@@ -14,7 +14,7 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-
+--------------------------
 <section>
 
 <!-- 전체영화목록  -->
