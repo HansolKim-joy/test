@@ -16,7 +16,8 @@
 <section>
 
 <!-- 창작게시판 -->
-<!-- 123 -->
+<!-- 123 78-->
+<!-- dd -->
 	
 	<div id="c_div">
 	<form id="s_form">
@@ -112,7 +113,7 @@
 	</div>
 	<br><br><br>
 	
-	<!-- 검색조건 -->
+;;	<!-- 검색조건 -->
 	<div id="c_d_3">
 	<select>
 		<option value='글번호'>글번호</option>
