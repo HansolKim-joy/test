@@ -51,7 +51,6 @@
                 time.value = "24:00";
                 return false;
             }
-
             // 분은 60분을 넘길 수 없게 세팅
             if(minute > 60) {
                 alert("분은 60분을 넘길 수 없습니다.");
