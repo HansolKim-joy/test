@@ -58,6 +58,7 @@
                 time.value = hours + ":00";
                 return false;
             }
+졸려요
 
             // 콜론을 넣어 시간을 완성하고 반환한다.
             time.value = hours + ":" + minute;
