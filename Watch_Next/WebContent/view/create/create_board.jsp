@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- test -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +17,7 @@
 <section>
 
 <!-- 창작게시판 -->
-<!-- 123 78-->
-<!-- dd -->
+
 	
 	<div id="c_div">
 	<form id="s_form">
