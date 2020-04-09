@@ -16,6 +16,7 @@
 <section>
 
 <!-- 창작게시판 -->
+<!-- 123 -->
 	
 	<div id="c_div">
 	<form id="s_form">
