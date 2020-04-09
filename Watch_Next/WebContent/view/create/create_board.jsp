@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!-- test2 -->
+<!-- 시험 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,7 +113,7 @@
 	</div>
 	<br><br><br>
 	
-;;	<!-- 검색조건 -->
+	<!-- 검색조건 -->
 	<div id="c_d_3">
 	<select>
 		<option value='글번호'>글번호</option>
