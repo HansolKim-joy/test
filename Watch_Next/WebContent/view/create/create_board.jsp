@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 시험 -2->
+<!-- 시험2 -->
 <!DOCTYPE html>
 <html>
 <head>
