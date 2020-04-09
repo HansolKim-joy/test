@@ -15,7 +15,7 @@ public class MemberService {
 		
 		Member loginUser = new MemberDAO().loginMember(conn,m);
 		close(conn);
-		김한솔 메롱 자고싶다
+		김한솔 메롱 자고싶다 뭐냐 뭐냐
 		return loginUser;
 	}
 	
