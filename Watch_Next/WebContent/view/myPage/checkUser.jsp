@@ -15,7 +15,7 @@
 <section>
 	<h2>회원 정보 수정</h2>
 </section>
-
+안녕하세요^^
 
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
