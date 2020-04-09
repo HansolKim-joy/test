@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+   .lg{
+       margin: 0 auto;
+       padding: 80px;
+    }
+       
+    .lg_h2{
+       text-align: center;
+       text-size: 30px;
+    }
+    
+    .lg_button1{
+        margin-left: 70px;
+       width: 277px;
+       height: 30px;
+        border-radius: 7px;
+      margin-bottom: 5px;
+       margin-top: 10px;
+       border: 0px;
+       background: #B22222;
+       color:white;
+       outline: 0;
+    }
+    
+    .lg_button{
+         width: 170px;
+       height: 30px;
+       border-radius: 7px;
+       margin-left: 5px;
+       border: 0px;
+        background-color: #4d4c50;
+        outline: 0;
+    }
+    
+   .lg_form{
+       border: 1px;
+       color: white;
+       margin: 0 auto;
+       margin-top: 3%;
+       background-color: #00000014;
+       height: 350px;
+       width: 600px;
+      border-radius: 20px;
+   }
+   
+   .hline{
+       border: 0;  
+       height: 1px; 
+       background: red;
+   }
+
+   #lg_table{
+      margin: 0 auto; 
+          margin-top: 100px;
+        font-size: 20px; 
+        font-weight: bold; 
+        width: 600px;
+        color: white;
+   }
+   
+   .lg_text{
+      background-color: white;
+       color: black;
+       height: 30px;
+       width: 276px;
+       margin-left: 70px;
+       border-radius: 7px;
+       border: 0px;
+       outline: 0;
+   }
+   
+   .lg_text1{
+      background-color: white;
+       color: black;
+       height: 30px;
+       width: 276px;
+       margin-left: 70px;
+       border-radius: 7px;
+       margin-top: 10px;
+       border: 0px;
+       outline: 0;
+   }
+   
+   #join_member{
+   		background-color: yellow;
+   }
+   

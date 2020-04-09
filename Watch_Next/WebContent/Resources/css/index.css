@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.index_form{
+	positon: relative;
+	min-height: 100%;
+	padding-bottom: 100px;
+}
+.pp_slide-wrap{
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+.pp_slider{
+    list-style: none outside none;
+    padding-left: 0;
+    margin: 0;
+}
+.pp_slide-content{
+    margin-bottom: 60px;
+}
+.pp_slider li{
+	width: 400px;
+    text-align: center;
+    color: #FFF;
+    background-size:cover;
+    background-position: center;
+}
+.pp_slider h3 {
+    margin: 100;
+    padding: 100px 0;
+    height:250px;
+}
+.pp_slide-content{
+	border: 3px soild red;
+    width:100%;
+    height:300px;
+}
+#pp_item_ct{
+	border: 1px solid white;
+}
+
+.pp_item div{display: inline-block;}
+.pp_poster1{display: inline; vertical-align: baseline; width: 200px; height: 300px;}
+.pp_poster2{display: inline; vertical-align: baseline; width: 200px; height: 300px;}
+.pp_poster3{display: inline; vertical-align: baseline; width: 200px; height: 300px;}
+
+.pp_item1{width: 200px; background-color: black; height: 300px;}
+.pp_item2{width: 200px; background-color: black; height: 300px;}
+.pp_item3{width: 200px; background-color: black; height: 300px;}
+
+	/* 최신글 */
+#review{width: 80%; margin:0 auto; margin-top: 100px; color:white;}
+.hline{border: 4px solid red;}
+#review>table{margin:30px auto; text-align:center;}
+#review td{height:50px;}
+#num{width:70px; height:60px;}
+#category{width:150px; height:60px;}
+#title{width:400px; height:60px;}
+#date{width:200px; height:60px;}
+#writer{width:100px; height:60px;}
+#hits{width:150px; height:60px;}
+
+#wanted{width: 80%; margin:100px auto; color:white;}
+#wanted>table{margin:30px auto; text-align:center;}
+#wanted td{height:50px;}
+

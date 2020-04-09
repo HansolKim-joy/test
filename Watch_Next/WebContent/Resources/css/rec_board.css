@@ -1,0 +1,46 @@
+@charset "UTF-8";
+.p_slide-wrap{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+#rec_title{
+	color: white;
+}
+.hline{
+	border: 4px solid red;
+}
+.rec_subtitle{
+	color: white;
+	font-size: 20px;
+}
+.p_slider{
+    list-style: none outside none;
+    padding-left: 0;
+    margin: 0;
+}
+.p_slide-content{
+    margin-bottom: 60px;
+}
+.p_slider li{
+    text-align: center;
+    color: #FFF;
+    background-size:cover;
+    background-position: center;
+}
+.p_slider h3 {
+    margin: 100;
+    padding: 100px 0;
+    height:250px;
+}
+.p_slide-content{
+    width: 100%;
+    height:300px;
+}
+.md_line{border: 2px solid red;}
+.p_item1{background-image:url('http://han3283.cafe24.com/images/apple.jpg');}
+.p_item2{background-image:url('http://han3283.cafe24.com/images/cherry.jpg');}
+.p_item3{background-image:url('http://han3283.cafe24.com/images/strawberry.jpg');}
+.p_item4{background-image:url('http://han3283.cafe24.com/images/grape.jpg');}
+.p_item5{background-image:url('http://han3283.cafe24.com/images/lemon.jpg');}
+.p_item6{background-image:url('http://han3283.cafe24.com/images/grapefruit.jpg');}

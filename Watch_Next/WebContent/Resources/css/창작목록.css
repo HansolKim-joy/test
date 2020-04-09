@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+	#c_div{margin: 0 auto; 
+			margin-top: 100px;  
+			font-size: 20px; 
+			font-weight: bold; 
+			width: 80%;}
+	
+	#c_title{color: white; }	
+	
+	.hline{border: 0; 
+			 height: 1px;   
+			 background: red; 
+			 }
+			 
+	#c_s_1{backgound-color: brown;
+			width: 80px;
+			hieght: 60px;
+			font-size: 20px;
+			color: white;
+			}	
+			
+	/* 창작 글 선택 목록 */		
+	#c{margin-left: 1100px; }
+		
+		
+	/* 창작글 목록 */	
+	#ta1{text-align: center; color: white; 
+		 font-weight: normal;
+		 width: 1200px;
+		 } 
+		 
+	.t{font-size: 20px;
+		border-bottom: 1px solid red;
+		border-top: 1px solid red; 
+	}
+		
+	.c_td1{width: 90px; font-size: 17px;}
+	
+	.c_td2{width: 130px;
+			position: center;
+			padding-left: 10px;
+			margin-bottom: 20px;
+	} 
+	
+	.c_td3{width: 100px;
+			padding-left: 10px;
+			font-weight: 100;
+			font-size: 17px;
+	}
+	
+	.c_td4{width: 330px; height: 100px;
+			font-weight: 100;
+			font-size: 17px;
+			padding-left: 25px;	
+	} 
+
+	.c_td5{width: 80px; padding-left: 50px;
+					font-weight: 100;
+					font-size: 17px;}
+	
+	.c_td6{width: 50px; padding-left: 30px;
+			font-weight: 100;
+			font-size: 17px;}
+	
+	.c_td7{width: 50px; padding-left: 30px;
+			font-weight: 100;
+			font-size: 17px;
+			}
+	
+	.c_td8{width: 50px; padding-left: 30px;
+			font-weight: 100;
+			font-size: 17px;
+			}
+		
+	.c_poster{width:150px; hieght: 150px;
+				
+				}
+				
+	#c_d_3{width: 300px;
+			margin: 0 auto;}
+	
+		/* 페이징 */
+.list_number{position:absolute; left:39%; text-align:center; display:inline-block; float:left;}
+.list_n_menu {padding:3px; MARGIN:3px; TEXT-ALIGN: center}
+.list_n_menu a {padding:5px 8px 4px 8px; MARGIN: 2px; BORDER: #ccc 1px solid; COLOR: white; TEXT-DECORATION: none}
+.list_n_menu a:hover {BORDER:red 1px solid; COLOR: red;}
+.list_n_menu a:active {BORDER:red 1px solid; COLOR: red;}
+.list_n_menu.current {BORDER: gray 1px solid; padding:5px 8px 4px 8px; FONT-WEIGHT: bold; MARGIN: 2px; COLOR: gray;}
+.list_n_menu.prev {BORDER: white 1px solid; padding:5px 8px 4px 8px; MARGIN: 2px; COLOR: white;}

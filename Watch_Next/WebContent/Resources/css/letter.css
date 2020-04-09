@@ -1,0 +1,65 @@
+@charset "UTF-8";
+body{background: #545357;}
+#letter_top{
+	list-style:none;
+	margin: 0;
+	padding: 0;
+	
+}
+#letter_top li{
+	color: white;
+	float: left;
+	margin-right: 40px;
+}
+#letter_list{
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
+#letter_list td{
+	color: white;
+}
+#l_l_choise{width: 80px;}
+#l_l_nick{width: 300px;}
+#l_l_name{width: 280px;}
+#l_l_time{width: 190px;}
+#letter_contents{
+	color: white;
+	font-size:1.2em;
+}
+#letter_checkbox{
+	width: 16px;
+	height: 16px;
+}
+#l_t_choise{width: 60px;}
+#l_t_nick{
+	width: 140px; 
+	text-align:center;
+}
+#l_t_name{
+	width: 370px; 
+	text-align:center;
+}
+#l_t_time{
+	width: 250px; 
+	text-align:center;
+}
+#letter_delete{float: right;}
+.letter_delete{
+	color: white; 
+	background: red; 
+	border: 0px; 
+	border-radius: 5px; 
+	width: 60px; 
+	height: 25px;
+}
+#letter_send{
+	color: white; 
+	background: red; 
+	border: 0px; 
+	border-radius: 5px; 
+	width: 60px; 
+	height: 25px;
+	float:right;
+}
+#letter_paging{text-align:center;}

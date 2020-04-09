@@ -1,0 +1,79 @@
+@charset "UTF-8";
+	/* 넷플릭스,왓챠,네이버,top */
+body{background: #545357;}
+#red_line{
+	border: 1px solid red;
+}
+#creW_top{
+		width: 100%;
+		height: 70px;
+		position: fixed;
+		color: white;
+		background-color: #4C4C4C;
+		top: 0; left: 0;
+		font-weight: bold;
+		font-size: 16px;
+	}
+#creW_fix{
+		width: 2000px;
+	}
+#creW_logo{
+		width: 200px;
+		height: 70px;
+	}
+#creW_logotd{width: 350px;}
+#creW_middle{width: 250px;}
+#creW_search{
+		font-size: 15px;
+		height: 30px;
+		border: 1px solid black;
+		background: #4C4C4C;
+	}
+#creW_searchbtn{
+		font-size: 14px;
+		font-weight: bold;
+		width: 40px;
+		height: 30px;
+		top: 15px;
+		left: 1192px;
+		border: 0px;
+		color: #ffffff;
+		background: #4C4C4C;
+	}
+#creW_right{width: 250px;}
+#creW_footer{
+	background-color: red;
+	height: 4px;
+}
+
+
+
+
+	/* 창작글 */
+#creW_videos{margin:0px 0px 0px 10%; color: white;}
+#creW_file{font-size: 16px;}
+#creW_upload{margin:0px 0px 0px 80%; color: black; font-size: 16px;}
+#creW_create{width: 80%; margin:100px auto; color:white;}
+#creW_createName{width: 520px; height: 20px; font-size: 18px; color: black;}
+#creW_directorName{width: 150px; height: 20px; font-size: 18px; color: black;}
+#creW_spolier{font-weight: bold;}
+/* 밑부분 */
+#creW_roop{width: 80%; margin:0px 120px 100px;}
+#creW_popcorn{color: #F1C40F; font-size: 1.7em;}
+#creW_button{
+	width: 100px; 
+	float: right; 
+	margin: 30px; 
+	height: 30px; 
+	font-size: 15px; 
+	font-weight: bold;
+	color: white; 
+	background: #ff3333; 
+	border: 0px; 
+	border-radius: 5px; 
+}
+
+	/* footer */
+#creW_foot{text-align: center; margin-bottom: 30px; }
+
+

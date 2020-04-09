@@ -1,0 +1,16 @@
+@charset "UTF-8";
+body{background: #545357;}
+#letter_detail_btn{
+	color: white; 
+	background: #ff3333; 
+	border: 0px; 
+	border-radius: 5px;
+	width: 70px; 
+	height: 25px;
+}
+#letter_send_btn_area{
+	width: 400px;
+	height: 100px;
+	text-align:center;
+	margin-top:50px;
+}

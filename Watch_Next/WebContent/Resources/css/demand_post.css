@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+	/* footer */
+
+#footer{
+	height: 100px;
+	text-align: center;
+}
+.f_bottom-contents{
+	color: white;
+}
+#f_logo{
+	width: 150px;
+	height: 40px;
+}
+#copyright{
+	text-align: center;
+	color: white;
+	font-size: 10px;
+}
+
+	/* 상세뷰 */
+.hline{height:4px; background-color:red; border:none;}	
+#dh2{color:white;}
+#demandp{width: 80%; margin:100px auto;}
+#box{margin-top:30px; background-color:white; color:black; border-radius:5px;}
+
+#dcinema{padding:10px; margin: 0 auto; text-align: center;}
+#dctitle{font-size:18px;}
+
+#wInfo{margin-left:20px;}
+
+#content{margin:20px;}
+#dcposter{width:250px; height:320px;}
+#btn{padding:20px; margin-left:5%; text-align:center;}
+#want{font-size:14px; font-weight:bold; background-color:red; color:white;
+	  border:none; border-radius:5px; width:90px; height:30px;}
+
+#listbtn{width:200px; margin-left:90%; margin-top:15px;}
+#listbtn button{background-color:red; color:white;
+				border:none; border-radius:5px; 
+				width:50px; height:25px; font-size:14px;}
+
+	/* 쪽지 및 팔로우 */
+ li ul {
+background: lightgray;
+display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+height:auto;
+padding:5px;
+margin:0px;
+border:0px;
+position:absolute;
+width:100px;
+z-index:200;
+}
+
+#rpWriter li:hover ul {
+display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+}

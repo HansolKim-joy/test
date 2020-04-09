@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.a_tag:link{
+   text-decoration: none; 
+   color: white;
+}
+
+.a_tag:visited{
+   text-decoration: none; 
+   color: white;
+}
+
+.a_tag:actve{
+   text-decoration: none; 
+   color: white;
+}
+
+.a_tag:hover{
+   text-decoration: none; 
+   color: white;
+}
