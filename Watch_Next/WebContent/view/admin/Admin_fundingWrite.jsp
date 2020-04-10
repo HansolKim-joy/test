@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){  
-	  
+		$("#admin_imageFile").hide();
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  
@@ -27,6 +27,10 @@
 		    }else{
 		        header.removeClass('down');
 		    }
+		});
+		// 왼쪽 회색배경 점선테두리 사각형 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+		$("#admin_imageArea").click(function(){
+			$("#admin_imageFile").click();
 		});
 	});
 </script>
@@ -68,66 +72,35 @@
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
-<form>
+<form action="<%= request.getContextPath() %>/insert.fund" method="post" encType="multipart/form-data">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
 		<h2>펀딩 작성 페이지</h2>
 		<hr id="red_line">
 		<br>
-		<div class="admin_image" name="admin_image">
-		<br><br><br><br><br>
-		<b>drag your image</b>
-		</div>
-		
-<!-- 이미지 드래그 스크립트 -->
-<script type="text/javascript">
-	$('.admin_image')
-	.on("dragover", dragOver)
-	.on("dragleave", dragOver)
-	.on("drop", uploadFiles);
-
-	function dragOver(e){
-		e.stopPropagation();
-		e.preventDefault();
-		if (e.type == "dragover") {
-		    $(e.target).css({
-		        "background-color": "black",
-		        "outline-offset": "-20px"
-		    });
-		} else {
-		    $(e.target).css({
-		        "background-color": "gray",
-		        "outline-offset": "-10px"
-		    });
+		<div id="admin_imageArea">
+		<img id="admin_image" width="300" height="300">
+		<script>
+		// 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+		function LoadImg(value,filevalue){
+			var reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
+			if(value.files && value.files[0]){
+				if(filevalue.match(reg)){
+				var reader = new FileReader();
+				reader.onload = function(e){
+					$("#admin_image").attr("src", e.target.result);
+				}
+				}else{
+					alert("이미지 파일이 아닙니다.");
+					history.go(0);
+				}
+							
+			reader.readAsDataURL(value.files[0]);
+			}
+			$("#admin_imageArea").css("outline","none");
 		}
-	}
-
-	function uploadFiles(e){
-		e.stopPropagation();
-		e.preventDefault();
-		dragOver(e); //1
-		 
-	    e.dataTransfer = e.originalEvent.dataTransfer; //2
-	    var files = e.target.files || e.dataTransfer.files;
-	 
-	    if (files.length > 1) {
-	        alert('하나만 올려주세요.');
-	        return;
-	    }
-	    if (files[0].type.match(/image.*/)) {
-	        $(e.target).css({
-	            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
-	            "outline": "none",
-	            "background-size": "100% 100%"
-	        });
-	        console.log(files);
-	        /* files안에 이미지파일이 담김 */
-	    }else{
-	      alert('이미지가 아닙니다.');
-	      return;
-	    }
-
-    }
-</script>
+		</script>
+		</div>
+		<input type="file" id="admin_imageFile" name="admin_imageFile" onchange="LoadImg(this,this.value)">
 		
 		<div class="admin_movie">
 			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name">
@@ -160,7 +133,7 @@
 			<br>
 			<b>줄거리 : </b>
 			<br><br>
-			<textarea rows="10" cols="40" style="overflow-y:scroll; resize: none;" id="admin_movie_story" name="admin_movie_story"></textarea>
+			<textarea rows="10" cols="40" style="overflow-y:scroll; resize: none;" id="admin_movie_story" name="admin_movie_story" placeholder="이미지를 넣으려면 왼쪽 영역을 클릭하세요"></textarea>
 			<br>
 		</div>
 		<div style="width: 100%; text-align:center;">
