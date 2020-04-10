@@ -8,8 +8,8 @@
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){  
-	  
+	$(document).ready(function(){
+		$("#admin_imageFile").hide();
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  
@@ -27,6 +27,10 @@
 		    }else{
 		        header.removeClass('down');
 		    }
+		});
+		// 왼쪽 회색배경 점선테두리 사각형 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+		$("#admin_imageArea").click(function(){
+			$("#admin_imageFile").click();
 		});
 	});
 </script>
@@ -70,80 +74,57 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-<form>
+<form action="<%= request.getContextPath() %>/insert.movie" method="post" encType="multipart/form-data">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
 		<h2>영화 정보 작성</h2>
 		<hr id="red_line">
 		<br>
-		<div class="admin_image" name="admin_image">
-		<br><br><br><br><br>
-		<b>drag your image</b>
-		</div>
-		
-<!-- 이미지 드래그 스크립트 -->
-<script type="text/javascript">
-	$('.admin_image')
-	.on("dragover", dragOver)
-	.on("dragleave", dragOver)
-	.on("drop", uploadFiles);
-
-	function dragOver(e){
-		e.stopPropagation();
-		e.preventDefault();
-		if (e.type == "dragover") {
-		    $(e.target).css({
-		        "background-color": "black",
-		        "outline-offset": "-20px"
-		    });
-		} else {
-		    $(e.target).css({
-		        "background-color": "gray",
-		        "outline-offset": "-10px"
-		    });
+		<div id="admin_imageArea">
+		<img id="admin_image" width="300" height="300">
+		<script>
+		// 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+		function LoadImg(value,filevalue){
+			var reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/i;
+			if(value.files && value.files[0]){
+				if(filevalue.match(reg)){
+				var reader = new FileReader();
+				reader.onload = function(e){
+					$("#admin_image").attr("src", e.target.result);
+				}
+				}else{
+					alert("이미지 파일이 아닙니다.");
+					history.go(0);
+				}
+							
+			reader.readAsDataURL(value.files[0]);
+			}
+			$("#admin_imageArea").css("outline","none");
 		}
-	}
+		</script>
+		</div>
+		<input type="file" id="admin_imageFile" name="admin_imageFile" onchange="LoadImg(this,this.value)">
+		
 
-	function uploadFiles(e){
-		e.stopPropagation();
-		e.preventDefault();
-		dragOver(e); //1
-		 
-	    e.dataTransfer = e.originalEvent.dataTransfer; //2
-	    var files = e.target.files || e.dataTransfer.files;
-	 
-	    if (files.length > 1) {
-	        alert('하나만 올려주세요.');
-	        return;
-	    }
-	    if (files[0].type.match(/image.*/)) {
-	        $(e.target).css({
-	            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
-	            "outline": "none",
-	            "background-size": "100% 100%"
-	        });
-	    }else{
-	      alert('이미지가 아닙니다.');
-	      return;
-	    }
-
-    }
-</script>
 
 		<div class="admin_movie">
-			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name"><br>
+			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name">
+			&ensp;&ensp;서비스 사이트 : 
+			<input type="checkbox" name="admin_movie_service" value="1"> 네이버 영화
+			<input type="checkbox" name="admin_movie_service" value="2"> 왓챠
+			<input type="checkbox" name="admin_movie_service" value="3"> 넷플릭스<br>
 			<b>감독 : </b><input type="text" id="admin_movie_director" name="admin_movie_director"><br>
 			<b>출연 : </b><input type="text" id="admin_movie_actor" name="admin_movie_actor"><br>
 			<b>장르 : </b>
 			<select id = "admin_movie_genre" name="admin_movie_genre">
-				<option value="action">액션 영화</option>
-				<option value="SF">SF 영화</option>
-				<option value="comedy">코미디 영화</option>
-				<option value="thriller">스릴러 영화</option>
-				<option value="war">전쟁 영화</option>
-				<option value="sports">스포츠 영화</option>
-				<option value="fantasy">판타지 영화</option>
-				<option value="music">음악 영화</option>
-				<option value="romance">로맨스 영화</option>d
+				<option value="1">액션 영화</option>
+				<option value="2">SF 영화</option>
+				<option value="3">코미디 영화</option>
+				<option value="4">스릴러 영화</option>
+				<option value="5">전쟁 영화</option>
+				<option value="6">스포츠 영화</option>
+				<option value="7">판타지 영화</option>
+				<option value="8">음악 영화</option>
+				<option value="9">로맨스 영화</option>
 			</select>
 			<br>
 			<b>영화 시간 : </b>
@@ -162,15 +143,31 @@
 			<br>
 			<b>줄거리 : </b>
 			<br><br>
-			<textarea rows="10" cols="40" style="overflow-y:scroll; resize: none;" id="admin_movie_story" name="admin_movie_story"></textarea>
-			<br>
+			<textarea rows="10" cols="40" style="overflow-y:scroll; resize: none;" id="admin_movie_story" name="admin_movie_story" placeholder="이미지를 넣으려면 왼쪽 영역을 클릭하세요"></textarea>
+			
 		</div>
 		<div style="width: 100%; text-align:center;">
-			<input type="submit" value="완료" id="admin_movie_btn">
-			<input type="reset" value="취소" id="admin_movie_btn">
+			<input type="submit" value="완료" id="admin_movie_submit" onclick="return chk();">
+			<input type="reset" value="취소" id="admin_movie_reset">
 		</div>
 	</div>
 </form>
+<script>
+	function chk(){
+		var 
+		var serviceChk = document.getElementsByName('admin_movie_service');
+		var a = 0;
+		for(var i=0; i<serviceChk.length; i++){
+			if(serviceChk[i].checked){
+				a++;
+			}
+		}
+		if(a < 1){
+			alert('서비스 사이트를 입력해 주세요.');
+			return false;
+		}
+	}
+</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
