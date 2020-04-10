@@ -30,20 +30,20 @@ public class RecBoardDAO {
 	public ArrayList<File> REVIEW_RecBoard(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<File> list = null;
+		ArrayList<File> list = new ArrayList<File>();
 		String query = prop.getProperty("Review_rec");
 		
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
-			if(rset.next()) {
-				File f = new File()
+			while(rset.next()) {
+				File f = new File(rset.getString("FILE_NEWNAME"));
+				list.add(f);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 
 	public ArrayList<File> STAR_RecBoard(Connection conn) {

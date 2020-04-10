@@ -22,6 +22,7 @@ public class RecBoardService {
 		ArrayList<File> list2 = bdao.STAR_RecBoard(conn);
 		ArrayList<File> list3 = bdao.LIKE_RecBoard(conn);
 		
+		hlist.put("manyReview", list);
 		
 		return hlist;
 	}
