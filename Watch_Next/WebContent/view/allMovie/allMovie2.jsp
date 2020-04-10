@@ -14,7 +14,6 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-2222222222222222222222222222222
 <section>
 
 <!-- 전체영화목록  -->
