@@ -143,7 +143,7 @@
 				<option value="sports">스포츠 영화</option>
 				<option value="fantasy">판타지 영화</option>
 				<option value="music">음악 영화</option>
-				<option value="romance">로맨스 영화</option>
+				<option value="romance">로맨스 영화</option>d
 			</select>
 			<br>
 			<b>영화 시간 : </b>
