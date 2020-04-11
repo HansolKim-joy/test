@@ -6,7 +6,11 @@
 	<div class="nav">
 		<div class="navi_set">
 			<div class="topnav">
+<<<<<<< HEAD
 				<a href="<%=request.getContextPath()%>/rec_board.me"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
+=======
+				<a href="<%=request.getContextPath()%>/index.jsp"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
+>>>>>>> refs/remotes/origin/hansol
 			</div>
 		</div>
 		<div class="navi_set">
@@ -21,7 +25,11 @@
 			<div class="topnav">게시판</div>
 			<ul class="subnav">
 				<li onclick="location.href='/Watch_Next/view/review/reviewWrite.jsp'">리뷰 게시판</li>
+<<<<<<< HEAD
 				<li>모집 게시판</li>
+=======
+				<li onclick="location.href='/Watch_Next/view/recruit/recruitList.jsp'">모집 게시판</li>
+>>>>>>> refs/remotes/origin/hansol
 				<li>창작 게시판</li>
 			</ul>
 		</div>
