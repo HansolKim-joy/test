@@ -6,21 +6,21 @@
 	<div class="nav">
 		<div class="navi_set">
 			<div class="topnav">
-				<a href="Main.html"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
+				<a href="<%=request.getContextPath()%>/rec_board.me"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
 			</div>
 		</div>
 		<div class="navi_set">
 			<div class="topnav">영화</div>
 			<ul class="subnav">
 				<li>정보</li>
-				<li>추천</li>
+				<li onclick="location.href='/Watch_Next/view/review/rec_board.jsp'">추천</li>
 			</ul>
 		</div>
 
 		<div class="navi_set">
 			<div class="topnav">게시판</div>
 			<ul class="subnav">
-				<li onclick="location.href='/Watch_Next/view/review/reviewWrite.jsp'">리뷰 게시판</a></li>
+				<li onclick="location.href='/Watch_Next/view/review/reviewWrite.jsp'">리뷰 게시판</li>
 				<li>모집 게시판</li>
 				<li>창작 게시판</li>
 			</ul>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="nav2">
-		<form autocomplete="off">
+		<form autocomplete="off" method="post" id="header_action">
 			<div class="navi_set2">
 				<div class="container-4">
 					<input type="search" name="search" id="search"
@@ -47,7 +47,7 @@
 			</div>
 			<div class="navi_set2">
 				<div class="topnav2">
-					<div class="topnav2" onclick="location.href='/Watch_Next/view/pages/loginForm.jsp'" class="a_tag">로그인</div>
+					<a href="/Watch_Next/view/pages/loginForm.jsp" class="a_tag">로그인</a>
 				</div>
 			</div>
 			<div class="navi_set2">
@@ -58,5 +58,11 @@
 		</form>
 	</div>
 </header>
-
+<script>
+	$(function(){
+		$('.icon').click(function(){
+			$("#header_action").attr("action", "<%=request.getContextPath()%>/search.mo?movieTitle=" + $("#search").val());
+		});
+	});
+</script>
 <br clear="all">

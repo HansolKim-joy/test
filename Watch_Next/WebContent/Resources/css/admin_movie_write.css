@@ -6,17 +6,21 @@ input[type="number"]
 #red_line{
 	border: 1px solid red;
 }
-.admin_image{
+#admin_imageArea{
     outline: 2px dashed #92b0b3;
     outline-offset:-10px; 
     text-align: center;
     transition: all .15s ease-in-out;
     width: 300px;
     height: 300px;
-    background-color: gray;
     margin: 50px;
     float: left;
+    background-color: gray;
+	outline-offset: -10px;
+	cursor:pointer;
+	border: 1px solid white;
 }
+
 .admin_movie{
 	margin: 0 auto; 
     margin-top: 100px;
