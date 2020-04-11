@@ -30,7 +30,7 @@ public class MovieInsertServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public MovieInsertServlet() {
-        super();
+        
         // TODO Auto-generated constructor stub
     }
 
