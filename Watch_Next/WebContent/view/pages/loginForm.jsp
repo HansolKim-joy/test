@@ -25,8 +25,8 @@
          <div>
             <input type="submit"  class="lg_button1" value="로그인">
          </div>
-            <button type="button" class="lg_button"><a href="/Watch_Next/view/pages/JoinForm.jsp" id="join_member">회원가입</a></button>
-            <button type="button" class="lg_button"><a href="/Watch_Next/view/pages/FindUserForm.jsp" id="find_member">아이디 찾기/비밀번호 찾기</a></button>
+            <button type="button" class="lg_button" onclick="location='/Watch_Next/view/pages/JoinForm.jsp'"></button>
+            <button type="button" class="lg_button" id="find_member" onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'" ></button>
          </div>
       </form>
     </div>
@@ -36,9 +36,6 @@
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script>
-   $(function() {
-//       console.log("asdf");      
-   })
    function validate(){
       if($('#userId').val().trim().length == 0){
          alert('아이디를 입력해주세요');

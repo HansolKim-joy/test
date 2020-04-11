@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,12 +33,19 @@ public class RecBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HashMap<String, ArrayList<File>> list = new RecBoardService().listView();
 		
+		HashMap<String, ArrayList<File>> list = new RecBoardService().listView();
 		String page = null;
+		
 		if(list != null) {
-			
+			page="view/recom/rec_board.jsp";
+			request.setAttribute("list", list);
+		} else {
+			page="view/errorPage/errorPage.jsp";
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

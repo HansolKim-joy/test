@@ -42,20 +42,61 @@ public class RecBoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
 		}
 		return list;
 	}
 
 	public ArrayList<File> STAR_RecBoard(Connection conn) {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<File> list = new ArrayList<File>();
+		String query = prop.getProperty("Star_rec");
+		
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				File f = new File(rset.getString("FILE_NEWNAME"));
+				list.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return list;
 	}
 
 	public ArrayList<File> LIKE_RecBoard(Connection conn) {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<File> list = new ArrayList<File>();
+		String query = prop.getProperty("Like_rec");
+
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				File f = new File(rset.getString("FILE_NEWNAME"));
+				list.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return list;
 	}
 	
-
 
 }
