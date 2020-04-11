@@ -86,7 +86,7 @@ public class Review {
 		this.bContent = bContent;
 	}
 	
-	
+		
 	public int getbNo() {
 		return bNo;
 	}
