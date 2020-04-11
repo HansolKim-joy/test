@@ -6,14 +6,14 @@
 	<div class="nav">
 		<div class="navi_set">
 			<div class="topnav">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
+				<a href="<%=request.getContextPath()%>"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
 			</div>
 		</div>
 		<div class="navi_set">
 			<div class="topnav">영화</div>
 			<ul class="subnav">
 				<li>정보</li>
-				<li>추천</li>
+				<li onclick="location.href='<%= request.getContextPath() %>/rec_board.me'">추천</li>
 			</ul>
 		</div>
 
