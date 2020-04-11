@@ -6,9 +6,9 @@ public class Member {
 	private String userName;
 	private String email;
 	private String phone;
-	private String deleteYN;
-	private String mailingYN;
-	private String adminYN;
+	private char deleteYN;
+	private char mailingYN;
+	private char adminYN;
 	
 	public Member() {}
 
@@ -17,8 +17,9 @@ public class Member {
 		this.userPwd = userPwd;
 	}
 
-	public Member(String userId, String userPwd, String userName, String email, String phone, String deleteYN,
-			String mailingYN, String adminYN) {
+	public Member(String userId, String userPwd, String userName, String email, String phone, char deleteYN,
+			char mailingYN, char adminYN) {
+		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
@@ -69,27 +70,27 @@ public class Member {
 		this.phone = phone;
 	}
 
-	public String getDeleteYN() {
+	public char getDeleteYN() {
 		return deleteYN;
 	}
 
-	public void setDeleteYN(String deleteYN) {
+	public void setDeleteYN(char deleteYN) {
 		this.deleteYN = deleteYN;
 	}
 
-	public String getMailingYN() {
+	public char getMailingYN() {
 		return mailingYN;
 	}
 
-	public void setMailingYN(String mailingYN) {
+	public void setMailingYN(char mailingYN) {
 		this.mailingYN = mailingYN;
 	}
 
-	public String getAdminYN() {
+	public char getAdminYN() {
 		return adminYN;
 	}
 
-	public void setAdminYN(String adminYN) {
+	public void setAdminYN(char adminYN) {
 		this.adminYN = adminYN;
 	}
 
@@ -99,7 +100,5 @@ public class Member {
 				+ ", phone=" + phone + ", deleteYN=" + deleteYN + ", mailingYN=" + mailingYN + ", adminYN=" + adminYN
 				+ "]";
 	}
-	
-	
-	
+
 }
