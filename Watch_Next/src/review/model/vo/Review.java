@@ -18,6 +18,7 @@ public class Review {
 	
 	public Review() {}
 	
+	
 	public Review(int bNo, int bType, String bWriter, String spo, String bTitle, String mTitle, int popcorn,
 			String bContent, int bCount, Date bDate, String status) {
 		super();
