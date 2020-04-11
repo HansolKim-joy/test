@@ -3,10 +3,10 @@ package review.model.vo;
 import java.sql.Date;
 
 public class Review {
-	private int bNo;
+	private int bNo; 
 	private int bType;
 	private String bWriter;
-	private String spo;
+	private String spo; 
 	private String bTitle;
 	private String mTitle;
 	private int popcorn;
@@ -61,7 +61,32 @@ public class Review {
 		this.popcorn = popcorn;
 		this.bContent = bContent;
 	}
+	
+	
 
+	public Review(String spo, String mTitle, int popcorn) {
+		super();
+		this.spo = spo;
+		this.mTitle = mTitle;
+		this.popcorn = popcorn;
+	}
+	
+	
+	//종훈씨
+	public Review(int bNo, String bContent) {
+		super();
+		this.bNo = bNo;
+		this.bContent = bContent;
+	}
+
+	//일단 임시아이디용 객체
+	public Review(String bTitle, String bContent) {
+		super();
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+	}
+	
+	
 	public int getbNo() {
 		return bNo;
 	}
