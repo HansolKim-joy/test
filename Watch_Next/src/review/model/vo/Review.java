@@ -79,7 +79,6 @@ public class Review {
 		this.bContent = bContent;
 	}
 	
-	
 
 	//일단 임시아이디용 객체
 	public Review(String bTitle, String bContent) {
