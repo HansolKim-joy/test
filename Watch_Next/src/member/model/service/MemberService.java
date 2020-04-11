@@ -16,6 +16,7 @@ public class MemberService {
 		Member loginUser = new MemberDAO().loginMember(conn,m);
 		close(conn);
 		System.out.println(loginUser);
+=======
 		return loginUser;
 	}
 	

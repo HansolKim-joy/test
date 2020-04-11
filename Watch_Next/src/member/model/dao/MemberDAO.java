@@ -56,6 +56,15 @@ public class MemberDAO {
 				
 				loginUser = new Member(userId, userPwd, userName, email, phone, deleteYN, mailingYN, adminYN);
 				
+=======
+				loginUser = new Member(rset.getString(1),
+										rset.getString(2),
+										rset.getString(3),
+										rset.getString(4),
+										rset.getString(5),
+										rset.getString(6).charAt(0),
+										rset.getString(7).charAt(0),
+										rset.getString(8).charAt(0));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

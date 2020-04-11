@@ -65,7 +65,7 @@
 <%@ include file="/view/layout/Header.jsp" %>
 	<!-- 모집 게시판 작성 -->
 <br clear="all">
-<form>
+<form action="<%=request.getContextPath() %>/insert.recruit" method="post">
 	<div id="recW_recruit">
 		<h2><strong>모집 게시판 작성</strong></h2>
 		<hr id="red_line">
@@ -73,8 +73,8 @@
 		<h4><strong>제목 : &ensp;<input type="text" id="recW_recruitName" name="recW_recruitName"></strong></h4>
 		<h4><strong>종류 : &nbsp;
 		<select id="recW_type" name="recW_type">
-			<option>NETFLIX</option>
-			<option>WATCHA</option>
+			<option value="NETFLIX">NETFLIX</option>
+			<option value="WATCHA">WATCHA</option>
 		</select>
 		</strong></h4>
 	</div>
@@ -87,8 +87,8 @@
 	<div id = "recW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="recW_button">
-	<input type="submit" value="완료" id="recW_button" class="recW_submit">
+	<input type="reset" value="취소" id="recW_button" onclick="location.href='<%=request.getContextPath() %>/list.recruit'">
+	<input type="submit" value="완료" id="recW_button" class="recW_submit" >
 	</div>
 </form>
 <!-- footer -->
