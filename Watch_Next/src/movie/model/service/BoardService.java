@@ -1,21 +1,23 @@
-package MovieBoard.model.service;
+package movie.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import static common.JDBCTemplate.*;
 
-import MovieBoard.model.dao.MovieDAO;
-import MovieBoard.model.vo.Movie;
+import movie.model.dao.MovieDAO;
+import movie.model.vo.Movie;
 
-import MovieBoard.model.vo.Review;
+import review.model.vo.Review;
 
 public class BoardService {
 	public BoardService() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArrayList<Movie> MovieList(int currentPage, int boardLimit) {
-		ArrayList<Movie> list = null;
+	public HashMap<String, Movie> MovieList(int currentPage, int boardLimit) {
+		HashMap<String, Movie> list = null;
 		Connection conn = getConnection();
 		
 		list = new MovieDAO().MovieList(conn, currentPage, boardLimit);
@@ -61,9 +63,9 @@ public class BoardService {
 		return result;
 	}
 	
-	public Movie searchMovie(String movieTitle) {
+	public HashMap<String, Movie> searchMovie(String movieTitle) {
 		Connection conn = getConnection();
-		Movie m = new MovieDAO().searchMovie(conn, movieTitle);
+		HashMap<String, Movie> m = new MovieDAO().searchMovie(conn, movieTitle);
 		close(conn);
 		return m;
 	}

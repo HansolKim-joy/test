@@ -12,7 +12,7 @@
 		<div class="navi_set">
 			<div class="topnav">영화</div>
 			<ul class="subnav">
-				<li>정보</li>
+				<li onclick="location.href='<%= request.getContextPath() %>/movie.all'">정보</li>
 				<li onclick="location.href='<%= request.getContextPath() %>/rec_board.me'">추천</li>
 			</ul>
 		</div>
@@ -52,7 +52,7 @@
 			</div>
 			<div class="navi_set2">
 				<div class="topnav2">
-					<a href="/Watch_Next/view/pages/memberJoinForm.jsp" class="a_tag">회원가입</a>
+					<a href="/Watch_Next/view/pages/JoinForm.jsp" class="a_tag">회원가입</a>
 				</div>
 			</div>
 		</form>

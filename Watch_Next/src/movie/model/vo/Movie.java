@@ -17,6 +17,24 @@ public class Movie {
 	
 	public Movie() {}
 
+	
+	
+	public Movie(int mNo, String mTitle, String mDirector, String mActor, String mRunningTime, Date mReleaseDate,
+			String mCountry, String mStory, String service_Site) {
+		super();
+		this.mNo = mNo;
+		this.mTitle = mTitle;
+		this.mDirector = mDirector;
+		this.mActor = mActor;
+		this.mReleaseDate = mReleaseDate;
+		this.mCountry = mCountry;
+		this.mStory = mStory;
+		this.mRunningTime = mRunningTime;
+		Service_Site = service_Site;
+	}
+
+
+
 	public Movie(int mNo, int mGenre, int mFileNo, String mTitle, String mDirector, String mActor, Date mReleaseDate,
 			String mCountry, String mStory, String mRunningTime, String service_Site) {
 		super();
@@ -30,8 +48,30 @@ public class Movie {
 		this.mCountry = mCountry;
 		this.mStory = mStory;
 		this.mRunningTime = mRunningTime;
-		Service_Site = service_Site;
+		this.Service_Site = service_Site;
 	}
+
+	public Movie(String mTitle, String mDirector, String mActor, String mRunningTime, Date mReleaseDate, String mCountry,
+			String mStory, int mFileNo, int mGenre, String service_Site) {
+		this.mGenre = mGenre;
+		this.mFileNo = mFileNo;
+		this.mTitle = mTitle;
+		this.mDirector = mDirector;
+		this.mActor = mActor;
+		this.mReleaseDate = mReleaseDate;
+		this.mCountry = mCountry;
+		this.mStory = mStory;
+		this.mRunningTime = mRunningTime;
+		this.Service_Site = service_Site;
+	}
+	
+
+	public Movie(int mNo, String mTitle) {
+		this.mNo = mNo;
+		this.mTitle = mTitle;
+	}
+
+	
 
 	public int getmNo() {
 		return mNo;
