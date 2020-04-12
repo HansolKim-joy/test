@@ -64,7 +64,6 @@ public class Review {
 	}
 	
 	
-
 	public Review(String spo, String mTitle, int popcorn) {
 		super();
 		this.spo = spo;
