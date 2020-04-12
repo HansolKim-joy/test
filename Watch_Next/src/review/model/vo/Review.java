@@ -2,7 +2,6 @@ package review.model.vo;
 
 import java.sql.Date;
 
-
 public class Review {
 	private int bNo; 
 	private int bType;
