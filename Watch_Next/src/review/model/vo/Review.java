@@ -2,6 +2,7 @@ package review.model.vo;
 
 import java.sql.Date;
 
+
 public class Review {
 	private int bNo; 
 	private int bType;
@@ -79,7 +80,6 @@ public class Review {
 		this.bNo = bNo;
 		this.bContent = bContent;
 	}
-	
 	
 
 	//일단 임시아이디용 객체
