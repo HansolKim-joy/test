@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, java.util.HashMap, movie.model.vo.File"%>
+<% 
+	HashMap<String, ArrayList<File>> list = (HashMap<String, ArrayList<File>>)request.getAttribute("list");
+	ArrayList<File> rlist = list.get("manyReview");
+	ArrayList<File> Slist = list.get("manyStar");
+	ArrayList<File> Llist = list.get("manyLike");
+			
+%>
 <!DOCTYPE html>
 <html>
 <head>

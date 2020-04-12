@@ -46,16 +46,25 @@ public class MemberDAO {
 			if(rset.next()) {
 				System.out.println("123");
 				String userId = rset.getString("USER_ID");
-				String userPwd = rset.getString("USER_PWD");
+				String userPwd = rset.getString("USER_PASS");
 				String userName = rset.getString("USER_NAME");
-				String email = rset.getString("EMAIL");
-				String phone = rset.getString("PHONE");
-				String deleteYN = rset.getString("DELETE_YN");
-				String mailingYN = rset.getString("MAILING_YN");
+				String email = rset.getString("USER_EMAIL");
+				String phone = rset.getString("USER_PHONE");
+				String deleteYN = rset.getString("USER_DELETE");
+				String mailingYN = rset.getString("MAILING");
 				String adminYN = rset.getString("ADMIN_YN");
 				
 				loginUser = new Member(userId, userPwd, userName, email, phone, deleteYN, mailingYN, adminYN);
 				
+=======
+				loginUser = new Member(rset.getString(1),
+										rset.getString(2),
+										rset.getString(3),
+										rset.getString(4),
+										rset.getString(5),
+										rset.getString(6).charAt(0),
+										rset.getString(7).charAt(0),
+										rset.getString(8).charAt(0));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
