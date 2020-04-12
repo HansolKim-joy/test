@@ -53,7 +53,6 @@
 		
 	<hr class="hline">
 	
-	
 	<!-- 진행상황 -->
 	<form>
 		<table id="f_t">

@@ -56,7 +56,6 @@
 
 <hr>
 
-
 <div id="content">
 
   <div id="dposter">
