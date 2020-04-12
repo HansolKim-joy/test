@@ -129,6 +129,7 @@
 					</table>
 				</div>
 				<button type="submit" id="mp_update">정보수정</button>
+				<button id="updatePwdBtn" onclick="alert('비밀번호 확인');">비밀번호 변경</button>
 			</form>
 			<br><br><br>
 			<hr class="mp_hline">
@@ -177,7 +178,6 @@
 			$('#mp_button5').click(function(){
 				$('#mp_h_content5').slideToggle();
 			});
-			
 		});
 	</script>
 <!-- footer -->
