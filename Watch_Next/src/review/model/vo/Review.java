@@ -61,6 +61,20 @@ public class Review {
 		this.popcorn = popcorn;
 		this.bContent = bContent;
 	}
+	
+	//종훈씨
+		public Review(int bNo, String bContent) {
+			super();
+			this.bNo = bNo;
+			this.bContent = bContent;
+		}	
+		
+		//일단 임시아이디용 객체
+		public Review(String bTitle, String bContent) {
+			super();
+			this.bTitle = bTitle;
+			this.bContent = bContent;
+		}
 
 	public int getbNo() {
 		return bNo;
