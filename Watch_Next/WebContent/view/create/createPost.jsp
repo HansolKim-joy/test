@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>insert title</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -16,7 +17,6 @@
 <br clear="all">
 
 <section>
-
 
 	<!-- 창작 게시판 상세 -->
 <div id="createp">
