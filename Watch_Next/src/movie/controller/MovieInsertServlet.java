@@ -1,4 +1,4 @@
-package MovieBoard.controller;
+package movie.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import MovieBoard.model.service.BoardService;
-import MovieBoard.model.vo.Movie;
+import movie.model.service.BoardService;
+import movie.model.vo.Movie;
 import common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
 

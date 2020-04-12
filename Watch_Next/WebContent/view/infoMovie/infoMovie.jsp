@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="MovieBoard.model.vo.Movie, MovieBoard.model.vo.Review"%>
-<% Movie m = (Movie)request.getAttribute("Movie"); 
+    pageEncoding="UTF-8" import="movie.model.vo.Movie, review.model.vo.Review"%>
+<% Movie m = (Movie)request.getAttribute("Movie");
    Review r = (Review)request.getAttribute("Review");
-   String serviceSite[] = m.getServiceSite().split(", ");%>
+   String fName = (String)request.getAttribute("fName");
+   String genre = (String)request.getAttribute("genre");
+   String serviceSite[] = m.getService_Site().split(", ");%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>insert title</title>
-<%@ include file="/view/layout/import.jsp" %>
+<link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer.css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer(AFTER).css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet" />
+<!--페이지에 적용되는 css넣기 -->
+<link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="<%=request.getContextPath() %>/Resources/css/infoMovie.css" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -28,8 +34,8 @@
 	<form >
 		<table id="m_movie">
 			<tr>
-				<td rowspan="4" id="m_td"><img src="<%=request.getContextPath() %>/Resources/images/<%=m.getFileNewName() %>" id="m_poster"></td>
-				<th id="m_Name"><%=m.getMovieTitle() %></th>
+				<td rowspan="4" id="m_td"><img src="<%=request.getContextPath() %>/Resources/images/<%=fName %>" id="m_poster"></td>
+				<th id="m_Name"><%=m.getmTitle() %></th>
 				<td >
 				<button id="m_want" onclick="mypage();">찜하기</button>
      				<script>
@@ -49,7 +55,7 @@
      			</td>
      		</tr>
      		<tr>
-     			<td id="m_info"><%=m.getStory() %></td>
+     			<td id="m_info"><%=m.getmStory() %></td>
      			<td>
      				<%for(int i=0; i<serviceSite.length; i++){
      					if(serviceSite[i].equals("3")){%>
@@ -69,7 +75,7 @@
      			<td id="m_review">
      			<%if(r != null){%>
      			<!-- 리뷰 내용 -->
-     			<%=r.getReviewContent() %>
+     			<%=r.getbContent() %>
      			<%}else{ %>
      			리뷰가 없습니다.
      			<%} %>
