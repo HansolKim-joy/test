@@ -14,7 +14,7 @@
 	<br clear="all">
 <section>
 
-	<!-- 수요목록 -->
+	<!-- 수요조사목록 -->
 	
 	<div id="funding">
 	<h2 id="f_h2">수요조사</h2>

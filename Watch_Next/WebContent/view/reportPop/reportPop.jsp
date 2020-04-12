@@ -20,7 +20,6 @@
 <br clear="all">
 
 <section>
-
 	<form>
 	<div id="reportfrm">
 		<div id="reason">

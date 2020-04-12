@@ -16,7 +16,6 @@
 <br clear="all">
 
 <section>
-
 	<!-- 수요조사 게시판 상세 -->
 <div id="demandp">
 	<h2 id="dh2"><strong>수요조사 게시판</strong></h2>

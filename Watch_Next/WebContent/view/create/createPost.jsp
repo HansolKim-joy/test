@@ -18,7 +18,6 @@
 
 <section>
 
-
 	<!-- 창작 게시판 상세 -->
 <div id="createp">
 	<h2 id="ch2"><strong>창작 게시판</strong></h2>
