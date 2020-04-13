@@ -5,6 +5,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.pro { 
+	height: 10px;  /* Can be anything */
+	position: relative;
+	background: black;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+	padding: 10px;
+	box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+.pro > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: red;
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43,194,83) 37%,
+    rgb(84,240,84) 69%
+  );
+  box-shadow: 
+    inset 0 2px 9px  rgba(255,255,255,0.3),
+    inset 0 -2px 6px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+#suyotb table {margin-left: 25%;
+    			border-spacing: 20px;}
+
+</style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />
 </head>
@@ -54,7 +88,7 @@
 	<hr class="hline">
 	
 	<!-- 진행상황 -->
-	<form>
+	<div id="suyotb">
 		<table id="f_t">
 			<tr class="f_tr1">
 				<td colspan="2" class = "f_t_p"><img class="poster" src="/Watch_Next/Resources/images/p1.jpg"></td>
@@ -63,18 +97,18 @@
 			</tr>
 			<tr class="f_tr2">
 				<td colspan="2">
-					<div class="bar">
-						<span id="current"></span>
+					<div class="pro">
+						<span style="width: 20%"></span>
 					</div>
 				</td>
 				<td colspan="2">
-					<div class="bar">
-						<span id="current"></span>
+					<div class="pro">
+						<span style="width: 40%"></span>
 					</div>
 				</td>
 				<td colspan="2">
-					<div class="bar">
-						<span id="current"></span>
+					<div class="pro">
+						<span style="width: 60%"></span>
 					</div>
 				</td>
 			</tr>
@@ -82,7 +116,7 @@
 				<td id="dDay">22일남음</td>
 				<td id="percent">60%달성</td>
 				<td id="dDay">22일남음</td>
-				<td id="percent">60%달성</td>
+				<td id="percent">60%달성</td> 
 				<td id="dDay">22일남음</td>
 				<td id="percent">60%달성</td>
 			</tr>
@@ -93,18 +127,18 @@
 			</tr>
 			<tr class="f_tr2">
 				<td colspan="2">
-					<div class="bar">
-						<span id="current"></span>
+					<div class="pro">
+						<span style="width: 30%"></span>
 					</div>
 				</td>	
 				<td colspan="2">
-					<div class="bar">
-						<span id="current"></span>
+					<div class="pro">
+						<span style="width: 50%"></span>
 					</div>
 				</td>	
 				<td colspan="2">
-					<div class="bar">
-						<span id="current"></span>
+					<div class="pro">
+						<span style="width: 70%"></span>
 					</div>
 				</td>	
 			</tr>
@@ -118,7 +152,7 @@
 			</tr>
 		</table>
 	
-	</form>
+	</div>
 	<br>
 	</div>
 	
