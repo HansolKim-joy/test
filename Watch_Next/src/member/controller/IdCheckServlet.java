@@ -1,29 +1,27 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class IdCheckServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public IdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +31,16 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		int result = new MemberService().idCheck(userId);
 		
-		System.out.println(userId + " " + userPwd);
-		
-		Member m = new Member(userId, userPwd);
-		
-		Member loginUser = new MemberService().loginMember(m);
-		System.out.println(loginUser);
-		if(loginUser != null) {
-			System.out.println(loginUser);
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			session.setMaxInactiveInterval(600);
-			System.out.println(request.getContextPath());
-			response.sendRedirect(request.getContextPath());
-		}else {
-			
-			request.setAttribute("msg", "로그인 실패");
-			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
-			view.forward(request, response);
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.append("fail");
+		} else {
+			out.append("success");
 		}
+		out.flush();
+		out.close();
 	}
 
 	/**

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/view/layout/import.jsp" %>
-<link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet"/>
 </head>
 <body>
 <!--header -->
@@ -36,9 +36,9 @@
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script>
-   $(function() {
+//    $(function() {
 //       console.log("asdf");      
-   })
+//    })
    function validate(){
       if($('#userId').val().trim().length == 0){
          alert('아이디를 입력해주세요');
@@ -55,6 +55,8 @@
       
       return true;
    }
+   
+   
 
 </script>
 <script src="/Watch_Next/Resources/js/Header.js"></script>

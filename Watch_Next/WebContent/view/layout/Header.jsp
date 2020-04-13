@@ -52,7 +52,7 @@
 			</div>
 			<div class="navi_set2">
 				<div class="topnav2">
-					<a href="/Watch_Next/view/pages/memberJoinForm.jsp" class="a_tag">회원가입</a>
+					<a href="/Watch_Next/view/pages/JoinForm.jsp" class="a_tag">회원가입</a>
 				</div>
 			</div>
 		</form>
