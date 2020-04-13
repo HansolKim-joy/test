@@ -44,6 +44,10 @@ $(document).ready(function() {
 		function myPage(){
 			location.href="/Watch_Next/view/myPage/myPageMain.jsp";
 		}
+		
+		function logout(){
+			location.href="<%= request.getContextPath() %>/logout.me";
+		}
 	</script>
 <%}%>
 <br clear="all">
@@ -73,7 +77,6 @@ $(document).ready(function() {
     </div>
     
  
-    <button type="submit" onclick="location.href='/Watch_Next/view/myPage/myPageMain.jsp'">버튼</button>
     
     <!-- 리뷰게시판 -->
 	<div id="review">

@@ -4,30 +4,31 @@ public class Member {
 	private String userId;
 	private String userPwd;
 	private String userName;
-	private String email;
 	private String phone;
-	private char deleteYN;
-	private char mailingYN;
-	private char adminYN;
-	
+	private String email;
+	private String mailingYN;
+	private String adminYN;
+	private String deleteYN;
+
 	public Member() {}
 
 	public Member(String userId, String userPwd) {
+		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
 	}
 
-	public Member(String userId, String userPwd, String userName, String email, String phone, char deleteYN,
-			char mailingYN, char adminYN) {
+	public Member(String userId, String userPwd, String userName, String phone, String email, String mailingYN,
+			String adminYN, String deleteYN ) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
-		this.email = email;
 		this.phone = phone;
-		this.deleteYN = deleteYN;
+		this.email = email;
 		this.mailingYN = mailingYN;
 		this.adminYN = adminYN;
+		this.deleteYN = deleteYN;
 	}
 
 	public String getUserId() {
@@ -54,14 +55,6 @@ public class Member {
 		this.userName = userName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -70,35 +63,42 @@ public class Member {
 		this.phone = phone;
 	}
 
-	public char getDeleteYN() {
-		return deleteYN;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDeleteYN(char deleteYN) {
-		this.deleteYN = deleteYN;
-	}
-
-	public char getMailingYN() {
+	public void setEmail(String email) {
+		this.email = email;
+  }
+  
+    public String getMailingYN() {
 		return mailingYN;
 	}
 
-	public void setMailingYN(char mailingYN) {
+	public void setMailingYN(String mailingYN) {
 		this.mailingYN = mailingYN;
 	}
 
-	public char getAdminYN() {
+	public String getAdminYN() {
 		return adminYN;
 	}
 
-	public void setAdminYN(char adminYN) {
+	public void setAdminYN(String adminYN) {
 		this.adminYN = adminYN;
+	}
+
+	public String getDeleteYN() {
+		return deleteYN;
+	}
+
+	public void setDeleteYN(String deleteYN) {
+		this.deleteYN = deleteYN;
 	}
 
 	@Override
 	public String toString() {
-		return "Member [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", email=" + email
-				+ ", phone=" + phone + ", deleteYN=" + deleteYN + ", mailingYN=" + mailingYN + ", adminYN=" + adminYN
+		return "Member [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", phone=" + phone
+				+ ", email=" + email + ", mailingYN=" + mailingYN + ", adminYN=" + adminYN + ", deleteYN=" + deleteYN
 				+ "]";
 	}
-
 }
