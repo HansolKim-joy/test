@@ -1,4 +1,4 @@
-package MovieBoard.model.vo;
+package common;
 
 public class PageInfo {
 	private int currentPage;

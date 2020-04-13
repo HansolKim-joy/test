@@ -1,6 +1,9 @@
-package MovieBoard.controller;
+package board.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,22 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import MovieBoard.model.vo.Movie;
-import MovieBoard.model.vo.Review;
-import MovieBoard.model.service.BoardService;
-
+import board.model.service.RecBoardService;
+import movie.model.vo.File;
 
 /**
- * Servlet implementation class MovieSearchServlet
+ * Servlet implementation class RecBoardServlet
  */
-@WebServlet("/search.mo")
-public class MovieSearchServlet extends HttpServlet {
+@WebServlet("/rec_board.me")
+public class RecBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MovieSearchServlet() {
+    public RecBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +33,19 @@ public class MovieSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String movieTitle = request.getParameter("movieTitle");
-		BoardService service = new BoardService();
 		
-		Movie m = service.searchMovie(movieTitle);
-		Review r = service.searchGradeReview(movieTitle);
-		String page = "";
-		if(m != null) {
-			page = "view/infoMovie/infoMovie.jsp";
-			request.setAttribute("Movie", m);
-			request.setAttribute("Review", r);
-		}else {
-			page = "view/common/errorPage.jsp";
-			request.setAttribute("msg", "검색에 실패했습니다.");
+		HashMap<String, ArrayList<File>> list = new RecBoardService().listView();
+		String page = null;
+		
+		if(list != null) {
+			page="view/recom/rec_board.jsp";
+			request.setAttribute("list", list);
+		} else {
+			page="view/errorPage/errorPage.jsp";
 		}
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

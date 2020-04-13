@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*"  %>
+<%
+	ArrayList<Recruit> list = (ArrayList<Recruit>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage(); 
+	
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +19,7 @@
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link type="text/css" href="/Watch_Next/Resources/css/recruit_list.css" rel="stylesheet" >
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -26,125 +35,95 @@
 	<hr class="hline">
 	
 	
-	<table>
+	<table id="recruit">
 	<tr>
 		<th id="num">번호</th>
-		<th id="rccategory">
-			<ul>
-				<li>
-					말머리▼
-					<ul>
-						<li><a href='#'>NETFLIX</a></li>
-						<li><a href='#'>WATCHA</a></li>
-					</ul>
-				</li>
-			</ul>
-		</th>
+		<th id="rccategory">말머리</th>
 		<th id="title">글 제목</th>
 		<th id="date">날짜</th>
 		<th id="writer">글쓴이</th>
 		<th id="hits">조회</th>
 	</tr>
 	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
+	<% if(list.isEmpty()) { %>
+		<td colspan="6">조회된 리스트가 없습니다.</td>
 	</tr>
+	<% } else { %>
+		<% for(Recruit r : list) { %>
 	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
+		<td><%=r.getrNo() %></td>
+		<td><%=r.getrHead() %></td>
+		<td><%=r.getbTitle() %></td>
+		<td><%=r.getbDate() %></td>	
+		<td><%=r.getUserId() %></td>
+		<td><%=r.getbViews() %></td>
+		
 	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
-	<tr>
-		<td>168</td>
-		<td>NETFLIX</td>
-		<td>2명 모집해요~ 선착순!!</td>
-		<td>2020-04-01</td>
-		<td>아이디</td>
-		<td>6</td>
-	</tr>
+		<% } %>
+	<% } %> 
+		</table>
+	</div>
 
-	</table>
-	
-</div>
-
+	<br><br><br><br>
 <!-- 페이징 -->
-<div class="list_number">
-    <div>
-        <div class="list_n_menu">
-        <span class="prev"><  이전</span>
-        <span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>
-        <a href="">다음  ></a></div>
-    </div>
+<div class="list_number" align="center">
+	<% if(!list.isEmpty()){ %>
+	
+		<!-- 맨 처음으로 -->
+		<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=1'"> &gt;</button>
+		
+		<!-- 이전 페이지 -->
+		<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= currentPage - 1 %>'" id="before">&gt;</button>
+		<script>
+			if(<%= currentPage %> <=1){
+				$('#before').attr('disable', 'true');
+				}
+		</script>
+	
+		<!-- 10개 페이지 목록 -->
+		<% for(int p = startPage; p <= endPage; p++){ %>
+			<% if(p == currentPage){ %>
+				<button id="ch" disabled><%= p %></button>
+			<%} else { %>
+				<button id="num" onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%=p %>'"><%= p %></button>
+			<%} %>
+		<% } %>
+		
+		<!-- 다음 페이지로 -->
+		<button id="after" onclick="location.href='<%=request.getContextPath() %>/list.recruit?currenPage=<%= currentPage + 1 %>'">&gt;</button>
+		<script>
+			if(<%= currentPage %> >= <%= maxPage %>){
+				$('#after').attr('disable', 'true');
+			}
+		</script>
+		
+		<!-- 맨 끝으로 -->
+		<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=<%= maxPage %>'">&gt;&gt;</button>
+	<% } %>
+   
+   		<div class="search" align="right">
+   			 <% if(loginUser != null){ %> --%>
+   				<button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
+   		<% } %>   
+   		</div>
 </div>
 
-<!-- 글쓰기 -->
-
-<input id="write" type="button" value="글쓰기">
-
-
+<script>
+	$(function(){
+		$('#recruit td').mouseenter(function(){
+			$(this).parent().css('cursor', 'pointer');
+		}).click(function(){
+			var rNo = $(this).parent().children().eq(0).text();
+			
+			if('<%= loginUser %>' != 'null'){
+				location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
+			}else{
+				alert('로그인 해주세요.');
+			}
+		})
+	});
+</script>
+ --%>
 <!-- 검색 -->
 <br clear="left">
 

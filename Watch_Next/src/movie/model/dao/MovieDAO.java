@@ -1,4 +1,4 @@
-package MovieBoard.model.dao;
+package movie.model.dao;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,10 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
-import MovieBoard.model.vo.Movie;
-import MovieBoard.model.vo.Review;
+import movie.model.vo.Movie;
+import review.model.vo.Review;
 
 import static common.JDBCTemplate.*;
 public class MovieDAO {
@@ -30,10 +31,10 @@ public class MovieDAO {
 	
 	}
 
-	public ArrayList<Movie> MovieList(Connection conn, int currentPage, int boardLimit) {
+	public HashMap<String, Movie> MovieList(Connection conn, int currentPage, int boardLimit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<Movie> list = null;
+		HashMap<String, Movie> list = null;
 		String sql = prop.getProperty("MovieList");
 		int startRow = (currentPage - 1) * boardLimit + 1;
 		int endRow = startRow + boardLimit - 1;
@@ -44,14 +45,13 @@ public class MovieDAO {
 			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<Movie>();
+			list = new HashMap<String, Movie>();
 			
 			while(rset.next()) {
 				Movie m = new Movie(rset.getInt("movie_no"),
-						 rset.getString("movie_title"),
-						 rset.getString("file_newname")
+						 rset.getString("movie_title")
 						);
-				list.add(m);
+				list.put(rset.getString("file_newname"),m);
 			}
 		} catch (SQLException e) {
 			
@@ -136,16 +136,16 @@ public class MovieDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, m.getMovieTitle());
-			pstmt.setString(2, m.getDirector());
-			pstmt.setString(3, m.getActor());
-			pstmt.setDate(4, m.getReleaseDate());
-			pstmt.setString(5, m.getCountry());
-			pstmt.setString(6, m.getStory());
-			pstmt.setInt(7, m.getGenreNo());
-			pstmt.setInt(8, m.getFileNo());
-			pstmt.setString(9, m.getRunningTime());
-			pstmt.setString(10, m.getServiceSite());
+			pstmt.setString(1, m.getmTitle());
+			pstmt.setString(2, m.getmDirector());
+			pstmt.setString(3, m.getmActor());
+			pstmt.setDate(4, m.getmReleaseDate());
+			pstmt.setString(5, m.getmCountry());
+			pstmt.setString(6, m.getmStory());
+			pstmt.setInt(7, m.getmGenre());
+			pstmt.setInt(8, m.getmFileNo());
+			pstmt.setString(9, m.getmRunningTime());
+			pstmt.setString(10, m.getService_Site());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -156,16 +156,17 @@ public class MovieDAO {
 		
 		return result;
 	}
-	public Movie searchMovie(Connection conn, String movieTitle) {
+	public HashMap<String, Movie> searchMovie(Connection conn, String movieTitle) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		HashMap<String, Movie> mMap = null;
 		Movie m = null;
 		String sql = prop.getProperty("searchMovie");
 		// select * from MLIST where MOVIE_TITLE = ?
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, movieTitle);
-			
+			mMap = new HashMap<String, Movie>();
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				m = new Movie(
@@ -177,13 +178,9 @@ public class MovieDAO {
 						rset.getDate("releasedate"),
 						rset.getString("country"),
 						rset.getString("story"),
-						rset.getString("genre"),
-						rset.getString("file_newname"),
 						rset.getString("service_site")
-						// 여기에 get메소드 넣기
-						// 이미지도 가져와야하니 newname도 가져와야함
-						// 뭐뭐가져와야하는지 학교가서 보자
 						);
+				mMap.put(rset.getString("file_newname") + ", " + rset.getString("genre"), m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -192,7 +189,7 @@ public class MovieDAO {
 			close(pstmt);
 		}
 		
-		return m;
+		return mMap;
 	}
 	public Review searchGradeReview(Connection conn, String movieTitle) {
 		PreparedStatement pstmt = null;

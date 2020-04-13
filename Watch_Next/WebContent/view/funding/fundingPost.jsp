@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>insert title</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link type="text/css" href="/Watch_Next/Resources/css/funding_post.css" rel="stylesheet" >
@@ -17,7 +17,6 @@
 <br clear="all">
 
 <section>
-
 	<!-- 펀딩 게시판 상세 -->
 <br clear="all">
 

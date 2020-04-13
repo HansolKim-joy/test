@@ -1,7 +1,8 @@
-package MovieBoard.controller;
+package movie.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import MovieBoard.model.service.BoardService;
-import MovieBoard.model.vo.Movie;
-import MovieBoard.model.vo.PageInfo;
+import movie.model.service.BoardService;
+import movie.model.vo.Movie;
+import common.PageInfo;
 
 
 /**
@@ -65,11 +66,21 @@ public class MovieListServlet extends HttpServlet {
 		 */
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
-		ArrayList<Movie> mlist = service.MovieList(currentPage, boardLimit);
+		HashMap<String,Movie> mMap = service.MovieList(currentPage, boardLimit);
+		ArrayList<Movie> mlist = new ArrayList<Movie>();
+		ArrayList<String> fNameList = new ArrayList<String>();
+		if(!mMap.isEmpty()) {
+			mMap.forEach((k,v) -> {mlist.add(v); 
+								  fNameList.add(k);}
+								  );
+		}
+		
+		
 		String page = null;
-		if(mlist != null) {
+		if(!mlist.isEmpty()) {
 			page = "view/allMovie/allMovie2.jsp";
 			request.setAttribute("mlist", mlist);
+			request.setAttribute("fNameList", fNameList);
 			request.setAttribute("pi", pi);
 		}else {
 			page = "view/common/errorPage.jsp";

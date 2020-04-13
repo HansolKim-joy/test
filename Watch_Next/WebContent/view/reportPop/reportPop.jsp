@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>insert title</title>
 <style>
-	#reportfrm{padding-top:10px; padding-left:60px;}
+	#reportfrm{padding-top:3px; padding-left:60px;}
 	#reason{margin-top:10px; font-size:15px; color:white; font-weight:bold;}
 	#reportSubmit{background-color:red; color:white; width:380px; height:35px;
 				  border:none; border-radius:5px; font-size:15px; font-weight:bold;}
@@ -20,7 +20,6 @@
 <br clear="all">
 
 <section>
-
 	<form>
 	<div id="reportfrm">
 		<div id="reason">
@@ -29,7 +28,7 @@
 		
 		<br>
 		<div id="reportBox">
-			<textarea cols=75 rows=12 style="resize:none"></textarea>
+			<textarea cols=50 rows=12 style="resize:none"></textarea>
 		</div>
 		
 		<br>

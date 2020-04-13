@@ -9,7 +9,7 @@ public class Member {
 	private String mailingYN;
 	private String adminYN;
 	private String deleteYN;
-	
+
 	public Member() {}
 
 	public Member(String userId, String userPwd) {
@@ -69,9 +69,9 @@ public class Member {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getMailingYN() {
+  }
+  
+    public String getMailingYN() {
 		return mailingYN;
 	}
 
@@ -101,8 +101,4 @@ public class Member {
 				+ ", email=" + email + ", mailingYN=" + mailingYN + ", adminYN=" + adminYN + ", deleteYN=" + deleteYN
 				+ "]";
 	}
-	
-	
-	
-	
 }
