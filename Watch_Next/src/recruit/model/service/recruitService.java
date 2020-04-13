@@ -55,9 +55,10 @@ public class recruitService {
 		
 		Connection conn = getConnection();
 		recruitDAO dao = new recruitDAO(); //recruitDAO 두 개를 호출해야하기 때문에 참조변수로 선언
-		
+    
 		int result = dao.updateCount(conn, rNo);
 		//게시판 상세보기 시 조회수가 증가해야하기 때문에 게시판 상세보기 서비스에는 조회수 증가하는 기능도 구현 해야함
+		//System.out.println("===================update complete================");
 		
 		Recruit board = null;
 		if(result > 0) {
@@ -77,6 +78,5 @@ public class recruitService {
 		
 	}
 
-	
 
 }

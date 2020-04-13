@@ -21,9 +21,9 @@ public class recruitDAO {
 	
 	public recruitDAO() {
 		//recruit게시글 받아옴
-		String fileName = recruitDAO.class.getResource("/sql/board/board-query.properties").getPath();
-		
-		try {
+		String fileName = recruitDAO.class.getResource("/sql/recruit/board-query.properties").getPath();
+
+    try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -71,8 +71,9 @@ public class recruitDAO {
 		
 		String query = prop.getProperty("selectList");
 		
-		int startRow = (currentPage - 1) * boardLimit + 1;
-		int endRow = startRow + boardLimit - 1;
+		 int startRow = (currentPage - 1) * boardLimit + 1; 
+		 int endRow = startRow + boardLimit - 1;
+		
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -89,11 +90,9 @@ public class recruitDAO {
 										rset.getDate("board_date"),
 										rset.getString("user_id"),
 										rset.getInt("board_views"));
-				
 				list.add(r);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -107,7 +106,6 @@ public class recruitDAO {
 	public int insertBoard(Connection conn, Recruit r) {
 		// 게시글 작성
 		// insert into tb_recruit values(seq_board, ?, ?, ?, ?, ?)
-		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -115,18 +113,44 @@ public class recruitDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, r.getrHead());
+			pstmt.setString(1, r.getUserId());
 			pstmt.setString(2, r.getbTitle());
-			/* pstmt.setString(3, r.getUserId()); */
+			pstmt.setString(3, r.getbContent());
 			
 			result = pstmt.executeUpdate();
+			
+			int finalResult = 0;
+			if(result > 0) {
+				finalResult = insertRecruit(conn,r);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+
+	private int insertRecruit(Connection conn, Recruit r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 		
+		String query = prop.getProperty("insertRecruit");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, r.getrHead());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
 		return result;
 	}
 
@@ -154,8 +178,33 @@ public class recruitDAO {
 
 
 	public Recruit selectBoard(Connection conn, int rNo) {
-		// select * from 
-		return null;
+		// select * from recdetail where rNo=?
+		//게시글 선택
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Recruit r = null;
+		
+		String query = prop.getProperty("selectBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, r.getrNo());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r = new Recruit(rset.getInt("RECRUIT_NO"),
+										rset.getString("RECRUIT_HEAD"),
+										rset.getString("USER_ID"),
+										rset.getString("BOARD_TITLE"),
+										rset.getString("BOARD_CONTENT"),
+										rset.getInt("BOARD_VIEWS"),
+										rset.getDate("BOARD_DATE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
 	}
 
 }

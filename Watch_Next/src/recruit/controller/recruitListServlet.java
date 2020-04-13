@@ -46,7 +46,7 @@ public class recruitListServlet extends HttpServlet {
 		 int startPage; 
 		 int endPage;
 		 int boardLimit = 10;
-		  
+
 		 currentPage = 1; 
 		 
 		 if(request.getParameter("currentPage") != null) {
@@ -65,6 +65,17 @@ public class recruitListServlet extends HttpServlet {
 		  
 		 PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		  
+
+		 //---------------------------목록 호출-------------------------
+		 
+		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
+		 
+		 String option;
+		 
+		  if(request.getParameter("searchType") != null) {
+				 option = request.getParameter("searchType");
+				 System.out.println(option);
+				 }
 		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
 		  
 		 String page = null;
@@ -80,9 +91,6 @@ public class recruitListServlet extends HttpServlet {
 		  
 		 RequestDispatcher view = request.getRequestDispatcher(page);
 		 view.forward(request, response);
-		 
-		 
-		
 	}
 
 	/**

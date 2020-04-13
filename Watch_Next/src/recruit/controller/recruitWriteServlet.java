@@ -39,8 +39,9 @@ public class recruitWriteServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		/* Member loginUser = (Member)session.getAttribute("loginUser"); */
 		/* String writer = loginUser.getUserId(); */
-		
+
 		Recruit r = new Recruit();
+
 		r.setbTitle(title);
 		r.setbContent(content);
 		r.setrHead(rHead);
