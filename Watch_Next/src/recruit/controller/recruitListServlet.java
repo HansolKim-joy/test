@@ -9,9 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
-
+import member.model.vo.Member;
 import recruit.model.service.recruitService;
 import recruit.model.vo.PageInfo;
 import recruit.model.vo.Recruit;
@@ -69,7 +69,9 @@ public class recruitListServlet extends HttpServlet {
 		 //---------------------------목록 호출-------------------------
 		 
 		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
-		 
+		 HttpSession session = request.getSession();
+		 Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		 String option;
 		 
 		  if(request.getParameter("searchType") != null) {
@@ -82,6 +84,7 @@ public class recruitListServlet extends HttpServlet {
 			 page = "view/recruit/recruitList.jsp";
 			 request.setAttribute("list", list); 
 			 request.setAttribute("pi", pi);
+			 request.setAttribute("loginUser", loginUser);
 		 
 		 } else { 
 			 page = "view/common/errorPage.jsp"; 
