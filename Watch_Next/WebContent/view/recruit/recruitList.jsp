@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*"  %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*, member.model.vo.*"  %>
 <%
 	ArrayList<Recruit> list = (ArrayList<Recruit>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	Member loginUser = (Member)request.getAttribute("loginUser");
 	
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -60,7 +61,6 @@
 		<td><%=r.getbDate() %></td>	
 		<td><%=r.getUserId() %></td>
 		<td><%=r.getbViews() %></td>
-		<%-- <td type="hidden"><%=r.get %></td> --%>
 		
 	</tr>
 		<% } %>
@@ -105,27 +105,25 @@
 		<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 	<% } %>
    
-   		<%-- <div class="search" align="right">
-   			 <% if(loginUser != null){ %> --%>
+   		<div class="search" align="right">
+   			 <% if(loginUser != null){ %> 
    				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
-   		<%-- <% } %>   
-   		</div>  --%>
+   		 <% } %>   
+   		</div>  
 </div>
 
-<<script>
+<script>
 	$(function(){
 		$('#recruit td').mouseenter(function(){
 			$(this).parent().css('cursor', 'pointer');
 		}).click(function(){
 			
 			var rNo = $(this).parent().children().eq(0).text();
-			//alert(rNo);
-			location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
-			<%-- if('<%= loginUser %>' != 'null'){
+			 if('<%= loginUser %>' != 'null'){
 				location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
 			}else{
 				alert('로그인 해주세요.');
-			} --%>
+			}
 		})
 	});
 </script> 
@@ -151,6 +149,6 @@
 
 <!— footer —>
 <%@ include file="/view/layout/footer.jsp" %>
-<script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
+<script src="<%= request.getContextPath() %>/Resources/js/Header.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package recruit.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import recruit.model.service.recruitService;
 import recruit.model.vo.Recruit;
 
@@ -37,14 +39,15 @@ public class recruitWriteServlet extends HttpServlet {
 		String rHead = request.getParameter("recW_type");
 		
 		HttpSession session = request.getSession();
-		/* Member loginUser = (Member)session.getAttribute("loginUser"); */
-		/* String writer = loginUser.getUserId(); */
+		Member loginUser = (Member)session.getAttribute("loginUser"); 
+		String writer = loginUser.getUserId(); 
 
 		Recruit r = new Recruit();
 
 		r.setbTitle(title);
 		r.setbContent(content);
 		r.setrHead(rHead);
+		r.setUserId(writer);
 		
 		int result = new recruitService().insertRecruit(r);
 		

@@ -50,10 +50,12 @@ public class MemberDAO {
 				String userName = rset.getString("USER_NAME");
 				String phone = rset.getString("USER_PHONE");
 				String email = rset.getString("USER_EMAIL");
-				String deleteYN = rset.getString("USER_DELETE");
+				String mailingYN = rset.getString("MAILING");
+	            String adminYN = rset.getString("ADMIN_YN");
+	            String deleteYN = rset.getString("USER_DELETE");
 				
 				loginUser = new Member(userId, userPwd, userName, phone, email, mailingYN, adminYN, deleteYN);
-			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -21,7 +21,7 @@
 			<div class="topnav">게시판</div>
 			<ul class="subnav">
 				<li>리뷰 게시판</li>
-				<li>모집 게시판</li>
+				<li onclick="goR();">모집 게시판</li>
 				<li>창작 게시판</li>
 			</ul>
 		</div>
@@ -54,5 +54,11 @@
 		</form>
 	</div>
 </header>
-
+<script>
+	
+	function goR(){
+		location.href="<%= request.getContextPath() %>/list.recruit";
+	}
+	
+</script>
 <br clear="all">
