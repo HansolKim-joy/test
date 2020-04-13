@@ -53,8 +53,7 @@ public class MemberDAO {
 				String mailingYN = rset.getString("mailing");
 				String adminYN = rset.getString("admin_Yn");
 				String deleteYN = rset.getString("USER_DELETE");
-				String mailingYN = rset.getString("MAILING");
-		        String adminYN = rset.getString("ADMIN_YN");
+				
 				loginUser = new Member(userId, userPwd, userName, phone, email, mailingYN, adminYN, deleteYN);
 			}
 		} catch (SQLException e) {
