@@ -119,10 +119,6 @@ public class recruitDAO {
 			
 			result = pstmt.executeUpdate();
 			
-			int finalResult = 0;
-			if(result > 0) {
-				finalResult = insertRecruit(conn,r);
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -132,7 +128,7 @@ public class recruitDAO {
 	}
 
 
-	private int insertRecruit(Connection conn, Recruit r) {
+	public int insertRecruit(Connection conn, Recruit r) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -166,8 +162,9 @@ public class recruitDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
 			pstmt.setInt(1, rNo);
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -188,16 +185,16 @@ public class recruitDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setInt(1, r.getrNo());
+			System.out.println(pstmt);
+			pstmt.setInt(1, rNo);
 			rset = pstmt.executeQuery();
-			
+			System.out.println("rset"+rset);
 			if(rset.next()) {
 				r = new Recruit(rset.getInt("RECRUIT_NO"),
 										rset.getString("RECRUIT_HEAD"),
-										rset.getString("USER_ID"),
 										rset.getString("BOARD_TITLE"),
 										rset.getString("BOARD_CONTENT"),
+										rset.getString("USER_ID"),
 										rset.getInt("BOARD_VIEWS"),
 										rset.getDate("BOARD_DATE"));
 			}

@@ -38,15 +38,27 @@ public class recruitService {
 		//게시판 작성
 		Connection conn = getConnection();
 		
-		int result = new recruitDAO().insertBoard(conn, r);
+		recruitDAO rd = new recruitDAO();
 		
-		if(result > 0) {
-			commit(conn);
+		int result1 = rd.insertBoard(conn, r);
+		
+		int result2 = 0;
+		int result = 0;
+		if(result1 > 0) {
+			result2 = rd.insertRecruit(conn, r);
+			
+			if(result1 > 0 && result2 > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 		}else {
 			rollback(conn);
 		}
 		
 		close(conn);
+		
+		result = result1 + result2;
 		
 		return result;
 	}
@@ -59,7 +71,7 @@ public class recruitService {
 		int result = dao.updateCount(conn, rNo);
 		//게시판 상세보기 시 조회수가 증가해야하기 때문에 게시판 상세보기 서비스에는 조회수 증가하는 기능도 구현 해야함
 		//System.out.println("===================update complete================");
-		
+		System.out.println(result);
 		Recruit board = null;
 		if(result > 0) {
 			board = dao.selectBoard(conn, rNo);

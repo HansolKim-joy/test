@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList" %>
-<% Recruit r = (Recruit)request.getAttribute("recruit");  %>
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList, member.model.vo.*" %>
+<%
+	Recruit r = (Recruit)request.getAttribute("board"); 
+	Member loginUser = (Member)request.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>모집 글 상세보기</title>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" >
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -19,13 +24,20 @@
 
 <!-- 모집 게시판 상세 -->
 <div id="recruitp">
-	<h2 id="rh2"><strong>모집 게시판글 상세보기</strong></h2>
+	<h2 style="color: white; font-size: 30px;">모집 게시판글 상세보기</h2>
 	<hr class="hline">
 	
+	<form action="view/recruit/recruitDetail.jsp" id="detailForm" method="post">
 	<div id="box">
     
 <div id="now">
-	<b>WATCHA</b>&nbsp;&nbsp;&nbsp;<label id=rctitle>왓챠 세달 같이보실분 구해요</label>
+	<b>
+	<%= r.getrHead() %>
+	<input type="hidden" value=<%= r.getrHead() %> name="rHead">	
+	</b>&nbsp;&nbsp;&nbsp; 
+	<label id=rctitle><%= r.getbTitle() %></label>
+	<input type="hidden" name="rNo" value=<%=r.getrNo() %>>
+	
 </div>
   
 <hr>
@@ -35,10 +47,9 @@
 	<tr>
 		<td width="850px" style="font-size:17px;"></td>
 		<td width="80px" style="font-size:17px;">글쓴이 : </td>
-		<td width="70px" style="font-size:17px;" id="rpWriter">
+		<td width="70px" style="font-size:17px;" id="rpWriter"><%= r.getUserId() %>
 			<ul>
 				<li>
-					kimsj
 					<ul>
 						<li><a href='#'>쪽지보내기</a></li>
 						<li><a href='#'>팔로우하기</a></li>
@@ -47,9 +58,9 @@
 			</ul>
 		</td>
 		<td width="70px" style="font-size:17px;">날짜 : </td>
-      	<td width="150px" style="font-size:17px;">2020-03-26</td>
+      	<td width="150px" style="font-size:17px;"><%= r.getbDate() %></td>
       	<td width="80px" style="font-size:17px;">조회수 : </td>
-      	<td width="70px" style="font-size:17px;">3</td>
+      	<td width="70px" style="font-size:17px;"><%= r.getbViews() %>></td>
 	</tr>
 </table>
 </div>
@@ -58,8 +69,7 @@
 
 <div id="content">
 	<p style="font-size:15px;">
-		옷을 위하여서 미인을 구하기 위하여서 그리하였는가? 아니다 그들은 커다란 이상 곧 만천하의 대중을 품에 안고 그들에게 밝은 길을 찾아 주며 그들을 행복스럽고 평화스러운 곳으로 인도하겠다는 커다란 이상을 품었기 때문이다 그러므로 그들은 길지
-		<br><br><br><br><br><br><br><br><br><br>
+		<%=r.getbContent() %>
 	</p>
 </div>
 
@@ -74,14 +84,19 @@
 
 
     </div>
-    
+    </form>
     <!-- 목록수정삭제 버튼 -->
  
 <div id=listbtn>
-	<button type=button title="수정" >수정</button>
+	<!-- <button type=button title="수정" >수정</button>
     <button type=button title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
     <button onclick="location.href='reviewList.html'"
-        		type=button title="목록" >목록</button>
+        		type=button title="목록" >목록</button> -->
+    <% if(loginUser != null && loginUser.equals(r.getUserId())){ %>
+    	<input type="submit" id="update" value="수정">
+    	<input type="button" id="delete" onclick="deleteR();" value="삭제">
+    <% } %>	
+    	<div onclick="location.href='<%= request.getContextPath() %>/list.recruit'" id="menu">목록</div>
 </div>
     
     	<!-- 댓글 -->
@@ -102,6 +117,17 @@
 </div>
 	
 </div>	
+
+<script>
+	function deleteR(){
+		var d = confirm('모집글 등록을 취소하시겠습니까?');
+		
+		if(d){
+			$('#delete').attr('action', '<%=request.getContextPath() %>/delete.recruit');
+			$('#delete').submit();
+		}
+	}
+</script>
 
 </section>
 

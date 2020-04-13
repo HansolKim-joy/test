@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import recruit.model.service.recruitService;
 import recruit.model.vo.Recruit;
 
@@ -31,14 +33,15 @@ public class recruitDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNO"));
-		
+		int rNo = Integer.parseInt(request.getParameter("rNo"));
+		 HttpSession session = request.getSession();
+		 Member loginUser = (Member)session.getAttribute("loginUser");
 		Recruit board = new recruitService().selectBoard(rNo);
-		
 		String page = null;
 		if(board != null) {
 			page = "view/recruit/recruitDetail.jsp";
 			request.setAttribute("board", board);
+			request.setAttribute("loginUser", loginUser);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");
