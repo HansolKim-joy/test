@@ -16,9 +16,9 @@ public class LetterService {
 		return letterList;
 	}
 
-	public int getListCount() {
+	public int getListCount(String userName) {
 		Connection conn = getConnection();
-		int count = new LetterDAO().getListCount(conn);
+		int count = new LetterDAO().getListCount(conn, userName);
 		
 		close(conn);
 		return count;
@@ -51,9 +51,9 @@ public class LetterService {
 		return userId;
 	}
 
-	public int getsendListCount() {
+	public int getsendListCount(String userId) {
 		Connection conn = getConnection();
-		int count = new LetterDAO().getsendListCount(conn);
+		int count = new LetterDAO().getsendListCount(conn, userId);
 		
 		close(conn);
 		return count;
@@ -62,7 +62,12 @@ public class LetterService {
 	public Letter getDetailLetter(int no) {
 		Connection conn = getConnection();
 		Letter l = new LetterDAO().getDetailLetter(conn, no);
-		
+		int result = new LetterDAO().updateStatus(conn, no);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return l;
 	}
@@ -79,6 +84,14 @@ public class LetterService {
 		
 		close(conn);
 		return result;
+	}
+
+	public int allListCount(String userId) {
+		Connection conn = getConnection();
+		int count = new LetterDAO().allListCount(conn, userId);
+		
+		close(conn);
+		return count;
 	}
 
 }

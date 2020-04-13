@@ -42,7 +42,6 @@ public class LetterSendServlet extends HttpServlet {
 		String sendContent = request.getParameter("send_content");
 		
 		String sendId = service.getUserId(sendName);
-		System.out.println(sendId + "===");
 		Letter l = new Letter(userId, sendTitle, sendContent, sendId);
 		
 		int result = service.letterSend(l);

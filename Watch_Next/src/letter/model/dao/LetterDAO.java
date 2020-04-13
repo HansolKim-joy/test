@@ -63,15 +63,15 @@ public class LetterDAO {
 		
 		return letterList;
 	}
-	public int getListCount(Connection conn) {
-		Statement stmt = null;
+	public int getListCount(Connection conn, String userName) {
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int count = 0;
 		String sql = prop.getProperty("getListCount");
-		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				count = rs.getInt(1);
@@ -80,7 +80,7 @@ public class LetterDAO {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return count;
@@ -168,16 +168,15 @@ public class LetterDAO {
 		}
 		return userId;
 	}
-	public int getsendListCount(Connection conn) {
-		Statement stmt = null;
+	public int getsendListCount(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int count = 0;
 		String sql = prop.getProperty("getsendListCount");
-		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt(1);
 			}
@@ -185,7 +184,7 @@ public class LetterDAO {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return count;
@@ -238,6 +237,42 @@ public class LetterDAO {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+		}
+		return result;
+	}
+	public int allListCount(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = prop.getProperty("allListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+	public int updateStatus(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateStatus");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

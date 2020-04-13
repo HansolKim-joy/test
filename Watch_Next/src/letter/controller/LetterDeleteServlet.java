@@ -30,6 +30,8 @@ public class LetterDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] no = request.getParameterValues("letter_chk");
 		int result = new LetterService().deleteLetter(no);
+		
+		response.sendRedirect(request.getContextPath()+"/letter.view");
 	}
 
 	/**

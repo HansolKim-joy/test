@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="letter.model.vo.Letter"%>
-<%	Letter l = (Letter)request.getAttribute("letter"); %>    
-
+    pageEncoding="UTF-8" import="letter.model.vo.Letter, member.model.vo.Member"%>
+<%	Letter l = (Letter)request.getAttribute("letter"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +16,10 @@
 	<h4 style = color:white;>보낸 이 : <%=l.getUserName() %></h4>
 	<h4 style = color:white;>받는 이 : <%=l.getUserId() %></h4>
 	<h4 style = color:white;>제목 : <%=l.getMsg_Title() %></h4>
-	<textarea cols="50" rows="20" style="overflow-y:scroll; resize: none;"><%=l.getMsg_Content() %></textarea>
+	<textarea cols="50" rows="20" style="overflow-y:scroll; resize: none;" readonly><%=l.getMsg_Content() %></textarea>
 	<br>
 	<div id="letter_send_btn_area">
-		<button onclick="<%=request.getContextPath()%>/letter.view" id="letter_detail_btn">돌아가기</button>
+		<button onclick="location.href='<%=request.getContextPath()%>/letter.view'" id="letter_detail_btn">돌아가기</button>
 	</div>
 </body>
 </html>

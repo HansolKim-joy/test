@@ -38,17 +38,15 @@ public class LetterListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		LetterService service = new LetterService();
 		
-		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		// 바꾸기전까지 이거 쓰기
+		String userName = loginUser.getUserName();
 		String chk = request.getParameter("str");
 		PageInfo pi = null;
+		int allCount = service.allListCount(userId);
 		if(chk != null) {
-			int sendlistCount = service.getListCount();
-			
-			
+			int sendlistCount = service.getsendListCount(userId);
 			int currentPage;			// 현재 페이지
 			int pageLimit = 10;			// 한 페이지에 표시될 페이징 수
 			int maxPage;				// 전체 페이지중 마지막 페이지
@@ -72,9 +70,10 @@ public class LetterListServlet extends HttpServlet {
 			pi = new PageInfo(currentPage, sendlistCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 			ArrayList<Letter> sendletterList = service.sendletterList(userId, currentPage, boardLimit);
 			request.setAttribute("letterList", sendletterList);
+			request.setAttribute("count", sendlistCount);
+			request.setAttribute("chk", "str");
 		}else {
-			int listCount = service.getsendListCount();
-
+			int listCount = service.getListCount(userName);
 			int currentPage;			// 현재 페이지
 			int pageLimit = 10;			// 한 페이지에 표시될 페이징 수
 			int maxPage;				// 전체 페이지중 마지막 페이지
@@ -98,12 +97,13 @@ public class LetterListServlet extends HttpServlet {
 			pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 			ArrayList<Letter> letterList = service.letterList(userId, currentPage, boardLimit);
 			request.setAttribute("letterList", letterList);
+			request.setAttribute("count", listCount);
 		}
 		
 		
-		String page = "view/letter/letterMain.jsp";		
+		String page = "view/letter/letterMain.jsp";
 		request.setAttribute("pi", pi);
-		
+		request.setAttribute("allCount", allCount);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}
