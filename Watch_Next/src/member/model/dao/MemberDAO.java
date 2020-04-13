@@ -115,5 +115,61 @@ public class MemberDAO {
 		return result;
 				
 	}
-	
+
+	public int updateMember(Connection conn, Member member) {
+		// UPDATE TB_USER SET USER_NAME=?, USER_PHONE=?, USER_EMAIL=?, MAILING=? WHERE USER_ID=?;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		Member m = null;
+		
+		String query = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getUserName());
+			pstmt.setString(2, member.getPhone());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getMailingYN());
+			pstmt.setString(5, member.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public Member selectMember(Connection conn, Member member) {
+		// select * from tb_user where user_id=?
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		
+		String query = prop.getProperty("selectNewMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getUserId());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getString("user_id"),
+								rset.getString("user_pass"),
+								rset.getString("user_name"),
+								rset.getString("user_phone"),
+								rset.getString("user_eamil"),
+								rset.getString("mailing"),
+								rset.getString("admin_yn"),
+								rset.getString("user_delete"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
 }

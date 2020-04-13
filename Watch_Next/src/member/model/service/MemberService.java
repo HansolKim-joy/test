@@ -2,8 +2,10 @@ package member.model.service;
 
 
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
@@ -38,5 +40,21 @@ public class MemberService {
 		int result = new MemberDAO().idCheck(conn, userId);
 		return result;
 	}
-	
+
+	public Member updateMember(Member member) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		Member m = new Member(); 
+		int result = mDAO.updateMember(conn, member);
+		
+		if(result > 0) {
+			m = mDAO.selectMember(conn, member);
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return m;
+	}
+
 }
