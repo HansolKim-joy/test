@@ -6,14 +6,14 @@
 	<div class="nav">
 		<div class="navi_set">
 			<div class="topnav">
-				<a href="<%=request.getContextPath()%>/rec_board.me"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
+				<a href="<%=request.getContextPath()%>"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
 			</div>
 		</div>
 		<div class="navi_set">
 			<div class="topnav">영화</div>
 			<ul class="subnav">
 				<li>정보</li>
-				<li onclick="location.href='/Watch_Next/view/review/rec_board.jsp'">추천</li>
+				<li onclick="location.href='<%= request.getContextPath() %>/rec_board.me'">추천</li>
 			</ul>
 		</div>
 
@@ -49,7 +49,7 @@
 				<div class="topnav2" id="myPage" onclick="myPage();">마이 페이지</div>
 			</div>
 			<div class="navi_set2">
-				<div class="topnav2">로그아웃</div>
+				<div class="topnav2" onclick="logout();">로그아웃</div>
 			</div>
 		</form>
 	</div>

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, MovieBoard.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, movie.model.vo.*, common.PageInfo"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	ArrayList<Movie> mlist = (ArrayList<Movie>)request.getAttribute("mlist");
+	ArrayList<String> fNameList = (ArrayList<String>)request.getAttribute("fNameList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -16,7 +17,11 @@
 <head>
 <meta charset="UTF-8">
 <title>insert title</title>
-<%@ include file="/view/layout/import.jsp" %>
+<link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer.css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer(AFTER).css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet" />
+<!--페이지에 적용되는 css넣기 -->
+<link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
 <link type="text/css" href="<%=request.getContextPath()%>/Resources/css/allMovie.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -24,6 +29,7 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
+
 <section>
 
 <!-- 전체영화목록  -->
@@ -47,11 +53,11 @@
 				<th colspan="5" class="m_t">조회된 리스트가 없습니다.</th>
 			</tr>
 		<%} else{%>
-			<% for(Movie m : mlist){%>
+			<% for(int i=0; i<mlist.size(); i++){%>
 				<%if(moviecheck % 6 == 0 || moviecheck == 1){%>
 					<tr>
 				<%} %>
-				<th class="m_t"><img src="<%=request.getContextPath() %>/Resources/images/<%=m.getFileNewName() %>" class="m_p"><br><%= m.getMovieTitle() %></th>
+				<th class="m_t"><img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p"><br><%= mlist.get(i).getmTitle()%></th>
 				<%if(moviecheck % 5 == 0){%>
 					</tr>
 				<%} %>

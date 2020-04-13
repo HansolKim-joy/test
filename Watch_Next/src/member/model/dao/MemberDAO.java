@@ -44,28 +44,16 @@ public class MemberDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				System.out.println("123");
+//				System.out.println("123");
 				String userId = rset.getString("USER_ID");
 				String userPwd = rset.getString("USER_PASS");
 				String userName = rset.getString("USER_NAME");
-				String email = rset.getString("USER_EMAIL");
 				String phone = rset.getString("USER_PHONE");
+				String email = rset.getString("USER_EMAIL");
 				String deleteYN = rset.getString("USER_DELETE");
-				String mailingYN = rset.getString("MAILING");
-				String adminYN = rset.getString("ADMIN_YN");
 				
-				loginUser = new Member(userId, userPwd, userName, email, phone, deleteYN, mailingYN, adminYN);
-				
-=======
-				loginUser = new Member(rset.getString(1),
-										rset.getString(2),
-										rset.getString(3),
-										rset.getString(4),
-										rset.getString(5),
-										rset.getString(6).charAt(0),
-										rset.getString(7).charAt(0),
-										rset.getString(8).charAt(0));
-			}
+				loginUser = new Member(userId, userPwd, userName, phone, email, mailingYN, adminYN, deleteYN);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -73,6 +61,57 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return loginUser;
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMember");
+		System.out.println(m.getMailingYN());
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setString(5, m.getEmail());
+			pstmt.setString(6, m.getMailingYN());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int idCheck(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+				
 	}
 	
 }

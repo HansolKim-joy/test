@@ -22,8 +22,8 @@ public class recruitDAO {
 	public recruitDAO() {
 		//recruit게시글 받아옴
 		String fileName = recruitDAO.class.getResource("/sql/recruit/board-query.properties").getPath();
-		
-		try {
+
+    try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -66,12 +66,10 @@ public class recruitDAO {
 	public ArrayList<Recruit> selectList(Connection conn, int currentPage, int boardLimit) {
 		//db에서 게시글 받아옴
 		PreparedStatement pstmt = null;
-		//Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Recruit> list = null;
 		
 		String query = prop.getProperty("selectList");
-		
 		
 		 int startRow = (currentPage - 1) * boardLimit + 1; 
 		 int endRow = startRow + boardLimit - 1;
@@ -79,7 +77,6 @@ public class recruitDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			
@@ -87,7 +84,7 @@ public class recruitDAO {
 			list = new ArrayList<Recruit>();
 			
 			while(rset.next()) {
-				Recruit r = new Recruit(rset.getInt("rnum"),
+				Recruit r = new Recruit(rset.getInt("RECRUIT_NO"),
 										rset.getString("RECRUIT_HEAD"),
 										rset.getString("board_title"),
 										rset.getDate("board_date"),
@@ -95,9 +92,7 @@ public class recruitDAO {
 										rset.getInt("board_views"));
 				list.add(r);
 			}
-			System.out.println(list.size());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -110,8 +105,7 @@ public class recruitDAO {
 
 	public int insertBoard(Connection conn, Recruit r) {
 		// 게시글 작성
-		// insert into tb_recruit values(seq_board.nextval, id?, title?, content?, 0, sysdate)
-		
+		// insert into tb_recruit values(seq_board, ?, ?, ?, ?, ?)
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -119,19 +113,16 @@ public class recruitDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
 			pstmt.setString(1, r.getUserId());
 			pstmt.setString(2, r.getbTitle());
 			pstmt.setString(3, r.getbContent());
 			
-			
 			result = pstmt.executeUpdate();
 			
 			int finalResult = 0;
-			if(result >0) {
+			if(result > 0) {
 				finalResult = insertRecruit(conn,r);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -161,7 +152,6 @@ public class recruitDAO {
 		}
 
 		return result;
-		
 	}
 
 
@@ -214,9 +204,6 @@ public class recruitDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		return r;
 	}
 

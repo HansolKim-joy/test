@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/view/layout/import.jsp" %>
-<link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet"/>
 </head>
 <body>
 <!--header -->
@@ -52,6 +52,8 @@
       
       return true;
    }
+   
+   
 
 </script>
 <script src="/Watch_Next/Resources/js/Header.js"></script>

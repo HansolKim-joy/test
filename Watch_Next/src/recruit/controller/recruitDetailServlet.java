@@ -1,27 +1,28 @@
 package recruit.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import recruit.model.service.recruitService;
 import recruit.model.vo.Recruit;
 
 /**
- * Servlet implementation class recruitInsertServlet
+ * Servlet implementation class recruitDetailServlet
  */
-@WebServlet("/insert.recruit")
-public class recruitWriteServlet extends HttpServlet {
+@WebServlet("/detail.recruit")
+public class recruitDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public recruitWriteServlet() {
+    public recruitDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,30 +31,22 @@ public class recruitWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		int rNo = Integer.parseInt(request.getParameter("rNO"));
 		
-		String title = request.getParameter("recW_recruitName");
-		String content = request.getParameter("editor_content");
-		String rHead = request.getParameter("recW_type");
+		Recruit board = new recruitService().selectBoard(rNo);
 		
-		HttpSession session = request.getSession();
-		/* Member loginUser = (Member)session.getAttribute("loginUser"); */
-		/* String writer = loginUser.getUserId(); */
-
-		Recruit r = new Recruit();
-
-		r.setbTitle(title);
-		r.setbContent(content);
-		r.setrHead(rHead);
-		
-		int result = new recruitService().insertRecruit(r);
-		
-		if(result > 0) {
-			response.sendRedirect("list.recruit?currentPage=1");
-		}else {
-			request.setAttribute("msg", "게시글 작성에 실패하였습니다.");
-			request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
+		String page = null;
+		if(board != null) {
+			page = "view/recruit/recruitDetail.jsp";
+			request.setAttribute("board", board);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");
 		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+	
 	}
 
 	/**

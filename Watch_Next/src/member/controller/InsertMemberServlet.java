@@ -1,6 +1,7 @@
-package MovieBoard.controller;
+package member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import MovieBoard.model.vo.Movie;
-import MovieBoard.model.vo.Review;
-import MovieBoard.model.service.BoardService;
-
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class MovieSearchServlet
+ * Servlet implementation class InsertMemberServlet
  */
-@WebServlet("/search.mo")
-public class MovieSearchServlet extends HttpServlet {
+@WebServlet("/insert.me")
+public class InsertMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MovieSearchServlet() {
+    public InsertMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,39 @@ public class MovieSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String movieTitle = request.getParameter("movieTitle");
-		BoardService service = new BoardService();
 		
-		Movie m = service.searchMovie(movieTitle);
-		Review r = service.searchGradeReview(movieTitle);
+		String userId = request.getParameter("user_ID");
+		String userPwd = request.getParameter("user_Pass");
+		String name = request.getParameter("user_Name");
+		String phone = request.getParameter("user_Phone");
+		String email = request.getParameter("user_Email");
+		String mailingYN = request.getParameter("user_Check");
+		System.out.println(mailingYN);
+		
+		
+		
+//		char mailingYN = mailingYN1.charAt(0);
+		
+		Member m = new Member(userId, userPwd, name, phone, email, mailingYN, null, null);
+		
+		int result = new MemberService().insertMember(m);
+		
+		
 		String page = "";
-		if(m != null) {
-			page = "view/infoMovie/infoMovie.jsp";
-			request.setAttribute("Movie", m);
-			request.setAttribute("Review", r);
-		}else {
-			page = "view/common/errorPage.jsp";
-			request.setAttribute("msg", "ê²€ìƒ‰ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+		String msg = "";
+		
+		if(result > 0) {
+			page = "/";
+			msg = "È¸¿ø°¡ÀÔ¿¡ ¼º°øÇß½À´Ï´Ù.";
+		} else {
+			page = "view/errorPage/errorPage.jsp";
+			msg = "È¸¿ø°¡ÀÔ¿¡ ½ÇÆÐÇß½À´Ï´Ù.";
 		}
+		
+		request.setAttribute("msg", msg);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
 	}
 
 	/**

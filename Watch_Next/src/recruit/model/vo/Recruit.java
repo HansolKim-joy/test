@@ -13,9 +13,7 @@ public class Recruit {
 	private char DecYn;
 	private char DeleteYn;
 	
-	
 	public Recruit() {}
-	
 	
 	public Recruit(int rNo, String rHead, String bTitle, Date bDate, String userId, int bViews) {
 		super();
@@ -27,10 +25,6 @@ public class Recruit {
 		this.bViews = bViews;
 	}
 
-
-
-
-
 	public Recruit(int rNo, String rHead, String bTitle, String bContent, String userId, int bViews, Date bDate) {
 		super();
 		this.rNo = rNo;
@@ -41,9 +35,6 @@ public class Recruit {
 		this.bViews = bViews;
 		this.bDate = bDate;
 	}
-	
-	
-	
 
 	public Recruit(int rNo, String rHead, String bTitle, Date bDate, String userId, int bViews, String bContent,
 			char decYn, char deleteYn) {
@@ -58,10 +49,6 @@ public class Recruit {
 		DecYn = decYn;
 		DeleteYn = deleteYn;
 	}
-
-
-
-
 
 	public int getrNo() {
 		return rNo;
@@ -132,8 +119,6 @@ public class Recruit {
 		this.bDate = bDate;
 	}
 
-	 
-
 	public char getDecYn() {
 		return DecYn;
 	}
@@ -160,10 +145,5 @@ public class Recruit {
 				+ userId + ", bViews=" + bViews + ", bContent=" + bContent + ", DecYn=" + DecYn + ", DeleteYn="
 				+ DeleteYn + "]";
 	}
-
-
-	
-	
-	
 
 }
