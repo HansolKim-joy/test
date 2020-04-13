@@ -100,7 +100,12 @@
 			<hr class="hline">
 			
 			<div id="mp_info"><%= loginUser.getUserName() %>님의 마이페이지입니다.</div>
-			<a href="message.html"><img id="send" src="/Watch_Next/Resources/images/쪽지.png"></a>
+			<a href="javascript:void(0);" onclick="letterPopup();"><img id="send" src="/Watch_Next/Resources/images/쪽지.png"></a>
+			<script>
+			function letterPopup(){
+				window.open('<%=request.getContextPath()%>/letter.view','letter','width=700, height=700, left=100, top=50');
+			}
+			</script>
 			<br>
 			<br>
 			<form id="mp_profile" class="mp_profile" action="/Watch_Next/view/myPage/checkUser.jsp" method="post">

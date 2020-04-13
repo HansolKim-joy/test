@@ -53,7 +53,8 @@ public class MemberDAO {
 				String mailingYN = rset.getString("mailing");
 				String adminYN = rset.getString("admin_Yn");
 				String deleteYN = rset.getString("USER_DELETE");
-				
+				String mailingYN = rset.getString("MAILING");
+		        String adminYN = rset.getString("ADMIN_YN");
 				loginUser = new Member(userId, userPwd, userName, phone, email, mailingYN, adminYN, deleteYN);
 			}
 		} catch (SQLException e) {
@@ -115,7 +116,6 @@ public class MemberDAO {
 		return result;
 				
 	}
-
 	public int updateMember(Connection conn, Member member) {
 		// UPDATE TB_USER SET USER_NAME=?, USER_PHONE=?, USER_EMAIL=?, MAILING=? WHERE USER_ID=?;
 		PreparedStatement pstmt = null;

@@ -1,12 +1,12 @@
 package movie.model.service;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static common.JDBCTemplate.*;
 
 import movie.model.dao.MovieDAO;
+import movie.model.vo.Dib;
 import movie.model.vo.Movie;
 
 import review.model.vo.Review;
@@ -75,5 +75,36 @@ public class BoardService {
 		Review r = new MovieDAO().searchGradeReview(conn, movieTitle);
 		close(conn);
 		return r;
+	}
+
+	public int insertDib(String user_id, int movie_no) {
+		Connection conn = getConnection();
+		int result = new MovieDAO().insertDib(conn, user_id, movie_no);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public Dib searchDib(int i) {
+		Connection conn = getConnection();
+		Dib d = new MovieDAO().searchDib(conn, i);
+		close(conn);
+		return d;
+	}
+
+	public int DeleteDib(String user_id, int movie_no) {
+		Connection conn = getConnection();
+		int result = new MovieDAO().deleteDib(conn, user_id, movie_no);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

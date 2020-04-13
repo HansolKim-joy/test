@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="movie.model.vo.Movie, review.model.vo.Review"%>
+    pageEncoding="UTF-8" import="movie.model.vo.*, review.model.vo.Review, member.model.vo.Member"%>
 <% Movie m = (Movie)request.getAttribute("Movie");
    Review r = (Review)request.getAttribute("Review");
+   Dib d = (Dib)request.getAttribute("Dib");
+   Member loginUser = (Member)session.getAttribute("loginUser");
    String fName = (String)request.getAttribute("fName");
    String genre = (String)request.getAttribute("genre");
    String serviceSite[] = m.getService_Site().split(", ");%>
@@ -31,41 +33,44 @@
 	<h1 id="m_title">영화정보 게시판</h1>
 	<hr class="hline">
 	
-	<form >
 		<table id="m_movie">
 			<tr>
 				<td rowspan="4" id="m_td"><img src="<%=request.getContextPath() %>/Resources/images/<%=fName %>" id="m_poster"></td>
 				<th id="m_Name"><%=m.getmTitle() %></th>
-				<td >
-				<button id="m_want" onclick="mypage();">찜하기</button>
-     				<script>
-     					function mypage(){
-     				
-     					}
-     			
-     					/* $(function(){
-     					$('#want').hover(function(){
-     					$(this).css('background', 'white');
-     					}, function(){
-     					$(this).css('background', 'red');
-     					}); */
-     					
-     				</script>
-     				
-     			</td>
+				<%if(loginUser != null){ %>
+					<%if(d == null){ %>
+					<td>
+					<button id="m_want" onclick="myDib();">찜하기</button>
+	     				<script>
+	     					function myDib(){
+	     						location.href="<%=request.getContextPath()%>/movie.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
+	     					}
+	     				</script>
+	     			</td>
+	     			<%}else{ %>
+	     			<td>
+					<button id="m_want" onclick="delDib();">찜풀기</button>
+	     				<script>
+	     					function delDib(){
+	     						location.href="<%=request.getContextPath()%>/del.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
+	     					}
+	     				</script>
+	     			</td>
+	     			<%} %>
+	     		<%} %>
      		</tr>
      		<tr>
-     			<td id="m_info"><%=m.getmStory() %></td>
+     			<td id="m_info">장르 : <%=genre%><br>감독 : <%=m.getmDirector() %><br>배우 : <%=m.getmActor() %><br><br><%=m.getmStory() %></td>
      			<td>
      				<%for(int i=0; i<serviceSite.length; i++){
      					if(serviceSite[i].equals("3")){%>
-     				<a href="http://www.netflix.com" target="_blank"> <img src="/Watch_Next/Resources/images/넷플릭스.png" id="m_net" class="ci"> </a>
+     				<a href="http://www.netflix.com" target="_blank"> <img src="/Watch_Next/Resources/images/넷플릭스.png" id="m_wat"> </a>
      					<%} 
      					if(serviceSite[i].equals("2")){%>
      				<a href="https://play.watcha.net" target="_blank"><img src="/Watch_Next/Resources/images/왓챠.png" id="m_wat"></a>
      					<%} 
      					if(serviceSite[i].equals("1")){%>
-     				<a href="https://movie.naver.com" target="_blank"><img src="/Watch_Next/Resources/images/네이버 영화.png" id="m_wat"></a>
+     				<a href="https://movie.naver.com" target="_blank"><img src="/Watch_Next/Resources/images/네이버 영화.png" id="m_net" class="ci"></a>
      					<%}
      				  }%>
      			</td>
@@ -83,7 +88,6 @@
      		</tr>
      		
 		</table>
-	</form>
 	</div>
 </section>
 

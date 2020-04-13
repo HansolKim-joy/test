@@ -8,10 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import movie.model.vo.Dib;
 import movie.model.vo.Movie;
 import review.model.vo.Review;
 
@@ -218,5 +218,75 @@ public class MovieDAO {
 		}
 		
 		return r;
+	}
+
+	public int insertDib(Connection conn, String user_id, int movie_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertDib");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, movie_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Dib searchDib(Connection conn, int i) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Dib d = null;
+		
+		String sql = prop.getProperty("searchDib");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, "admin");
+			// 이거 아이디로 바꿔야댐
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				d = new Dib(
+						rs.getString("user_id"),
+						rs.getInt("movie_no")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return d;
+	}
+
+	public int deleteDib(Connection conn, String user_id, int movie_no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteDib");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, movie_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
