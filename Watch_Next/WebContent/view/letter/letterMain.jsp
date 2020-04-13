@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="letter.model.vo.Letter, common.PageInfo, java.util.ArrayList, member.model.vo.Member"%>
+<%
+	ArrayList<Letter> letterList = (ArrayList<Letter>)request.getAttribute("letterList");
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,22 +16,23 @@
 <title>쪽지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link type="text/css" href="<%=request.getContextPath() %>/Resources/css/letter.css" rel="stylesheet" />
+<link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
 </head>
 <body>
 <h2 style = color:red;>쪽지함 (받은 쪽지)</h2>
 <hr color='red'>
 <ul id="letter_top">
-	<li><a href="#">받은 쪽지</a></li>
-	<li><a href="#">보낸 쪽지</a></li>
+	<li><a href="<%=request.getContextPath()%>/letter.view">받은 쪽지</a></li>
+	<li><a href="<%=request.getContextPath()%>/letter.view?str=str">보낸 쪽지</a></li>
 	<li>쪽지 ?통/전체 ?통</li>
 </ul>
-<button onclick="location.href='letter_send.jsp'" id="letter_send">보내기</button>
+<button onclick="location.href='view/letter/letter_send.jsp'" id="letter_send">보내기</button>
 <br clear="all">
 <hr color='red' size='3'>
 <table id="letter_list">
 	<tr>
 		<td id="l_l_choise">선택</td>
-		<td id="l_l_nick">닉네임(아이디)</td>
+		<td id="l_l_nick">닉네임</td>
 		<td id="l_l_name">제목</td>
 		<td id="l_l_time">받은시간</td>
 		<td>상태</td>
@@ -30,38 +40,63 @@
 </table>
 <br><br>
 <!-- 쪽지 목록 DB불러오는거 이양식대로 -->
-<form action="/watch_next/letter_delete.do">
+<form action="/watch_next/letter.del">
 	<div id = "letter_contents">
-		<table id = "letter_table">
-			<tr>
-				<td id = "l_t_choise"><input type="checkbox" id="letter_checkbox"></td>
-				<td id = "l_t_nick">qkrtlsdn(rory)</td>
-				<td id = "l_t_name">qkrtlsmary)</td>
-				<td id = "l_t_time">qkrtlsmary)</td>
-				<td>qkrtlsmary)</td>
-			</tr>
-			<tr>
-				<td id = "l_t_choise"><input type="checkbox" id="letter_checkbox"></td>
-				<td id = "l_t_nick">qkrtlsdn(rory)</td>
-				<td id = "l_t_name">qkrtlsmary)</td>
-				<td id = "l_t_time">qkrtlsmary)</td>
-				<td>qkrtlsmary)</td>
-			</tr>
-			<tr>
-				<td id = "l_t_choise"><input type="checkbox" id="letter_checkbox"></td>
-				<td id = "l_t_nick">qkrtlsdn(rory)</td>
-				<td id = "l_t_name">qkrtlsmary)</td>
-				<td id = "l_t_time">qkrtlsmary)</td>
-				<td>qkrtlsmary)</td>
-			</tr>
+		<table id = "letter_list">
+		<%if(!letterList.isEmpty()){ %>
+			<%for(int i=0; i<letterList.size(); i++){ %>
+				<tr>
+					<td id = "l_l_choise"><input type="checkbox" id="letter_checkbox" name="letter_chk" value="<%=letterList.get(i).getMsgNo()%>"></td>
+					<td id = "l_l_nick"><%=letterList.get(i).getUserName() %></td>
+					<td id = "l_l_name"><a href="/Watch_Next/letter.de?no=<%=letterList.get(i).getMsgNo()%>"><%=letterList.get(i).getMsg_Title() %></a></td>
+					<td id = "l_l_time"><%=letterList.get(i).getMsg_Date() %></td>
+					<td>
+					<%if(letterList.get(i).getState() == 'Y'){ %>
+						읽었음
+					<%}else{ %>
+						안읽음
+					<%} %>
+					</td>
+				</tr>
+			<%} %>
+		<%}else{ %>
+				<tr>
+					<td colspan=5>읽어올 쪽지가 없습니다.</td>
+				</tr>
+		<%} %>
 		</table>
-		<p id="letter_paging">
-		&emsp;<a href="#">←</a>
-		&emsp;<a href="#">1</a>
-		&emsp;<a href="#">2</a>
-		&emsp;<a href="#">3</a>
-		&emsp;<a href="#">→</a>
-		</p>
+		<!-- 페이징 -->
+		<div class="pagingArea" align="center">
+		<%if(!letterList.isEmpty()){ %>
+			<!-- 맨 처음으로 -->
+			<button onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=1'">&lt;&lt;</button>
+			<!-- 이전 페이지로 -->
+			<button onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%=currentPage - 1 %>'" id="beforeBtn">&lt;</button>
+			<script>
+				if(<%= currentPage %> <= 1){
+					$('#beforeBtn').attr("disabled", "true");
+				}
+			</script>
+			
+			<!-- 10개 페이지 목록 -->
+			<% for(int p = startPage; p<=endPage; p++){ %>
+				<%if(p == currentPage){ %>
+					<button id="choosen" disabled><%= p %></button>
+				<%} else{%>
+					<button id="numBtn" onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%= p %>'"><%= p %></button>
+				<%} %>
+			<%} %>
+			<!-- 다음 페이지로 -->
+			<button id="afterBtn" onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%=currentPage + 1 %>'">&gt;</button>
+			<script>
+				if(<%= currentPage %> >= <%=maxPage%>){
+					$('#afterBtn').attr("disabled", "true");
+				}
+			</script>
+			<!-- 맨 끝으로 -->
+			<button onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%=maxPage%>'">&gt;&gt;</button>
+		<% } %>
+		</div>
 		<br>
 		<input type="submit" value="삭제" id="letter_delete" class="letter_delete">
 		<b id="letter_delete">선택한쪽지&emsp;</b>

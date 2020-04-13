@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+		
+	#m_div{margin: 0 auto; margin-top: 100px; 
+	 		font-size: 20px; font-weight: bold;
+			width: 80%;}
+	
+	#m_title{color: white; }	
+	
+	.hline{ border: 0;  height: 1px;
+		   background: red; }
+	
+	#m_movie{/* width: 90%;  */
+			height: 320px; 
+			color:white; }	
+		
+	#m_td{width: 350px;}
+	/* 포스터 */
+	#m_poster{width: 250px; height: 350px;}
+		
+	#m_Name{width:350px; font-size: 30px;
+			 color: white;
+			  text-align: left;
+   			  padding-left: 10px;}
+				
+	#m_info{ color: white; font-size: 17px; 
+			padding: 10px;
+			font-weight: normal;
+			 text-align: left;
+   			  padding-left: 10px;}
+			
+     #m_review{color: white; font-size: 17px; padding: 10px;
+			font-weight: normal;}
+			 
+	
+	/* 찜하기 */		
+	#m_want{border: 3px solid white; background: #212121;
+			color: white; margin-left: 10%;
+  			 font-weight: bold; padding: 2px 6px;	
+			 text-transform: uppercase;
+			cursor: pointer; border-radius: 5px;
+			 position: relative; margin-top: -3px;
+			 height: 50px;  width: 80px;}
+	
+	
+	#m_want:hover{background:#fff;  color:#1AAB8A;}
+	
+	#m_want:before, #m_want:after{ content:''; position:absolute;
+  								top:0; right:0;  height:2px; width:0; 
+							  background: #1AAB8A; transition:400ms ease all;}
+	
+	#m_want:after{right:inherit; top:inherit; left:0; bottom:0;}
+	
+	#m_want:hover:before, #m_want:hover:after{width:100%; transition:800ms ease all;}
+	
+	/* 상영사이트 */
+	#m_net{ cursor: pointer; width: 80px; height: 50px;  margin-left: 50px;}
+	
+	 #m_wat{ cursor: pointer; width: 80px; height: 50px; }
+	 
+	 #m_naver{ cursor: pointer; width: 70px; height: 50px; margin-left: 136px;}
+	 
+
+	
+
+	

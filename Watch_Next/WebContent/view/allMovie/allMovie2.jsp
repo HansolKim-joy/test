@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, movie.model.vo.*, common.PageInfo"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, movie.model.vo.*, common.PageInfo, member.model.vo.Member"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	ArrayList<Movie> mlist = (ArrayList<Movie>)request.getAttribute("mlist");
 	ArrayList<String> fNameList = (ArrayList<String>)request.getAttribute("fNameList");
+	Member loginUser = (Member)session.getAttribute("loginUser");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -57,7 +58,7 @@
 				<%if(moviecheck % 6 == 0 || moviecheck == 1){%>
 					<tr>
 				<%} %>
-				<th class="m_t"><img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p"><br><%= mlist.get(i).getmTitle()%></th>
+				<th class="m_t"><a class="a_tag" href="<%=request.getContextPath()%>/search.mo?movieTitle=<%= mlist.get(i).getmTitle()%>"><img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p"><br><%= mlist.get(i).getmTitle()%></a></th>
 				<%if(moviecheck % 5 == 0){%>
 					</tr>
 				<%} %>

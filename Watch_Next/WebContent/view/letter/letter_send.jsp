@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>쪽지 보내기</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
 <link type="text/css" href="<%=request.getContextPath() %>/Resources/css/letter_detail.css" rel="stylesheet" />
 </head>
 <body>
@@ -35,7 +36,9 @@
 				$('#send_content').focus();
 				return false;
 			}else{
-				confirm('이대로 보내시겠습니까?');
+				if(confirm('이대로 보내시겠습니까?') == false){
+					return false;	
+				}
 			}
 		});
 	</script>
