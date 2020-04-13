@@ -76,7 +76,6 @@ public class recruitListServlet extends HttpServlet {
 				 option = request.getParameter("searchType");
 				 System.out.println(option);
 				 }
-		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
 		  
 		 String page = null;
 		 if(list != null) { 
