@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% %>    
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList" %>
+<% Recruit r = (Recruit)request.getAttribute("recruit");  %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>insert title</title>
+<title>모집 글 상세보기</title>
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -19,7 +19,7 @@
 
 <!-- 모집 게시판 상세 -->
 <div id="recruitp">
-	<h2 id="rh2"><strong>모집 게시판</strong></h2>
+	<h2 id="rh2"><strong>모집 게시판글 상세보기</strong></h2>
 	<hr class="hline">
 	
 	<div id="box">

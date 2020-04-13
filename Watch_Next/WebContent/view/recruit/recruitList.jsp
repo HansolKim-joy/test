@@ -16,10 +16,13 @@
 <head>
 <meta charset="UTF-8">
 <title>insert title</title>
+
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+<link type="text/css" href="/Watch_Next/Resources/css/recruit_list.css" rel="stylesheet" >
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -35,7 +38,7 @@
 	<hr class="hline">
 	
 	
-	<table id="recruit">
+	<table>
 	<tr>
 		<th id="num">번호</th>
 		<th id="rccategory">말머리</th>
@@ -57,6 +60,7 @@
 		<td><%=r.getbDate() %></td>	
 		<td><%=r.getUserId() %></td>
 		<td><%=r.getbViews() %></td>
+		<%-- <td type="hidden"><%=r.get %></td> --%>
 		
 	</tr>
 		<% } %>
@@ -101,35 +105,38 @@
 		<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 	<% } %>
    
-   		<div class="search" align="right">
+   		<%-- <div class="search" align="right">
    			 <% if(loginUser != null){ %> --%>
-   				<button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
-   		<% } %>   
-   		</div>
+   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
+   		<%-- <% } %>   
+   		</div>  --%>
 </div>
 
-<script>
+<<script>
 	$(function(){
 		$('#recruit td').mouseenter(function(){
 			$(this).parent().css('cursor', 'pointer');
 		}).click(function(){
-			var rNo = $(this).parent().children().eq(0).text();
 			
-			if('<%= loginUser %>' != 'null'){
+			var rNo = $(this).parent().children().eq(0).text();
+			//alert(rNo);
+			location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
+			<%-- if('<%= loginUser %>' != 'null'){
 				location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
 			}else{
 				alert('로그인 해주세요.');
-			}
+			} --%>
 		})
 	});
-</script>
- --%>
+</script> 
+ 
 <!-- 검색 -->
 <br clear="left">
 
 <div id="searchDiv">
-<form id="searchForm" action="" method="get">
+<form id="searchForm" action="" method="post">
 	<select id="searchType">
+		<option value="all">전체보기</option>
 		<option value="netflix">NETFLIX</option>
 		<option value="whatxha">WHATCHA</option>
 	</select>&nbsp;&nbsp;&nbsp;&nbsp;
