@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*, member.model.vo.*"  %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*"  %>
 <%
 	ArrayList<Recruit> list = (ArrayList<Recruit>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	Member loginUser = (Member)request.getAttribute("loginUser");
 	
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
