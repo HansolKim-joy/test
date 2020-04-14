@@ -65,7 +65,7 @@
 				<tr>
 					<td class = "l_l_choise"><input type="checkbox" class="letter_checkbox" name="letter_chk" value="<%=letterList.get(i).getMsgNo()%>"></td>
 					<td class = "l_l_nick"><%=letterList.get(i).getUserName() %></td>
-					<td class = "l_l_name"><a class="a_tag" href="/Watch_Next/letter.de?no=<%=letterList.get(i).getMsgNo()%>"><%=letterList.get(i).getMsg_Title() %></a></td>
+					<td class = "l_l_name"><a class="a_tag" href="/Watch_Next/letter.de?no=<%=letterList.get(i).getMsgNo()%>&chk=<%=chk%>"><%=letterList.get(i).getMsg_Title() %></a></td>
 					<td class = "l_l_time"><%=letterList.get(i).getMsg_Date() %></td>
 					<td class = "l_l_state">
 					<%if(letterList.get(i).getState() == 'Y'){ %>

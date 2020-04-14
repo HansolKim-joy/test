@@ -31,7 +31,8 @@ public class LetterDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		Letter l = new LetterService().getDetailLetter(no);
+		String chk = request.getParameter("chk");
+		Letter l = new LetterService().getDetailLetter(no,chk);
 		
 		request.setAttribute("letter", l);
 		String page = "view/letter/letter_read.jsp";
