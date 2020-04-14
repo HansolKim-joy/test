@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="movie.model.vo.*, review.model.vo.Review, member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="movie.model.vo.*, review.model.vo.Review"%>
 <% Movie m = (Movie)request.getAttribute("Movie");
    Review r = (Review)request.getAttribute("Review");
    Dib d = (Dib)request.getAttribute("Dib");
-   Member loginUser = (Member)session.getAttribute("loginUser");
    String fName = (String)request.getAttribute("fName");
    String genre = (String)request.getAttribute("genre");
    String serviceSite[] = m.getService_Site().split(", ");%>
