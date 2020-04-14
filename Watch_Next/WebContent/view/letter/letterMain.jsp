@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="letter.model.vo.Letter, common.PageInfo, java.util.ArrayList, member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="letter.model.vo.Letter, common.PageInfo, java.util.ArrayList"%>
 <%
 	ArrayList<Letter> letterList = (ArrayList<Letter>)request.getAttribute("letterList");
-	Member loginUser = (Member)session.getAttribute("loginUser");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
