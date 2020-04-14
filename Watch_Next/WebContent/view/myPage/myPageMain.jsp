@@ -64,6 +64,15 @@
 		font-size: 15px;
 		border-radius: 20px;
 	}
+	 #updatePwdBtn{
+	 	margin-top: 15px;
+	 	margin-right:-90px;
+	 	float: right;
+		height: 25px;
+		width: 100px;
+		font-size: 15px;
+		border-radius: 20px;
+	 }
 	.mp_hline{
 		border: 1px solid red;
 	}
@@ -87,6 +96,11 @@
 	.mp_middle{
 		height: 10px;
 	}
+	/* #updatePwdBtn{
+		width: 40px;
+		height: 30px;
+		border-radius: 50%;
+	} */
 </style>
 </head>
 <body>
@@ -134,8 +148,8 @@
 					</table>
 				</div>
 				<button type="submit" id="mp_update">정보수정</button>
-				<button id="updatePwdBtn" onclick="alert('비밀번호 확인');">비밀번호 변경</button>
 			</form>
+			<!-- <button id="updatePwdBtn" onclick="alert('비밀번호 확인');">비밀번호 변경</button> -->
 			<br><br><br>
 			<hr class="mp_hline">
 			
@@ -183,6 +197,10 @@
 			$('#mp_button5').click(function(){
 				$('#mp_h_content5').slideToggle();
 			});
+		});
+		
+		$('#mp_update').click(function(){
+			window.open('<%= request.getContextPath() %>/view/myPage/checkPwd.jsp','checkPwd', 'width=200, height=100');
 		});
 	</script>
 <!-- footer -->

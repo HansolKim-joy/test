@@ -14,16 +14,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class memberCheckServlet
+ * Servlet implementation class CheckPwdServlet
  */
-@WebServlet("/update.me")
-public class memberCheckServlet extends HttpServlet {
+@WebServlet("/CheckPwd.me")
+public class CheckPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberCheckServlet() {
+    public CheckPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,36 +33,15 @@ public class memberCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
-		String userId = request.getParameter("userId");
-		String userName = request.getParameter("userName");
-		String userEmail = request.getParameter("userEmail");
-		String userPhone = request.getParameter("userPhone");
-		String userMailing = request.getParameter("mailing");
-		
-//		System.out.println(userId + ", " + userName + ", " + userEmail + ","
-//				+ userPhone + ", " + userMailing);
-		
-		Member member = new Member(userId, null, userName, userPhone, userEmail, userMailing, "N", "N");
-		
-		Member m = new MemberService().updateMember(member);
-		
-		System.out.println(m);
 		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		Member m = new MemberService().checkPwd(userId);
 		
+		String userPwd = m.getUserPwd();
 		
+		RequestDispatcher view = request.getRequestDispatcher("checkPwd");
 		
-		String page = null;
-		if(m != null) {
-			page = "/view/myPage/myPageMain.jsp";
-			session.setAttribute("loginUser", m);
-		}else {
-			page = "view/errorPage/errorPage.jsp";
-			request.setAttribute("msg", "회원조회에 실패했습니다.");
-		}
-		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 	}
 
 	/**
