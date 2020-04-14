@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	Member updateUser = (Member)session.getAttribute("updateUser");
-	String mailing = updateUser.getMailingYN();
+	String mailing = updateUser.getMailingYN(); 
 	
 	String checkedMailingY = "";
 	String checkedMailingN = "";

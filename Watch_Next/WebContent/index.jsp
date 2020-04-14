@@ -13,7 +13,7 @@
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
 <script src="/Watch_Next/WebContent/Resources/js/Index.js"></script>
 <script>
-$(document).ready(function() {
+$(document).ready(function() { 
     $(".pp_slider").lightSlider({
         mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
         loop:true,       // 무한반복 할 것인지

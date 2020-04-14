@@ -23,7 +23,7 @@ public class memberCheckServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberCheckServlet() {
+    public memberCheckServlet() { 
         super();
         // TODO Auto-generated constructor stub
     }

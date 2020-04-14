@@ -15,7 +15,7 @@ $(document).ready(function(){
 		    if(navbar > 100){
 		        header.addClass('down');
 		    }else{
-		        header.removeClass('down');
+		        header.removeClass('down'); 
 		    }
 		  });
 	});  

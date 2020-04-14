@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>비밀번호 확인</title>
 <%@ include file="/view/layout/import.jsp" %>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <style>
 	#checkPwdMain{
