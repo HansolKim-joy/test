@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <%@ include file="/view/layout/import.jsp" %>
 <style>
-	#checkPwdMain{
+	#checkPwdMain{ 
 		width: 500px;
 		margin: 0 auto;
 		margin-top: 100px;
