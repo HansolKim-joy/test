@@ -3,17 +3,13 @@ package Funding.Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oracle.jrockit.jfr.RequestDelegate;
-
 import Funding.model.service.DemandService;
-import Funding.model.vo.*;
 import recruit.model.vo.PageInfo;
 
 /**
@@ -64,7 +60,10 @@ public class DemandListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, ListCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		
-		ArrayList<Demand> list = ds.selectList(currentPage, boardLimit);
+		ArrayList<String> list = ds.selectList(currentPage, boardLimit);
+		
+		
+		
 		
 		String page =null;
 		if(list != null) {

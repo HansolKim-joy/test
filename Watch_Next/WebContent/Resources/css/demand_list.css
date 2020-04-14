@@ -24,7 +24,7 @@
 .hline{height:4px; background-color:red; border:none;}	
 #sel{width:500px; margin:20px auto; color: black;}
 .cinema{width: 70px; height: 70px; margin:10px;}
-#allview{margin-left:15px; font-weight:bold; font-size:18px; float:left;}
+#allview{margin-left:15px; font-weight:bold; font-size:18px; float:left; color:white;}
 #selSearch{width:450px; margin-left:63%; margin-bottom:10px; color:black;}
 #selSearch input{width:150px; height:25px; font-size:13px}
 #selSearch select{height:25px;font-size:13px}
@@ -101,4 +101,11 @@
   overflow: hidden;
 }
 #suyotb table {margin-left: 25%;
-    			border-spacing: 20px;}
+    			border-spacing: 20px;
+    			margin: 0 auto;}
+    			
+section{width: 80%;
+    margin: 0 auto;
+    margin-top: 100px;}
+    
+h2{color: white; font-size: 35px;}

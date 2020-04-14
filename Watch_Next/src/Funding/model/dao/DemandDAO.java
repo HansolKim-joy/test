@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import Funding.model.vo.Demand;
@@ -52,10 +53,10 @@ public class DemandDAO {
 		
 		return result;
 	}
-	public ArrayList<Demand> selectList(Connection conn, int currentPage, int boardLimit) {
-		PreparedStatement pstmt = null;
+	public ArrayList<String> selectList(Connection conn, int currentPage, int boardLimit) {
+		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<Demand> list = null;
+		ArrayList<String> list = null;
 		
 		String query = prop.getProperty("SelectList");
 		
@@ -63,10 +64,10 @@ public class DemandDAO {
 		int end = start + boardLimit - 1;
 		
 		try {
-			pstmt = conn.prepareStatement(query);
+			stmt = conn.createStatement();
 			
 			
-			list = new ArrayList<Demand>();
+			
 			
 			while(rset.next()) {
 				
@@ -78,7 +79,7 @@ public class DemandDAO {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
 		
 		return list;
