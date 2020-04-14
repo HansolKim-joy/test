@@ -18,7 +18,7 @@ public class MemberDAO {
 	
 	public MemberDAO() {
 		String fileName = MemberDAO.class.getResource("/sql/member/member-query.properties").getPath();
-		
+		 
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -119,17 +119,17 @@ public class MemberDAO {
 		// UPDATE TB_USER SET USER_NAME=?, USER_PHONE=?, USER_EMAIL=?, MAILING=? WHERE USER_ID=?;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		Member m = null;
 		
 		String query = prop.getProperty("updateMember");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, member.getUserName());
-			pstmt.setString(2, member.getPhone());
-			pstmt.setString(3, member.getEmail());
-			pstmt.setString(4, member.getMailingYN());
-			pstmt.setString(5, member.getUserId());
+			pstmt.setString(1, member.getUserPwd());
+			pstmt.setString(2, member.getUserName());
+			pstmt.setString(3, member.getPhone());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getMailingYN());
+			pstmt.setString(6, member.getUserId());
 			
 			result = pstmt.executeUpdate();
 			

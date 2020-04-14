@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="member.model.vo.Member"%>
+	pageEncoding="UTF-8"%>
 <% 
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	System.out.println(loginUser);
@@ -16,7 +16,7 @@
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
 <script src="/Watch_Next/WebContent/Resources/js/Index.js"></script>
 <script>
-$(document).ready(function() {
+$(document).ready(function() { 
     $(".pp_slider").lightSlider({
         mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
         loop:true,       // 무한반복 할 것인지
@@ -36,10 +36,8 @@ $(document).ready(function() {
 </head>
 <body>
 <!--header -->
-<%if(loginUser==null){ %>
 <%@ include file="/view/layout/Header.jsp" %>
-<%} else{%>
-<%@ include file="/view/layout/HeaderAfter.jsp" %>
+
 	<script>
 		function myPage(){
 			location.href="/Watch_Next/view/myPage/myPageMain.jsp";
@@ -49,7 +47,6 @@ $(document).ready(function() {
 			location.href="<%= request.getContextPath() %>/logout.me";
 		}
 	</script>
-<%}%>
 <br clear="all">
 
 

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+    pageEncoding="UTF-8"%>
 <% 
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	String mailing = loginUser.getMailingYN();
+	Member updateUser = (Member)session.getAttribute("updateUser");
+	String mailing = updateUser.getMailingYN(); 
 	
 	String checkedMailingY = "";
 	String checkedMailingN = "";
@@ -50,6 +50,9 @@
 	#updateTable{
 		border-spacing: 30px;
 	}
+	.tdlast{
+		width: 100px;
+	}
 	#updateMemberBtn{
 		border: 0;
 		outline: 0;
@@ -61,6 +64,14 @@
 		width: 20px;
 		height: 20px;
 		font-size: 25px;
+	}
+	#pwdMessage{
+		text-align: center;
+		display: none;
+	}
+	#pwdMessage1{
+		text-align: center;
+		display: none;
 	}
 </style>
 </head>
@@ -79,19 +90,32 @@
 					<tr>
 						<td>아이디 : &emsp;</td>
 						<td><input type="text" id="userId" name="userId" value="<%= loginUser.getUserId() %>" readonly></td>
+						<td class="tdlast"></td>
 					</tr>
-					
+					<tr>
+						<td>변경 비밀번호 : &emsp;</td>
+						<td><input type="password" id="userPwd" name="userPwd" class="loginUser"></td>
+						<td><label id="pwdMessage1"></label></td>
+					</tr>
+					<tr>
+						<td>변경 비밀번호 확인 : &emsp;</td>
+						<td><input type="password" id="userPwd2" name="userPwd2" class="loginUser"></td>
+						<td><label id="pwdMessage"></label></td>
+					</tr>
 					<tr>
 						<td>이름 : &emsp;</td>
 						<td><input type="text" id="userName" name="userName" class="loginUser" value="<%= loginUser.getUserName() %>"></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>이메일 : &emsp;</td>
 						<td><input type="text" id="userEmail" name="userEmail" class="loginUser" value="<%= loginUser.getEmail() %>"></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>연락처 : &emsp;</td>
 						<td><input type="text" id="phone" name="userPhone" class="loginUser" value="<%=loginUser.getPhone() %>"></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>메일링 서비스 : &emsp;</td>
@@ -101,6 +125,7 @@
 							&emsp;&emsp;
 							<input type="checkbox" id="mailingN" name="mailing" onclick="doOpenCheck(this);" value="N" class="checkbox" <%= checkedMailingN %>>&emsp;N
 						</td>
+						<td></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -133,6 +158,33 @@
 			location.href="<%= request.getContextPath() %>/Resources/view/myPage/myPageMain.jsp";
 		});
 		
+		$('#userPwd2').change(function(){
+			var userPwd = $('#userPwd').val();
+			var userPwd2 = $('#userPwd2').val();
+			/* console.log(userPwd);
+			console.log(userPwd2); */
+			
+			if(userPwd == userPwd2){
+				/* console.log('같다구요!'); */
+				$('#pwdMessage').text('일치').css({"color":"green", "display":"block"});
+			}else{
+				/* console.log('다르다구요!'); */
+				$('#pwdMessage').text('불일치').css({"color":"red", "display":"block"});
+			}
+		});
+		
+		$('#userPwd').change(function(){
+			var userPwd = $('#userPwd').val();
+			var check = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+			/* console.log(userPwd); */
+			
+			if(check.test(userPwd)){
+				/* console.log('되요!'); */
+				$('#pwdMessage1').text('사용 가능').css({"color":"green", "display":"block"});
+			}else{
+				$('#pwdMessage1').text('사용 불가능').css({"color":"red", "display":"block"});
+			}
+		});
 	</script>
 </section>
 

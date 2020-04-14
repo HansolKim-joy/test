@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="member.model.vo.Member"%>
-<%
-	Member loginUser = (Member)session.getAttribute("loginUser");
-%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <%@ include file="/view/layout/import.jsp" %>
@@ -122,7 +119,7 @@
 			</script>
 			<br>
 			<br>
-			<form id="mp_profile" class="mp_profile" action="/Watch_Next/view/myPage/checkUser.jsp" method="post">
+			<form id="mp_profile" class="mp_profile" action="<%= request.getContextPath() %>/view/myPage/checkPwd.jsp">
 				<div id="mp_tabled">
 					<table id="mp_table">
 						<tr>
@@ -149,7 +146,6 @@
 				</div>
 				<button type="submit" id="mp_update">정보수정</button>
 			</form>
-			<!-- <button id="updatePwdBtn" onclick="alert('비밀번호 확인');">비밀번호 변경</button> -->
 			<br><br><br>
 			<hr class="mp_hline">
 			
@@ -198,10 +194,7 @@
 				$('#mp_h_content5').slideToggle();
 			});
 		});
-		
-		$('#mp_update').click(function(){
-			window.open('<%= request.getContextPath() %>/view/myPage/checkPwd.jsp','checkPwd', 'width=200, height=100');
-		});
+	
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
