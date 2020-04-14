@@ -53,7 +53,7 @@ public class MemberDAO {
 				String mailingYN = rset.getString("mailing");
 				String adminYN = rset.getString("admin_Yn");
 				String deleteYN = rset.getString("USER_DELETE");
-				
+
 				loginUser = new Member(userId, userPwd, userName, phone, email, mailingYN, adminYN, deleteYN);
 			}
 		} catch (SQLException e) {
@@ -158,7 +158,7 @@ public class MemberDAO {
 								rset.getString("user_pass"),
 								rset.getString("user_name"),
 								rset.getString("user_phone"),
-								rset.getString("user_eamil"),
+								rset.getString("user_email"),
 								rset.getString("mailing"),
 								rset.getString("admin_yn"),
 								rset.getString("user_delete"));
@@ -171,4 +171,33 @@ public class MemberDAO {
 		}
 		return m;
 	}
+
+	public Member checkPwd(Connection conn, String userId) {
+		// select user_pass from tb_user where user_id=?
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		
+		String query = prop.getProperty("checkPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getString("user_id"), rset.getString("user_pass"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+
+	
 }

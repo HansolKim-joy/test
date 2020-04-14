@@ -44,15 +44,25 @@ public class MemberService {
 	public Member updateMember(Member member) {
 		Connection conn = getConnection();
 		MemberDAO mDAO = new MemberDAO();
-		Member m = new Member(); 
+		Member m = null;
+		
 		int result = mDAO.updateMember(conn, member);
 		
 		if(result > 0) {
 			m = mDAO.selectMember(conn, member);
+			System.out.println(m);
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
+		close(conn);
+		return m;
+	}
+
+	public Member checkPwd(String userId) {
+		Connection conn = getConnection();
+		Member m = new MemberDAO().checkPwd(conn, userId);
+		
 		close(conn);
 		return m;
 	}
