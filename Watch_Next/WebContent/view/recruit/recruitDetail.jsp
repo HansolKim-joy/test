@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList, member.model.vo.*" %>
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList" %>
 <%
 	Recruit r = (Recruit)request.getAttribute("board"); 
-	Member loginUser = (Member)request.getAttribute("loginUser");
 	Member m = (Member)request.getAttribute("m");
 %>
 <!DOCTYPE html>
