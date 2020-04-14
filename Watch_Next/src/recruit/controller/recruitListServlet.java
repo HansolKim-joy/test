@@ -71,14 +71,11 @@ public class recruitListServlet extends HttpServlet {
 		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
 		 HttpSession session = request.getSession();
 		 Member loginUser = (Member)session.getAttribute("loginUser");
+		 //-------------------------검색옵션-----------------
 		
-		 String option;
-		 
-		  if(request.getParameter("searchType") != null) {
-				 option = request.getParameter("searchType");
-				 System.out.println(option);
-				 }
-		  
+		String choice = request.getParameter("choice");
+		ArrayList<Recruit> cList = rservice.choiceHead(choice);
+
 		 String page = null;
 		 if(list != null) { 
 			 page = "view/recruit/recruitList.jsp";
@@ -90,7 +87,7 @@ public class recruitListServlet extends HttpServlet {
 			 page = "view/common/errorPage.jsp"; 
 		 	 request.setAttribute("msg", "게시판 조회에 실패하였습니다.");
 		 }
-		  
+		 
 		 RequestDispatcher view = request.getRequestDispatcher(page);
 		 view.forward(request, response);
 	}

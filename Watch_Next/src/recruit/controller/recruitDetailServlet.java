@@ -36,7 +36,7 @@ public class recruitDetailServlet extends HttpServlet {
 		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		 HttpSession session = request.getSession();
 		 Member loginUser = (Member)session.getAttribute("loginUser");
-		Recruit board = new recruitService().selectBoard(rNo);
+		 Recruit board = new recruitService().selectBoard(rNo);
 		String page = null;
 		if(board != null) {
 			page = "view/recruit/recruitDetail.jsp";
