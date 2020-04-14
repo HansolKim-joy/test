@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="member.model.vo.Member"%>
-<%
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	System.out.println(loginUser);
-%>
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +33,8 @@ $(document).ready(function() {
 </head>
 <body>
 <!--header -->
-<%if(loginUser==null){ %>
 <%@ include file="/view/layout/Header.jsp" %>
-<%} else{%>
-<%@ include file="/view/layout/HeaderAfter.jsp" %>
+
 	<script>
 		function myPage(){
 			location.href="/Watch_Next/view/myPage/myPageMain.jsp";
@@ -49,7 +44,6 @@ $(document).ready(function() {
 			location.href="<%= request.getContextPath() %>/logout.me";
 		}
 	</script>
-<%}%>
 <br clear="all">
 
 

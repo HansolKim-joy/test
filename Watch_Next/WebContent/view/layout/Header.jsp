@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-
+    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <!-- 헤더 -->
 <header>
 	<div class="nav">
@@ -45,16 +47,25 @@
 					</button>
 				</div>
 			</div>
-			<div class="navi_set2">
-				<div class="topnav2">
-					<a href="/Watch_Next/view/pages/loginForm.jsp" class="a_tag">로그인</a>
+			<% if(loginUser == null) {%>
+				<div class="navi_set2">
+					<div class="topnav2">
+						<a href="/Watch_Next/view/pages/loginForm.jsp" class="a_tag">로그인</a>
+					</div>
 				</div>
-			</div>
-			<div class="navi_set2">
-				<div class="topnav2">
-					<a href="/Watch_Next/view/pages/JoinForm.jsp" class="a_tag">회원가입</a>
+				<div class="navi_set2">
+					<div class="topnav2">
+						<a href="/Watch_Next/view/pages/JoinForm.jsp" class="a_tag">회원가입</a>
+					</div>
 				</div>
-			</div>
+			<% } else { %>
+				<div class="navi_set2">
+					<div class="topnav2" id="myPage" onclick="location.href='<%= request.getContextPath()%>/view/myPage/myPageMain.jsp'">마이 페이지</div>
+				</div>
+				<div class="navi_set2">
+					<div class="topnav2" onclick="logout();">로그아웃</div>
+				</div>
+			<% } %>
 		</form>
 	</div>
 </header>

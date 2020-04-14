@@ -35,6 +35,7 @@ public class memberCheckServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userId = request.getParameter("userId");
+		String inputPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
@@ -43,19 +44,25 @@ public class memberCheckServlet extends HttpServlet {
 //		System.out.println(userId + ", " + userName + ", " + userEmail + ","
 //				+ userPhone + ", " + userMailing);
 		
-		Member member = new Member(userId, null, userName, userPhone, userEmail, userMailing, "N", "N");
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userPwd = "";
+		if(inputPwd == null && inputPwd.equals(loginUser.getUserPwd())) {
+			userPwd = loginUser.getUserPwd();
+		}else {
+			userPwd = inputPwd;
+		}
+		
+		Member member = new Member(userId, userPwd, userName, userPhone, userEmail, userMailing, "N", "N");
 		
 		Member m = new MemberService().updateMember(member);
 		
 		System.out.println(m);
-		HttpSession session = request.getSession();
-		
-		
 		
 		String page = null;
 		if(m != null) {
 			page = "/view/myPage/myPageMain.jsp";
-			session.setAttribute("loginUser", m);
+			session.setAttribute("updateUser", m);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
