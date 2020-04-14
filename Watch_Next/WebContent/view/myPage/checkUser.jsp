@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-	Member updateUser = (Member)session.getAttribute("updateUser");
-	String mailing = updateUser.getMailingYN(); 
-	
-	String checkedMailingY = "";
-	String checkedMailingN = "";
-	if(mailing.equals("Y")){
-		checkedMailingY = "checked"; 
-	}else{
-		checkedMailingN = "checked"; 
-	}
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,6 +108,17 @@
 					</tr>
 					<tr>
 						<td>메일링 서비스 : &emsp;</td>
+						
+						<% 
+							String mailing = loginUser.getMailingYN();
+							String checkedMailingY = "";
+							String checkedMailingN = "";
+							if(mailing.equals("Y")){
+								checkedMailingY = "checked"; 
+							}else{
+								checkedMailingN = "checked"; 
+							}
+						%>
 						<td>
 							&emsp;&emsp;
 							<input type="checkbox" id="mailingY" name="mailing" onclick="doOpenCheck(this);" value="Y" class="checkbox" <%= checkedMailingY %>>&emsp;Y
