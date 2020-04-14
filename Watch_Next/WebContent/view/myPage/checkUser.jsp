@@ -9,7 +9,7 @@
 	if(mailing.equals("Y")){
 		checkedMailingY = "checked"; 
 	}else{
-		checkedMailingN = "checked";
+		checkedMailingN = "checked"; 
 	}
 %>
 <!DOCTYPE html>

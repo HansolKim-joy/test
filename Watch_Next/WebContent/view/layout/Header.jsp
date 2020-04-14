@@ -11,7 +11,7 @@
 				<a href="<%=request.getContextPath()%>/index.jsp"><img id="logo" src="/Watch_Next/Resources/images/logo.png"></a>
 			</div>
 		</div>
-		<div class="navi_set">
+		<div class="navi_set"> 
 			<div class="topnav">영화</div>
 			<ul class="subnav">
 				<li onclick="location.href='<%= request.getContextPath() %>/movie.all'">정보</li>

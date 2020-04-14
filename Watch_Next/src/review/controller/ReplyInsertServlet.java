@@ -1,26 +1,30 @@
-package letter.controller;
+package review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import letter.model.service.LetterService;
-import letter.model.vo.Letter;
+import com.google.gson.Gson;
+
+import review.model.service.ReviewService;
+import review.model.vo.ReviewReply;
 
 /**
- * Servlet implementation class LetterDetailServlet
+ * Servlet implementation class ReplyInsertServlet
  */
-@WebServlet("/letter.de")
-public class LetterDetailServlet extends HttpServlet {
+@WebServlet("/insertReply.rv")
+public class ReplyInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LetterDetailServlet() {
+    public ReplyInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +33,24 @@ public class LetterDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("no"));
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
+		int bid = Integer.parseInt(request.getParameter("bid"));
+		System.out.println(bid);
 		
-		String chk = request.getParameter("chk");
-		Letter l = new LetterService().getDetailLetter(no,chk);
+		ReviewReply re = new ReviewReply();
+		re.setrWriter(writer);
+		re.setrContent(content);
+		re.setRefBid(bid);
 		
-		request.setAttribute("letter", l);
-		String page = "view/letter/letter_read.jsp";
-		request.getRequestDispatcher(page).forward(request, response);
+		ArrayList<ReviewReply> list = new ReviewService().insertReply(re);
+		System.out.println(list);
+		response.setContentType("applicaiton/json; charset=UTF-8");
+		/*
+		 * Gson gson = new Gson(); gson.toJson(list, response.getWriter());
+		 */
+		new Gson().toJson(list, response.getWriter());
+		
 	}
 
 	/**

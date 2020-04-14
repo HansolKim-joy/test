@@ -1,26 +1,27 @@
-package letter.controller;
+package review.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import letter.model.service.LetterService;
-import letter.model.vo.Letter;
+import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class LetterDetailServlet
+ * Servlet implementation class ReviewDeleteServlet
  */
-@WebServlet("/letter.de")
-public class LetterDetailServlet extends HttpServlet {
+@WebServlet("/delete.rv")
+public class ReviewDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LetterDetailServlet() {
+    public ReviewDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +30,18 @@ public class LetterDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("no"));
+		int rv = Integer.parseInt(request.getParameter("rv"));
 		
-		String chk = request.getParameter("chk");
-		Letter l = new LetterService().getDetailLetter(no,chk);
+		int result = new ReviewService().deleteReview(rv);
 		
-		request.setAttribute("letter", l);
-		String page = "view/letter/letter_read.jsp";
-		request.getRequestDispatcher(page).forward(request, response);
+		if(result>0) {
+			response.sendRedirect("list.rv");
+		} else {
+			RequestDispatcher view = request.getRequestDispatcher("view/common/errorPage.jsp");
+			request.setAttribute("msg", "리뷰 삭제를 실패하였습니다.");
+			view.forward(request, response);
+		}
+		
 	}
 
 	/**

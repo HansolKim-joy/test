@@ -59,14 +59,16 @@ public class LetterService {
 		return count;
 	}
 
-	public Letter getDetailLetter(int no) {
+	public Letter getDetailLetter(int no, String chk) {
 		Connection conn = getConnection();
 		Letter l = new LetterDAO().getDetailLetter(conn, no);
-		int result = new LetterDAO().updateStatus(conn, no);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
+		if(chk == null) {
+			int result = new LetterDAO().updateStatus(conn, no);
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
 		}
 		close(conn);
 		return l;

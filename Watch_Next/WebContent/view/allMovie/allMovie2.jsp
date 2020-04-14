@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, movie.model.vo.*, common.PageInfo, member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, movie.model.vo.*, common.PageInfo%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	ArrayList<Movie> mlist = (ArrayList<Movie>)request.getAttribute("mlist");
 	ArrayList<String> fNameList = (ArrayList<String>)request.getAttribute("fNameList");
-	Member loginUser = (Member)session.getAttribute("loginUser");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();

@@ -12,7 +12,7 @@
 	#mypage{
 		font-size: 30px;
 		color: white;
-	}
+	} 
 	.hline{
 		border: 2px solid red;
 	}

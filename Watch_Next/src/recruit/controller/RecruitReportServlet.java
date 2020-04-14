@@ -1,4 +1,4 @@
-package letter.controller;
+package recruit.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import letter.model.service.LetterService;
-import letter.model.vo.Letter;
-
 /**
- * Servlet implementation class LetterDetailServlet
+ * Servlet implementation class RecruitReportServlet
  */
-@WebServlet("/letter.de")
-public class LetterDetailServlet extends HttpServlet {
+@WebServlet("/report.recruit")
+public class RecruitReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LetterDetailServlet() {
+    public RecruitReportServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +26,7 @@ public class LetterDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("no"));
 		
-		String chk = request.getParameter("chk");
-		Letter l = new LetterService().getDetailLetter(no,chk);
-		
-		request.setAttribute("letter", l);
-		String page = "view/letter/letter_read.jsp";
-		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

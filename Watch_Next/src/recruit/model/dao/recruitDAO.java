@@ -185,10 +185,8 @@ public class recruitDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			System.out.println(pstmt);
 			pstmt.setInt(1, rNo);
 			rset = pstmt.executeQuery();
-			System.out.println("rset"+rset);
 			if(rset.next()) {
 				r = new Recruit(rset.getInt("RECRUIT_NO"),
 										rset.getString("RECRUIT_HEAD"),
@@ -203,5 +201,113 @@ public class recruitDAO {
 		}
 		return r;
 	}
+
+	public int updateBoard(Connection conn, Recruit r) {
+		//게시글 수정
+		//update tb_board set bTitle?, bContent?  where board_no=?
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, r.getbTitle());
+			pstmt.setString(2, r.getbContent());
+			pstmt.setInt(3, r.getrNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+		
+	}
+	public int updateRecruit(Connection conn, Recruit r) {
+		//update tb_recruit set recruit_head? where recruit_no=?
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateRecruit");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, r.getrHead());
+			pstmt.setInt(2, r.getrNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int deleteRecruit(Connection conn, int rNo) {
+		//게시글 삭제
+		//update tb_board set BOARD_DELETE_YN='Y' where board_no=?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteRecruit");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, rNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public ArrayList<Recruit> choiceHead(Connection conn, String choice) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Recruit> cList = null;
+		String query = prop.getProperty("choiceHead");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, choice);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				cList.add(new Recruit(
+						rset.getInt("RECRUIT_NO"), 
+						rset.getString("RECRUIT_HEAD"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"), 
+						rset.getString("USER_ID"),
+						rset.getInt("BOARD_VIEWS"),
+						rset.getDate("BOARD_DATE")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return cList;
+	}
+
+
+	
 
 }

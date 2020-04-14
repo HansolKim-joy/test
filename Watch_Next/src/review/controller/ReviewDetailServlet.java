@@ -1,6 +1,7 @@
-package recruit.controller;
+package review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,23 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import member.model.vo.Member;
-import recruit.model.service.recruitService;
-import recruit.model.vo.Recruit;
+import review.model.service.ReviewService;
+import review.model.vo.Review;
+import review.model.vo.ReviewReply;
 
 /**
- * Servlet implementation class recruitDetailServlet
+ * Servlet implementation class ReviewDetailServlet
  */
-@WebServlet("/detail.recruit")
-public class recruitDetailServlet extends HttpServlet {
+@WebServlet("/detail.rv")
+public class ReviewDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public recruitDetailServlet() {
+    public ReviewDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +33,24 @@ public class recruitDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
-		 HttpSession session = request.getSession();
-		 Member loginUser = (Member)session.getAttribute("loginUser");
-		 Recruit board = new recruitService().selectBoard(rNo);
+		int rv = Integer.parseInt(request.getParameter("rv"));
+		
+		Review review = new ReviewService().selectReview(rv);
+		ArrayList<ReviewReply> list = new ReviewService().selectReplyList(rv);
+		
 		String page = null;
-		if(board != null) {
-			page = "view/recruit/recruitDetail.jsp";
-			request.setAttribute("board", board);
-			request.setAttribute("loginUser", loginUser);
+		if(review != null) {
+			page = "view/review_board/reviewPost.jsp";
+			request.setAttribute("review", review);
+			request.setAttribute("list", list);
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");
+			page = "view/errorPage/errorPage.jsp";
+			request.setAttribute("msg", "게시물 상세조회에 실패했습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
-	
+		
 	}
 
 	/**

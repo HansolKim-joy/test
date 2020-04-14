@@ -26,7 +26,7 @@ public class MemberDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		 
 	}
 
 	public Member loginMember(Connection conn, Member m) {

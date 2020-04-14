@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList, member.model.vo.*" %>
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList" %>
 <%
 	Recruit r = (Recruit)request.getAttribute("board"); 
-	Member loginUser = (Member)request.getAttribute("loginUser");
+	Member m = (Member)request.getAttribute("m");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,18 +27,19 @@
 	<h2 style="color: white; font-size: 30px;">모집 게시판글 상세보기</h2>
 	<hr class="hline">
 	
-	<form action="view/recruit/recruitDetail.jsp" id="detailForm" method="post">
-	<div id="box">
-    
-<div id="now">
-	<b>
-	<%= r.getrHead() %>
-	<input type="hidden" value=<%= r.getrHead() %> name="rHead">	
-	</b>&nbsp;&nbsp;&nbsp; 
-	<label id=rctitle><%= r.getbTitle() %></label>
-	<input type="hidden" name="rNo" value=<%=r.getrNo() %>>
-	
-</div>
+	<form action="view/recruit/recruitUpdate.jsp" id="detailForm" name="detailForm">
+		<div id="box">
+	    
+			<div id="now">
+				<b>
+				<%= r.getrHead() %>
+				<input type="hidden" value="<%= r.getrHead() %>" name="rHead">	
+				</b>&nbsp;&nbsp;&nbsp; 
+				<input type="text" readonly="<%= r.getbTitle() %>" id=rctitle name="bTitle" value="<%= r.getbTitle() %>" style="border: 0;">
+				
+				<input type="hidden" name="rNo" value="<%=r.getrNo() %>">
+				
+			</div>
   
 <hr>
 
@@ -47,7 +48,8 @@
 	<tr>
 		<td width="850px" style="font-size:17px;"></td>
 		<td width="80px" style="font-size:17px;">글쓴이 : </td>
-		<td width="70px" style="font-size:17px;" id="rpWriter"><%= r.getUserId() %>
+		<td width="70px" style="font-size:17px;" id="rpWriter">
+			<input type="text" readonly="<%=r.getUserId() %>" name="userId" value="<%=r.getUserId()%>" style="border: 0;">
 			<ul>
 				<li>
 					<ul>
@@ -58,9 +60,13 @@
 			</ul>
 		</td>
 		<td width="70px" style="font-size:17px;">날짜 : </td>
-      	<td width="150px" style="font-size:17px;"><%= r.getbDate() %></td>
+      	<td width="150px" style="font-size:17px;" >
+      		<input type="text" readonly="<%=r.getbDate() %>" name="bDate" value="<%=r.getbDate()%>" style="border: 0;">
+      	</td>
       	<td width="80px" style="font-size:17px;">조회수 : </td>
-      	<td width="70px" style="font-size:17px;"><%= r.getbViews() %>></td>
+      	<td width="70px" style="font-size:17px;" >
+      		<input type="text" readonly="<%=r.getbViews() %>" name="bViews"	value="<%= r.getbViews() %>" style="border:0;">
+      	</td>
 	</tr>
 </table>
 </div>
@@ -68,36 +74,37 @@
 <hr>
 
 <div id="content">
-	<p style="font-size:15px;">
-		<%=r.getbContent() %>
+	<p style="font-size:15px;" >
+		<input type="text" name="bContent" value="<%=r.getbContent() %>" style="border:0;">
+		
 	</p>
 </div>
 
 	<!-- 신고버튼 -->
 <div id="btn">
-	<a href="#" target="_self">
+	<button  >
 		<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
 			onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop', 
-								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
-	</a>
+			'left'='+(screen.availWidth-500)/2+','top='+'(screen.availHeight-300)/2+', 'width=500px','height=300px')">
+	</button>
 </div>
-
+	    <!-- 목록수정삭제 버튼 -->
+ 
+		<div id=listbtn>
+			<!-- <button type=button title="수정" >수정</button>
+		    <button type=button title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
+		    <button onclick="location.href='reviewList.html'"
+		        		type=button title="목록" >목록</button> -->
+		    <% if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
+		    	<button type="submit" id="update" value="수정">수정</button>
+		    	<button type="button" id="delete" onclick="deleteR();" value="삭제">삭제</button>
+		   <% } %>
+		    	<div onclick="location.href='<%= request.getContextPath() %>/list.recruit'" id="menu" >목록</div>
+		</div>
 
     </div>
     </form>
-    <!-- 목록수정삭제 버튼 -->
- 
-<div id=listbtn>
-	<!-- <button type=button title="수정" >수정</button>
-    <button type=button title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
-    <button onclick="location.href='reviewList.html'"
-        		type=button title="목록" >목록</button> -->
-    <% if(loginUser != null && loginUser.equals(r.getUserId())){ %>
-    	<input type="submit" id="update" value="수정">
-    	<input type="button" id="delete" onclick="deleteR();" value="삭제">
-    <% } %>	
-    	<div onclick="location.href='<%= request.getContextPath() %>/list.recruit'" id="menu">목록</div>
-</div>
+
     
     	<!-- 댓글 -->
 <div id="replybox1">
@@ -110,8 +117,11 @@
 <div id="replybox2">
 <table>
 <tr><th>김땡땡</th>
-	<td><button type=button id=report onclick="window.open('reportPop.html', 'pop', 
-												'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button></td></tr>
+	<td>
+		<button type=button id=report onclick="window.open('reportPop.html', 'pop', 'left'='+(screen.availWidth-500)/2'+',top'='+(screen.availHeight-300)/2+',
+				width=500px,height=300px')">신고</button>
+	</td>
+</tr>
 <tr><td colspan="2" style="font-size:14px;">공감합니다</td></tr>
 </table>
 </div>
@@ -120,11 +130,11 @@
 
 <script>
 	function deleteR(){
-		var d = confirm('모집글 등록을 취소하시겠습니까?');
+		var d = confirm('게시글을 삭제하시겠습니까?');
 		
 		if(d){
-			$('#delete').attr('action', '<%=request.getContextPath() %>/delete.recruit');
-			$('#delete').submit();
+			location.href="<%=request.getContextPath() %>/delete.recruit?rNo=" + <%=r.getrNo() %>;
+			
 		}
 	}
 </script>
