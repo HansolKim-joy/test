@@ -83,12 +83,12 @@
 					</tr>
 					<tr>
 						<td>변경 비밀번호 : &emsp;</td>
-						<td><input type="password" id="userPwd" name="userPwd" class="loginUser"></td>
+						<td><input type="password" id="userPwd" name="userPwd" class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
 						<td><label id="pwdMessage1"></label></td>
 					</tr>
 					<tr>
 						<td>변경 비밀번호 확인 : &emsp;</td>
-						<td><input type="password" id="userPwd2" name="userPwd2" class="loginUser"></td>
+						<td><input type="password" id="userPwd2" name="userPwd2" class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
 						<td><label id="pwdMessage"></label></td>
 					</tr>
 					<tr>
@@ -133,7 +133,7 @@
 							&emsp;&emsp;&emsp;	
 							<button id="updateMemberBtn" onclick="updateMemeber();">수정 완료</button>
 							&emsp;&emsp;&emsp;&emsp;&emsp;
-							<span id="cancelBtn" onclick="location.href='javascript:history.go(-1)'">취소하기</span>
+							<span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
 						</td>
 						
 					</tr>

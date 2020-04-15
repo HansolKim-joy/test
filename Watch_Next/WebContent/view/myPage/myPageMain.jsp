@@ -159,17 +159,24 @@
 				<div class="mp_middle"></div>
 				<div id="mp_h_content2" class="mp_h_content"> 내용</div>
 			</div>
-			<div id="mp_content3" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
+			<div id="mp_content3" class="mp_content">나의 찜 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button3" class="mp_button">+</button>
 				<div class="mp_middle"></div>
-				<div id="mp_h_content3" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content3" class="mp_h_content"></div>
 			</div>
-			<div id="mp_content4" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
+			<div id="mp_content4" class="mp_content">게시글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button4" class="mp_button">+</button>
 				<div class="mp_middle"></div>
-				<div id="mp_h_content4" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content4" class="mp_h_content">
+					<ol>
+						<li><b>리뷰</b></li>
+						<li><b>모집</b></li>
+						<li><b>수요조사</b></li>
+						<li><b>펀딩</b></li>
+					</ol>
+				</div>
 			</div>
-			<div id="mp_content5" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
+			<div id="mp_content5" class="mp_content">댓글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button5" class="mp_button">+</button>
 				<div class="mp_middle"></div>
 				<div id="mp_h_content5" class="mp_h_content"> 내용</div>
