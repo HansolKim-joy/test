@@ -41,8 +41,8 @@ public class memberCheckServlet extends HttpServlet {
 		String userPhone = request.getParameter("userPhone");
 		String userMailing = request.getParameter("mailing");
 		
-//		System.out.println(userId + ", " + userName + ", " + userEmail + ","
-//				+ userPhone + ", " + userMailing);
+		System.out.println(userId + ", " + inputPwd + ", " + userName + ", " + userEmail + ","
+				+ userPhone + ", " + userMailing);
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
@@ -62,7 +62,7 @@ public class memberCheckServlet extends HttpServlet {
 		String page = null;
 		if(m != null) {
 			page = "/view/myPage/myPageMain.jsp";
-			session.setAttribute("updateUser", m);
+			session.setAttribute("loginUser", m);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
