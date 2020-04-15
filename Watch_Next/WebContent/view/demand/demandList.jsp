@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, Funding.model.vo.*"%>
+<%
+	ArrayList<DemandList> list = (ArrayList<DemandList>)request.getAttribute("list");
+	int j = 4;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,9 +61,53 @@
 		
 	<hr class="hline">
 	
-	<!-- 진행상황 -->
 	<div id="suyotb">
-		<table id="f_t">
+		   <% for(int i=0; i<list.size(); i++){ 
+			 DemandList dl = list.get(i);
+			 if(i%j==0){ %>
+				<ol>
+					<li>
+						<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>">
+						<div class="pro">
+							<span style="width: <%= dl.getMinPeople() %>%"></span>
+						</div>
+						<span>
+						<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음1</div>
+						<div style="display: inline-block;"><%= dl.getMinPeople() %>%</div>
+						</span>
+					</li>
+				
+			<%}else if(i%j==3){ %>
+					<li>
+						<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>">
+						<div class="pro">
+							<span style="width: <%= dl.getMinPeople() %>%"></span>
+						</div>
+						<span>
+						<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음3</div>
+						<div style="display: inline-block;"><%= dl.getMinPeople() %>%</div>
+						</span>
+					</li>
+				</ol>
+					
+			<%}else{%>
+					<li>
+						<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>">
+						<div class="pro">
+							<span style="width: <%= dl.getMinPeople() %>%"></span>
+						</div>
+						<span>
+						<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음2</div>
+						<div style="display: inline-block;"><%= dl.getMinPeople() %>%</div>
+						</span>
+					</li>
+			<%} %>		
+		<% } %>   
+		
+	<!-- 진행상황 --> 
+	
+	
+		 <!--  <table id="f_t">
 			<tr class="f_tr1">
 				<td colspan="2" class = "f_t_p"><img class="poster" src="/Watch_Next/Resources/images/p1.jpg"></td>
 				<td colspan="2" class = "f_t_p"><img class="poster" src="/Watch_Next/Resources/images/p2.jpg"></td>
@@ -120,12 +168,11 @@
 				<td id="dDay">22일남음</td>
 				<td id="percent">60%달성</td>
 			</tr>
-		</table>
+		</table>   -->
 	
 	</div>
 	<br>
 	</div>
-	
 	<!-- 페이징 -->	
 	<div class="list_number">
         <div class="list_n_menu">

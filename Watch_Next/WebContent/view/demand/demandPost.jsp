@@ -112,7 +112,7 @@
 </section>
 
 
-<!— footer —>
+<!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
 </body>

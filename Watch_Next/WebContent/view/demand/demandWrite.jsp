@@ -127,7 +127,8 @@
 			<br>
 			<b>감독 : </b><input type="text" id="admin_movie_director" name="admin_movie_director">
 			<b>총원 : </b><input type="text" id="admin_movie_max" name="admin_movie_max" value='150' readonly><br>
-			<b>출연 : </b><input type="text" id="admin_movie_actor" name="admin_movie_actor"><br>
+			<b>출연 : </b><input type="text" id="admin_movie_actor" name="admin_movie_actor">
+			<b>최소 인원 : </b><input type="text" id="admin_movie_min" name="admin_movie_min"><br>
 			<b>장르 : </b>
 			<select id = "admin_movie_genre" name="admin_movie_genre">
 				<option value="1">액션 영화</option>
@@ -157,7 +158,7 @@
 			<br>
 		</div>
 		<div style="width: 100%; text-align:center;">
-			<input type="submit" value="완료" id="admin_movie_btn">
+			<input type="submit" value="완료" id="admin_movie_btn" onclick="location.href='<%= request.getContextPath()%>/view/demand/demandList.jsp'">
 			<input type="reset" value="취소" id="admin_movie_btn">
 		</div>
 	</div>

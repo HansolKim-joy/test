@@ -1,23 +1,22 @@
 package Funding.model.vo;
 
-import java.sql.Date;
 
 public class DemandList {
 	private int dNo;
 	private int FileNo;
 	private String FileName;
-	private Date EndDay;
-	private int Percent;
+	private int minPeople;
+	private int EndDay;
 
 	public DemandList() {}
 
-	public DemandList(int dNo, int fileNo, String fileName, Date endDay, int percent) {
+	public DemandList(int dNo, int fileNo, String fileName, int minPeople, int endDay) {
 		super();
 		this.dNo = dNo;
 		FileNo = fileNo;
 		FileName = fileName;
+		this.minPeople = minPeople;
 		EndDay = endDay;
-		Percent = percent;
 	}
 
 	public int getdNo() {
@@ -44,38 +43,29 @@ public class DemandList {
 		FileName = fileName;
 	}
 
-	public Date getEndDay() {
+	public int getMinPeople() {
+		return minPeople;
+	}
+
+	public void setMinPeople(int minPeople) {
+		this.minPeople = minPeople;
+	}
+
+	public int getEndDay() {
 		return EndDay;
 	}
 
-	public void setEndDay(Date endDay) {
+	public void setEndDay(int endDay) {
 		EndDay = endDay;
-	}
-
-	public int getPercent() {
-		return Percent;
-	}
-
-	public void setPercent(int percent) {
-		Percent = percent;
 	}
 
 	@Override
 	public String toString() {
-		return "DemandList [dNo=" + dNo + ", FileNo=" + FileNo + ", FileName=" + FileName + ", EndDay=" + EndDay
-				+ ", Percent=" + Percent + "]";
+		return "DemandList [dNo=" + dNo + ", FileNo=" + FileNo + ", FileName=" + FileName + ", minPeople=" + minPeople
+				+ ", EndDay=" + EndDay + "]";
 	}
 	
 	
-	
-	
 
-
-
-	
-	
-	
-	
-	
 	
 }
