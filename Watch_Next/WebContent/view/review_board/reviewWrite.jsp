@@ -12,6 +12,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/Resources/js/editor.js"></script>
+<style>
+	.subnav li {width: 120px;}
+</style>
 <script>
 	$(document).ready(function() {
 		$("#txtEditor").Editor();
