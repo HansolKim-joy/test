@@ -158,8 +158,8 @@
 			<br>
 		</div>
 		<div style="width: 100%; text-align:center;">
-			<input type="submit" value="완료" id="admin_movie_btn" onclick="location.href='<%= request.getContextPath()%>/view/demand/demandList.jsp'">
-			<input type="reset" value="취소" id="admin_movie_btn">
+			<input type="submit" value="완료" id="admin_movie_btn">
+			<input type="button" value="취소" id="admin_movie_btn" onclick="location.href='<%= request.getContextPath()%>/list.de'">
 		</div>
 	</div>
 </form>

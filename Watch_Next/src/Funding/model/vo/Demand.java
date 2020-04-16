@@ -20,6 +20,16 @@ public class Demand {
 
 	public Demand() {
 	}
+	
+	
+	
+	//수요조사 사람 퍼센트 생성자
+	public Demand(int dNo, int smWant) {
+		super();
+		this.dNo = dNo;
+		this.smWant = smWant;
+	}
+	
 	// 수요조사 입력할때 생성자
 	public Demand(String userId, int smNo, int fileNo, int minPeople, String movieTitle, String movieDirector, String movieActor,
 			String movieStory, int gerneNo, String runningTime) {
@@ -35,6 +45,8 @@ public class Demand {
 		this.runningTime = runningTime;
 		this.minPeople = minPeople;
 	}
+	
+	//전체 생성자
 	public Demand(int dNo, String userId, int smNo, int smWant, int fileNo, String movieTitle, String movieDirector,
 			String movieActor, String movieStory, int minPeople, Date startDate, Date endDate, int gerneNo,
 			String runningTime) {

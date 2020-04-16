@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, Funding.model.vo.*"%>
 <%
 	ArrayList<DemandList> list = (ArrayList<DemandList>)request.getAttribute("list");
+	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
+	double percent = 0.0;
 	int j = 4;
 %>
 <!DOCTYPE html>
@@ -62,48 +64,64 @@
 	<hr class="hline">
 	
 	<div id="suyotb">
+	<% if(!list.isEmpty()) {%>
 		   <% for(int i=0; i<list.size(); i++){ 
-			 DemandList dl = list.get(i);
-			 if(i%j==0){ %>
-				<ol>
-					<li>
-						<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>">
-						<div class="pro">
-							<span style="width: <%= dl.getMinPeople() %>%"></span>
-						</div>
-						<span>
-						<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음1</div>
-						<div style="display: inline-block;"><%= dl.getMinPeople() %>%</div>
-						</span>
-					</li>
-				
-			<%}else if(i%j==3){ %>
-					<li>
-						<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>">
-						<div class="pro">
-							<span style="width: <%= dl.getMinPeople() %>%"></span>
-						</div>
-						<span>
-						<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음3</div>
-						<div style="display: inline-block;"><%= dl.getMinPeople() %>%</div>
-						</span>
-					</li>
-				</ol>
+				 DemandList dl = list.get(i);
+				 percent=0;
+				 for(int a=0; a<wlist.size(); a++){ 
+						Demand wl = wlist.get(a);
+						if(dl.getdNo() == wl.getdNo()) {
+							percent = Math.round((((double)wl.getSmWant()/dl.getMinPeople())*100)*100)/100.0;
+						}
+					}
+				 if(i%j==0){ %>
+					<ol>
+						<li>
+							
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
+							
+							
+							<div class="pro">
+								<span style="width: <%= percent %>%"></span>
+							</div>
+							<span>
+							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
+							<div style="display: inline-block;"><%= percent %>%</div>
+							</span>
+							
+						</li>
 					
-			<%}else{%>
-					<li>
-						<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>">
-						<div class="pro">
-							<span style="width: <%= dl.getMinPeople() %>%"></span>
-						</div>
-						<span>
-						<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음2</div>
-						<div style="display: inline-block;"><%= dl.getMinPeople() %>%</div>
-						</span>
-					</li>
-			<%} %>		
-		<% } %>   
-		
+				<%}else if(i%j==3){ %>
+						<li>
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
+							<div class="pro">
+							<%  %>
+								<span style="width: <%= percent %>%"></span>
+							</div>
+							<span>
+							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
+							<div style="display: inline-block;"><%= percent %>%</div>
+							</span>
+						</li>
+					</ol>
+						
+				<%}else{%>
+						<li>
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
+							<div class="pro">
+							<% System.out.println(percent); %>
+								<span style="width: <%= percent %>%"></span>
+							</div>
+							<span>
+							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
+							<div style="display: inline-block;"><%= percent %>%</div>
+							</span>
+						</li>
+				<%} %>		
+			<% } %>   
+		<%} else{%>
+			<div>게시글이 없습니다.</div>
+		<%} %>
 	<!-- 진행상황 --> 
 	
 	
@@ -173,18 +191,26 @@
 	</div>
 	<br>
 	</div>
-	<!-- 페이징 -->	
+		
+	
+	
+	<br><br><br>
+
+</section>
+<br clear="all">
+
+	<!-- 페이징 -->
 	<div class="list_number">
+		<button type="button" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</button>
         <div class="list_n_menu">
         <span class="prev">이전</span>
         <span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>
-        <a href="">다음  ></a></div>
+        <a href="">다음  ></a>
+        
+        </div>
 	</div>
 	
-	<br><br><br>
 	
-
-</section>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>

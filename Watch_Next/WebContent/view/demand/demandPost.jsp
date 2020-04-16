@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="Funding.model.vo.Demand"%>
+<%  Demand d = (Demand)request.getAttribute("Demand");
+	String fName = (String)request.getAttribute("fName");
+	String genre = (String)request.getAttribute("genre");
+	String smName = (String)request.getAttribute("smName");
+	char chk = (char)request.getAttribute("chk");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,11 +39,10 @@
 <table>
 	<tr>
 		<td width="850px" style="font-size:17px;"></td>
-		<td width="80px" style="font-size:17px;">글쓴이 : </td>
+		<td width="150px" style="font-size:17px;">글쓴이 : <%=d.getUserId() %></td>
 		<td width="70px" style="font-size:17px;" id="rpWriter">
 			<ul>
 				<li>
-					kimsj
 					<ul>
 						<li><a href='#'>쪽지보내기</a></li>
 						<li><a href='#'>팔로우하기</a></li>
@@ -46,9 +51,7 @@
 			</ul>
 		</td>
 		<td width="70px" style="font-size:17px;">날짜 : </td>
-      	<td width="150px" style="font-size:17px;">2020-03-26</td>
-      	<td width="80px" style="font-size:17px;">조회수 : </td>
-      	<td width="70px" style="font-size:17px;">3</td>
+      	<td width="150px" style="font-size:17px;"><%=d.getStartDate() %></td>
 	</tr>
 </table>
 </div>
@@ -58,26 +61,25 @@
 <div id="content">
 
   <div id="dposter">
-  	<img id="dcposter" src="/Watch_Next/Resources/images/singstreet.jpg"><br>
+  	<img id="dcposter" src="/Watch_Next/Resources/images/<%=fName%>"><br>
   </div>
   
   <br><br>
   <div id="dpinfo">
   <p style="font-size:15px;">
 	
-	지역 - 서울 종로피카디리<br>
-	제목 - 싱스트리트<br>
-	장르 - 드라마 /로맨스<br>
-	감독 - 존 카니<br>
-	배우 - 페리다 월시-필로, 루시 보인턴<br><br>
+	지역 - <%=smName %><br>
+	제목 - <%=d.getMovieTitle() %><br>
+	장르 - <%=genre %><br>
+	감독 - <%=d.getMovieDirector() %><br>
+	배우 - <%=d.getMovieActor() %><br><br>
 
-	줄거리 -  첫 눈에 반한 그녀를 위한 인생 첫 번째 노래!
- 	‘싱 스트리트’의 가슴 설레는 사운드가 지금 시작된다!<br><br>
+	줄거리 -  <%=d.getMovieStory() %><br><br>
 	</p>
 		
 	<div id="minPeople">
 	<p style="font-size:15px;">
-	최소인원 - 10명</p>
+	최소인원 - <%=d.getMinPeople() %>명</p>
 	</div>
 
 	</div>
@@ -86,13 +88,30 @@
 	<!-- 기대돼요 신고버튼 -->
 <br><br>
 <div id="btn">
-	<button id="want" onclick="alert('보고싶어요를 눌렀습니다')">보고싶어요</button>
+<%if(loginUser != null){ %>
+	<%if(chk == 'N' || chk == 0){ %>
+	<!-- 보고싶어요 했는지 안했는지 검사 -->
+	<button id="want" onclick="onWant();">보고싶어요</button>
+	<%}else if(chk == 'Y'){%>
+	<button id="wantcancel" onclick="onNoWant();">보고싶어요</button>
+	<%} %>
+	<script>
+		function onWant(){
+			location.href="<%=request.getContextPath()%>/demand.putWant?no=<%=d.getdNo()%>&userId=<%=d.getUserId()%>";
+		}
+		function onNoWant(){
+			location.href="<%=request.getContextPath()%>/demand.notWant?no=<%=d.getdNo()%>&userId=<%=d.getUserId()%>";
+		}
+	</script>
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="#" target="_self">
 		<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
-			onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop', 
+			onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop',
 								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
 	</a>
+<%} %>
+	<br>
+	<h2><%=d.getSmWant() %>명이 보고싶어합니다.</h2>
 </div>
 
 
@@ -100,11 +119,20 @@
 
 
     
-    <!-- 목록삭제 버튼 -->
+    <!-- 목록수정삭제 버튼 -->
 <div id=listbtn>
-    <button type=button title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
-    <button onclick="location.href='reviewList.html'"
-        		type=button title="목록" >목록</button>
+	<%if(d.getUserId().equals(loginUser.getUserId())){ %>
+	<button type=button onclick="location.href='<%=request.getContextPath()%>/updatePage.de?no=<%=d.getdNo()%>'" title="수정" >수정</button>&nbsp;&nbsp;&nbsp;
+    <button type=button onclick="demdel();" title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
+	<script>
+		function demdel(){
+			if(confirm('정말 삭제하시겠습니까?') == true){
+				location.href="<%=request.getContextPath()%>/delete.de?no=<%=d.getdNo()%>";
+			}
+		}
+	</script>
+	<%} %>
+    <button onclick="location.href='<%=request.getContextPath()%>/list.de'" type=button title="목록" >목록</button>
 </div>
 
 </div>
