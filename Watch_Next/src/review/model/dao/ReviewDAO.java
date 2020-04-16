@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import member.model.vo.Member;
 import review.model.vo.Review;
 import review.model.vo.ReviewReply;
 
@@ -495,7 +496,7 @@ public class ReviewDAO {
 	  return cList; }
 	
 
-
+	//좋아요 기능
 	public int like(Connection conn, int bid) {
 		String SQL = "update tb_review set review_like = review_like +1 where review_no = ?";
 		
@@ -518,7 +519,32 @@ public class ReviewDAO {
 		
 	}
 	
+	
+	//아이디받아오기
+		public String getUserID(Connection conn, String userID) {
+			// select user_id from rvlist where user_id=?
+			String SQL = "select user_id from rvlist where user_id=?";
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
 
+			
+			try {
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, userID);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					return rs.getString(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return null; //존재하지 않는 아이디
+		}
 
 
 
