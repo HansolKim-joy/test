@@ -55,7 +55,7 @@ public class recruitWriteServlet extends HttpServlet {
 			response.sendRedirect("list.recruit?currentPage=1");
 		}else {
 			request.setAttribute("msg", "게시글 작성에 실패하였습니다.");
-			request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("view/errorPage/errorPage.jsp").forward(request, response);
 		}
 	}
 

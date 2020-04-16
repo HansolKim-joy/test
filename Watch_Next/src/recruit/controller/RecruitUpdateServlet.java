@@ -68,7 +68,7 @@ public class RecruitUpdateServlet extends HttpServlet {
 		if(result > 0) {
 			page = "/detail.recruit?rNo=" + rNo;
 		}else {
-			page = "view/common/errorPage.jsp";
+			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "공지사항 수정에 실패하였습니다.");
 		}
 		

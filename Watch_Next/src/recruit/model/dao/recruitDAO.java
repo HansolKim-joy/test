@@ -13,7 +13,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import recruit.model.vo.Comment;
 import recruit.model.vo.Recruit;
+import review.model.vo.ReviewReply;
 
 public class recruitDAO {
 	
@@ -21,7 +23,7 @@ public class recruitDAO {
 	
 	public recruitDAO() {
 		//recruit게시글 받아옴
-		String fileName = recruitDAO.class.getResource("/sql/recruit/board-query.properties").getPath();
+		String fileName = recruitDAO.class.getResource("/sql/recruit/recruit-query.properties").getPath();
 
     try {
 			prop.load(new FileReader(fileName));
@@ -230,6 +232,7 @@ public class recruitDAO {
 		
 	}
 	public int updateRecruit(Connection conn, Recruit r) {
+		//게시글 수정
 		//update tb_recruit set recruit_head? where recruit_no=?
 		
 		PreparedStatement pstmt = null;
@@ -278,6 +281,10 @@ public class recruitDAO {
 
 
 	public ArrayList<Recruit> choiceHead(Connection conn, String choice) {
+		//검색옵션(넷플 / 왓챠)
+		//select RECRUIT_NO, RECRUIT_HEAD, BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_VIEWS, BOARD_DATE from tb_recruit 
+		//join tb_board on (recruit_no = board_no) where recruit_head = ?
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Recruit> cList = null;
@@ -299,7 +306,6 @@ public class recruitDAO {
 						rset.getDate("BOARD_DATE")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -308,6 +314,99 @@ public class recruitDAO {
 	}
 
 
+	public ArrayList<Comment> selectComment(Connection conn, int rNo) {
+		//댓글 입력
+		//select * from tb_comments where board_no=? 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Comment> comment = null;
+		
+		String query = prop.getProperty("selectComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNo);
+			
+			rset = pstmt.executeQuery();
+			
+			comment = new ArrayList<Comment>();
+			System.out.println("selectComment" + rset);
+			while(rset.next()) {
+				comment.add(new Comment(rset.getInt("comments_no"),
+									     rset.getString("comments_cotent"),
+										 rset.getInt("board_no"),
+										 rset.getString("user_id"),
+										 rset.getDate("comments_date"),
+										 rset.getString("comments_dec_yn"),
+										 rset.getString("comments_delete_yn")));
+							}
+			
+			System.out.println(comment);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return comment;
+	}
+
+
+	public int insertComment(Comment co, Connection conn) {
+		//댓글 입력
+		//insert into tb_comments values(seq_rid.nextval, ?, ?, ?, sysdate, default, default)
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, co.getRefBid());
+			pstmt.setString(2, co.getrWriter());
+			pstmt.setString(3, co.getrContent());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("댓글입력" + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 	
+	  public int deleteComment(Connection conn, int bid) { 
+		  //댓글 삭제 
+		  //update tb_comments set COMMENTS_DELETE_YN='Y' where COMMENTS_NO=? 
+		  PreparedStatement pstmt = null; 
+		  int result = 0;
+		  
+		  String query = prop.getProperty("deleteComment");
+		  
+		  try { 
+			  pstmt = conn.prepareStatement(query); 
+			  
+			  pstmt.setInt(1, bid);
+			  
+			  result = pstmt.executeUpdate();
+		  } catch (SQLException e) { 
+			  e.printStackTrace(); 
+		  }finally { 
+			  close(pstmt); 
+		  }
+		  
+		  return result;
+		  }
+	 
+
+
 
 }

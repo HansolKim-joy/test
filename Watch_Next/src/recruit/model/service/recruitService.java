@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import recruit.model.dao.recruitDAO;
+import recruit.model.vo.Comment;
 import recruit.model.vo.Recruit;
 
 public class recruitService {
@@ -117,6 +118,41 @@ public class recruitService {
 		
 		return result;
 	}
+	
+	public ArrayList<Comment> selectComment(int rNo) {
+			//댓글가져옴
+		Connection conn = getConnection();
+		
+		ArrayList<Comment> comment = new recruitDAO().selectComment(conn, rNo);
+		
+		close(conn);
+		
+		return comment;
+		}
+	
+	public ArrayList<Comment> insertComment(Comment co) {
+		//댓글입력
+		Connection conn = getConnection();
+		recruitDAO reDAO = new recruitDAO();
+		
+		int result = reDAO.insertComment(co, conn);
+		ArrayList<Comment> comment = null;
+		
+		if(result > 0) {
+			commit(conn);
+			
+			comment = reDAO.selectComment(conn, co.getRefBid());
+			System.out.println("insertsdkjf" + comment);
+		} else {
+			System.out.println("insertno" + comment);
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return comment;
+	}
+
 
 	public int deleteRecruit(int rNo) {
 		
@@ -138,8 +174,30 @@ public class recruitService {
 		Connection conn = getConnection();
 		ArrayList<Recruit> cList = new recruitDAO().choiceHead(conn, choice);
 		close(conn);
-		return null;
+		return cList;
 	}
 
+	
+	 public int deleteComment(int bid) { 
+		 Connection conn = getConnection();
+		 System.out.println("servicebid "+bid);
+		 int result = new recruitDAO().deleteComment(conn, bid);
+		 
+		 if(result > 0) {
+			 commit(conn);
+		 }else {
+			 rollback(conn);
+		 }
+		 
+		 close(conn);
+		 
+		 
+		 return result;
+		 
+	 }
+	 
+
+	
+	
 
 }

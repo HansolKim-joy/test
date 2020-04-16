@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import recruit.model.service.recruitService;
 
 /**
- * Servlet implementation class RecruitDeleteServlet
+ * Servlet implementation class CommentDeleteServlet
  */
-@WebServlet("/delete.recruit")
-public class RecruitDeleteServlet extends HttpServlet {
+@WebServlet("/delete.comment")
+public class CommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecruitDeleteServlet() {
+    public CommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,21 @@ public class RecruitDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("bid 11"+request.getParameter("rNo"));
 		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		
-		int result = new recruitService().deleteRecruit(rNo);
+		int result = new recruitService().deleteComment(rNo);
+		System.out.println("servlet "+result);
 		
 		if(result > 0) {
-			response.sendRedirect("list.recruit");
+			response.sendRedirect("detail.recruit");
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
-			request.setAttribute("msg", "모집글 삭제를 실패했습니다");
+			request.setAttribute("msg", "댓글 삭제를 실패했습니다.");
 			view.forward(request, response);
 		}
-	
+		
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
