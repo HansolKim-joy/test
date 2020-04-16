@@ -60,7 +60,7 @@
 				</div>
 			<% } else { %>
 				<div class="navi_set2">
-					<div class="topnav2" id="myPage" onclick="location.href='<%= request.getContextPath()%>/view/myPage/myPageMain.jsp'">마이 페이지</div>
+					<div class="topnav2" id="myPage" onclick="location.href='<%= request.getContextPath() %>/list.all'">마이 페이지</div>
 				</div>
 				<div class="navi_set2">
 					<div class="topnav2" onclick="logout();">로그아웃</div>

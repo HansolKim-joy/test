@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, board.model.vo.*"%>
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	System.out.println("view" + list);
+%>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -98,6 +102,14 @@
 		height: 30px;
 		border-radius: 50%;
 	} */
+	
+	.listTabled{
+		text-align: -webkit-center;
+	}
+	.listTable{
+		text-align: center;
+		width: 80%;
+	}
 </style>
 </head>
 <body>
@@ -149,42 +161,66 @@
 			<br><br><br>
 			<hr class="mp_hline">
 			
-			<div id="mp_content1" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" id="mp_button1" class="mp_button">+</button>
-				<div class="mp_middle"></div>
-				<div id="mp_h_content1" class="mp_h_content"> 내용</div>
-			</div>
-			<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" id="mp_button2" class="mp_button">+</button>
-				<div class="mp_middle"></div>
-				<div id="mp_h_content2" class="mp_h_content"> 내용</div>
-			</div>
-			<div id="mp_content3" class="mp_content">나의 찜 &nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" id="mp_button3" class="mp_button">+</button>
-				<div class="mp_middle"></div>
-				<div id="mp_h_content3" class="mp_h_content"></div>
-			</div>
+			<form>
+				<div id="mp_content1" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" id="mp_button1" class="mp_button">+</button>
+					<div class="mp_middle"></div>
+					<div id="mp_h_content1" class="mp_h_content"> 내용</div>
+				</div>
+			</form>
+			<form>
+				<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" id="mp_button2" class="mp_button">+</button>
+					<div class="mp_middle"></div>
+					<div id="mp_h_content2" class="mp_h_content"> 내용</div>
+				</div>
+			</form>
+			<form>
+				<div id="mp_content3" class="mp_content">나의 찜 &nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" id="mp_button3" class="mp_button">+</button>
+					<div class="mp_middle"></div>
+					<div id="mp_h_content3" class="mp_h_content"></div>
+				</div>
+			</form>
+			
 			<div id="mp_content4" class="mp_content">게시글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button4" class="mp_button">+</button>
 				<div class="mp_middle"></div>
 				<div id="mp_h_content4" class="mp_h_content">
-					<ol>
-						<li><b>리뷰</b></li>
-						<li><b>모집</b></li>
-						<li><b>수요조사</b></li>
-						<li><b>펀딩</b></li>
-					</ol>
+					<% if(list.isEmpty()){ %>
+						게시글이 존재하지 않습니다.
+					<% }else{ %>
+						<div class="listTabled">
+								<table class="listTable" border=1>
+									<tr>
+										<td>글 번호</td>
+										<td>글 제목</td>
+										<td>날짜</td>
+										<td>조회수</td>
+									</tr>
+						<% for(int i = 0; i < list.size(); i++){ %>	
+									<tr>
+										<td><%= list.get(i).getbNo() %></td>
+										<td><%= list.get(i).getbTitle() %></td>
+										<td><%= list.get(i).getbDate() %></td>
+										<td><%= list.get(i).getbCount() %></td>
+						<% } %>
+								</table>
+							</div> 
+					<% } %>
 				</div>
 			</div>
-			<div id="mp_content5" class="mp_content">댓글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" id="mp_button5" class="mp_button">+</button>
-				<div class="mp_middle"></div>
-				<div id="mp_h_content5" class="mp_h_content"> 내용</div>
-			</div>
+			<form>
+				<div id="mp_content5" class="mp_content">댓글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="submit" id="mp_button5" class="mp_button">+</button>
+					<div class="mp_middle"></div>
+					<div id="mp_h_content5" class="mp_h_content"> 내용</div>
+				</div>
+			</form>
 		</div>
 	</section>
 	<script>
-		$(function(){
+		/* $(function(){
 			$('#mp_button1').click(function(){
 				$('#mp_h_content1').slideToggle();
 			});
@@ -200,11 +236,15 @@
 			$('#mp_button5').click(function(){
 				$('#mp_h_content5').slideToggle();
 			});
+		}); */
+		
+		$('#mp_button4').click(function(){
+			$('#mp_h_content4').slideToggle();
 		});
-	
+		
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
-<script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
+<script src="/Watch_Next/Resources/js/Header.js"></script>
 </body>
 </html>

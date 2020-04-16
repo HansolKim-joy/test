@@ -1,14 +1,19 @@
 package movie.model.service;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import static common.JDBCTemplate.*;
-
+import board.model.vo.Board;
+import listAll.model.BoardDAO;
 import movie.model.dao.MovieDAO;
 import movie.model.vo.Dib;
 import movie.model.vo.Movie;
-
 import review.model.vo.Review;
 
 public class BoardService {
@@ -106,5 +111,14 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<Board> selectMyboard(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDAO().selectMyboard(conn, userId);
+		
+		close(conn);
+		return list;
 	}
 }
