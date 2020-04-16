@@ -96,9 +96,10 @@
 					<table style="margin-left: auto; margin-right: auto; margin-bottom:10px; text-align: center; font-size:15px; color:red;">
 						<tr>
 							<td>
-								<a href="#" target="_self">
-									<img id="like" onclick="imgToggle()" src="/Watch_Next/Resources/images/like.png" width="35px" height="35px">
-								</a>
+							 		<input type="button" id="likeb" value="버튼">
+<!-- 								<a href="#" target="_self"> -->
+<!-- 									<img id="like" onclick="imgToggle()" src="/Watch_Next/Resources/images/like.png" width="35px" height="35px"> -->
+<!-- 								</a> -->
 							</td>
 							<td width=5px></td>
 							<td>
@@ -166,6 +167,9 @@
 	<script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
 	
 	<script>
+		//조아요
+		$
+	
 		var cnt = 1;
 		function imgToggle() {
 			var img1 = document.getElementById("like");

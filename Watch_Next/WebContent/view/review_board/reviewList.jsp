@@ -61,7 +61,7 @@
 	<hr class="hline">
 	
 	
-	<table>
+	<table id="rvtable">
 	<tr>
 		<th id="num">번호</th>
 		<th id="rlcategory">
@@ -200,22 +200,86 @@
 	$('#spoY').click(function(){
 		var spo = "Y";
 		$.ajax({
-			url: 'list.rv',
+			url: 'list.spo',
 			data: {spo:spo},
 			success : function(data){
 				console.log("ysuccess");
+				console.log(data);
+				
+				$reviewTable = $('#rvtable');
+				$reviewTable.text("");
+			
+				for(var key in data) {
+					var $tr = $('<tr>');
+					var $yno = $('<td>').text(data[key].bNo);
+					var $yspo = $('<td>').text(data[key].spo);
+					var $yrtitle = $('<td>').text(data[key].bTitle);
+					var $ypopcorn = $('<td>').text(data[key].popcorn);
+					var $ydate = $('<td>').text(data[key].bDate);
+					var $ywriter = $('<td>').text(data[key].bWriter);
+					var $yview = $('<td>').text(data[key].bCount);
+					
+					console.log($yno);
+					
+					$tr.append($yno);
+					$tr.append($yspo);
+					$tr.append($yrtitle);
+					$tr.append($ypopcorn);
+					$tr.append($ydate);
+					$tr.append($ywriter);
+					$tr.append($yview);
+					$reviewTable.append($tr);
+				}
+				
+				
+				
+				$("#rvtable").load(window.location.href + " #rvtable");
+				
+				
 			} 
 			
 		});
 	});
 	
-	$('#spoN').click(function(){
+	$('#spoY').click(function(){
 		var spo = "N";
 		$.ajax({
 			url: 'list.rv',
 			data: {spo:spo},
 			success : function(data){
 				console.log("nsuccess");
+				console.log(data);
+				
+				$reviewTable = $('#rvtable');
+				$reviewTable.text("");
+			
+				for(var key in data) {
+					var $tr = $('<tr>');
+					var $yno = $('<td>').text(data[key].bNo);
+					var $yspo = $('<td>').text(data[key].spo);
+					var $yrtitle = $('<td>').text(data[key].bTitle);
+					var $ypopcorn = $('<td>').text(data[key].popcorn);
+					var $ydate = $('<td>').text(data[key].bDate);
+					var $ywriter = $('<td>').text(data[key].bWriter);
+					var $yview = $('<td>').text(data[key].bCount);
+					
+					console.log($yno);
+					
+					$tr.append($yno);
+					$tr.append($yspo);
+					$tr.append($yrtitle);
+					$tr.append($ypopcorn);
+					$tr.append($ydate);
+					$tr.append($ywriter);
+					$tr.append($yview);
+					$reviewTable.append($tr);
+				}
+				
+				
+				
+				$("#rvtable").load(window.location.href + " #rvtable");
+				
+				
 			} 
 			
 		});
