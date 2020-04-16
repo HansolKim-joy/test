@@ -20,50 +20,76 @@ import review.model.vo.Review;
 @WebServlet("/list.rv")
 public class ReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReviewListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ReviewListServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ReviewService service = new ReviewService();
-		
-		//페이징
+
+		// 페이징
 		int listCount = service.getListCount();
-		
+
 		int currentPage;
 		int pageLimit = 10;
 		int maxPage;
 		int startPage;
 		int endPage;
 		int boardLimit = 10;
-		
+
 		currentPage = 1;
-		if(request.getParameter("currentPage") != null){
+		if (request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			
+
 		}
-		
-		maxPage = (int)((double)listCount/boardLimit +0.9);
-		startPage = (((int)((double)currentPage/pageLimit+0.9))-1) * pageLimit +1;
-		endPage = pageLimit+startPage-1;
-		if(maxPage<endPage) {
+
+		maxPage = (int) ((double) listCount / boardLimit + 0.9);
+		startPage = (((int) ((double) currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1;
+		endPage = pageLimit + startPage - 1;
+		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
+
+		// 검색
+		String sk_ = request.getParameter("sk"); //임시변수
+		String sv_ = request.getParameter("sv");
+
+		String sk="전체"; //null처리한 실제변수
+		if(sk_ != null) {
+			sk = sk_;
+		}
 		
+		String sv="";
+		if(sv_ != null) {
+			sv = sv_;
+		}
+		
+		//스포유무로 모아보기
+		String spo_ = request.getParameter("spo");
+		
+		String spo="";
+		if(spo_ != null) {
+			spo = spo_;
+		}
+		
+		
+
 		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
-		
-		ArrayList<Review> list = service.selectList(currentPage, boardLimit);
-		
+
+		ArrayList<Review> list = service.selectList(currentPage, boardLimit, sk, sv, spo);
+
 		String page = null;
-		if(list != null) {
+		if (list != null) {
 			page = "view/review_board/reviewList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
@@ -71,26 +97,20 @@ public class ReviewListServlet extends HttpServlet {
 			page = "view/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 조회에 실패했습니다.");
 		}
-		
+
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
-	
 }

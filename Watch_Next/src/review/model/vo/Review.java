@@ -3,6 +3,7 @@ package review.model.vo;
 import java.sql.Date;
 
 public class Review {
+	private int rnum; //ROW NUM
 	private int bNo; //게시판번호
 	private String bWriter;
 	private String spo;
@@ -18,9 +19,10 @@ public class Review {
 	
 	public Review() {}
 	
-	public Review(int bNo, String bWriter, String spo, String bTitle, String mTitle, int popcorn,
+	public Review(int rnum, int bNo, String bWriter, String spo, String bTitle, String mTitle, int popcorn,
 			String bContent, int bLike, int bCount, Date bDate, String status) {
 		super();
+		this.rnum = rnum;
 		this.bNo = bNo;
 		this.bWriter = bWriter;
 		this.spo = spo;
@@ -34,9 +36,10 @@ public class Review {
 		this.status = status;
 	}
 
-	public Review(int bNo, String bWriter, String spo, String bTitle, String mTitle, int popcorn,
+	public Review(int rnum, int bNo, String bWriter, String spo, String bTitle, String mTitle, int popcorn,
 			String bContent, int bLike, int bCount, String dec, Date bDate, String status) {
 		super();
+		this.rnum = rnum;
 		this.bNo = bNo;
 		this.bWriter = bWriter;
 		this.spo = spo;
@@ -90,6 +93,15 @@ public class Review {
 		super();
 		this.bTitle = bTitle;
 		this.bContent = bContent;
+	}
+
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public int getbNo() {
@@ -190,11 +202,24 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [bNo=" + bNo + ", bWriter=" + bWriter + ", spo=" + spo + ", bTitle=" + bTitle + ", mTitle="
-				+ mTitle + ", popcorn=" + popcorn + ", bContent=" + bContent + ", bLike=" + bLike + ", bCount=" + bCount
-				+ ", dec=" + dec + ", bDate=" + bDate + ", status=" + status + "]";
+		return "Review [rnum=" + rnum + ", bNo=" + bNo + ", bWriter=" + bWriter + ", spo=" + spo + ", bTitle=" + bTitle
+				+ ", mTitle=" + mTitle + ", popcorn=" + popcorn + ", bContent=" + bContent + ", bLike=" + bLike
+				+ ", bCount=" + bCount + ", dec=" + dec + ", bDate=" + bDate + ", status=" + status + "]";
 	}
+
+
 	
+	
+	
+
+
+	
+
+
+	
+	
+
+
 
 
 }

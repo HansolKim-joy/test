@@ -32,50 +32,173 @@ public class ReviewDAO {
 	}
 
 
-	public ArrayList<Review> selectList(Connection conn, int currentPage, int boardLimit) {
+	public ArrayList<Review> selectList(Connection conn, int currentPage, int boardLimit, String sk, String sv, String spo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Review> list = null;
+		String SQL ="";
 		
 		String query = prop.getProperty("selectList");
 		
 		int startRow = (currentPage -1) * boardLimit +1;
 		int endRow = startRow + boardLimit -1;
 		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+		if(spo.equals("Y")) {
+			try {
+				SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND SPO_CHK_YN='Y' ";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				rset = pstmt.executeQuery();
+				System.out.println("rset:"+rset);
+				list = new ArrayList<Review>();
+				
+					while(rset.next()) {
+						Review r = new Review(rset.getInt("rnum"),
+								  rset.getInt("board_no"),
+				      			  rset.getString("user_id"),
+				      			  rset.getString("spo_chk_yn"),
+				      			  rset.getString("board_title"),
+				      			  rset.getString("review_movie_title"),
+				      			  rset.getInt("review_grade"),
+				      			  rset.getString("board_content"),
+				      			  rset.getInt("review_like"),
+				      			  rset.getInt("board_views"),
+				      			  rset.getDate("board_date"),
+				      			  rset.getString("board_delete_yn"));
 			
-			rset = pstmt.executeQuery();
-			list = new ArrayList<Review>();
+						list.add(r);
+						
+						for(int i=0; i<list.size(); i++) {
+							System.out.println("spoYlist:"+list);
+						}
+						
+						
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}//spoY끝
 			
-			while(rset.next()) {
-				Review r = new Review(rset.getInt("board_no"),
-		      			  rset.getString("user_id"),
-		      			  rset.getString("spo_chk_yn"),
-		      			  rset.getString("board_title"),
-		      			  rset.getString("review_movie_title"),
-		      			  rset.getInt("review_grade"),
-		      			  rset.getString("board_content"),
-		      			  rset.getInt("review_like"),
-		      			  rset.getInt("board_views"),
-		      			  rset.getDate("board_date"),
-		      			  rset.getString("board_delete_yn"));
-	
-				list.add(r);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
+		} else if(spo.equals("n")){
+				System.out.println(spo);
+				try { System.out.println("y"); //값까진 받아옴...
+				SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN='Y' AND RNUM BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				rset = pstmt.executeQuery();
+				System.out.println("rset:"+rset);
+				list = new ArrayList<Review>();
+				
+					while(rset.next()) {
+						Review r = new Review(rset.getInt("rnum"),
+								rset.getInt("board_no"),
+				      			  rset.getString("user_id"),
+				      			  rset.getString("spo_chk_yn"),
+				      			  rset.getString("board_title"),
+				      			  rset.getString("review_movie_title"),
+				      			  rset.getInt("review_grade"),
+				      			  rset.getString("board_content"),
+				      			  rset.getInt("review_like"),
+				      			  rset.getInt("board_views"),
+				      			  rset.getDate("board_date"),
+				      			  rset.getString("board_delete_yn"));
+			
+						list.add(r);
+						System.out.println("spoNlist:"+list);
+						
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt); 
+			} //spoN끝
+			
+		} else{
 		
+				try {
+					if(sk.equals("전체")) {
+						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setInt(1, startRow);
+						pstmt.setInt(2, endRow);
+						pstmt.setString(3, "%" + sv + "%");
+						pstmt.setString(4, "%" + sv + "%");
+						pstmt.setString(5, "%" + sv + "%");
+						pstmt.setString(6, "%" + sv + "%");
+					} else if(sk.equals("영화제목")) {
+						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+					/*
+					 * pstmt.setInt(1, startRow); pstmt.setInt(2, endRow);
+					 */
+						pstmt.setString(1, "%" + sv + "%");
+						
+					} else if(sk.equals("리뷰제목")) {
+						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND BOARD_TITLE LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setInt(1, startRow);
+						pstmt.setInt(2, endRow);
+						pstmt.setString(3, "%" + sv + "%");
+						
+					} else if(sk.equals("작성자")) {
+						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND USER_ID LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setInt(1, startRow);
+						pstmt.setInt(2, endRow);
+						pstmt.setString(3, "%" + sv + "%");
+						
+					} else if(sk.equals("내용")) {
+						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND BOARD_CONTENT LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setInt(1, startRow);
+						pstmt.setInt(2, endRow);
+						pstmt.setString(3, "%" + sv + "%");
+						
+					}else{
+						pstmt = conn.prepareStatement(query);
+						pstmt.setInt(1, startRow);
+						pstmt.setInt(2, endRow);
+					}
+					
+					rset = pstmt.executeQuery();
+					list = new ArrayList<Review>();
+					
+					while(rset.next()) {
+						Review r = new Review( rset.getInt("rnum"),
+								  rset.getInt("board_no"),
+				      			  rset.getString("user_id"),
+				      			  rset.getString("spo_chk_yn"),
+				      			  rset.getString("board_title"),
+				      			  rset.getString("review_movie_title"),
+				      			  rset.getInt("review_grade"),
+				      			  rset.getString("board_content"),
+				      			  rset.getInt("review_like"),
+				      			  rset.getInt("board_views"),
+				      			  rset.getDate("board_date"),
+				      			  rset.getString("board_delete_yn"));
+			
+						list.add(r);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					close(rset);
+					close(pstmt);
+				}
+		}//else문끝
 	
+		
 		return list;
 	}
+
 
 
 	public int getListCount(Connection conn) {
@@ -193,7 +316,8 @@ public class ReviewDAO {
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				r = new Review(rset.getInt("board_no"),
+				r = new Review(rset.getInt("rnum"),
+						  rset.getInt("board_no"),
 		      			  rset.getString("user_id"),
 		      			  rset.getString("spo_chk_yn"),
 		      			  rset.getString("board_title"),
@@ -349,6 +473,50 @@ public class ReviewDAO {
 	}
 
 
+	
+	 public ArrayList<Review> choiceHead(Connection conn, String choice) {
+	 PreparedStatement pstmt = null; ResultSet rset = null; ArrayList<Review>
+	 cList = null; String query = prop.getProperty("choiceHead");
+	  
+	 try { pstmt = conn.prepareStatement(query); pstmt.setString(1, choice); rset
+	= pstmt.executeQuery();
+	  
+	  while(rset.next()) { Review r = new Review(rset.getInt("rnum"),
+	  rset.getInt("board_no"), rset.getString("user_id"),
+	  rset.getString("spo_chk_yn"), rset.getString("board_title"),
+	  rset.getString("review_movie_title"), rset.getInt("review_grade"),
+	  rset.getString("board_content"), rset.getInt("review_like"),
+	  rset.getInt("board_views"), rset.getDate("board_date"),
+	  rset.getString("board_delete_yn"));
+	  
+	  cList.add(r); } } catch (SQLException e) { e.printStackTrace(); }
+	  
+	  
+	  return cList; }
+	
+
+
+	public int like(Connection conn, int bid) {
+		String SQL = "update tb_review set review_like = review_like +1 where review_no = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			
+			pstmt.setInt(1, bid);
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+		}
+		
+		
+		return -1;
+		
+	}
 	
 
 

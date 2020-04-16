@@ -215,7 +215,7 @@
 					
 					$('#reply_content').val("");
 
-					$("#replybox2").load(window.location.href + "#replybox2");
+					$("#replySelectTable").load(window.location.href + " #replySelectTable");
 					
 				} 
 				

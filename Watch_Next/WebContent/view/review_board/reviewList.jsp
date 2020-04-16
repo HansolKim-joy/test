@@ -23,6 +23,29 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link type="text/css" href="/Watch_Next/Resources/css/review_list.css" rel="stylesheet" >
+<style>
+	.subnav li {width: 120px;}
+ 	#rlcategory li ul {
+	font-weight:bold;
+	font-size:18px;
+	background: lightgray;
+	display:none; 
+	height:auto;
+	padding:5px;
+	border:0px;
+	position:absolute;
+	width:100px;
+	z-index:200;
+	color:red;
+	}
+	
+	#rlcategory li:hover ul {
+	display:block;
+	} 
+	
+	.spo{border:none; background:transparent;}
+	.spo:hover{border:none;}
+</style>
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -46,8 +69,8 @@
 				<li>
 					말머리▼
 					<ul>
-						<li><a href='#'>스포있음</a></li>
-						<li><a href='#'>스포없음</a></li>
+						<li><button class="spo" id="spoY">스포있음</button></li>
+						<li><button class="spo" id="spoN">스포없음</button></li>
 					</ul>
 				</li>
 			</ul>
@@ -147,15 +170,16 @@
 <br clear="left">
 
 <div id="searchDiv">
-<form id="searchForm" action="" method="get">
-	<select id="searchType">
-		<option value="all">영화제목</option>
-		<option value="subject">리뷰제목</option>
-		<option value="writer">작성자</option>
-		<option value="contents">내용</option>
+<form id="searchForm" action="<%=request.getContextPath() %>/list.rv" method="get">
+	<select id="searchType" name="sk">
+		<option ${(param.sk=="전체")?"selected":""} value="전체">전체</option>
+		<option ${(param.sk=="영화제목")?"selected":""} value="영화제목">영화제목</option>
+		<option ${(param.sk=="리뷰제목")?"selected":""} value="리뷰제목">리뷰제목</option>
+		<option ${(param.sk=="작성자")?"selected":""} value="작성자">작성자</option>
+		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
 	</select>&nbsp;&nbsp;&nbsp;&nbsp;
 
-	<input id="blank" type="text" size="35" id="searchText" value="">&nbsp;
+	<input id="blank" name="sv" type="text" size="35" id="searchText" value="${param.sv}">&nbsp;
 	<input id="botSearch" type="submit" value="검색"/>
 </form>
 </div>
@@ -168,11 +192,35 @@
 		$('#reviewList td').mouseenter(function(){
 			$(this).parent().css('cursor', 'pointer');
 		}).click(function(){
-			<% %>
 			var rv = $(this).parent().children().eq(0).text();
 			location.href="<%= request.getContextPath() %>/detail.rv?rv="+rv;
 		})
 	});
+	
+	$('#spoY').click(function(){
+		var spo = "Y";
+		$.ajax({
+			url: 'list.rv',
+			data: {spo:spo},
+			success : function(data){
+				console.log("ysuccess");
+			} 
+			
+		});
+	});
+	
+	$('#spoN').click(function(){
+		var spo = "N";
+		$.ajax({
+			url: 'list.rv',
+			data: {spo:spo},
+			success : function(data){
+				console.log("nsuccess");
+			} 
+			
+		});
+	});
+	
 </script>
 
 

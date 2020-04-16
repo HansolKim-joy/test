@@ -15,10 +15,10 @@ import review.model.vo.ReviewReply;
 public class ReviewService {
 
 
-	public ArrayList<Review> selectList(int currentPage, int boardLimit) {
+	public ArrayList<Review> selectList(int currentPage, int boardLimit, String sk, String sv, String spo) {
 		Connection conn = getConnection();
 		
-		ArrayList<Review> list = new ReviewDAO().selectList(conn, currentPage, boardLimit);
+		ArrayList<Review> list = new ReviewDAO().selectList(conn, currentPage, boardLimit, sk, sv, spo);
 		
 		close(conn);
 		
@@ -126,6 +126,29 @@ public class ReviewService {
 	public int deleteReview(int rv) {
 		Connection conn = getConnection();
 		int result = new ReviewDAO().deleteReview(conn, rv);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Review> choiceHead(String choice) {
+		Connection conn = getConnection();
+		ArrayList<Review> cList = new ReviewDAO().choiceHead(conn, choice);
+		close(conn);
+		
+		return cList;
+	}
+
+	public int likey(int bid) {// bid아직 안받아옴
+		Connection conn = getConnection();
+		int result = new ReviewDAO().like(conn, bid);
 		
 		if(result>0) {
 			commit(conn);
