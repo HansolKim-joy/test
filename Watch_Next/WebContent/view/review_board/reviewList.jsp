@@ -25,26 +25,6 @@
 <link type="text/css" href="/Watch_Next/Resources/css/review_list.css" rel="stylesheet" >
 <style>
 	.subnav li {width: 120px;}
- 	#rlcategory li ul {
-	font-weight:bold;
-	font-size:18px;
-	background: lightgray;
-	display:none; 
-	height:auto;
-	padding:5px;
-	border:0px;
-	position:absolute;
-	width:100px;
-	z-index:200;
-	color:red;
-	}
-	
-	#rlcategory li:hover ul {
-	display:block;
-	} 
-	
-	.spo{border:none; background:transparent;}
-	.spo:hover{border:none;}
 </style>
 </head>
 <body>
@@ -64,17 +44,7 @@
 	<table id="rvtable">
 	<tr>
 		<th id="num">번호</th>
-		<th id="rlcategory">
-			<ul>
-				<li>
-					말머리▼
-					<ul>
-						<li><button class="spo" id="spoY">스포있음</button></li>
-						<li><button class="spo" id="spoN">스포없음</button></li>
-					</ul>
-				</li>
-			</ul>
-		</th>
+		<th id="rlcategory">말머리</th>
 		<th id="title">리뷰 제목</th>
 		<th id="popcorn">팝콘 점수</th>
 		<th id="date">날짜</th>
@@ -162,9 +132,10 @@
 
 
 <!-- 글쓰기 -->
-<input id="write" type="button" value="글쓰기"
-	   onclick="location.href='<%= request.getContextPath() %>/view/review_board/reviewWrite.jsp'">
-
+<% if(loginUser != null){ %>
+	<input id="write" type="button" value="글쓰기"
+		   onclick="location.href='<%= request.getContextPath() %>/view/review_board/reviewWrite.jsp'">
+<% } %>
 
 <!-- 검색 -->
 <br clear="left">
@@ -204,12 +175,12 @@
 			data: {spo:spo},
 			success : function(data){
 				console.log("ysuccess");
-				console.log(data);
+				/* console.log(data); */
 				
 				$reviewTable = $('#rvtable');
-				$reviewTable.text("");
+				$reviewTable>td.html("");
 			
-				for(var key in data) {
+				/* for(var key in data) {
 					var $tr = $('<tr>');
 					var $yno = $('<td>').text(data[key].bNo);
 					var $yspo = $('<td>').text(data[key].spo);
@@ -230,7 +201,7 @@
 					$tr.append($yview);
 					$reviewTable.append($tr);
 				}
-				
+				 */
 				
 				
 				$("#rvtable").load(window.location.href + " #rvtable");
@@ -250,8 +221,8 @@
 				console.log("nsuccess");
 				console.log(data);
 				
-				$reviewTable = $('#rvtable');
-				$reviewTable.text("");
+				/* $reviewTable = $('#rvtable');
+				$reviewTable.html("");
 			
 				for(var key in data) {
 					var $tr = $('<tr>');
@@ -277,7 +248,7 @@
 				
 				
 				
-				$("#rvtable").load(window.location.href + " #rvtable");
+				$("#rvtable").load(window.location.href + " #rvtable"); */
 				
 				
 			} 

@@ -44,48 +44,6 @@ public class ReviewDAO {
 		int startRow = (currentPage -1) * boardLimit +1;
 		int endRow = startRow + boardLimit -1;
 		
-		if(spo.equals("N")) {
-			try {
-				SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND SPO_CHK_YN='N' ";
-				pstmt = conn.prepareStatement(SQL);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				
-				rset = pstmt.executeQuery();
-				System.out.println("rset:"+rset);
-				list = new ArrayList<Review>();
-				
-					while(rset.next()) {
-						Review r = new Review(rset.getInt("rnum"),
-								  rset.getInt("board_no"),
-				      			  rset.getString("user_id"),
-				      			  rset.getString("spo_chk_yn"),
-				      			  rset.getString("board_title"),
-				      			  rset.getString("review_movie_title"),
-				      			  rset.getInt("review_grade"),
-				      			  rset.getString("board_content"),
-				      			  rset.getInt("review_like"),
-				      			  rset.getInt("board_views"),
-				      			  rset.getDate("board_date"),
-				      			  rset.getString("board_delete_yn"));
-			
-						list.add(r);
-						
-						for(int i=0; i<list.size(); i++) {
-							System.out.println("spoNlist:"+list);
-						}
-						
-						
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(pstmt);
-			}
-			
-		} else{
-		
 				try {
 					if(sk.equals("전체")) {
 						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?";
@@ -156,7 +114,7 @@ public class ReviewDAO {
 					close(rset);
 					close(pstmt);
 				}
-		}//else문끝
+		
 	
 		
 		return list;
@@ -203,7 +161,7 @@ public class ReviewDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "user01");//임시아이디 받아온 아이디로 바꿔넣어야함
+			pstmt.setString(1, r.getbWriter());
 			pstmt.setString(2, r.getbTitle());
 			pstmt.setString(3, r.getbContent());
 						

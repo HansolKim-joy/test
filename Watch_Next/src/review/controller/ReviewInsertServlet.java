@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import review.model.service.ReviewService;
 import review.model.vo.Review;
 
@@ -38,6 +40,10 @@ public class ReviewInsertServlet extends HttpServlet {
 		String content = request.getParameter("editor_content");
 		String spo = request.getParameter("revW_spolier");
 		
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser"); 
+		String writer = loginUser.getUserId(); 
+		
 		if(request.getParameter("revW_spolier") != null) {
 			spo = "Y";
 		}else {
@@ -51,6 +57,7 @@ public class ReviewInsertServlet extends HttpServlet {
 		r.setbContent(content);
 		r.setSpo(spo);
 		r.setPopcorn(popcorn);
+		r.setbWriter(writer);
 		
 		int result = new ReviewService().insertReview(r);
 		
