@@ -198,6 +198,36 @@ public class MemberDAO {
 		
 		return m;
 	}
-
+	
+	   public Member findUser(Connection conn, String email) {
+		      // SELECT * FROM TB_USER WHERE USER_EMAIL = ?
+		      PreparedStatement pstmt = null;
+		      ResultSet rset = null;
+		      Member finduser = null;
+		      
+		      
+		      String query = prop.getProperty("FindUser");
+		      
+		      try {
+		         pstmt = conn.prepareStatement(query);
+		         pstmt.setString(1, email);
+		         
+		         rset = pstmt.executeQuery();
+		         
+		         if(rset.next()) {
+		            System.out.println("rset " + rset);
+		            String userId = rset.getString("USER_ID");
+		            String userPwd = rset.getString("USER_PASS");
+		            
+		            finduser = new Member(userId, userPwd);
+		         }
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(rset);
+		         close(pstmt);
+		      }
+		      return finduser;
+		   }
 	
 }
