@@ -161,6 +161,15 @@ public class ReviewService {
 		return result;
 	}
 
+	public static ArrayList<Review> spoList(String spo) {
+		Connection conn = getConnection();
+		ArrayList<Review> spolist = new ReviewDAO().selectSpoList(conn, spo);
+		
+		close(conn);
+		
+		return spolist;
+	}
+
 
 
 

@@ -21,6 +21,7 @@
 }
 
 	/* 목록 */
+.hline{height:4px; background-color:red; border:none;}
 #reviewList{width: 80%; margin:100px auto; color:white;}
 #reviewList>table{margin:30px auto; text-align:center;}
 #reviewList td{height:50px; font-size:17px;}
