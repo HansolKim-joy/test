@@ -11,10 +11,10 @@
     }
     
     .lg_button1{
-        margin-left: 70px;
+       margin-left: 70px;
        width: 277px;
        height: 30px;
-        border-radius: 7px;
+      border-radius: 7px;
       margin-bottom: 5px;
        margin-top: 10px;
        border: 0px;
@@ -24,13 +24,13 @@
     }
     
     .lg_button{
-         width: 170px;
+       width: 170px;
        height: 30px;
        border-radius: 7px;
-       margin-left: 5px;
+       margin-left: 10px;
        border: 0px;
-        background-color: #4d4c50;
-        outline: 0;
+       background-color: #4d4c50;
+       outline: 0;
     }
     
    .lg_form{
@@ -41,7 +41,7 @@
        background-color: #00000014;
        height: 350px;
        width: 600px;
-      border-radius: 20px;
+       border-radius: 20px;
    }
    
    .hline{
@@ -83,6 +83,7 @@
    }
    
    #join_member{
-   		background-color: yellow;
+         background-color: yellow;
    }
+
    

@@ -66,5 +66,13 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	public Member findUser(String email) {
+	      Connection conn = getConnection();
+	      Member finduser = new MemberDAO().findUser(conn, email);
+	      close(conn);
+	      return finduser;
+	   }
+	
 
 }

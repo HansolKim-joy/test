@@ -11,7 +11,10 @@
 <body>
 <!--header -->
 <%@ include file="/view/layout/Header.jsp" %>
-
+<%
+   String msg = (String)request.getAttribute("msg"); 
+//    System.out.println("qkqh" + msg);
+%>
 
 <section>
 
@@ -20,18 +23,21 @@
    <hr class="hline">
       <form class="lg_form" onsubmit="return validate();" action="<%= request.getContextPath() %>/login.me" method="post">
          <div class="lg">
-            <input type="text" class="lg_text" id="userId"  name="userId" placeholder="아이디">
-            <input type="password" class="lg_text1" id="userPwd" name="userPwd" placeholder="비밀번호">
+            <div class="div">
+               <input type="text" class="lg_text" id="userId"  name="userId" placeholder="아이디">
+            </div>
+            <div class="div">
+               <input type="password" class="lg_text1" id="userPwd" name="userPwd" placeholder="비밀번호">
+            </div>
          <div>
             <input type="submit"  class="lg_button1" value="로그인">
          </div>
-            <button type="button" class="lg_button" onclick="location='/Watch_Next/view/pages/JoinForm.jsp'"></button>
-            <button type="button" class="lg_button" id="find_member" onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'" ></button>
+            <button type="button" class="lg_button" onclick="location='/Watch_Next/view/pages/JoinForm.jsp'">회원가입</button>
+            <button type="button" class="lg_button" id="find_member" onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'" >아이디/비밀번호 찾기</button>
          </div>
       </form>
     </div>
 </section>
-
 
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
@@ -52,7 +58,15 @@
       
       return true;
    }
-   
+   $(function(){
+      var msg = '<%= msg %>';
+      if(msg.trim() == '이메일로 회원님의 정보를 보냈습니다. 확인 후 다시 로그인 해주세요.'){
+         alert(msg)
+      }
+      if(msg.trim() == "없는 회원입니다 다시 확인해주세요."){
+         alert(msg)
+      }
+   })
    
 
 </script>
