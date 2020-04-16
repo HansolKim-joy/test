@@ -12,7 +12,7 @@ public class Demand {
 	private String movieDirector; // 영화 감독
 	private String movieActor;// 영화 배우
 	private String movieStory;// 영화 스토리
-	private int minPeople;
+	private int minPeople; //최소인원
 	private Date startDate;// 시작 날짜
 	private Date endDate;// 끝나는 날짜
 	private int gerneNo;// 장르 번호
@@ -20,7 +20,21 @@ public class Demand {
 
 	public Demand() {
 	}
-
+	// 수요조사 입력할때 생성자
+	public Demand(String userId, int smNo, int fileNo, int minPeople, String movieTitle, String movieDirector, String movieActor,
+			String movieStory, int gerneNo, String runningTime) {
+		super();
+		this.userId = userId;
+		this.smNo = smNo;
+		this.fileNo = fileNo;
+		this.movieTitle = movieTitle;
+		this.movieDirector = movieDirector;
+		this.movieActor = movieActor;
+		this.movieStory = movieStory;
+		this.gerneNo = gerneNo;
+		this.runningTime = runningTime;
+		this.minPeople = minPeople;
+	}
 	public Demand(int dNo, String userId, int smNo, int smWant, int fileNo, String movieTitle, String movieDirector,
 			String movieActor, String movieStory, int minPeople, Date startDate, Date endDate, int gerneNo,
 			String runningTime) {
