@@ -25,11 +25,19 @@
 #sel{width:500px; margin:20px auto; color: black;}
 .cinema{width: 70px; height: 70px; margin:10px;}
 #allview{margin-left:15px; font-weight:bold; font-size:18px; float:left; color:white;}
-#selSearch{width:450px; margin-left:63%; margin-bottom:10px; color:black;}
+#selSearch{width:450px; margin-left:61%; margin-bottom:10px; color:black;}
 #selSearch input{width:150px; height:25px; font-size:13px}
 #selSearch select{height:25px;font-size:13px}
-#sbtn{font-size:13px; width:45px; height:25px; background-color:red; color:white; border-radius:5px; border:none;}
-
+#sbtn{margin-left: 5px; font-size:13px; width:45px; height:25px; background-color:red; color:white; border-radius:5px; border:none;}
+#btn{    margin-left: 72%;
+    font-size: 13px;
+    width: 67px;
+    height: 25px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding-bottom: 2px;}
 	/* 목록 */
 #dem{width: 80%; margin:100px auto; color:white;}
 #dem>table{margin:30px auto; text-align:center;}
@@ -39,12 +47,7 @@
 #demdiv{padding:70px;  margin-bottom:500px;}
 #percent{text-align:right; font-size:18px}
 #dDay{width:150px; height:5px; font-size:18px; color:red; font-weight:bold}
-#poster1{float:left;}
-#poster2{float:left; padding-left:150px;}
-#poster3{float:left; padding-left:150px;}
-#poster4{float:left; margin-top:50px;}
-#poster5{float:left; padding-left:150px; margin-top:50px;}
-#poster6{float:left; padding-left:150px; margin-top:50px;}
+
 .poster{width: 250px; height: 350px;}
 
 	/* 달성률 */
@@ -52,7 +55,7 @@
 #current{display: block; z-index:1; width:60%; height:10px; background-color:red;}
 
 	/* 페이징 */
-.list_number{font-size:12px; margin-left:39%; margin-bottom:15px;left:60%; text-align:center; display:inline-block; float:left;}
+.list_number{font-size:12px; margin-bottom:15px; text-align:center;}
 .list_n_menu {padding:3px; MARGIN:3px;TEXT-ALIGN: center}
 .list_n_menu a {padding:5px 8px 4px 8px; MARGIN: 2px; BORDER: #ccc 1px solid; COLOR: white; TEXT-DECORATION: none}
 .list_n_menu a:hover {BORDER:red 1px solid; COLOR: red;}
@@ -100,8 +103,7 @@
   position: relative;
   overflow: hidden;
 }
-#suyotb > ol{margin-left: 60px;
-    		 margin-top: 50px;}
+#suyotb > ol{margin-top: 50px;}
     			
 #suyotb > ol > li {float: left;
 				   width: 250px;

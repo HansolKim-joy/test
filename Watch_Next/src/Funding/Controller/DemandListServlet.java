@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Funding.model.service.DemandService;
+import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
 import recruit.model.vo.PageInfo;
 
@@ -62,13 +63,13 @@ public class DemandListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, ListCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		
 		ArrayList<DemandList> list = ds.selectList(currentPage, boardLimit);
-		
+		ArrayList<Demand> want = ds.wantPeople();
 		
 		String page =null;
 		if(list != null) {
 			page="view/demand/demandList.jsp";
-			
 			request.setAttribute("list", list);
+			request.setAttribute("wlist", want);
 			request.setAttribute("pi", pi);
 		}else {
 			page="view/errorPage/errorPage.jsp";
