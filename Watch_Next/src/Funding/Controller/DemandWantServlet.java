@@ -1,27 +1,27 @@
-package recruit.controller;
+package Funding.Controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import recruit.model.service.recruitService;
+import Funding.model.service.DemandService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class RecruitDeleteServlet
+ * Servlet implementation class DemandWantServlet
  */
-@WebServlet("/delete.recruit")
-public class RecruitDeleteServlet extends HttpServlet {
+@WebServlet("/demand.putWant")
+public class DemandWantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecruitDeleteServlet() {
+    public DemandWantServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,15 @@ public class RecruitDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
-		
-		int result = new recruitService().deleteRecruit(rNo);
-		
-		if(result > 0) {
-			response.sendRedirect("list.recruit");
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
-			request.setAttribute("msg", "모집글 삭제를 실패했습니다");
-			view.forward(request, response);
-		}
-	
+		int no = Integer.parseInt(request.getParameter("no"));
+		String dUserId = request.getParameter("userId");
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		int result = new DemandService().putWant(no, userId, dUserId);
+		String page = request.getContextPath() + "/demand.detail?no=" + no;
+		response.sendRedirect(page);
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

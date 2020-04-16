@@ -38,7 +38,11 @@
 #listbtn button{background-color:red; color:white;
 				border:none; border-radius:5px; 
 				width:50px; height:25px; font-size:14px;}
-
+				
+#menu{background-color:red; color:white;
+	border:none; border-radius:5px; 
+	width:50px; height:25px; font-size:14px;}
+		
 	/* 쪽지 및 팔로우 */
 #recruitp li ul {
 background: lightgray;
@@ -59,11 +63,15 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 	/* 댓글 */
 textarea:focus {outline: none;}
 
-#replybox1{font-size:14px; padding:5px; float:left;width:90%; height:60px; margin-top:30px; background-color:white; color:black; border-radius:5px;}
-#reply_save{font-size:14px; margin-top:30px; margin-left:6px; width:100px; height:60px;
+#replybox1{font-size:14px; padding:5px; float:left; width:90%; height:60px; margin-top:30px; background-color:white; color:black; border-radius:5px;}
+#reply_content{resize: none; border:none;  height: 35px;}
+#reply_save{font-size:14px; margin-left:70px; width:100px; height:60px;
 			border:none; border-radius:5px;
 			background-color:red; color:white; font-weight:bold;}
 #report{margin-top:10px; margin-left:90%;
+		background-color:red; color:white; font-size:13px;
+		border:none; border-radius:5px;}
+#deleteComment{margin-top:10px; margin-left:90%;
 		background-color:red; color:white; font-size:13px;
 		border:none; border-radius:5px;}
 

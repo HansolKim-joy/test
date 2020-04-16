@@ -71,10 +71,23 @@
 	</a>&nbsp;&nbsp;
 	<a href="#" target="_self">
 		<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
-			onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop', 
-								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
+			onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+										'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
 	</a>
 </div>
+
+<script>
+	//로그인 확인
+	$(function(){
+		$('#like').click(function(){
+			if('<%= loginUser %>' != 'null') {
+				console.log('로그인함');
+			} else{
+				alert('회원만 좋아요를 누를 수 있습니다.');
+			}
+		})
+	});
+</script>
 
 <script>
 var cnt = 1;

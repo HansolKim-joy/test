@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
+import Funding.model.vo.DemandWant;
 
 
 public class DemandDAO {
@@ -116,5 +117,203 @@ public class DemandDAO {
 		
 		return result;
 	}
+	
+	public ArrayList<Demand> wantPeople(Connection conn) {
+		//SELECT DEMAND_SURVEY_NO, COUNT(*) CNT FROM TB_WANT GROUP BY DEMAND_SURVEY_NO;
+		Statement stmt = null;
+		ResultSet rset = null;
+		Demand d = null;
+		ArrayList<Demand> want = new ArrayList<Demand>();
+		
+		String query = prop.getProperty("WantPeople");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				d = new Demand(rset.getInt("DEMAND_SURVEY_NO"),
+							   rset.getInt("CNT"));
+				want.add(d);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return want;
+	}
+	
+	public Demand getDemand(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Demand d = null;
+		
+		String sql = prop.getProperty("getDemand");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				d = new Demand(rs.getInt("DEMAND_SURVEY_NO"),
+							   rs.getString("USER_ID"),
+							   rs.getInt("SCREENING_MOVIE_NO"),
+							   rs.getInt("cnt"),
+							   rs.getInt("FILE_NO"),
+							   rs.getString("movie_title"),
+							   rs.getString("movie_director"),
+							   rs.getString("movie_actor"),
+							   rs.getString("movie_story"),
+							   rs.getInt("demand_min_people"),
+							   rs.getDate("demand_start_date"),
+							   rs.getDate("DEMAND_END_DATE"),
+							   rs.getInt("GENRE_NO"),
+							   rs.getString("running_time")
+							   );
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return d;
+	}
+	public String getFile(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String fName = "";
+		
+		String sql = prop.getProperty("getFile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				fName = rs.getString("FILE_NEWNAME");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return fName;
+	}
+	public String getGenre(Connection conn, int gerneNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String genre = "";
+		
+		String sql = prop.getProperty("getGenre");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gerneNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				genre = rs.getString("genre");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return genre;
+	}
+	public String getScreen(Connection conn, int smNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String smName = "";
+		
+		String sql = prop.getProperty("getScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, smNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				smName = rs.getString("SCREENING_MOVIE_NAME");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return smName;
+	}
+	public char getWant(Connection conn, String userId, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		char chk = 0;
+		
+		String sql = prop.getProperty("getWant");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userId);
+			pstmt.setInt(2, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				chk = rs.getString("want_yn").charAt(0);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return chk;
+	}
+	public int putWant(Connection conn, int no, String userId, String dUserId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("putWant");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, no);
+			pstmt.setString(3, dUserId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int notWant(Connection conn, int no, String userId, String dUserId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("notWant");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, no);
+			pstmt.setString(3, dUserId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }
+	
+	

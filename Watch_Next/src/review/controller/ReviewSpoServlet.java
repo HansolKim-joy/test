@@ -1,27 +1,30 @@
-package recruit.controller;
+package review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import recruit.model.service.recruitService;
+import com.google.gson.Gson;
+
+import review.model.service.ReviewService;
+import review.model.vo.Review;
 
 /**
- * Servlet implementation class RecruitDeleteServlet
+ * Servlet implementation class ReviewSpoServlet
  */
-@WebServlet("/delete.recruit")
-public class RecruitDeleteServlet extends HttpServlet {
+@WebServlet("/list.spo")
+public class ReviewSpoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecruitDeleteServlet() {
+    public ReviewSpoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +33,21 @@ public class RecruitDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
-		
-		int result = new recruitService().deleteRecruit(rNo);
-		
-		if(result > 0) {
-			response.sendRedirect("list.recruit");
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
-			request.setAttribute("msg", "모집글 삭제를 실패했습니다");
-			view.forward(request, response);
-		}
-	
+		//스포유무로 모아보기
+				String spo = request.getParameter("spo");
+				/*
+				 * String spo=""; if(spo_ != null) { spo = spo_; }
+				 */
+				System.out.println("servlet_spo는?"+spo);
+				
+				Review rspo = new Review();
+				rspo.setSpo(spo);
+				
+				
+				ArrayList<Review> spolist = ReviewService.spoList(spo);
+				response.setContentType("applicaiton/json; charset=UTF-8");
+				new Gson().toJson(spolist, response.getWriter());
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

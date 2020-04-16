@@ -3,6 +3,7 @@
 <%
 	ArrayList<Recruit> list = (ArrayList<Recruit>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Recruit> cList = (ArrayList<Recruit>)request.getAttribute("cList");
 	
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();

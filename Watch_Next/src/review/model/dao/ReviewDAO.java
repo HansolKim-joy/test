@@ -44,9 +44,9 @@ public class ReviewDAO {
 		int startRow = (currentPage -1) * boardLimit +1;
 		int endRow = startRow + boardLimit -1;
 		
-		if(spo.equals("Y")) {
+		if(spo.equals("N")) {
 			try {
-				SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND SPO_CHK_YN='Y' ";
+				SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND SPO_CHK_YN='N' ";
 				pstmt = conn.prepareStatement(SQL);
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, endRow);
@@ -72,7 +72,7 @@ public class ReviewDAO {
 						list.add(r);
 						
 						for(int i=0; i<list.size(); i++) {
-							System.out.println("spoYlist:"+list);
+							System.out.println("spoNlist:"+list);
 						}
 						
 						
@@ -82,44 +82,7 @@ public class ReviewDAO {
 			} finally {
 				close(rset);
 				close(pstmt);
-			}//spoY끝
-			
-		} else if(spo.equals("n")){
-				System.out.println(spo);
-				try { System.out.println("y"); //값까진 받아옴...
-				SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN='Y' AND RNUM BETWEEN ? AND ?";
-				pstmt = conn.prepareStatement(SQL);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				
-				rset = pstmt.executeQuery();
-				System.out.println("rset:"+rset);
-				list = new ArrayList<Review>();
-				
-					while(rset.next()) {
-						Review r = new Review(rset.getInt("rnum"),
-								rset.getInt("board_no"),
-				      			  rset.getString("user_id"),
-				      			  rset.getString("spo_chk_yn"),
-				      			  rset.getString("board_title"),
-				      			  rset.getString("review_movie_title"),
-				      			  rset.getInt("review_grade"),
-				      			  rset.getString("board_content"),
-				      			  rset.getInt("review_like"),
-				      			  rset.getInt("board_views"),
-				      			  rset.getDate("board_date"),
-				      			  rset.getString("board_delete_yn"));
-			
-						list.add(r);
-						System.out.println("spoNlist:"+list);
-						
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rset);
-				close(pstmt); 
-			} //spoN끝
+			}
 			
 		} else{
 		
@@ -516,6 +479,52 @@ public class ReviewDAO {
 		
 		return -1;
 		
+	}
+
+
+	public ArrayList<Review> selectSpoList(Connection conn, String spo) {
+		// selectSpoList = select * from rvlist where spo_chk_yn=?
+		
+					System.out.println("dao_spo는?"+spo);
+					
+					PreparedStatement pstmt = null;
+					ResultSet rset = null;
+					ArrayList<Review> spolist = null;
+					
+					String query = prop.getProperty("selectSpoList");
+					
+					try {
+						pstmt = conn.prepareStatement(query);
+						pstmt.setString(1, spo);
+						rset = pstmt.executeQuery();
+						
+						spolist = new ArrayList<Review>();
+						
+						while(rset.next()) {
+							Review r = new Review( rset.getInt("rnum"),
+									  rset.getInt("board_no"),
+					      			  rset.getString("user_id"),
+					      			  rset.getString("spo_chk_yn"),
+					      			  rset.getString("board_title"),
+					      			  rset.getString("review_movie_title"),
+					      			  rset.getInt("review_grade"),
+					      			  rset.getString("board_content"),
+					      			  rset.getInt("review_like"),
+					      			  rset.getInt("board_views"),
+					      			  rset.getDate("board_date"),
+					      			  rset.getString("board_delete_yn"));
+				
+							spolist.add(r);
+							System.out.println("dao spo : " + spolist);
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					
+					return spolist;
 	}
 	
 
