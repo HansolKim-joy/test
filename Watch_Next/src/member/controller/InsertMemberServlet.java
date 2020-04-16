@@ -53,11 +53,11 @@ public class InsertMemberServlet extends HttpServlet {
       String msg = "";
       
       if(result > 0) {
+    	 msg = "회원가입에 성공하였습니다.";
          page = "/";
-         msg = "회원가입에 성공하였습니다.";
       } else {
-         page = "view/errorPage/errorPage.jsp";
-         msg = "회원가입에 실패했습니다.";
+		 msg = "회원가입에 실패했습니다. 다시 입력해주세요.";
+         page = "view/pages/JoinForm.jsp";
       }
       
       request.setAttribute("msg", msg);
