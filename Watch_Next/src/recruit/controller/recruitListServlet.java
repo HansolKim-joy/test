@@ -84,7 +84,7 @@ public class recruitListServlet extends HttpServlet {
 			 request.setAttribute("loginUser", loginUser);
 		 
 		 } else { 
-			 page = "view/common/errorPage.jsp"; 
+			 page = "view/errorPage/errorPage.jsp"; 
 		 	 request.setAttribute("msg", "게시판 조회에 실패하였습니다.");
 		 }
 		 
