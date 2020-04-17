@@ -43,7 +43,6 @@ public class ReviewDAO {
 		
 		int startRow = (currentPage -1) * boardLimit +1;
 		int endRow = startRow + boardLimit -1;
-				System.out.println("sk2:"+sk2);
 				try {
 				if(sk2.equals("스포선택")) {
 					if(sk.equals("전체")) {
@@ -306,7 +305,7 @@ public class ReviewDAO {
 	}
 	
 	public ArrayList<ReviewReply> selectReplyList(Connection conn, int refBid) {
-		// selectReplyList=select * from tb_comments where board_no=?
+		// selectReplyList=select * from tb_comments where board_no=? and comments_delete_yn='N'
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -528,6 +527,155 @@ public class ReviewDAO {
 					
 					
 					return spolist;
+	}
+
+
+	public int deleteReply(Connection conn, int rpno) {
+		// deleteReply = update tb_comments set comments_delete_yn='Y' where comments_no=?
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteReply");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rpno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public char getLike(Connection conn, String userId, int rv) {
+		// getLike=SELECT * FROM TB_LIKEY WHERE USER_ID = ? AND BNO = ?
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		char chk=0;
+		
+		Review review = null;
+		
+		String query = prop.getProperty("getLike");
+		
+		try {
+			pstmt  = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, rv);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				chk = rs.getString("like_yn").charAt(0);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+	
+		return chk;
+	}
+
+
+	public int putLike(Connection conn, int rv, String userId) {
+		// putLike = INSERT INTO TB_LIKEY VALUES(?, ?, 'Y')
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("putLike");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, rv);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public int putLikeC(Connection conn, int rv) {
+		// putLikeC=update tb_review set review_like = review_like + 1 where review_no = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		
+		String query = prop.getProperty("putLikeC");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rv);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+	
+		return result;
+	}
+
+
+	public int notLike(Connection conn, int rv, String userId) {
+		// notLike = DELETE FROM TB_LIKEY WHERE USER_ID = ? AND BNO = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("notLike");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, rv);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public int notLikeC(Connection conn, int rv) {
+		// notLikeC=update tb_review set review_like = review_like - 1 where review_no = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		
+		String query = prop.getProperty("notLikeC");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rv);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+	
+		return result;
 	}
 	
 

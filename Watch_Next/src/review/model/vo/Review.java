@@ -105,6 +105,13 @@ public class Review {
 		this.popcorn = popcorn;
 	}
 	
+	// 좋아요 용
+	public Review(int bNo, int bLike) {
+		super();
+		this.bNo = bNo;
+		this.bLike = bLike;
+	}
+	
 	public int getRnum() {
 		return rnum;
 	}

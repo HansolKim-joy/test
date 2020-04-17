@@ -3,6 +3,7 @@
 <%
 	Review r = (Review)request.getAttribute("review");
 	ArrayList<ReviewReply> list = (ArrayList<ReviewReply>)request.getAttribute("list");
+	char chk = (char)request.getAttribute("chk");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,8 @@
 <style>
 	.subnav li {width: 120px;}
 	.popimg{width:30px; height:30px;}
+	.like{width:35px; height:35px;}
+	.likeb{background-color:transparent; border:none;}
 </style>
 </head>
 <body>
@@ -56,24 +59,29 @@
 								<td width="850px" style="font-size:17px;">
 									<% if(r.getPopcorn() ==1) { %>
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==2) { %>
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==3) { %>
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==4) { %>
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==5) { %>
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} %>
 								</td>
 								<td width="80px" style="font-size:17px;">글쓴이 : </td>
@@ -82,8 +90,11 @@
 										<li>
 											<%= r.getbWriter() %> 
 											<ul>
-												<li><a href='#'>쪽지보내기</a></li>
-												<li><a href='#'>팔로우하기</a></li>
+												<li><a onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
+														'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
+													쪽지보내기</a>
+												</li>
+												<li><a onclick="">팔로우하기</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -109,11 +120,22 @@
 					<!-- 좋아요 및 신고버튼 -->
 					<table style="margin-left: auto; margin-right: auto; margin-bottom:10px; text-align: center; font-size:15px; color:red;">
 						<tr>
-							<td>
-							 		<input type="button" id="likeb" value="버튼">
-<!-- 								<a href="#" target="_self"> -->
-<!-- 									<img id="like" onclick="imgToggle()" src="/Watch_Next/Resources/images/like.png" width="35px" height="35px"> -->
-<!-- 								</a> -->
+							<td>	
+									<% if(chk == 'N' || chk==0) {%>
+							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
+									<% } else if(chk =='Y') {%>
+										<button type="button" class="likeb" onclick="onNoLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/likeee.png"></button>
+									<% } %>
+									<script>
+										function onLike(){
+											var rv = <%=r.getbNo() %>;
+ 											location.href="<%=request.getContextPath()%>/putLike.rv?rv="+rv;
+										}
+										function onNoLike(){
+											var rv = <%=r.getbNo() %>;
+											location.href="<%=request.getContextPath()%>/notLike.rv?rv="+rv;
+										}
+									</script>
 							</td>
 							<td width=5px></td>
 							<td>
@@ -124,8 +146,9 @@
 								</a>
 							</td>
 						</tr>
+							
 						<tr>
-							<td id="likeCnt">좋아요수</td>
+							<td id="likeCnt"><%= r.getbLike() %></td>
 							<td></td>
 						</tr>
 					</table>
@@ -166,7 +189,11 @@
 						</th>
 						<td>
 							<% if(loginUser!=null && loginUser.getUserId().equals(list.get(i).getrWriter())) { %>
-								<button type=button id=replydelete>삭제</button>
+								<form action="<%=request.getContextPath()%>/deleteReply.rv">
+									<input type="submit" id="replydelete" value="삭제" onclick="return rpdel();">
+									<input type=hidden name="replyno" value="<%=list.get(i).getrId()%>">
+								<input type="hidden" name="rv" value="<%=r.getbNo() %>">
+							</form>
 							<% } else { %>
 								<button type=button id=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
 								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
@@ -191,26 +218,7 @@
 	<script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
 	
 	<script>
-		//조아요
-		$
-	
-		var cnt = 1;
-		function imgToggle() {
-			var img1 = document.getElementById("like");
-			var img2 = document.getElementById("like");
-			
-			if(cnt%2==1){
-				img1.src="/Watch_Next/Resources/images/likeee.png";
-			    img2.src="/Watch_Next/Resources/images/like.png";
-			    location.href="";
-			} else {
-			    img1.src="/Watch_Next/Resources/images/like.png";
-			    img2.src="/Watch_Next/Resources/images/likeee.png";
-			}
-			
-			cnt++; // cnt 변수 1씩 증가 시키기
-		}
-		
+		//게시글삭제
 		function deleterv(){
 			var bool = confirm('정말 삭제하시겠습니까?');
 			if(bool) {
@@ -253,7 +261,7 @@
 		});
 		
 		//댓글삭제
-		$('#replydelete').click(function(){
+		function rpdel(){
 			var rpmsg = confirm("댓글을 삭제합니다.");
 			if(rpmsg == true){
 				alert('삭제하였습니다.');
@@ -261,8 +269,7 @@
 				return false;
 			}
 				
-				
-			});
+		};
 		
 	</script>
 	
