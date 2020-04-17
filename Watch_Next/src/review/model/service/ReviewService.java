@@ -138,14 +138,6 @@ public class ReviewService {
 		return result;
 	}
 
-	public ArrayList<Review> choiceHead(String choice) {
-		Connection conn = getConnection();
-		ArrayList<Review> cList = new ReviewDAO().choiceHead(conn, choice);
-		close(conn);
-		
-		return cList;
-	}
-
 	public int likey(int bid) {// bid아직 안받아옴
 		Connection conn = getConnection();
 		int result = new ReviewDAO().like(conn, bid);
@@ -161,13 +153,62 @@ public class ReviewService {
 		return result;
 	}
 
-	public static ArrayList<Review> spoList(String spo) {
+	public int deleteReply(int rpno) {
 		Connection conn = getConnection();
-		ArrayList<Review> spolist = new ReviewDAO().selectSpoList(conn, spo);
+		int result = new ReviewDAO().deleteReply(conn, rpno);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
+		return result;
+	}
+
+	public static char getLike(String userId, int rv) {
+		Connection conn = getConnection();
+		char chk = new ReviewDAO().getLike(conn, userId, rv);
 		
-		return spolist;
+		close(conn);
+		return chk;
+	}
+
+	public int putLike(int rv, String userId) {
+		Connection conn = getConnection();
+		
+		ReviewDAO dao = new ReviewDAO();
+		
+		int result1 = dao.putLike(conn, rv, userId);
+		int result2 = dao.putLikeC(conn, rv);
+		
+		if(result1>0 && result2>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1;
+	}
+
+	public int notLike(int rv, String userId) {
+		Connection conn = getConnection();
+		
+		ReviewDAO dao = new ReviewDAO();
+		
+		int result1 = dao.notLike(conn, rv, userId);
+		int result2 = dao.notLikeC(conn, rv);
+		
+		if(result1>0 && result2>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1;
 	}
 
 
