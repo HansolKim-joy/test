@@ -32,7 +32,7 @@ public class ReviewDAO {
 	}
 
 
-	public ArrayList<Review> selectList(Connection conn, int currentPage, int boardLimit, String sk, String sv, String spo) {
+	public ArrayList<Review> selectList(Connection conn, int currentPage, int boardLimit, String sk, String sv, String sk2) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -43,8 +43,9 @@ public class ReviewDAO {
 		
 		int startRow = (currentPage -1) * boardLimit +1;
 		int endRow = startRow + boardLimit -1;
-		
+				System.out.println("sk2:"+sk2);
 				try {
+				if(sk2.equals("스포선택")) {
 					if(sk.equals("전체")) {
 						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?";
 						pstmt = conn.prepareStatement(SQL);
@@ -57,10 +58,9 @@ public class ReviewDAO {
 					} else if(sk.equals("영화제목")) {
 						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ?";
 						pstmt = conn.prepareStatement(SQL);
-					/*
-					 * pstmt.setInt(1, startRow); pstmt.setInt(2, endRow);
-					 */
-						pstmt.setString(1, "%" + sv + "%");
+						pstmt.setInt(1, startRow); 
+						pstmt.setInt(2, endRow);
+						pstmt.setString(3, "%" + sv + "%");
 						
 					} else if(sk.equals("리뷰제목")) {
 						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND BOARD_TITLE LIKE ?";
@@ -82,12 +82,57 @@ public class ReviewDAO {
 						pstmt.setInt(1, startRow);
 						pstmt.setInt(2, endRow);
 						pstmt.setString(3, "%" + sv + "%");
+					}//"스포선택" if문끝
+					
+				} else {
+					if(sk.equals("전체")) {
+						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, sk2);
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
+						pstmt.setString(4, "%" + sv + "%");
+						pstmt.setString(5, "%" + sv + "%");
+						pstmt.setString(6, "%" + sv + "%");
+						pstmt.setString(7, "%" + sv + "%");
+					} else if(sk.equals("영화제목")) {
+						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, sk2);
+						pstmt.setInt(2, startRow); 
+						pstmt.setInt(3, endRow);
+						pstmt.setString(4, "%" + sv + "%");
+						
+					} else if(sk.equals("리뷰제목")) {
+						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND BOARD_TITLE LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, sk2);
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
+						pstmt.setString(4, "%" + sv + "%");
+						
+					} else if(sk.equals("작성자")) {
+						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND USER_ID LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, sk2);
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
+						pstmt.setString(4, "%" + sv + "%");
+						
+					} else if(sk.equals("내용")) {
+						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND BOARD_CONTENT LIKE ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, sk2);
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
+						pstmt.setString(4, "%" + sv + "%");
 						
 					}else{
 						pstmt = conn.prepareStatement(query);
 						pstmt.setInt(1, startRow);
 						pstmt.setInt(2, endRow);
 					}
+				}	
 					
 					rset = pstmt.executeQuery();
 					list = new ArrayList<Review>();

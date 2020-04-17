@@ -14,6 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link type="text/css" href="/Watch_Next/Resources/css/review_post.css" rel="stylesheet" >
+<style>
+	.subnav li {width: 120px;}
+	.popimg{width:30px; height:30px;}
+</style>
 </head>
 <body>
 	<%@ include file="/view/layout/Header.jsp" %>
@@ -51,15 +55,25 @@
 							<tr>
 								<td width="850px" style="font-size:17px;">
 									<% if(r.getPopcorn() ==1) { %>
-										★☆☆☆☆
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 									<%} else if(r.getPopcorn() ==2) { %>
-										★★☆☆☆
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 									<%} else if(r.getPopcorn() ==3) { %>
-										★★★☆☆
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 									<%} else if(r.getPopcorn() ==4) { %>
-										★★★★☆
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 									<%} else if(r.getPopcorn() ==5) { %>
-										★★★★★
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 									<%} %>
 								</td>
 								<td width="80px" style="font-size:17px;">글쓴이 : </td>
@@ -120,11 +134,17 @@
 	    
 	 
 	    <div id=listbtn>
-	        <button type=submit title="수정" >수정</button>
-	        <button type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
-	        <button onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>        		
+	    <% if(loginUser != null && loginUser.getUserId().equals(r.getbWriter())) { %>
+	        <button  class="lbtn" id="bupBtn" type=submit title="수정" >수정</button>
+	        <button  class="lbtn" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
+	   		<button class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+	    <% } else if(!loginUser.getUserId().equals(r.getbWriter())) {%>    
+	        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+	    <% }  %>            		
 	    </div>
 	    </form>
+	    
+	    <br clear="all">
 	    
 	   	<!-- 댓글 -->
 		<div id="replybox1">
@@ -145,8 +165,12 @@
 							<%= list.get(i).getrWriter() %>
 						</th>
 						<td>
-							<button type=button id=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
-							'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
+							<% if(loginUser!=null && loginUser.getUserId().equals(list.get(i).getrWriter())) { %>
+								<button type=button id=replydelete>삭제</button>
+							<% } else { %>
+								<button type=button id=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
+							<% } %>	
 						</td>
 					</tr>
 					<tr>	
@@ -194,8 +218,9 @@
 			}
 		}
 		
+		//댓글작성
 		$('#reply_save').click(function(){
-			var writer = '임시';
+			var writer = '<%= loginUser.getUserId() %>';
 			var bid = <%= r.getbNo() %>;
 			var content = $('#reply_content').val();
 			$.ajax({
@@ -221,10 +246,24 @@
 
 					$("#replySelectTable").load(window.location.href + " #replySelectTable");
 					
+					
 				} 
 				
 			});
 		});
+		
+		//댓글삭제
+		$('#replydelete').click(function(){
+			var rpmsg = confirm("댓글을 삭제합니다.");
+			if(rpmsg == true){
+				alert('삭제하였습니다.');
+			} else{
+				return false;
+			}
+				
+				
+			});
+		
 	</script>
 	
 	

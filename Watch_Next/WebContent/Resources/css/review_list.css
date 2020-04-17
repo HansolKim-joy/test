@@ -45,8 +45,9 @@ button:focus {outline: none;}
 		border:none; border-radius:5px; font-size:14px; height:25px;}
 
 	/* 검색 */
-#searchDiv{width: 420px; margin:100px auto;}
+#searchDiv{width: 600px; margin:100px auto;}
 #searchType{font-size:14px; width:90px; height:25px;}
+#selectSpo{font-size:14px; width:80px; height:25px;}
 #blank{height:25px; font-size:14px;}
 #botSearch{ background-color:red; color:white;
 			border-radius:5px; border:none;

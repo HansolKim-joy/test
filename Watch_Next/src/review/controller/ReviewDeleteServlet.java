@@ -37,7 +37,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		if(result>0) {
 			response.sendRedirect("list.rv");
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("view/common/errorPage.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
 			request.setAttribute("msg", "리뷰 삭제를 실패하였습니다.");
 			view.forward(request, response);
 		}
