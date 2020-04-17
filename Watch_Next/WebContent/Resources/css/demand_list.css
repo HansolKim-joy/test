@@ -22,7 +22,11 @@
 
 	/* 선택 */
 .hline{height:4px; background-color:red; border:none;}	
-#sel{width:500px; margin:20px auto; color: black;}
+#sel{width: 500px;
+    margin: 20px auto;
+    margin-top: 35px;
+    margin-left: 37%;
+    color: black;}
 .cinema{width: 70px; height: 70px; margin:10px;}
 #allview{margin-left:15px; font-weight:bold; font-size:18px; float:left; color:white;}
 #selSearch{width:450px; margin-left:61%; margin-bottom:10px; color:black;}

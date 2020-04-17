@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, Funding.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, Funding.model.vo.*, common.PageInfo"%>
 <%
 	ArrayList<DemandList> list = (ArrayList<DemandList>)request.getAttribute("list");
 	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
 	double percent = 0.0;
 	int j = 4;
+	
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,34 +41,16 @@
 	<hr class="hline">
 	
 	<div id="sel">
-		<a href="#"><img src="/Watch_Next/Resources/images/cgv.png" class="cinema"></a>
-		<a href="#"><img src="/Watch_Next/Resources/images/메가박스.png" class="cinema"></a>
-		<a href="#"><img src="/Watch_Next/Resources/images/롯데.png" class="cinema"></a>
-		<a href="#"><img src="/Watch_Next/Resources/images/피카디리.png" class="cinema"></a>
+		<button class="btn" value="cgv"><img src="/Watch_Next/Resources/images/cgv.png" class="cinema"></button>
+		<button class="btn" value="mega"><img src="/Watch_Next/Resources/images/메가박스.png" class="cinema"></button>
+		<button class="btn" value="lotte"><img src="/Watch_Next/Resources/images/롯데.png" class="cinema"></button>
+		<button class="btn" value="pica"><img src="/Watch_Next/Resources/images/피카디리.png" class="cinema"></button>
 	</div>
 	
 	<br>
 	
-	<span id="allview">전체보기</span>
 	
-	<span id="selSearch">
-		<input type="text" placeholder='검색어를 입력하세요'>
-		<button id="sbtn">검색</button>&nbsp;&nbsp;
-		
-		<select>
-	  		<option value='' selected>전체</option>
-	  		<option value='압구정 CGV'>압구정 CGV</option>
-	  		<option value='COEX MEGABOX'>COEX MEGABOX</option>
-	  		<option value='강남역 롯데시네마'>강남역 롯데시네마</option>
-	  		<option value='종로 피카디리'>종로 피카디리</option>
-		</select>
-		<select>
-	  		<option value='' selected>선택</option>
-	  		<option value='추천순'>추천순</option>
-	  		<option value='인기순'>인기순</option>
-	  		<option value='마감 임박순'>마감 임박순</option>
-		</select>
-	</span>
+
 		
 	<hr class="hline">
 	
@@ -71,7 +62,7 @@
 				 for(int a=0; a<wlist.size(); a++){ 
 						Demand wl = wlist.get(a);
 						if(dl.getdNo() == wl.getdNo()) {
-							percent = Math.round((((double)wl.getSmWant()/dl.getMinPeople())*100)*100)/100.0;
+							percent = Math.round((((double)wl.getSmWant()/dl.getMinPeople())*100)*10)/100.0;
 						}
 					}
 				 if(i%j==0){ %>
@@ -109,7 +100,6 @@
 						<li>
 							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
 							<div class="pro">
-							<% System.out.println(percent); %>
 								<span style="width: <%= percent %>%"></span>
 							</div>
 							<span>
@@ -201,11 +191,30 @@
 
 	<!-- 페이징 -->
 	<div class="list_number">
-		<button type="button" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</button>
+		<a type="a" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
         <div class="list_n_menu">
-        <span class="prev">이전</span>
-        <span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>
-        <a href="">다음  ></a>
+        	<!--이전 페이지 -->
+	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
+	        <script>
+					if(<%= currentPage %> <= 1 ){
+						$('#beforeBtn').hide();
+					}
+			</script>
+			<!--페이지 목록  -->
+			<% for (int p=startPage; p<=endPage; p++){
+				if(p == currentPage) {%>
+					<a><%= p %> </a>
+				<%} else{ %>
+					<a onclick="location.href='<%=request.getContextPath() %>/list.de?currentPage=<%= p %>'"><%= p %></a>
+				<%} %>
+			<%} %>	
+			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
+	        <script>
+				if(<%= currentPage %> >= <%= maxPage %>){
+					
+					$('#afterBtn').hide();
+				}
+			</script>
         
         </div>
 	</div>
@@ -214,5 +223,14 @@
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
+
+<script type="text/javascript">
+	$('.btn').click(function(){
+		
+	});
+	
+	
+	
+</script>
 </body>
 </html>
