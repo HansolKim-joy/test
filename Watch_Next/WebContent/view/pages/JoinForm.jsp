@@ -18,45 +18,35 @@
 			<h2>회원가입</h2>
 			<hr class="hline">
 			<div id="div_form">
-				<form action="<%= request.getContextPath() %>/insert.me"
-					method="post" id="joinForm" name="joinForm">
+				<form action="<%= request.getContextPath() %>/insert.me" method="post" id="joinForm" name="joinForm">
 					<table>
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" class="jn_input" id="user_ID"
-								name="user_ID" placeholder="아이디를 입력하시오."></td>
+							<td><input type="text" class="jn_input" id="user_ID" name="user_ID" placeholder="아이디를 입력하시오." required></td>
 							<td><label id="idResult"></label>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" class="jn_input" id="user_Pass"
-								onkeyup="check_pwd();" name="user_Pass"
-								placeholder="비밀번호를 입력하시오."></td>
+							<td><input type="password" class="jn_input" id="user_Pass" onkeyup="check_pwd();" name="user_Pass" placeholder="비밀번호를 입력하시오."></td>
 							<td><label id="pwdCheck1"></label></td>
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" class="jn_input" id="user_PassCh"
-								onkeyup="check_pwd1();" name="user_Pass1"
-								placeholder="비밀번호를 입력하시오."></td>
+							<td><input type="password" class="jn_input" id="user_PassCh" onkeyup="check_pwd1();" name="user_Pass1" placeholder="비밀번호를 입력하시오."></td>
 							<td><label id="pwdCheck2"></label></td>
 						</tr>
 						<tr>
 							<td>이름</td>
-							<td><input type="text" class="jn_input" id="user_Name"
-								name="user_Name" placeholder="이름을 입력하시오."></td>
+							<td><input type="text" class="jn_input" id="user_Name" name="user_Name" placeholder="이름을 입력하시오."></td>
 						</tr>
 						<tr>
 							<td>전화번호</td>
-							<td><input type="tel" class="jn_input" id="user_Phone"
-								name="user_Phone" placeholder="전화번호를 입력하시오."></td>
+							<td><input type="tel" class="jn_input" id="user_Phone" name="user_Phone" placeholder="전화번호를 입력하시오."></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" class="jn_input" id="user_Email"
-								name="user_Email" placeholder="이메일을 입력하시오."></td>
-							<td><input type="button" onclick="email_CheckNum()"
-								value="인증받기"></td>
+							<td><input type="email" class="jn_input" id="user_Email" name="user_Email" placeholder="이메일을 입력하시오."></td>
+							<td><input type="button" onclick="email_CheckNum()" value="인증받기"></td>
 						</tr>
 						<tr>
 							<td class="em_hide" id="email_Check">이메일 확인</td>
@@ -65,9 +55,8 @@
 						</tr>
 						<tr>
 							<td>메일링 서비스</td>
-							<td><input type="checkbox" id="user_Check" name="user_Check"
-								value="Y">수신 <input type="checkbox" id="user_Check"
-								name="user_Check" value="N">비수신</td>
+							<td><input type="checkbox" id="user_Check" name="user_Check" value="Y">수신 
+								<input type="checkbox" id="user_Check"name="user_Check" value="N">비수신</td>
 						</tr>
 					</table>
 					<div id="jn_btn">
