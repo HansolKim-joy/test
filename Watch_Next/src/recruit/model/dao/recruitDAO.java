@@ -315,7 +315,7 @@ public class recruitDAO {
 
 
 	public ArrayList<Comment> selectComment(Connection conn, int rNo) {
-		//댓글 입력
+		//db에서 댓글 가져옴
 		//select * from tb_comments where board_no=? 
 		
 		PreparedStatement pstmt = null;
