@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import board.model.vo.Board;
 import member.model.vo.Member;
 import movie.model.service.BoardService;
+import recruit.model.vo.Recruit;
+import review.model.vo.Review;
 
 /**
  * Servlet implementation class BoardAllServlet
@@ -37,15 +38,17 @@ public class BoardAllServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		ArrayList<Board> list = new BoardService().selectMyboard(userId);
-		
-		System.out.println("ksldjf" + list);
+		BoardService bService = new BoardService();
+		ArrayList<Review> ReviewList = bService.selectMyReview(userId);
+		ArrayList<Recruit> RecruitList = bService.selectMyRecruit(userId);
+//		System.out.println("ksldjf" + ReviewList);
 		
 		String page = "";
-		if(list != null) {
-			System.out.println("servlet" + list);
+		if(ReviewList != null) {
+//			System.out.println("servlet" + ReviewList);
 			page = "view/myPage/myPageMain.jsp";
-			request.setAttribute("list", list);
+			request.setAttribute("ReviewList", ReviewList);
+			request.setAttribute("RecruitList", RecruitList);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 		}

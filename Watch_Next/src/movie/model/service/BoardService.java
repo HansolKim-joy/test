@@ -14,6 +14,7 @@ import listAll.model.BoardDAO;
 import movie.model.dao.MovieDAO;
 import movie.model.vo.Dib;
 import movie.model.vo.Movie;
+import recruit.model.vo.Recruit;
 import review.model.vo.Review;
 
 public class BoardService {
@@ -113,12 +114,20 @@ public class BoardService {
 		return result;
 	}
 
-	public ArrayList<Board> selectMyboard(String userId) {
+	public ArrayList<Review> selectMyReview(String userId) {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new BoardDAO().selectMyboard(conn, userId);
+		ArrayList<Review> ReviewList = new BoardDAO().selectMyReview(conn, userId);
 		
 		close(conn);
-		return list;
+		return ReviewList;
+	}
+
+	public ArrayList<Recruit> selectMyRecruit(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Recruit> RecruitList = new BoardDAO().selectMyRecruit(conn, userId);
+		close(conn);
+		return RecruitList;
 	}
 }
