@@ -77,7 +77,7 @@
 		<hr id="red_line">
 		<br>
 		<div id="admin_imageArea">
-		<img id="admin_image" width="300" height="300">
+		<img id="admin_image" width="300" height="300" >
 		<script>
 		// 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
 		function LoadImg(value,filevalue){
@@ -102,7 +102,7 @@
 		<input type="file" id="admin_imageFile" name="admin_imageFile" onchange="LoadImg(this,this.value)">
 		
 		<div class="admin_movie">
-			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name">
+			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name"  >
 			<b>장소 : </b>
 			<select id = "admin_movie_spot" name="admin_movie_spot">
 				<option value="1">압구정 CGV</option>

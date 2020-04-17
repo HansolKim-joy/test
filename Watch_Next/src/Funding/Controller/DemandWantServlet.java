@@ -38,6 +38,10 @@ public class DemandWantServlet extends HttpServlet {
 		int result = new DemandService().putWant(no, userId, dUserId);
 		String page = request.getContextPath() + "/demand.detail?no=" + no;
 		response.sendRedirect(page);
+		
+		
+		
+		
 	}
 
 	/**
