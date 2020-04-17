@@ -44,11 +44,7 @@ public class ReplyInsertServlet extends HttpServlet {
 		re.setRefBid(bid);
 		
 		ArrayList<ReviewReply> list = new ReviewService().insertReply(re);
-		System.out.println(list);
 		response.setContentType("applicaiton/json; charset=UTF-8");
-		/*
-		 * Gson gson = new Gson(); gson.toJson(list, response.getWriter());
-		 */
 		new Gson().toJson(list, response.getWriter());
 		
 	}

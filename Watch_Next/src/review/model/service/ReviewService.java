@@ -15,10 +15,10 @@ import review.model.vo.ReviewReply;
 public class ReviewService {
 
 
-	public ArrayList<Review> selectList(int currentPage, int boardLimit, String sk, String sv, String spo) {
+	public ArrayList<Review> selectList(int currentPage, int boardLimit, String sk, String sv, String sk2) {
 		Connection conn = getConnection();
 		
-		ArrayList<Review> list = new ReviewDAO().selectList(conn, currentPage, boardLimit, sk, sv, spo);
+		ArrayList<Review> list = new ReviewDAO().selectList(conn, currentPage, boardLimit, sk, sv, sk2);
 		
 		close(conn);
 		

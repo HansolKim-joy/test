@@ -64,7 +64,7 @@ public class ReviewInsertServlet extends HttpServlet {
 		if(result>0) {
 			response.sendRedirect("list.rv");
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("view/common/errorPage.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
 			request.setAttribute("msg", "리뷰 등록에 실패했습니다.");
 			view.forward(request, response);
 		}
