@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import member.model.vo.Member;
 import recruit.model.service.recruitService;
 import recruit.model.vo.PageInfo;
@@ -71,10 +73,7 @@ public class recruitListServlet extends HttpServlet {
 		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
 		 HttpSession session = request.getSession();
 		 Member loginUser = (Member)session.getAttribute("loginUser");
-		 //-------------------------검색옵션-----------------
 		
-		String choice = request.getParameter("choice");
-		ArrayList<Recruit> cList = rservice.choiceHead(choice);
 
 		 String page = null;
 		 if(list != null) { 
@@ -91,6 +90,14 @@ public class recruitListServlet extends HttpServlet {
 		 RequestDispatcher view = request.getRequestDispatcher(page);
 				 
 		 view.forward(request, response);
+		 
+		 //-------------------------검색옵션-----------------
+			
+			String choice = request.getParameter("choice");
+			ArrayList<Recruit> cList = rservice.choiceHead(choice);
+		 
+		 response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson(cList, response.getWriter());
 	}
 
 	/**

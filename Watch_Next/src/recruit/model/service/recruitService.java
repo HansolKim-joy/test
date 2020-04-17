@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import recruit.model.dao.recruitDAO;
-import recruit.model.vo.Comment;
+import common.Comment;
 import recruit.model.vo.Recruit;
 
 public class recruitService {
@@ -172,27 +172,29 @@ public class recruitService {
 
 	public ArrayList<Recruit> choiceHead(String choice) {
 		Connection conn = getConnection();
+		
 		ArrayList<Recruit> cList = new recruitDAO().choiceHead(conn, choice);
+		
 		close(conn);
 		return cList;
 	}
 
 	
-	 public int deleteComment(int bid) { 
+	 public ArrayList<Comment> deleteComment(int rId, int rNo) { 
 		 Connection conn = getConnection();
-		 System.out.println("servicebid "+bid);
-		 int result = new recruitDAO().deleteComment(conn, bid);
-		 
+		 System.out.println("servicebid "+rId);
+		 int result = new recruitDAO().deleteComment(conn, rId);
 		 if(result > 0) {
 			 commit(conn);
 		 }else {
 			 rollback(conn);
 		 }
 		 
+		 ArrayList<Comment> list = new recruitDAO().selectComment(conn, rNo);
 		 close(conn);
 		 
 		 
-		 return result;
+		 return list;
 		 
 	 }
 	 
