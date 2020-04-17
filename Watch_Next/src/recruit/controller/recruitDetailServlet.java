@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Comment;
 import member.model.vo.Member;
 import recruit.model.service.recruitService;
-import recruit.model.vo.*;
+import recruit.model.vo.Recruit;
 
 /**
  * Servlet implementation class recruitDetailServlet

@@ -13,9 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import recruit.model.vo.Comment;
+import common.Comment;
 import recruit.model.vo.Recruit;
-import review.model.vo.ReviewReply;
 
 public class recruitDAO {
 	
@@ -331,7 +330,7 @@ public class recruitDAO {
 			rset = pstmt.executeQuery();
 			
 			comment = new ArrayList<Comment>();
-			System.out.println("selectComment" + rset);
+			System.out.println("selectComment " + rset);
 			while(rset.next()) {
 				comment.add(new Comment(rset.getInt("comments_no"),
 									     rset.getString("comments_cotent"),
@@ -342,7 +341,7 @@ public class recruitDAO {
 										 rset.getString("comments_delete_yn")));
 							}
 			
-			System.out.println(comment);
+			System.out.println("comment " + comment);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -383,7 +382,7 @@ public class recruitDAO {
 
 
 	
-	  public int deleteComment(Connection conn, int bid) { 
+	  public int deleteComment(Connection conn, int rId) { 
 		  //댓글 삭제 
 		  //update tb_comments set COMMENTS_DELETE_YN='Y' where COMMENTS_NO=? 
 		  PreparedStatement pstmt = null; 
@@ -394,7 +393,7 @@ public class recruitDAO {
 		  try { 
 			  pstmt = conn.prepareStatement(query); 
 			  
-			  pstmt.setInt(1, bid);
+			  pstmt.setInt(1, rId);
 			  
 			  result = pstmt.executeUpdate();
 		  } catch (SQLException e) { 

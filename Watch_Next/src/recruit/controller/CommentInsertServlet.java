@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import member.model.vo.Member;
 import recruit.model.service.recruitService;
-import recruit.model.vo.Comment;
+import common.Comment;
 
 /**
  * Servlet implementation class CommentInsertServlet

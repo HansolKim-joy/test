@@ -1,6 +1,7 @@
 package recruit.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import recruit.model.service.recruitService;
+import common.Comment;
 
 /**
  * Servlet implementation class CommentDeleteServlet
@@ -30,19 +34,13 @@ public class CommentDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("bid 11"+request.getParameter("rId"));
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
+		int rId = Integer.parseInt(request.getParameter("rId")); // 히든번호
+		int rNo = Integer.parseInt(request.getParameter("rNo")); // 히든번호
+		ArrayList<Comment> list = new recruitService().deleteComment(rId, rNo);
+//		System.out.println("servlet "+list);
 		
-		int result = new recruitService().deleteComment(rNo);
-		System.out.println("servlet "+result);
-		
-		if(result > 0) {
-			response.sendRedirect("detail.recruit");
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("view/errorPage/errorPage.jsp");
-			request.setAttribute("msg", "댓글 삭제를 실패했습니다.");
-			view.forward(request, response);
-		}
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 		
 	}
 
