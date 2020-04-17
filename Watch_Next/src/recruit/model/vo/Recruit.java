@@ -46,10 +46,21 @@ public class Recruit {
 		this.userId = userId;
 		this.bViews = bViews;
 		this.bContent = bContent;
-		DecYn = decYn;
-		DeleteYn = deleteYn;
+		this.DecYn = decYn;
+		this.DeleteYn = deleteYn;
 	}
-
+	
+	// 한솔
+	public Recruit(int rNo, String bTitle, int bViews, Date bDate, String rHead) {
+		super();
+		this.rNo = rNo;
+		this.bTitle = bTitle;
+		this.bViews = bViews;
+		this.bDate = bDate;
+		this.rHead = rHead;
+	}
+	
+	
 	public int getrNo() {
 		return rNo;
 	}

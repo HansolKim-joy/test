@@ -95,7 +95,15 @@ public class Review {
 		this.bContent = bContent;
 	}
 
-	
+	// 한솔
+	public Review(int bNo, String bTitle, int bCount, Date bDate, int popcorn) {
+		super();
+		this.bNo = bNo;
+		this.bTitle = bTitle;
+		this.bCount = bCount;
+		this.bDate = bDate;
+		this.popcorn = popcorn;
+	}
 	
 	public int getRnum() {
 		return rnum;
