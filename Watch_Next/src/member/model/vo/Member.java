@@ -19,7 +19,7 @@ public class Member {
 	}
 
 	public Member(String userId, String userPwd, String userName, String phone, String email, String mailingYN,
-			String adminYN, String deleteYN ) {
+			String adminYN, String deleteYN) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -69,9 +69,9 @@ public class Member {
 
 	public void setEmail(String email) {
 		this.email = email;
-  }
-  
-    public String getMailingYN() {
+	}
+
+	public String getMailingYN() {
 		return mailingYN;
 	}
 
