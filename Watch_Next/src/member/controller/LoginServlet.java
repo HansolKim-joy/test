@@ -48,8 +48,7 @@ public class LoginServlet extends HttpServlet {
          System.out.println(request.getContextPath());
          response.sendRedirect(request.getContextPath());
       }else {
-         
-         request.setAttribute("msg", "없는 회원입니다 다시 확인해주세요.");
+         request.setAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다.");
          RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
          view.forward(request, response);
       }

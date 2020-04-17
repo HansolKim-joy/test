@@ -209,7 +209,7 @@
       	}
       
       function email_CheckNum(){
-         var user_em = $('#em_input').val();
+         var user_em = $('#user_Email').val();
          var em_check = $('#email_Check1').val();
          var em_ch = Number(em_check);
          var isEmpty = false;

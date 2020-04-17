@@ -54,7 +54,7 @@ public class InsertMemberServlet extends HttpServlet {
       
       if(result > 0) {
     	 msg = "회원가입에 성공하였습니다.";
-         page = "/";
+         page = "view/pages/loginForm.jsp";
       } else {
 		 msg = "회원가입에 실패했습니다. 다시 입력해주세요.";
          page = "view/pages/JoinForm.jsp";

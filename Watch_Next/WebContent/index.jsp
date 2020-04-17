@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
-<script src="/Watch_Next/WebContent/Resources/js/Index.js"></script>
+<!-- <script src="/Watch_Next/WebContent/Resources/js/Index.js"></script> -->
 <script>
 $(document).ready(function() { 
     $(".pp_slider").lightSlider({
@@ -55,7 +55,8 @@ $(document).ready(function() {
             <ul id="pp_slider" class="pp_slider">
                 <li class="pp_item">
                 	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster1"></div>
-                	<div class="pp_item1"></div>
+               		<div class="pp_item1">dudghds</div>
+                	
                 </li>
                 <li class="pp_item">
                 	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></div>
