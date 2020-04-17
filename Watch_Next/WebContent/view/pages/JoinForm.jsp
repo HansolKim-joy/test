@@ -207,6 +207,78 @@
 			}	      	 
 	      	 
       	}
+         function jnform(){
+            
+           var userId = $('#user_ID');
+           var userPwd = $('#user_Pass');
+           var userCh = $('#user_PassCh');
+           var name = $('#user_Name');
+           var phone = $('#user_Phone');
+           var email = $('#user_Email');
+           var emailCh = $('email_Check1'); 
+           
+           var bool = true;
+           
+//            console.log(userId.val()); 
+//            var userPwdch = $('#user_PassCh').val(); 이 객체는 focus를 사용할 수 없음 
+           
+              if(userId.val() == ''){
+                 alert("아이디를 입력해주세요.");
+                 userId.focus();
+                //bool = false;
+                return false;
+                
+              }
+              
+             if(userPwd.val() == ''){
+                alert("비밀번호를 입력해주세요.");
+                userPwd.focus();
+                return false;
+                //bool = false;
+            }
+             
+             if(userCh.val() == ''){
+                alert('인증번호를 입력해주세요.');
+                userCh.focus();
+                return false;
+                //bool = false;
+             }
+             
+             if(name.val() == ''){
+                alert('이름을 입력해주세요.');
+                name.focus();
+               return false;
+               // bool = false;
+             }
+             
+             if(phone.val() == ''){
+                alert('핸드폰 번호를 입력해주세요.');
+                phone.focus();
+            return false;
+               // bool = false;
+             }
+            
+             if(email.val() == ''){
+                alert('이메일을 입력해주세요.');
+                email.focus();
+               return false;
+               // bool = false;
+             }
+             
+             if(emailCh.val() == ''){
+                alert('인증번호를 입력해주세요.');
+                emailCh.focus();
+                return false;
+                //bool = false;
+             }
+             
+             //return true;
+         if(bool){
+            $('#joinForm').submit();
+         }             
+             
+         }
+>>>>>>> branch 'master' of https://github.com/HansolKim-joy/test.git
       
       function email_CheckNum(){
          var user_em = $('#user_Email').val();

@@ -75,18 +75,18 @@ public class ReviewListServlet extends HttpServlet {
 		}
 		
 		//스포유무로 모아보기
-		String spo_ = request.getParameter("spo");
+		String sk2_ = request.getParameter("sk2");
 		
-		String spo="";
-		if(spo_ != null) {
-			spo = spo_;
+		String sk2="스포선택";
+		if(sk2_ != null) {
+			sk2 = sk2_;
 		}
 		
 		
 
 		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 
-		ArrayList<Review> list = service.selectList(currentPage, boardLimit, sk, sv, spo);
+		ArrayList<Review> list = service.selectList(currentPage, boardLimit, sk, sv, sk2);
 
 		String page = null;
 		if (list != null) {
@@ -94,7 +94,7 @@ public class ReviewListServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
-			page = "view/common/errorPage.jsp";
+			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "게시판 조회에 실패했습니다.");
 		}
 

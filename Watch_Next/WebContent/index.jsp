@@ -38,10 +38,6 @@ $(document).ready(function() {
 		function myPage(){
 			location.href="/Watch_Next/view/myPage/myPageMain.jsp";
 		}
-		
-		function logout(){
-			location.href="<%= request.getContextPath() %>/logout.me";
-		}
 	</script>
 <br clear="all">
 

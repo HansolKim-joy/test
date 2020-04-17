@@ -30,7 +30,7 @@ public class CommentDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("bid 11"+request.getParameter("rNo"));
+		System.out.println("bid 11"+request.getParameter("rId"));
 		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		
 		int result = new recruitService().deleteComment(rNo);

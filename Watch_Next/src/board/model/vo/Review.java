@@ -1,5 +1,7 @@
 package board.model.vo;
 
+import java.sql.Date;
+
 public class Review {
 	private int rNo;
 	private String mTitle;
@@ -18,6 +20,8 @@ public class Review {
 	
 	public Review() {}
 	
+
+
 	public int getrNo() {
 		return rNo;
 	}

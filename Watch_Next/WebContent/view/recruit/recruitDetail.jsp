@@ -93,10 +93,7 @@
 	    <!-- 목록수정삭제 버튼 -->
  
 		<div id=listbtn>
-			<!-- <button type=button title="수정" >수정</button>
-		    <button type=button title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
-		    <button onclick="location.href='reviewList.html'"
-		        		type=button title="목록" >목록</button> -->
+			
 		    <% if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
 		    	<button type="submit" id="update" value="수정">수정</button>
 		    	<button type="button" id="delete" onclick="deleteRe();" value="삭제">삭제</button>
@@ -117,9 +114,10 @@
 			<tr>
 				<td>
 					<textarea id="reply_content" name="reply_content" rows="2" cols="167"  
-				  placeholder="댓글을 입력하세요." ><%= r.getrNo() %></textarea>
+				  placeholder="댓글을 입력하세요." ></textarea>
 				</td>
 				<td>
+					
 					<button id="reply_save">댓글 작성</button>
 				</td>
 			</tr>
@@ -178,17 +176,21 @@
 				}
 			}
 			
-			
-			$('#reply_save').click(function(){
+				$('#reply_save').click(function(){
 				var writer = '<%= loginUser.getUserId() %>';
 				var rNo = '<%= r.getrNo() %>';
 				var content = $('#reply_content').val();
+				
+				if($('#reply_content').val(); == null){
+					alert("댓글을 작성해주세요");
+				}else{
+					alert("댓글 작성 완료");
+				}
 				
 				$.ajax({
 					url : 'insertComment.recruit',
 					data : {writer:writer, content:content, rNo:rNo},
 					success: function(data){
-						alter("DASDF");
 						$replyTable = $('#replySelectTable');
 						$replyTable.text("");
 						

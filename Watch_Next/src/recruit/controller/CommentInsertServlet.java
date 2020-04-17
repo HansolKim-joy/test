@@ -36,7 +36,7 @@ public class CommentInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String writer = request.getParameter("writer");
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		String content = request.getParameter("content");
 		
 		HttpSession session = request.getSession();
@@ -46,7 +46,7 @@ public class CommentInsertServlet extends HttpServlet {
 		Comment co = new Comment();
 		co.setrWriter(writer);
 		co.setrContent(content);
-		co.setRefBid(bid);
+		co.setRefBid(rNo);
 		
 		ArrayList<Comment> comment = new recruitService().insertComment(co);
 		

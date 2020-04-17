@@ -25,26 +25,7 @@
 <link type="text/css" href="/Watch_Next/Resources/css/review_list.css" rel="stylesheet" >
 <style>
 	.subnav li {width: 120px;}
- 	#rlcategory li ul {
-	font-weight:bold;
-	font-size:18px;
-	background: lightgray;
-	display:none; 
-	height:auto;
-	padding:5px;
-	border:0px;
-	position:absolute;
-	width:100px;
-	z-index:200;
-	color:red;
-	}
-	
-	#rlcategory li:hover ul {
-	display:block;
-	} 
-	
-	.spo{border:none; background:transparent;}
-	.spo:hover{border:none;}
+	.popimg{width:20px; height:25px;}
 </style>
 </head>
 <body>
@@ -64,17 +45,7 @@
 	<table id="rvtable">
 	<tr>
 		<th id="num">번호</th>
-		<th id="rlcategory">
-			<ul>
-				<li>
-					말머리▼
-					<ul>
-						<li><button class="spo" id="spoY">스포있음</button></li>
-						<li><button class="spo" id="spoN">스포없음</button></li>
-					</ul>
-				</li>
-			</ul>
-		</th>
+		<th id="rlcategory">말머리</th>
 		<th id="title">리뷰 제목</th>
 		<th id="popcorn">팝콘 점수</th>
 		<th id="date">날짜</th>
@@ -99,17 +70,27 @@
 		
 		</td>
 		<td align="left">[ <%= r.getmTitle() %> ] <%= r.getbTitle() %></td>
-		<td>
+		<td align="left">
 			<% if(r.getPopcorn() ==1) { %>
-				★☆☆☆☆
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 			<%} else if(r.getPopcorn() ==2) { %>
-				★★☆☆☆
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 			<%} else if(r.getPopcorn() ==3) { %>
-				★★★☆☆
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 			<%} else if(r.getPopcorn() ==4) { %>
-				★★★★☆
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 			<%} else if(r.getPopcorn() ==5) { %>
-				★★★★★
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
 			<%} %>
 			
 		
@@ -162,9 +143,10 @@
 
 
 <!-- 글쓰기 -->
-<input id="write" type="button" value="글쓰기"
-	   onclick="location.href='<%= request.getContextPath() %>/view/review_board/reviewWrite.jsp'">
-
+<% if(loginUser != null){ %>
+	<input id="write" type="button" value="글쓰기"
+		   onclick="location.href='<%= request.getContextPath() %>/view/review_board/reviewWrite.jsp'">
+<% } %>
 
 <!-- 검색 -->
 <br clear="left">
@@ -177,6 +159,11 @@
 		<option ${(param.sk=="리뷰제목")?"selected":""} value="리뷰제목">리뷰제목</option>
 		<option ${(param.sk=="작성자")?"selected":""} value="작성자">작성자</option>
 		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
+	</select>
+	<select id="selectSpo" name="sk2">
+		<option ${(param.sk2=="스포선택")?"selected":""} value="스포선택">스포선택</option>
+		<option ${(param.sk2=="Y")?"selected":""} value="Y">스포있음</option>
+		<option ${(param.sk2=="N")?"selected":""} value="N">스포없음</option>	
 	</select>&nbsp;&nbsp;&nbsp;&nbsp;
 
 	<input id="blank" name="sv" type="text" size="35" id="searchText" value="${param.sv}">&nbsp;
@@ -193,97 +180,17 @@
 			$(this).parent().css('cursor', 'pointer');
 		}).click(function(){
 			var rv = $(this).parent().children().eq(0).text();
-			location.href="<%= request.getContextPath() %>/detail.rv?rv="+rv;
+			
+			if('<%= loginUser %>' != 'null'){
+				location.href="<%= request.getContextPath() %>/detail.rv?rv="+rv;
+			} else{
+				alert('로그인 해주세요.');
+			}
+			
 		})
 	});
 	
-	$('#spoY').click(function(){
-		var spo = "Y";
-		$.ajax({
-			url: 'list.spo',
-			data: {spo:spo},
-			success : function(data){
-				console.log("ysuccess");
-				console.log(data);
-				
-				$reviewTable = $('#rvtable');
-				$reviewTable.text("");
-			
-				for(var key in data) {
-					var $tr = $('<tr>');
-					var $yno = $('<td>').text(data[key].bNo);
-					var $yspo = $('<td>').text(data[key].spo);
-					var $yrtitle = $('<td>').text(data[key].bTitle);
-					var $ypopcorn = $('<td>').text(data[key].popcorn);
-					var $ydate = $('<td>').text(data[key].bDate);
-					var $ywriter = $('<td>').text(data[key].bWriter);
-					var $yview = $('<td>').text(data[key].bCount);
-					
-					console.log($yno);
-					
-					$tr.append($yno);
-					$tr.append($yspo);
-					$tr.append($yrtitle);
-					$tr.append($ypopcorn);
-					$tr.append($ydate);
-					$tr.append($ywriter);
-					$tr.append($yview);
-					$reviewTable.append($tr);
-				}
-				
-				
-				
-				$("#rvtable").load(window.location.href + " #rvtable");
-				
-				
-			} 
-			
-		});
-	});
 	
-	$('#spoY').click(function(){
-		var spo = "N";
-		$.ajax({
-			url: 'list.rv',
-			data: {spo:spo},
-			success : function(data){
-				console.log("nsuccess");
-				console.log(data);
-				
-				$reviewTable = $('#rvtable');
-				$reviewTable.text("");
-			
-				for(var key in data) {
-					var $tr = $('<tr>');
-					var $yno = $('<td>').text(data[key].bNo);
-					var $yspo = $('<td>').text(data[key].spo);
-					var $yrtitle = $('<td>').text(data[key].bTitle);
-					var $ypopcorn = $('<td>').text(data[key].popcorn);
-					var $ydate = $('<td>').text(data[key].bDate);
-					var $ywriter = $('<td>').text(data[key].bWriter);
-					var $yview = $('<td>').text(data[key].bCount);
-					
-					console.log($yno);
-					
-					$tr.append($yno);
-					$tr.append($yspo);
-					$tr.append($yrtitle);
-					$tr.append($ypopcorn);
-					$tr.append($ydate);
-					$tr.append($ywriter);
-					$tr.append($yview);
-					$reviewTable.append($tr);
-				}
-				
-				
-				
-				$("#rvtable").load(window.location.href + " #rvtable");
-				
-				
-			} 
-			
-		});
-	});
 	
 </script>
 
