@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
 import movie.model.service.BoardService;
+import movie.model.vo.Movie;
 import recruit.model.vo.Recruit;
 import review.model.vo.Review;
 
@@ -41,6 +42,7 @@ public class BoardAllServlet extends HttpServlet {
 		BoardService bService = new BoardService();
 		ArrayList<Review> ReviewList = bService.selectMyReview(userId);
 		ArrayList<Recruit> RecruitList = bService.selectMyRecruit(userId);
+		ArrayList<Movie> DibList = bService.selectMyDib(userId);
 //		System.out.println("ksldjf" + ReviewList);
 		
 		String page = "";
@@ -49,6 +51,7 @@ public class BoardAllServlet extends HttpServlet {
 			page = "view/myPage/myPageMain.jsp";
 			request.setAttribute("ReviewList", ReviewList);
 			request.setAttribute("RecruitList", RecruitList);
+			request.setAttribute("DibList", DibList);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 		}

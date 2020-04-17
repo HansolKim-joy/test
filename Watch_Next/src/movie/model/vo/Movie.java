@@ -30,7 +30,7 @@ public class Movie {
 		this.mCountry = mCountry;
 		this.mStory = mStory;
 		this.mRunningTime = mRunningTime;
-		Service_Site = service_Site;
+		this.Service_Site = service_Site;
 	}
 
 
@@ -65,6 +65,14 @@ public class Movie {
 		this.Service_Site = service_Site;
 	}
 	
+	// 한솔
+	public Movie(int mNo, String mTitle, String mDirector, String Service_Site) {
+		super();
+		this.mNo = mNo;
+		this.mTitle = mTitle;
+		this.mDirector = mDirector;
+		this.Service_Site = Service_Site;
+	}
 
 	public Movie(int mNo, String mTitle) {
 		this.mNo = mNo;
