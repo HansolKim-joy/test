@@ -130,4 +130,12 @@ public class BoardService {
 		close(conn);
 		return RecruitList;
 	}
+
+	public ArrayList<Movie> selectMyDib(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Movie> DibList = new BoardDAO().selectMyDib(conn, userId);
+		close(conn);
+		return DibList;
+	}
 }

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*, movie.model.vo.*"%>
 <%
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
+	ArrayList<Movie> DibList = (ArrayList<Movie>)request.getAttribute("DibList");
 %>
 <!DOCTYPE html>
 <html>
@@ -97,6 +98,7 @@
 		display: none;
 		/* height: 200px; */
 		border: 1px solid black;
+		text-align: -webkit-center;
 	}
 	
 	.mp_middle{
@@ -118,6 +120,14 @@
 	#allMTable{
 		width: 100%;
 		border-spacing: 0 10px;
+	}
+	#myReviewContent{
+		display: none;
+	}
+	.myTable{
+		display: none;
+		text-align: center;
+		width: 100%;
 	}
 </style>
 </head>
@@ -184,82 +194,109 @@
 					<div id="mp_h_content2" class="mp_h_content"> 내용</div>
 				</div>
 			</form>
-			<form>
-				<div id="mp_content3" class="mp_content">나의 찜 &nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="submit" id="mp_button3" class="mp_button">+</button>
-					<div class="mp_middle"></div>
-					<div id="mp_h_content3" class="mp_h_content"></div>
+			
+			<div id="mp_content3" class="mp_content">나의 찜 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button3" class="mp_button">+</button>
+				<div class="mp_middle"></div>
+				<div id="mp_h_content3" class="mp_h_content">
+					<% if(DibList.isEmpty()) {%>
+						찜 목록이 존재하지 않습니다.
+					<% } else { %>
+						<% for(int i = 0; i < DibList.size(); i++) {%>
+							<div><%= DibList.get(i).getmNo() %></div>
+							<div><%= DibList.get(i).getmDirector() %></div>
+							<div><%= DibList.get(i).getmTitle() %></div>
+							<div>
+								<% 
+									String service = DibList.get(i).getService_Site();
+									String[] serviceArr = service.split(", ");
+									String where = "";
+									for(int j = 0; j < serviceArr.length; j++){
+										if(j != serviceArr.length -1){
+											switch(serviceArr[j]){
+											case "1": where += "네이버 영화 / "; break;
+											case "2": where += "왓챠 / "; break;
+											case "3": where += "넷플릭스 / "; break;
+											}
+										}else{
+											switch(serviceArr[j]){
+											case "1": where += "네이버 영화"; break;
+											case "2": where += "왓챠"; break;
+											case "3": where += "넷플릭스"; break;
+											}
+										}
+									}
+								%>
+								<%= where %>
+							</div>
+						<% } %>
+					<% } %>
 				</div>
-			</form>
+			</div>
+			
 			
 			<div id="mp_content4" class="mp_content">게시글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button4" class="mp_button">+</button>
 				<div class="mp_middle"></div>
 				<div id="mp_h_content4" class="mp_h_content">
-					<table id="allMTable">
+					<table>
 						<tr>
-							<td style="color: purple"><b>리뷰</b></td>
+							<td> <div id="myReview"> 리뷰 </div> </td>
+							<td> <div id="myRecruit"> 모집  </div> </td>
+							<td> <div id="myMade"> 창작 </div> </td>
+							<td> <div id="myDemand"> 수요조사 </div> </td>
+							<td> <div id="myFunding"> 펀딩 </div> </td>
+						</tr>
+					</table>
+					<table id="myReviewTable" class="myTable">
+						<tr>
+							<td>리뷰 번호</td>
+							<td>리뷰 제목</td>
+							<td>리뷰 점수</td>
+							<td>작성일</td>
+							<td>조회수</td>
+						</tr>
+						
+							<% if(ReviewList.isEmpty()) {%>
+							<tr>
+								<td colspan="5"> 게시글이 존재하지 않습니다. </td>
+							</tr>
+							<% }else{ %>
+								<% for(int i = 0; i < ReviewList.size(); i++) {%>
+								<tr>
+									<td><%= ReviewList.get(i).getbNo() %></td>
+									<td><%= ReviewList.get(i).getbTitle() %>
+									<td><%= ReviewList.get(i).getbLike() %>
+									<td><%= ReviewList.get(i).getbDate() %>
+									<td><%= ReviewList.get(i).getbCount() %>
+								<tr>
+								<%} %>
+							<% } %>
+					</table>
+					<table id="myRecruitTable" class="myTable">
+						<tr>
+							<td>모집 번호</td>
+							<td>모집 종류</td>
+							<td>모집 제목</td>
+							<td>작성일</td>
+							<td>조회수</td>
 						</tr>
 						<tr>
-							<td>
-								<% if(ReviewList.isEmpty()){%>
-									작성한 리뷰 게시글이 없습니다.
-								<%}else{ %>
-								<div class="listTabled">
-									<table class="listTable">
-										<tr>
-											<td>글 번호</td>
-											<td>리뷰 제목</td>
-											<td>팝콘 점수</td>
-											<td>작성일</td>
-											<td>조회수</td>
-										</tr>
-									<% for(int i = 0; i < ReviewList.size(); i++){ %>
-										<tr>
-											<td><%= ReviewList.get(i).getbNo() %></td>
-											<td><%= ReviewList.get(i).getbTitle() %></td>
-											<td><%= ReviewList.get(i).getPopcorn() %></td>
-											<td><%= ReviewList.get(i).getbDate() %></td>
-											<td><%= ReviewList.get(i).getbCount() %></td>
-										</tr>
-									<% } %>
-										</table>
-								</div>
-								<%} %>
-							</td>
-						
-						<tr>
-							<td style="color: purple"><b>모집</b></td>
+							<% if(RecruitList.isEmpty()){ %>
+								<td colspan="5">게시글이 존재하지 않습니다.</td>
 						</tr>
-						<tr>
-							<td>
-								<% if(RecruitList.isEmpty()){ %>
-									작성한 모집 게시글이 없습니다.
-								<%}else{ %>
-									<div class="listTabled">
-										<table class="listTable">
-											<tr>
-												<td>글 번호</td>
-												<td>말머리</td>
-												<td>모집 제목</td>
-												<td>작성일</td>
-												<td>조회수</td>
-											</tr>
-										<% for(int i = 0; i < RecruitList.size(); i++){ %>
-											<tr>
-												<td><%= RecruitList.get(i).getrNo() %></td>
-												<td><%= RecruitList.get(i).getrHead() %></td>
-												<td><%= RecruitList.get(i).getbTitle() %></td>
-												<td><%= RecruitList.get(i).getbDate() %></td>
-												<td><%= RecruitList.get(i).getbViews() %></td>
-											</tr>
-										<%} %>
-										</table>
-									</div>
-								<%} %>
-							</td>
-						</table>
-						
+							<% } else { %>
+								<% for(int i = 0; i < RecruitList.size(); i++) {%>
+									<tr>
+										<td><%= RecruitList.get(i).getrNo() %></td>
+										<td><%= RecruitList.get(i).getrHead() %></td>
+										<td><%= RecruitList.get(i).getbTitle() %></td>
+										<td><%= RecruitList.get(i).getbDate() %></td>
+										<td><%= RecruitList.get(i).getbViews()%></td>
+									</tr>
+								<% } %>
+							<% } %>
+					</table>
 				</div>
 			</div>
 			<form>
@@ -290,10 +327,24 @@
 			});
 		}); */
 		
+		
+		$('#mp_button3').click(function(){
+			$('#mp_h_content3').slideToggle();
+		});
+		
 		$('#mp_button4').click(function(){
 			$('#mp_h_content4').slideToggle();
 		});
 		
+		$('#myReview').click(function(){
+			$('#myReviewTable').toggle();
+			$('#myRecruitTable').css({"display":"none"});
+		});
+		
+		$('#myRecruit').click(function(){
+			$('#myReviewTable').css({"display":"none"});
+			$('#myRecruitTable').toggle();
+		});
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
