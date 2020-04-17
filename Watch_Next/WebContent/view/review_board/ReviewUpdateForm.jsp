@@ -21,8 +21,13 @@
 	});
 </script>
 <script type="text/javascript">
-	$(document).ready(function(){  
-		$('div.Editor-editor').text("<%= request.getParameter("editor_content") %>");
+	$(document).ready(function(){
+		// 작성시 넣은점수 가져오기
+		$('#pop_point')[0].innerText = "<%=request.getParameter("popgrade") %> 점";
+		// 점수유지시 에러안나게!
+		$('.pop_point').val(<%=request.getParameter("popgrade") %>);
+		
+		$('div.Editor-editor').html("<%= request.getParameter("editor_content") %>");
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  
@@ -109,17 +114,13 @@
  
 		<script>
 		
-		if(<%= request.getParameter("revW_spolier") %>.equals("Y")) {
-			$("input:checkbox[id='revW_spolier']").prop("checked", true);
-		} else {
+ 		if('<%= request.getParameter("revW_spolier") %>' == "Y") {
+ 			$("input:checkbox[id='revW_spolier']").prop("checked", true);
+		} else if('<%= request.getParameter("revW_spolier") %>' == "N") {
 			$("input:checkbox[id='revW_spolier']").prop("checked", false);
 		}
-		
 		</script>
 		
-
-				
-		<%-- <input type="hidden" name="writer" value="세션id값 받아와서넘겨주기" readonly:readonly> --%>
 		
 	</div>
 	<!-- 텍스트 편집기 부분 -->

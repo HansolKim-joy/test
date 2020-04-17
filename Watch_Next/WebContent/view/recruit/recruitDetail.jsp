@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList, common.Comment" %>
 <%
 	Recruit r = (Recruit)request.getAttribute("board"); 
-	Member m = (Member)request.getAttribute("m");
 	ArrayList<Comment> comment = (ArrayList<Comment>)request.getAttribute("comment");
 	
 %>
@@ -39,7 +38,7 @@
 					</b>&nbsp;&nbsp;&nbsp; 
 					<input type="text" readonly="<%= r.getbTitle() %>" id=rctitle name="bTitle" value="<%= r.getbTitle() %>" style="border: 0;">
 					
-					<input type="hidden" name="rNo" value="<%=r.getrNo() %>">
+					<input id="rNo" type="hidden" name="rNo" value="<%=r.getrNo() %>">
 				
 	</div>
   
@@ -77,18 +76,18 @@
 
 	<div id="content">
 		<p style="font-size:15px;" >
-			<input type="text" name="bContent" value="<%=r.getbContent() %>" style="border:0;">
+			<input type="text" name="bContent" class= "content" value="<%=r.getbContent() %>" style="border:0;">
 			
 		</p>
 	</div>
 
 	<!-- 신고버튼 -->
 	<div id="btn">
-		<button  >
+		
 			<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
 				onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop', 
 				'left'='+(screen.availWidth-500)/2+','top='+'(screen.availHeight-300)/2+', 'width=500px','height=300px')">
-		</button>
+		
 	</div>
 	    <!-- 목록수정삭제 버튼 -->
  
@@ -98,10 +97,10 @@
 		    	<button type="submit" id="update" value="수정">수정</button>
 		    	<button type="button" id="delete" onclick="deleteRe();" value="삭제">삭제</button>
 		   <% } %>
-		    	<div onclick="location.href='<%= request.getContextPath() %>/list.recruit'" id="menu"
+		    	<button onclick="location.href='<%= request.getContextPath() %>/list.recruit'" id="menu"
 		    		style="background-color:red; color:white;
 				border:none; border-radius:5px; 
-				width:50px; height:25px; font-size:14px; text-align:center;" >목록</div>
+				width:50px; height:25px; font-size:14px; text-align:center;" >목록</button>
 		</div>
 
     </div>
@@ -109,7 +108,7 @@
 
     
     	<!-- 댓글 -->
-	<div id="replybox1">
+	<div id="replybox1" >
 		<table>
 			<tr>
 				<td>
@@ -127,19 +126,20 @@
 	
 	<br clear="all">
 	<div id="replybox2">
-		<table>
+		<table id="replySelectTable" class="Comment">
 			<% if(comment.isEmpty()) { %>
 				<tr><td colspan=3 style="font-size:14px; text-align:center">댓글이 없습니다.</td></tr>
 			<% } else { %>
 				<% for(int i = 0; i < comment.size(); i++){ %>
-				<tr>
+				<tr class="Comment2">
+					
 					<th><%= comment.get(i).getrWriter() %></th>
 					<td>
 						<% if(loginUser != null && loginUser.getUserId().equals(comment.get(i).getrWriter())) { %>
-						<button type="button" id="deleteComment" onclick="dCo();" style="margin-top:10px; margin-left:90%; background-color:red; color:white; 
-								font-size:13px; border:none; border-radius:5px;">삭제</button>
+							<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
+							<input type="button" value="삭제" class="deleteC">
 						<% } else {%>
-						<button type=button id=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+						<button type=button class=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
 							'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
 							<% } %>
 					</td>
@@ -168,38 +168,67 @@
 					}
 			}
 			
-			function dCo(){
-				var de = confirm('댓글을 삭제하시겠습니까?');
-				
-				if(de){
-					location.href="<%=request.getContextPath() %>/delete.comment";
-				}
-			}
+			$(document).on('click', '.deleteC', function(){
+				console.log("눌려")
+				var rId = $(this).prev(".rId").val();
+				var rNo = $('#rNo').val();
+				$.ajax({
+					url: 'delete.comment',
+					data: {rId:rId, rNo:rNo},
+					success: function(data){
+						$replyTable = $('.Comment');
+// 						$replyTable.html("");
+						
+// 						//console.log(data);
+						
+// 						for(var key in data){
+// 							var $tr = $('<tr class="Comment">');
+// 							var $writerTd = $('<td>').text(data[key].rWriter).css('color','red');
+// 							var $contentTd = $('<td>').text(data[key].rContent).css('font-size','14px');
+// 							var $buttonTd = $('<td><input type="button" value="삭제" class="deleteC"></td>').css('font-size','14px');
+							
+// 							$tr.append($writerTd);
+// 							$tr.append($contentTd);
+// 							$tr.append($buttonTd);
+// 							$replyTable.append($tr);
+// 						}
+						
+// 						$('#reply_content').val("");
+						
+						$("#replySelectTable").load(window.location.href + " #replySelectTable");
+					}
+				});
+			});
+			
 			
 				$('#reply_save').click(function(){
 				var writer = '<%= loginUser.getUserId() %>';
 				var rNo = '<%= r.getrNo() %>';
 				var content = $('#reply_content').val();
+				var rId = $('.rId').val();
 				
-				if($('#reply_content').val(); == null){
+				if($('#reply_content').val().trim().length == 0){
 					alert("댓글을 작성해주세요");
 				}else{
-					alert("댓글 작성 완료");
+					//alert("댓글 작성 완료");
 				}
 				
 				$.ajax({
 					url : 'insertComment.recruit',
 					data : {writer:writer, content:content, rNo:rNo},
 					success: function(data){
-						$replyTable = $('#replySelectTable');
-						$replyTable.text("");
+						$replyTable = $("<table class='Comment' id='replySelectTable'></table>");
+						
+						$replyTable.html("");
 						
 						console.log(data);
 						
 						for(var key in data){
-							var $tr = $('<tr>');
-							var $writerTd = $('<td>').text(data[key].rWriter).css('color','red');
-							var $contentTd = $('<td>').text(data[key].rContent).css('font-size','14px');
+							
+							var $tr = $('<tr class="Comment2"></tr>');
+							var $writerTd = $('<td>').text(data[key].rWriter);
+							var $contentTd = $('<td class="content">').text(data[key].rContent);
+							
 							
 							$tr.append($writerTd);
 							$tr.append($contentTd);

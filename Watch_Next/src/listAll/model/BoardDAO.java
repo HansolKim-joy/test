@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import board.model.dao.RecBoardDAO;
 import board.model.vo.Board;
+import movie.model.vo.Movie;
 import recruit.model.vo.Recruit;
 import review.model.vo.Review;
 
@@ -90,6 +91,36 @@ public class BoardDAO {
 		}
 		
 		return RecruitList;
+	}
+	public ArrayList<Movie> selectMyDib(Connection conn, String userId) {
+		// select movie_no, director, movie_title, service_site from tb_user join tb_dib using (user_id) join tb_movie using (movie_no) where user_id=?
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Movie mo = null;
+		ArrayList<Movie> DibList = new ArrayList<Movie>();
+		
+		String query = prop.getProperty("selectDib");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				mo = new Movie(rset.getInt("movie_no"), 
+								rset.getString("director"),
+								rset.getString("movie_title"),
+								rset.getString("service_site"));
+				DibList.add(mo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return DibList;
 	}
 	
 }

@@ -137,9 +137,17 @@
 			<option value="netflix" >NETFLIX</option>
 			<option value="watcha" >WATCHA</option>
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		<select id="searchType2" name="searchType2">
+			<option value="전체" selected>전체</option>
+			<option value="리뷰제목">글제목</option>
+			<option value="작성자">작성자</option>
+			<option value="내용">내용</option>
+		</select>
+		
 	
 		<input id="blank" type="text" size="35" id="searchText" value="">&nbsp;
-		<input id="botSearch" type="button" value="검색"/>
+		<input id="botSearch" type="button" value="검색">
 	</form>
 	</div>
 	<script>
@@ -150,7 +158,9 @@
 				url: 'list.recruit',
 				data: {choice:choice},
 				success : function(data){
-					console.log(data);
+					console.log("data " +data);
+					
+					$("#recruit").load(window.location.href + " #recruit");
 				}
 			});
 		});

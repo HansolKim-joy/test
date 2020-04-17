@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import review.model.service.ReviewService;
 import review.model.vo.Review;
 import review.model.vo.ReviewReply;
@@ -34,6 +36,13 @@ public class ReviewDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int rv = Integer.parseInt(request.getParameter("rv"));
+		
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		
+		char chk = ReviewService.getLike(userId,rv);
+		request.setAttribute("chk", chk);
 		
 		Review review = new ReviewService().selectReview(rv);
 		ArrayList<ReviewReply> list = new ReviewService().selectReplyList(rv);

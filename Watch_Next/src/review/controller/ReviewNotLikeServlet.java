@@ -1,31 +1,27 @@
-package recruit.controller;
+package review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
-import recruit.model.service.recruitService;
-import common.Comment;
+import member.model.vo.Member;
+import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class CommentDeleteServlet
+ * Servlet implementation class ReviewNotLikeServlet
  */
-@WebServlet("/delete.comment")
-public class CommentDeleteServlet extends HttpServlet {
+@WebServlet("/notLike.rv")
+public class ReviewNotLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentDeleteServlet() {
+    public ReviewNotLikeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +30,16 @@ public class CommentDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rId = Integer.parseInt(request.getParameter("rId")); // 히든번호
-		int rNo = Integer.parseInt(request.getParameter("rNo")); // 히든번호
-		ArrayList<Comment> list = new recruitService().deleteComment(rId, rNo);
-//		System.out.println("servlet "+list);
+		int rv= Integer.parseInt(request.getParameter("rv"));
 		
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
 		
+		int result = new ReviewService().notLike(rv, userId);
+		
+		String page = request.getContextPath()+"/detail.rv?rv=" + rv;
+		response.sendRedirect(page);
 	}
 
 	/**

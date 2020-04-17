@@ -20,7 +20,7 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){  
-		$('div.Editor-editor').text("<%= request.getParameter("bContent") %>");
+		$('div.Editor-editor').html("<%= request.getParameter("bContent") %>");
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  

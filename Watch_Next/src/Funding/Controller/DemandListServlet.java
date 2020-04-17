@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Funding.model.service.DemandService;
 import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
-import recruit.model.vo.PageInfo;
+import common.PageInfo;
 
 /**
  * Servlet implementation class DemandListServlet

@@ -41,7 +41,7 @@ public class ReviewUpdateServlet extends HttpServlet {
 		}else {
 			spo = "N";
 		}
-		int popcorn = Integer.parseInt(request.getParameter("pop_point"));
+		int popcorn = Integer.parseInt(request.getParameter("pop_point").trim());
 		
 		
 		Review r = new Review();

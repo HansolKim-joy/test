@@ -1,4 +1,4 @@
-package recruit.model.vo;
+package common;
 
 import java.sql.Date;
 
@@ -97,3 +97,4 @@ public String toString() {
 
 
 }
+
