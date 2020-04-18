@@ -13,8 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import common.Comment;
 import review.model.vo.Review;
-import review.model.vo.ReviewReply;
 
 public class ReviewDAO {
 	
@@ -304,12 +304,12 @@ public class ReviewDAO {
 		return r;
 	}
 	
-	public ArrayList<ReviewReply> selectReplyList(Connection conn, int refBid) {
+	public ArrayList<Comment> selectReplyList(Connection conn, int refBid) {
 		// selectReplyList=select * from tb_comments where board_no=? and comments_delete_yn='N'
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<ReviewReply> list = null;
+		ArrayList<Comment> list = null;
 		
 		String query = prop.getProperty("selectReplyList");
 		
@@ -318,10 +318,10 @@ public class ReviewDAO {
 			pstmt.setInt(1, refBid);
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<ReviewReply>();
+			list = new ArrayList<Comment>();
 			
 			while(rset.next()) {
-				list.add(new ReviewReply(rset.getInt("comments_no"),
+				list.add(new Comment(rset.getInt("comments_no"),
 									     rset.getString("comments_cotent"),
 										 rset.getInt("board_no"),
 										 rset.getString("user_id"),
@@ -339,7 +339,7 @@ public class ReviewDAO {
 		return list;
 	}
 
-	public int insertReply(Connection conn, ReviewReply re) {
+	public int insertReply(Connection conn, Comment re) {
 		// insert into tb_comments values(seq_rid.nextval, ?, ?, ?, sysdate, default, default)
 		PreparedStatement pstmt = null;
 		int result = 0;

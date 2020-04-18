@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Comment;
 import member.model.vo.Member;
 import review.model.service.ReviewService;
 import review.model.vo.Review;
-import review.model.vo.ReviewReply;
 
 /**
  * Servlet implementation class ReviewDetailServlet
@@ -45,7 +45,7 @@ public class ReviewDetailServlet extends HttpServlet {
 		request.setAttribute("chk", chk);
 		
 		Review review = new ReviewService().selectReview(rv);
-		ArrayList<ReviewReply> list = new ReviewService().selectReplyList(rv);
+		ArrayList<Comment> list = new ReviewService().selectReplyList(rv);
 		
 		String page = null;
 		if(review != null) {
