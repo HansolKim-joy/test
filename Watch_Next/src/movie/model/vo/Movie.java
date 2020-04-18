@@ -14,6 +14,7 @@ public class Movie {
 	private String mStory;
 	private String mRunningTime;
 	private String Service_Site;
+	private String newFileName;
 	
 	public Movie() {}
 
@@ -66,12 +67,11 @@ public class Movie {
 	}
 	
 	// 한솔
-	public Movie(int mNo, String mTitle, String mDirector, String Service_Site) {
+	public Movie(String mTitle, String Service_Site, String newFileName) {
 		super();
-		this.mNo = mNo;
 		this.mTitle = mTitle;
-		this.mDirector = mDirector;
 		this.Service_Site = Service_Site;
+		this.newFileName = newFileName;
 	}
 
 	public Movie(int mNo, String mTitle) {
@@ -169,12 +169,19 @@ public class Movie {
 		Service_Site = service_Site;
 	}
 
+	public String getNewFileName() {
+		return newFileName;
+	}
+
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
+	
 	@Override
 	public String toString() {
 		return "Movie [mNo=" + mNo + ", mGenre=" + mGenre + ", mFileNo=" + mFileNo + ", mTitle=" + mTitle
 				+ ", mDirector=" + mDirector + ", mActor=" + mActor + ", mCountry=" + mCountry + ", mStory=" + mStory
 				+ ", mRunningTime=" + mRunningTime + ", Service_Site=" + Service_Site + "]";
 	}
-	
-	
+
 }
