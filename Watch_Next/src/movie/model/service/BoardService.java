@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import board.model.vo.Board;
+import common.Comment;
 import listAll.model.BoardDAO;
 import movie.model.dao.MovieDAO;
 import movie.model.vo.Dib;
@@ -137,5 +137,13 @@ public class BoardService {
 		ArrayList<Movie> DibList = new BoardDAO().selectMyDib(conn, userId);
 		close(conn);
 		return DibList;
+	}
+
+	public ArrayList<Comment> selectComment(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Comment> CommentList = new BoardDAO().selectComment(conn, userId);
+		close(conn);
+		return CommentList;
 	}
 }

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*, movie.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*, movie.model.vo.*, common.Comment"%>
 <%
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
 	ArrayList<Movie> DibList = (ArrayList<Movie>)request.getAttribute("DibList");
+	ArrayList<Comment> CommentList = (ArrayList<Comment>)request.getAttribute("CommentList");
 %>
 <!DOCTYPE html>
 <html>
@@ -97,18 +98,13 @@
 	.mp_h_content{
 		display: none;
 		/* height: 200px; */
-		border: 1px solid black;
+		/* border: 1px solid black; */
 		text-align: -webkit-center;
 	}
 	
 	.mp_middle{
 		height: 10px;
 	}
-	/* #updatePwdBtn{
-		width: 40px;
-		height: 30px;
-		border-radius: 50%;
-	} */
 	
 	.listTabled{
 		text-align: -webkit-center;
@@ -128,6 +124,30 @@
 		display: none;
 		text-align: center;
 		width: 100%;
+		margin-top: 5px;
+	}
+	.myBtn{
+		width: 100px;
+		border: 1px solid white;
+		border-radius: 20px;
+		text-align: center;
+	}
+	#listTable{
+		border-spacing: 20px;
+		margin-top: 5px;
+	}
+	.hline1{
+		width: 30%;
+		border: 1px solid red;
+	}
+	.mPhoto{
+		width: 200px;
+		height: 200px;
+	}
+	#dibTable{
+		text-align: center;
+		border-spacing: 20px;
+		
 	}
 </style>
 </head>
@@ -180,56 +200,124 @@
 			<br><br><br>
 			<hr class="mp_hline">
 			
-			<form>
-				<div id="mp_content1" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="submit" id="mp_button1" class="mp_button">+</button>
-					<div class="mp_middle"></div>
-					<div id="mp_h_content1" class="mp_h_content"> 내용</div>
-				</div>
-			</form>
-			<form>
-				<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="submit" id="mp_button2" class="mp_button">+</button>
-					<div class="mp_middle"></div>
-					<div id="mp_h_content2" class="mp_h_content"> 내용</div>
-				</div>
-			</form>
 			
-			<div id="mp_content3" class="mp_content">나의 찜 &nbsp;&nbsp;&nbsp;&nbsp;
+			<div id="mp_content1" class="mp_content">참여한 펀딩 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button1" class="mp_button">+</button>
+				<hr class="hline1">
+				<div class="mp_middle"></div>
+				<div id="mp_h_content1" class="mp_h_content"> 내용</div>
+			</div>
+			
+			
+			
+			<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button2" class="mp_button">+</button>
+				<hr class="hline1">
+				<div class="mp_middle"></div>
+				<div id="mp_h_content2" class="mp_h_content"> 내용</div>
+			</div>
+			
+			
+			
+			<div id="mp_content3" class="mp_content">나의 찜 영화&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button3" class="mp_button">+</button>
+				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content3" class="mp_h_content">
 					<% if(DibList.isEmpty()) {%>
 						찜 목록이 존재하지 않습니다.
 					<% } else { %>
+						<table id="dibTable">
 						<% for(int i = 0; i < DibList.size(); i++) {%>
-							<div><%= DibList.get(i).getmNo() %></div>
-							<div><%= DibList.get(i).getmDirector() %></div>
-							<div><%= DibList.get(i).getmTitle() %></div>
-							<div>
-								<% 
-									String service = DibList.get(i).getService_Site();
-									String[] serviceArr = service.split(", ");
-									String where = "";
-									for(int j = 0; j < serviceArr.length; j++){
-										if(j != serviceArr.length -1){
-											switch(serviceArr[j]){
-											case "1": where += "네이버 영화 / "; break;
-											case "2": where += "왓챠 / "; break;
-											case "3": where += "넷플릭스 / "; break;
+							<% if((i+1) % 4 == 1) {%>
+								<tr>
+									<td>
+										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>">
+										<br>
+										영화 제목 : <%= DibList.get(i).getmTitle() %> 
+										<% 
+											String service = DibList.get(i).getService_Site();
+											String[] serviceArr = service.split(", ");
+											String where = "";
+											for(int j = 0; j < serviceArr.length; j++){
+												if(j != serviceArr.length -1){
+													switch(serviceArr[j]){
+													case "1": where += "네이버 영화 / "; break;
+													case "2": where += "왓챠 / "; break;
+													case "3": where += "넷플릭스 / "; break;
+													}
+												}else{
+													switch(serviceArr[j]){
+													case "1": where += "네이버 영화"; break;
+													case "2": where += "왓챠"; break;
+													case "3": where += "넷플릭스"; break;
+													}
+												}
 											}
-										}else{
-											switch(serviceArr[j]){
-											case "1": where += "네이버 영화"; break;
-											case "2": where += "왓챠"; break;
-											case "3": where += "넷플릭스"; break;
+										%>
+										<br>
+										해당 사이트 : <%= where %>
+									</td> 
+								<% }else if((i+1) % 4 == 2 || (i+1) % 4 == 3){ %>
+									<td>
+										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>">
+										<br>
+										영화 제목 : <%= DibList.get(i).getmTitle() %> 
+										<% 
+											String service = DibList.get(i).getService_Site();
+											String[] serviceArr = service.split(", ");
+											String where = "";
+											for(int j = 0; j < serviceArr.length; j++){
+												if(j != serviceArr.length -1){
+													switch(serviceArr[j]){
+													case "1": where += "네이버 영화 / "; break;
+													case "2": where += "왓챠 / "; break;
+													case "3": where += "넷플릭스 / "; break;
+													}
+												}else{
+													switch(serviceArr[j]){
+													case "1": where += "네이버 영화"; break;											
+													case "2": where += "왓챠"; break;
+													case "3": where += "넷플릭스"; break;
+													}
+												}
+											}
+										%>
+										<br>
+										해당 사이트 : <%= where %>
+									</td>
+							<% } else if((i+1) % 4 == 0) {%>
+								<td>
+									<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>">
+									<br>
+									영화 제목 : <%= DibList.get(i).getmTitle() %> 
+									<% 
+										String service = DibList.get(i).getService_Site();
+										String[] serviceArr = service.split(", ");
+										String where = "";
+										for(int j = 0; j < serviceArr.length; j++){
+											if(j != serviceArr.length -1){
+												switch(serviceArr[j]){
+												case "1": where += "네이버 영화 / "; break;
+												case "2": where += "왓챠 / "; break;
+												case "3": where += "넷플릭스 / "; break;
+												}
+											}else{
+												switch(serviceArr[j]){
+												case "1": where += "네이버 영화"; break;											
+												case "2": where += "왓챠"; break;
+												case "3": where += "넷플릭스"; break;
+												}
 											}
 										}
-									}
-								%>
-								<%= where %>
-							</div>
+									%>
+									<br>
+									해당 사이트 : <%= where %>
+								</td>
+							</tr>
+							<% } %>
 						<% } %>
+						</table>
 					<% } %>
 				</div>
 			</div>
@@ -237,15 +325,16 @@
 			
 			<div id="mp_content4" class="mp_content">게시글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button4" class="mp_button">+</button>
+				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content4" class="mp_h_content">
-					<table>
+					<table id="listTable">
 						<tr>
-							<td> <div id="myReview"> 리뷰 </div> </td>
-							<td> <div id="myRecruit"> 모집  </div> </td>
-							<td> <div id="myMade"> 창작 </div> </td>
-							<td> <div id="myDemand"> 수요조사 </div> </td>
-							<td> <div id="myFunding"> 펀딩 </div> </td>
+							<td> <div id="myReview" class="myBtn"> 리뷰 </div> </td>
+							<td> <div id="myRecruit" class="myBtn"> 모집  </div> </td>
+							<td> <div id="myMade" class="myBtn"> 창작 </div> </td>
+							<td> <div id="myDemand" class="myBtn"> 수요조사 </div> </td>
+							<td> <div id="myFunding" class="myBtn"> 펀딩 </div> </td>
 						</tr>
 					</table>
 					<table id="myReviewTable" class="myTable">
@@ -265,10 +354,10 @@
 								<% for(int i = 0; i < ReviewList.size(); i++) {%>
 								<tr>
 									<td><%= ReviewList.get(i).getbNo() %></td>
-									<td><%= ReviewList.get(i).getbTitle() %>
-									<td><%= ReviewList.get(i).getbLike() %>
-									<td><%= ReviewList.get(i).getbDate() %>
-									<td><%= ReviewList.get(i).getbCount() %>
+									<td>[<%= ReviewList.get(i).getmTitle() %>]<%= ReviewList.get(i).getbTitle() %></td>
+									<td><%= ReviewList.get(i).getbLike() %></td>
+									<td><%= ReviewList.get(i).getbDate() %></td>
+									<td><%= ReviewList.get(i).getbCount() %></td>
 								<tr>
 								<%} %>
 							<% } %>
@@ -299,34 +388,18 @@
 					</table>
 				</div>
 			</div>
-			<form>
-				<div id="mp_content5" class="mp_content">댓글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="submit" id="mp_button5" class="mp_button">+</button>
-					<div class="mp_middle"></div>
-					<div id="mp_h_content5" class="mp_h_content"> 내용</div>
-				</div>
-			</form>
+			
+			
+			
+			<div id="mp_content5" class="mp_content">댓글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button5" class="mp_button">+</button>
+				<hr class="hline1">
+				<div class="mp_middle"></div>
+				<div id="mp_h_content5" class="mp_h_content"> 내용</div>
+			</div>
 		</div>
 	</section>
 	<script>
-		/* $(function(){
-			$('#mp_button1').click(function(){
-				$('#mp_h_content1').slideToggle();
-			});
-			$('#mp_button2').click(function(){
-				$('#mp_h_content2').slideToggle();
-			});
-			$('#mp_button3').click(function(){
-				$('#mp_h_content3').slideToggle();
-			});
-			$('#mp_button4').click(function(){
-				$('#mp_h_content4').slideToggle();
-			});
-			$('#mp_button5').click(function(){
-				$('#mp_h_content5').slideToggle();
-			});
-		}); */
-		
 		
 		$('#mp_button3').click(function(){
 			$('#mp_h_content3').slideToggle();
@@ -337,13 +410,13 @@
 		});
 		
 		$('#myReview').click(function(){
-			$('#myReviewTable').toggle();
+			$('#myReviewTable').slideToggle();
 			$('#myRecruitTable').css({"display":"none"});
 		});
 		
 		$('#myRecruit').click(function(){
 			$('#myReviewTable').css({"display":"none"});
-			$('#myRecruitTable').toggle();
+			$('#myRecruitTable').slideToggle();
 		});
 	</script>
 <!-- footer -->
