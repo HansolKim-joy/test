@@ -6,33 +6,33 @@ public class Demand {
 	private int dNo;// 수요조사 번호
 	private String userId;// 회원아이디
 	private int smNo;// 상영극장번호
-	private int smWant; // 보고싶어요
+	private int smWant; // 모인 금액
 	private int fileNo; // 파일번호
 	private String movieTitle; // 영화 제목
 	private String movieDirector; // 영화 감독
 	private String movieActor;// 영화 배우
 	private String movieStory;// 영화 스토리
-	private int minPeople; //최소인원
+	private int money; // 펀딩 금액
+	private int wantMoney; // 참여 금액
 	private Date startDate;// 시작 날짜
 	private Date endDate;// 끝나는 날짜
 	private int gerneNo;// 장르 번호
 	private String runningTime;// 상영 시간
+	private char usedYN;
 
 	public Demand() {
 	}
-	
-	
-	
-	//수요조사 사람 퍼센트 생성자
-	public Demand(int dNo, int smWant) {
+
+	// 수요조사 사람 퍼센트 생성자
+	public Demand(int dNo, int money) {
 		super();
 		this.dNo = dNo;
-		this.smWant = smWant;
+		this.money = money;
 	}
-	
+
 	// 수요조사 입력할때 생성자
-	public Demand(String userId, int smNo, int fileNo, int minPeople, String movieTitle, String movieDirector, String movieActor,
-			String movieStory, int gerneNo, String runningTime) {
+	public Demand(String userId, int smNo, int fileNo, int wantMoney, int money, String movieTitle,
+			String movieDirector, String movieActor, String movieStory, int gerneNo, String runningTime) {
 		super();
 		this.userId = userId;
 		this.smNo = smNo;
@@ -43,12 +43,13 @@ public class Demand {
 		this.movieStory = movieStory;
 		this.gerneNo = gerneNo;
 		this.runningTime = runningTime;
-		this.minPeople = minPeople;
+		this.money = money;
+		this.wantMoney = wantMoney;
 	}
-	
-	//전체 생성자
+
+	// 불러올때 생성자
 	public Demand(int dNo, String userId, int smNo, int smWant, int fileNo, String movieTitle, String movieDirector,
-			String movieActor, String movieStory, int minPeople, Date startDate, Date endDate, int gerneNo,
+			String movieActor, String movieStory, int wantMoney, int money, Date startDate, Date endDate, int gerneNo,
 			String runningTime) {
 		super();
 		this.dNo = dNo;
@@ -60,11 +61,35 @@ public class Demand {
 		this.movieDirector = movieDirector;
 		this.movieActor = movieActor;
 		this.movieStory = movieStory;
-		this.minPeople = minPeople;
+		this.wantMoney = wantMoney;
+		this.money = money;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.gerneNo = gerneNo;
 		this.runningTime = runningTime;
+	}
+
+	// 전체 생성자
+	public Demand(int dNo, String userId, int smNo, int smWant, int fileNo, String movieTitle, String movieDirector,
+			String movieActor, String movieStory, int money, int wantMoney, Date startDate, Date endDate, int gerneNo,
+			String runningTime, char usedYN) {
+		super();
+		this.dNo = dNo;
+		this.userId = userId;
+		this.smNo = smNo;
+		this.smWant = smWant;
+		this.fileNo = fileNo;
+		this.movieTitle = movieTitle;
+		this.movieDirector = movieDirector;
+		this.movieActor = movieActor;
+		this.movieStory = movieStory;
+		this.money = money;
+		this.wantMoney = wantMoney;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.gerneNo = gerneNo;
+		this.runningTime = runningTime;
+		this.usedYN = usedYN;
 	}
 
 	public int getdNo() {
@@ -139,12 +164,20 @@ public class Demand {
 		this.movieStory = movieStory;
 	}
 
-	public int getMinPeople() {
-		return minPeople;
+	public int getMoney() {
+		return money;
 	}
 
-	public void setMinPeople(int minPeople) {
-		this.minPeople = minPeople;
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public int getWantMoney() {
+		return wantMoney;
+	}
+
+	public void setWantMoney(int wantMoney) {
+		this.wantMoney = wantMoney;
 	}
 
 	public Date getStartDate() {
@@ -179,12 +212,21 @@ public class Demand {
 		this.runningTime = runningTime;
 	}
 
+	public char getUsedYN() {
+		return usedYN;
+	}
+
+	public void setUsedYN(char usedYN) {
+		this.usedYN = usedYN;
+	}
+
 	@Override
 	public String toString() {
 		return "Demand [dNo=" + dNo + ", userId=" + userId + ", smNo=" + smNo + ", smWant=" + smWant + ", fileNo="
 				+ fileNo + ", movieTitle=" + movieTitle + ", movieDirector=" + movieDirector + ", movieActor="
-				+ movieActor + ", movieStory=" + movieStory + ", minPeople=" + minPeople + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", gerneNo=" + gerneNo + ", runningTime=" + runningTime + "]";
+				+ movieActor + ", movieStory=" + movieStory + ", money=" + money + ", wantMoney=" + wantMoney
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", gerneNo=" + gerneNo + ", runningTime="
+				+ runningTime + ", usedYN=" + usedYN + "]";
 	}
 
 }

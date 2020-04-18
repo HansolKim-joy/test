@@ -5,18 +5,18 @@ public class DemandList {
 	private int dNo;
 	private int FileNo;
 	private String FileName;
-	private int minPeople;
+	private int price;
 	private int EndDay;
 
 	public DemandList() {}
 
-	public DemandList(int dNo, int fileNo, String fileName, int minPeople, int endDay) {
+	public DemandList(int dNo, int fileNo, String fileName, int price, int endDay) {
 		super();
 		this.dNo = dNo;
-		FileNo = fileNo;
-		FileName = fileName;
-		this.minPeople = minPeople;
-		EndDay = endDay;
+		this.FileNo = fileNo;
+		this.FileName = fileName;
+		this.price = price;
+		this.EndDay = endDay;
 	}
 
 	public int getdNo() {
@@ -43,12 +43,12 @@ public class DemandList {
 		FileName = fileName;
 	}
 
-	public int getMinPeople() {
-		return minPeople;
+	public int getprice() {
+		return price;
 	}
 
-	public void setMinPeople(int minPeople) {
-		this.minPeople = minPeople;
+	public void setprice(int price) {
+		this.price = price;
 	}
 
 	public int getEndDay() {
@@ -61,7 +61,7 @@ public class DemandList {
 
 	@Override
 	public String toString() {
-		return "DemandList [dNo=" + dNo + ", FileNo=" + FileNo + ", FileName=" + FileName + ", minPeople=" + minPeople
+		return "DemandList [dNo=" + dNo + ", FileNo=" + FileNo + ", FileName=" + FileName + ", price=" + price
 				+ ", EndDay=" + EndDay + "]";
 	}
 	

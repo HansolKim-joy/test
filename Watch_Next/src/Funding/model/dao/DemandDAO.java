@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
+
 import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
 import Funding.model.vo.DemandWant;
@@ -73,10 +75,10 @@ public class DemandDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				DemandList dl = new DemandList(rset.getInt("DEMAND_SURVEY_NO"),
+				DemandList dl = new DemandList(rset.getInt("DNO"),
 											   rset.getInt("FNO"),
 											   rset.getString("FNAME"),
-											   rset.getInt("DEMAND_MIN_PEOPLE"),
+											   rset.getInt("PRICE"),
 											   rset.getInt("DDAY"));
 				
 				list.add(dl);
@@ -92,34 +94,35 @@ public class DemandDAO {
 		return list;
 	}
 	public int insertDemand(Connection conn, Demand d) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String sql = prop.getProperty("insertDemand");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,d.getUserId());
-			pstmt.setInt(2, d.getSmNo());
-			pstmt.setInt(3, d.getFileNo());
-			pstmt.setString(4, d.getMovieTitle());
-			pstmt.setString(5, d.getMovieDirector());
-			pstmt.setString(6, d.getMovieActor());
-			pstmt.setString(7, d.getMovieStory());
-			pstmt.setInt(8, d.getMinPeople());
-			pstmt.setInt(9, d.getGerneNo());
-			pstmt.setString(10, d.getRunningTime());
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
+        PreparedStatement pstmt = null;
+        int result = 0;
+        String sql = prop.getProperty("insertDemand");
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, d.getUserId());
+            pstmt.setInt(2, d.getSmNo());
+            pstmt.setInt(3, d.getFileNo());
+            pstmt.setString(4, d.getMovieTitle());
+            pstmt.setString(5, d.getMovieDirector());
+            pstmt.setString(6, d.getMovieActor());
+            pstmt.setString(7, d.getMovieStory());
+            pstmt.setInt(8, d.getWantMoney());
+            pstmt.setInt(9, d.getMoney());
+            pstmt.setInt(10, d.getGerneNo());
+            pstmt.setString(11, d.getRunningTime());
+            result = pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+
+        return result;
+    }
 	
 	public ArrayList<Demand> wantPeople(Connection conn) {
-		//SELECT DEMAND_SURVEY_NO, COUNT(*) CNT FROM TB_WANT GROUP BY DEMAND_SURVEY_NO;
+		//SELECT DEMAND_SURVEY_NO, SUM(PRICE) CNT FROM TB_WANT GROUP BY DEMAND_SURVEY_NO;
 		Statement stmt = null;
 		ResultSet rset = null;
 		Demand d = null;
@@ -148,41 +151,42 @@ public class DemandDAO {
 	}
 	
 	public Demand getDemand(Connection conn, int no) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Demand d = null;
-		
-		String sql = prop.getProperty("getDemand");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				d = new Demand(rs.getInt("DEMAND_SURVEY_NO"),
-							   rs.getString("USER_ID"),
-							   rs.getInt("SCREENING_MOVIE_NO"),
-							   rs.getInt("cnt"),
-							   rs.getInt("FILE_NO"),
-							   rs.getString("movie_title"),
-							   rs.getString("movie_director"),
-							   rs.getString("movie_actor"),
-							   rs.getString("movie_story"),
-							   rs.getInt("demand_min_people"),
-							   rs.getDate("demand_start_date"),
-							   rs.getDate("DEMAND_END_DATE"),
-							   rs.getInt("GENRE_NO"),
-							   rs.getString("running_time")
-							   );
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return d;
-	}
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Demand d = null;
+
+        String sql = prop.getProperty("getDemand");
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, no);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                d = new Demand(rs.getInt("DEMAND_SURVEY_NO"),
+                               rs.getString("USER_ID"),
+                               rs.getInt("SCREENING_MOVIE_NO"),
+                               rs.getInt("cnt"),
+                               rs.getInt("FILE_NO"),
+                               rs.getString("movie_title"),
+                               rs.getString("movie_director"),
+                               rs.getString("movie_actor"),
+                               rs.getString("movie_story"),
+                               rs.getInt("demand_want_price"),
+                               rs.getInt("demand_price"),
+                               rs.getDate("demand_start_date"),
+                               rs.getDate("DEMAND_END_DATE"),
+                               rs.getInt("GENRE_NO"),
+                               rs.getString("running_time")
+                               );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return d;
+    }
 	public String getFile(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -249,69 +253,109 @@ public class DemandDAO {
 		}
 		return smName;
 	}
-	public char getWant(Connection conn, String userId, int no) {
+	public char getFund(Connection conn, String userId, int no, String duserId) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        char chk = 0;
+
+        String sql = prop.getProperty("getFund");
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userId);
+            pstmt.setInt(2, no);
+            pstmt.setString(3, duserId);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                chk = (char)rs.getInt("price");
+            }else {
+                chk = 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return chk;
+    }
+    public int putFund(Connection conn, int no, String userId, String dUserId, int price) {
+        PreparedStatement pstmt = null;
+        int result = 0;
+
+        String sql = prop.getProperty("putFund");
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            pstmt.setInt(2, no);
+            pstmt.setString(3, dUserId);
+            pstmt.setInt(4, price);
+
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+
+        return result;
+    }
+public int notFund(Connection conn, int no, String userId, String dUserId) {
+        PreparedStatement pstmt = null;
+        int result = 0;
+
+        String sql = prop.getProperty("notFund");
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            pstmt.setInt(2, no);
+            pstmt.setString(3, dUserId);
+
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+
+        return result;
+    }
+	public ArrayList<DemandList> SortList(Connection conn, int currentPage, int boardLimit, String cinema) {
+		//SELECT * FROM SORTLIST WHERE (RNUM BETWEEN ? AND ?) AND SM_NAME LIKE ?
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		char chk = 0;
+		ResultSet rset = null;
+		ArrayList<DemandList> list = new ArrayList<DemandList>();
 		
-		String sql = prop.getProperty("getWant");
+		String query = prop.getProperty("SortList");
+		
+		int start = (currentPage - 1 ) * boardLimit + 1;
+		int end = start + boardLimit - 1;
+		
+		
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,userId);
-			pstmt.setInt(2, no);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			pstmt.setString(3, cinema);
 			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				chk = rs.getString("want_yn").charAt(0);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				DemandList dl = new DemandList(rset.getInt("DNO"),
+											   rset.getInt("FNO"),
+											   rset.getString("FNAME"),
+											   rset.getInt("PRICE"),
+											   rset.getInt("DDAY"));
+				list.add(dl);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rs);
+			close(rset);
 			close(pstmt);
 		}
-		return chk;
-	}
-	public int putWant(Connection conn, int no, String userId, String dUserId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String sql = prop.getProperty("putWant");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setInt(2, no);
-			pstmt.setString(3, dUserId);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-	public int notWant(Connection conn, int no, String userId, String dUserId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String sql = prop.getProperty("notWant");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setInt(2, no);
-			pstmt.setString(3, dUserId);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
+		return list;
 	}
 
 }

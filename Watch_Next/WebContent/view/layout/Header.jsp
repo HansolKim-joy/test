@@ -31,8 +31,7 @@
 		<div class="navi_set">
 			<div class="topnav">펀딩</div>
 			<ul class="subnav">
-				<li>수요조사</li>
-				<li>펀딩참여</li>
+				<li onclick="location.href='<%= request.getContextPath() %>/list.de'">펀딩참여</li>
 			</ul>
 		</div>
 	</div>

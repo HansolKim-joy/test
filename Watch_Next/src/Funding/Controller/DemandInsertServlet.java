@@ -73,15 +73,15 @@ public class DemandInsertServlet extends HttpServlet {
 			String movieTitle = multiRequest.getParameter("admin_movie_name");
 			int smNo = Integer.parseInt(multiRequest.getParameter("admin_movie_spot"));
 			String movieDirector = multiRequest.getParameter("admin_movie_director");
-			int min = Integer.parseInt(multiRequest.getParameter("admin_movie_min"));
+			int money = Integer.parseInt(multiRequest.getParameter("admin_movie_min"));
+			int wantmoney = Integer.parseInt(multiRequest.getParameter("movie_wantprice"));
 			String movieActor = multiRequest.getParameter("admin_movie_actor");
 			int gerneNo = Integer.parseInt(multiRequest.getParameter("admin_movie_genre"));
 			String runningTime = multiRequest.getParameter("admin_movie_time");
 			String movieStory = multiRequest.getParameter("admin_movie_story");
 			int fileNo = new BoardService().insertPoster(originFile, saveFile);
-			
-			Demand d = new Demand(userId, smNo, fileNo, min, movieTitle, movieDirector, movieActor, movieStory, gerneNo, runningTime);
-		
+			System.out.println(fileNo);
+			Demand d = new Demand(userId, smNo, fileNo, wantmoney, money, movieTitle, movieDirector, movieActor, movieStory, gerneNo, runningTime);
 			int result = service.insertDemand(d);
 			String page = "";
 			if(result > 0) {
