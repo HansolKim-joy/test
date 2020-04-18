@@ -3,6 +3,7 @@ package mainlist.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,20 @@ public class RecruitListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	ArrayList<Recruit> list = new mainlistService().selectRelist();
+		ArrayList<Recruit> list = new mainlistService().selectRelist();
+		
+//		System.out.println("sssss" + list);
+		String page = "";
+		if(list != null) {
+			page = "index.jsp";
+			request.setAttribute("RecruitList", list);
+		} else {
+			page = "/views/errorPage/errorPage.jsp";
+		}
+	
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+	
 	}
 
 	/**

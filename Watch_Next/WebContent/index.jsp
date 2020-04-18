@@ -145,7 +145,7 @@ $(document).ready(function() {
 				<th id="writer">글쓴이</th>
 				<th id="hits">조회</th>
 			</tr>
-				<% if(RecruitList.isEmpty()) { %>
+				<% if(RecruitList == null) { %>
 				<% } else { %>
 					<% for(int i = 0; i < RecruitList.size(); i++) {%>
 			<tr>
