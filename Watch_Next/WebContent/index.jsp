@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*" %>
+	
+<% 
+	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,7 +136,7 @@ $(document).ready(function() {
 		<h3>모집 게시판</h3>
 
 		<hr class="hline">
-		<table id="mainWantedBody">
+		<table>
 			<tr>
 				<th id="num">번호</th>
 				<th id="category">말머리</th>
@@ -141,47 +145,51 @@ $(document).ready(function() {
 				<th id="writer">글쓴이</th>
 				<th id="hits">조회</th>
 			</tr>
-			<tbody></tbody>
-<!-- 			<tr> -->
-<!-- 				<td>203</td> -->
-<!-- 				<td>NETFLIX</td> -->
-<!-- 				<td>모집제목입니다</td> -->
-<!-- 				<td>2020-03-20</td> -->
-<!-- 				<td>아이디</td> -->
-<!-- 				<td>4</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>203</td> -->
-<!-- 				<td>NETFLIX</td> -->
-<!-- 				<td>모집제목입니다</td> -->
-<!-- 				<td>2020-03-20</td> -->
-<!-- 				<td>아이디</td> -->
-<!-- 				<td>4</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>203</td> -->
-<!-- 				<td>NETFLIX</td> -->
-<!-- 				<td>모집제목입니다</td> -->
-<!-- 				<td>2020-03-20</td> -->
-<!-- 				<td>아이디</td> -->
-<!-- 				<td>4</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>203</td> -->
-<!-- 				<td>NETFLIX</td> -->
-<!-- 				<td>모집제목입니다</td> -->
-<!-- 				<td>2020-03-20</td> -->
-<!-- 				<td>아이디</td> -->
-<!-- 				<td>4</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>203</td> -->
-<!-- 				<td>NETFLIX</td> -->
-<!-- 				<td>모집제목입니다</td> -->
-<!-- 				<td>2020-03-20</td> -->
-<!-- 				<td>아이디</td> -->
-<!-- 				<td>4</td> -->
-<!-- 			</tr> -->
+				<% if(RecruitList.isEmpty()) { %>
+				<% } else { %>
+					<% for(int i = 0; i < RecruitList.size(); i++) {%>
+			<tr>
+				<td><%= RecruitList.get(i).getrNo() %></td>
+				<td><%= RecruitList.get(i).getUserId() %></td>
+				<td><%= RecruitList.get(i).getbTitle() %></td>
+				<td><%= RecruitList.get(i).getbViews() %></td>
+				<td><%= RecruitList.get(i).getbDate() %></td>
+				<td><%= RecruitList.get(i).getrHead() %></td>
+			</tr>
+			<% } %>
+		<% } %>
+			<tr>
+				<td>203</td>
+				<td>NETFLIX</td>
+				<td>모집제목입니다</td>
+				<td>2020-03-20</td>
+				<td>아이디</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>203</td>
+				<td>NETFLIX</td>
+				<td>모집제목입니다</td>
+				<td>2020-03-20</td>
+				<td>아이디</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>203</td>
+				<td>NETFLIX</td>
+				<td>모집제목입니다</td>
+				<td>2020-03-20</td>
+				<td>아이디</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>203</td>
+				<td>NETFLIX</td>
+				<td>모집제목입니다</td>
+				<td>2020-03-20</td>
+				<td>아이디</td>
+				<td>4</td>
+			</tr>
 
 		</table>
 	</div>
@@ -189,58 +197,37 @@ $(document).ready(function() {
 	<%@ include file="/view/layout/footer.jsp" %>
 </div>
 <script>
-	/* 리뷰 게시판 불러오기 */
-// 	$('document').ready(function(){
+
+	// ajax는 데이터를 보내고 받아 올 때 사용한다 ex) 댓글 순, 중복확인, 좋아요 순 등등
+// 	$(document).ready(function(){
 		
 // 		$.ajax({
-// 			url: 'list.rv',
+// 			url: 'listRecruit.vo',
 // 			success:function(data){
-// 				console.log(data);
-// 				$tableBody = $('#mainReviewBody tbody');
+// 				$tableBody = $('#mainWantedBody tbody');
 // 				$tableBody.html("");
 				
 // 				for(var i in data){
 // 					var $tr = $("<tr>");
-// 					var $numTd = $("<td>").text(data[i].bNo);
-// 					var $categoryTd = $("<td>").text(data[i].spo);
-// 					var $titleTd = $("<td>").text(data[i].);
-// 					var $dateTd = $("<td>").text(data[i].);
-// 					var $writerTd = $("<td>").text(data[i].bWriter);
-// 					var $hitsTd = $("<td>").text(data[i].);
+// 					var $numTd = $("<td>").text(data[i].rNo);
+// 					var $writerTd = $("<td>").text(data[i].userId);
+// 					var $titleTd = $("<td>").text(data[i].bTitle);
+// 					var $hitsTd = $("<td>").text(data[i].bViews);
+// 					var $dateTd = $("<td>").text(data[i].bDate);
+// 					var $categoryTd = $("<td>").text(data[i].rHead);
+				
+// 					$tr.append($numTd);				
+// 					$tr.append($writerTd);				
+// 					$tr.append($titleTd);				
+// 					$tr.append($hitsTd);
+// 					$tr.append($dateTd);				
+// 					$tr.append($categoryTd);				
+// 					$tableBody.append($tr);
 // 				}
+// 				console.log(data);
 // 			}
 // 		});
 // 	});
-
-	
-	$(document).ready(function(){
-		
-		$.ajax({
-			url: 'listRecruit.vo',
-			success:function(data){
-				$tableBody = $('#mainWantedBody tbody');
-// 				$tableBody.html("");
-				
-				for(var i in data){
-					var $tr = $("<tr>");
-					var $numTd = $("<td>").text(data[i].rNo);
-					var $categoryTd = $("<td>").text(data[i].rHead);
-					var $titleTd = $("<td>").text(data[i].bTitle);
-					var $dateTd = $("<td>").text(data[i].bDate);
-					var $writerTd = $("<td>").text(data[i].userId);
-					var $hitsTd = $("<td>").text(data[i].bViews);
-				
-					$tr.append($numTd);				
-					$tr.append($categoryTd);				
-					$tr.append($titleTd);				
-					$tr.append($dateTd);				
-					$tr.append($writerTd);				
-					$tr.append($hitsTd);
-					$tableBody.append($tr);
-				}
-			}
-		});
-	});
 </script>
 
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
