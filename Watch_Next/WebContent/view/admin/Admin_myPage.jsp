@@ -107,6 +107,19 @@
 		border-radius: 200px;
 		line-height: 33px;
 	}
+	.pageBtn{
+		color: white;
+		font-size: 20px;
+		cursor: pointer;
+		/* border: 1px solid black; */
+	}
+	#myBtnFrom{
+		text-align: -webkit-center;
+	}
+	#myBtnTable{
+		text-align: center;
+		width: 500px;
+	}
 </style>
 </head>
 <body>
@@ -126,12 +139,19 @@
 				window.open('<%=request.getContextPath()%>/letter.view','letter','width=700, height=700, left=100, top=50');
 			}
 			</script>
-			<button onclick="location.href='<%= request.getContextPath() %>/fundingList.adm'">펀딩글 작성</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화글 작성</button>
+			<br><br><br>
+			<div id="myBtnFrom">
+				<table id="myBtnTable">
+					<tr>
+						<td><div class="pageBtn" onclick="location.href='<%= request.getContextPath() %>/fundingList.adm'">펀딩 작성 이동</div></td>
+						<td><div class="pageBtn" onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화 작성 이동</div></td>
+					</tr>
+				</table>
+			</div>
 			<br><br><br>
 			<hr class="mp_hline">
 			
-			<div id="mp_content1" class="mp_content">펀딩 요청 확인 &nbsp;&nbsp;&nbsp;&nbsp;
+			<div id="mp_content1" class="mp_content">신고 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button1" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
@@ -142,22 +162,11 @@
 			
 			
 			
-			<div id="mp_content2" class="mp_content">신고 확인 &nbsp;&nbsp;&nbsp;&nbsp;
+			<div id="mp_content2" class="mp_content">회원 정보 조회 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button2" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content2" class="mp_h_content">
-					내용
-				</div>
-			</div>
-			
-			
-			
-			<div id="mp_content3" class="mp_content">회원 정보 조회 &nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="submit" id="mp_button3" class="mp_button">+</button>
-				<hr class="hline1">
-				<div class="mp_middle"></div>
-				<div id="mp_h_content3" class="mp_h_content">
 					검색할 아이디 : <input type="text" id="searchId"> <button id="searchIdBtn">검색</button>
 					<br><br>
 					<div id="mp_tabled">
@@ -193,10 +202,6 @@
 		
 		$('#mp_button2').click(function(){
 			$('#mp_h_content2').slideToggle();
-		});
-		
-		$('#mp_button3').click(function(){
-			$('#mp_h_content3').slideToggle();
 		});
 		
 		$('#searchIdBtn').click(function(){
