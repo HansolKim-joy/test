@@ -298,7 +298,6 @@ public class recruitDAO {
 			rset = pstmt.executeQuery();
 			
 			comment = new ArrayList<Comment>();
-			System.out.println("selectComment " + rset);
 			while(rset.next()) {
 				comment.add(new Comment(rset.getInt("comments_no"),
 									     rset.getString("comments_cotent"),
@@ -309,7 +308,6 @@ public class recruitDAO {
 										 rset.getString("comments_delete_yn")));
 							}
 			
-			System.out.println("comment " + comment);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -322,29 +320,29 @@ public class recruitDAO {
 
 
 	public int insertComment(Comment co, Connection conn) {
-		//댓글 입력
-		//insert into tb_comments values(seq_rid.nextval, ?, ?, ?, sysdate, default, default)
+		// 댓글 입력
+		// insert into tb_comments values(seq_rid.nextval, ?, ?, ?, sysdate, default,
+		// default)
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("insertComment");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
-			
+
 			pstmt.setInt(1, co.getRefBid());
 			pstmt.setString(2, co.getrWriter());
 			pstmt.setString(3, co.getrContent());
-			
+
 			result = pstmt.executeUpdate();
-			
-			System.out.println("댓글입력" + result);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 

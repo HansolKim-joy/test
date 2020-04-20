@@ -1,4 +1,4 @@
-package recruit.controller;
+package create.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import recruit.model.service.recruitService;
+import review.model.service.ReviewService;
 import common.Comment;
 import create.model.service.CreateService;
 
 /**
  * Servlet implementation class CommentDeleteServlet
  */
-@WebServlet("/delete.comment")
+@WebServlet("/delete.co")
 public class CommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,12 +38,11 @@ public class CommentDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int rId = Integer.parseInt(request.getParameter("rId")); // 히든번호
 		int rNo = Integer.parseInt(request.getParameter("rNo")); // 히든번호
-		ArrayList<Comment> list = new recruitService().deleteComment(rId, rNo);
+		ArrayList<Comment> list = new CreateService().deleteComment(rId, rNo);
 //		System.out.println("servlet "+list);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
-		
 	}
 
 	/**
