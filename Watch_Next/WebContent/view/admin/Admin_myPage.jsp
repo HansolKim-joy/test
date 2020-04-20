@@ -170,7 +170,7 @@
 			<br><br><br>
 			<hr class="mp_hline">
 			
-			<button onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_fundingWrite.jsp'">펀딩글 작성</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/fundingList.adm'">펀딩글 작성</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화글 작성</button>
 			
 		</div>

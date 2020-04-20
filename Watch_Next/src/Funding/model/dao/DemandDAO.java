@@ -34,6 +34,7 @@ public class DemandDAO {
 			e.printStackTrace();
 		}
 	}
+	// 사용자가 보는 펀딩 리스트 카운트
 	public int getListCount(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -54,9 +55,85 @@ public class DemandDAO {
 			close(rset);
 			close(stmt);
 		}
-		
 		return result;
 	}
+	
+	// 사용자가 보는 펀딩  정렬 리스트 카운트
+	public int getSortListCount(Connection conn, String cinema) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("SortListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cinema);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+		
+	// 관리자가 보는 펀딩 리스트 카운트
+	public int getAdListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("AdminListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return result;
+	}
+	// 관리자가 보는 펀딩 정렬 리스트 카운트
+	public int getAdSortListCount(Connection conn, String cinema) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("AdminSortListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cinema);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+		
+	//관리자가 글게시물을 활성화시켰을때 리스트
 	public ArrayList<DemandList> selectList(Connection conn, int currentPage, int boardLimit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -72,11 +149,13 @@ public class DemandDAO {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				DemandList dl = new DemandList(rset.getInt("DNO"),
 											   rset.getInt("FNO"),
+											   rset.getString("TITLE"),
 											   rset.getString("FNAME"),
 											   rset.getInt("PRICE"),
 											   rset.getInt("DDAY"));
@@ -93,6 +172,44 @@ public class DemandDAO {
 		
 		return list;
 	}
+	
+	
+	//관리자가 글게시물을 활성화시키기전  리스트
+	public ArrayList<DemandList> AdminFunding(Connection conn, int currentPage, int boardLimit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<DemandList> list = new ArrayList<DemandList>();
+		
+		String query = prop.getProperty("AdminFList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, currentPage);
+			pstmt.setInt(2, boardLimit);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				DemandList dl = new DemandList(rset.getInt("DNO"),
+											   rset.getInt("FNO"),
+											   rset.getString("TITLE"),
+											   rset.getString("FNAME"),
+											   rset.getInt("PRICE"),
+											   rset.getInt("DDAY"));
+				list.add(dl);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+
+	
 	public int insertDemand(Connection conn, Demand d) {
         PreparedStatement pstmt = null;
         int result = 0;
@@ -344,6 +461,41 @@ public int notFund(Connection conn, int no, String userId, String dUserId) {
 			while(rset.next()) {
 				DemandList dl = new DemandList(rset.getInt("DNO"),
 											   rset.getInt("FNO"),
+											   rset.getString("TITLE"),
+											   rset.getString("FNAME"),
+											   rset.getInt("PRICE"),
+											   rset.getInt("DDAY"));
+				list.add(dl);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<DemandList> AdminSortList(Connection conn, int currentPage, int boardLimit, String cinema) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<DemandList> list = new ArrayList<DemandList>();
+		
+		String query = prop.getProperty("AdminSortList");
+		
+		int start = (currentPage - 1 ) * boardLimit + 1;
+		int end = start + boardLimit - 1;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			pstmt.setString(3, cinema);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				DemandList dl = new DemandList(rset.getInt("DNO"),
+											   rset.getInt("FNO"),
+											   rset.getString("TITLE"),
 											   rset.getString("FNAME"),
 											   rset.getInt("PRICE"),
 											   rset.getInt("DDAY"));

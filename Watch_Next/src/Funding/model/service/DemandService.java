@@ -112,11 +112,54 @@ public class DemandService {
 	public ArrayList<DemandList> SortList(int currentPage, int boardLimit, String cinema) {
 		Connection conn = getConnection();
 		ArrayList<DemandList> list = new DemandDAO().SortList(conn, currentPage, boardLimit, cinema);
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<DemandList> adminFunding(int currentPage, int boardLimit) {
+		Connection conn = getConnection();
+		ArrayList<DemandList> list = new DemandDAO().AdminFunding(conn, currentPage, boardLimit);
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<DemandList> AdminSortList(int currentPage, int boardLimit, String cinema) {
+		Connection conn = getConnection();
+		ArrayList<DemandList> list = new DemandDAO().AdminSortList(conn, currentPage, boardLimit, cinema);
 		System.out.println("service" + cinema);
 		close(conn);
 		
 		return list;
 	}
+
+	public int getSortListCount(String cinema) {
+		Connection conn = getConnection();
+		
+		int result = new DemandDAO().getSortListCount(conn, cinema);
+		System.out.println("서비스 : " + result);
+		close(conn);
+		
+		return result;
+	}
+
+	public int getAdListCount() {
+		Connection conn = getConnection();
+		
+		int result = new DemandDAO().getAdListCount(conn);
+		close(conn);
+		
+		return result;
+	}
 	
+	public int getAdSortListCount(String cinema) {
+		Connection conn = getConnection();
+		
+		int result = new DemandDAO().getAdSortListCount(conn, cinema);
+		close(conn);
+		
+		return result;
+	}
 	
 }

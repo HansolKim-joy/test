@@ -5,7 +5,8 @@
 	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
-	String percent1 = "";
+	System.out.println(list.isEmpty());
+	
 	double percent = 0.0;
 	int j = 4;
 	int currentPage = pi.getCurrentPage();
@@ -36,7 +37,7 @@
 	<!-- 수요조사목록 -->
 	
 	<div id="funding">
-	<h2 id="f_h2">수요조사</h2>
+	<h2 id="f_h2">펀딩 신청 목록</h2>
 
 	<hr class="hline">
 	
@@ -63,6 +64,8 @@
 						Demand wl = wlist.get(a);
 						if(dl.getdNo() == wl.getdNo()) {
 							percent = (int)(((double)wl.getMoney()/dl.getprice())*10000)/100.0;
+							System.out.println(dl.getprice());
+							System.out.println(wl.getMoney());
 						}
 					}
 				 if(i%j==0){ %>
@@ -76,7 +79,8 @@
 								<span style="width: <%= percent %>%"></span>
 							</div>
 							<span>
-							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
+							<div><%= dl.getTitle() %></div>
+							<div style="display: inline-block;">D - <%= dl.getEndDay() %></div>
 							<div style="display: inline-block;"><%= percent %>%</div>
 							</span>
 							
@@ -90,7 +94,8 @@
 								<span style="width: <%= percent %>%"></span>
 							</div>
 							<span>
-							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
+							<div><%= dl.getTitle() %></div>
+							<div style="display: inline-block;">D - <%= dl.getEndDay() %></div>
 							<div style="display: inline-block;"><%= percent %>%</div>
 							</span>
 						</li>
@@ -103,7 +108,8 @@
 								<span style="width: <%= percent %>%"></span>
 							</div>
 							<span>
-							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
+							<div><%= dl.getTitle() %></div>
+							<div style="display: inline-block;">D - <%= dl.getEndDay() %></div>
 							<div style="display: inline-block;"><%= percent %>%</div>
 							</span>
 						</li>
@@ -129,22 +135,21 @@
 		<a type="a" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
         <div class="list_n_menu">
         	<!--이전 페이지 -->
-	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
+	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/fundingList.adm?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
 	        <script>
 					if(<%= currentPage %> <= 1 ){
 						$('#beforeBtn').hide();
 					}
 			</script>
 			<!--페이지 목록  -->
-			
 			<% for (int p=startPage; p<=endPage; p++){
 				if(p == currentPage) {%>
 					<a><%= p %></a>
 				<%} else{ %>
-					<a onclick="location.href='<%=request.getContextPath() %>/list.de?currentPage=<%= p %>'"><%= p %></a>
+					<a onclick="location.href='<%=request.getContextPath() %>/fundingList.adm?currentPage=<%= p %>'"><%= p %></a>
 				<%} %>
 			<%} %>	
-			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
+			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/fundingList.adm?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
 	        <script>
 				if(<%= currentPage %> >= <%= maxPage %>){
 					
@@ -170,7 +175,7 @@
 
 	$('.btn').click(function(){
 		var cinema = $(this).val();
-		location.href='<%= request.getContextPath() %>/listSort.de?cinema=' + cinema;
+		location.href='<%= request.getContextPath() %>/listSort.adm?cinema=' + cinema;
 	});
 	
 	

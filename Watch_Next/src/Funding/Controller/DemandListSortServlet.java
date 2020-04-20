@@ -34,9 +34,10 @@ public class DemandListSortServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DemandService ds = new DemandService();
+		String cinema = request.getParameter("cinema");
 		
-		int ListCount = ds.getListCount();
-		
+		int ListCount = ds.getSortListCount(cinema);
+		System.out.println("서블릿:" + ListCount);
 		int currentPage; 
 		int pageLimit = 10; 
 		int maxPage; 
@@ -49,7 +50,7 @@ public class DemandListSortServlet extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			 currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		String cinema = request.getParameter("cinema");
+		
 		
 		maxPage = (int)((double)ListCount / boardLimit + 0.9);
 		 
