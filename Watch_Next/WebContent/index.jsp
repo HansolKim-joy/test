@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*" %>
+	pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*, review.model.vo.*" %>
 	
 <% 
-	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
-%>	
+	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("Recruitlist");
+	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("Reviewlist");
+// 	System.out.println("index"+ RecruitList);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,9 +56,8 @@ $(document).ready(function() {
         <div class="pp_slide-content1">
             <ul id="pp_slider" class="pp_slider">
                 <li class="pp_item">
-                	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster1"></div>
-               		<div class="pp_item1"></div>
-                	
+	           		<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></div>
+                	<div class="pp_item1"></div>
                 </li>
                 <li class="pp_item">
                 	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></div>
@@ -75,123 +76,39 @@ $(document).ready(function() {
     <!-- 리뷰게시판 -->
 	<div id="review">
 		<h3>리뷰 게시판</h3>
-
 		<hr class="hline">
 		<table id="mainReviewBody">
-			<tr>
-				<th id="num">번호</th>
-				<th id="category">말머리</th>
-				<th id="title">리뷰 제목</th>
-				<th id="date">날짜</th>
-				<th id="writer">글쓴이</th>
-				<th id="hits">조회</th>
-			</tr>
-			<tr>
-				<td>166</td>
-				<td>스포있음</td>
-				<td>리뷰제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>6</td>
-			</tr>
-			<tr>
-				<td>166</td>
-				<td>스포있음</td>
-				<td>리뷰제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>6</td>
-			</tr>
-			<tr>
-				<td>166</td>
-				<td>스포있음</td>
-				<td>리뷰제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>6</td>
-			</tr>
-			<tr>
-				<td>166</td>
-				<td>스포있음</td>
-				<td>리뷰제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>6</td>
-			</tr>
-			<tr>
-				<td>166</td>
-				<td>스포있음</td>
-				<td>리뷰제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>6</td>
-			</tr>
-
+			<thead>
+				<tr>
+					<th id="num">번호</th>
+					<th id="category">말머리</th>
+					<th id="title">리뷰 제목</th>
+					<th id="grade">평점</th>
+					<th id="date">날짜</th>
+					<th id="writer">글쓴이</th>
+					<th id="hits">조회</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
 		</table>
-
 	</div>
 
 	<!-- 모집게시판 -->
 	<div id="wanted">
 		<h3>모집 게시판</h3>
-
 		<hr class="hline">
-		<table>
-			<tr>
-				<th id="num">번호</th>
-				<th id="category">말머리</th>
-				<th id="title">모집 제목</th>
-				<th id="date">날짜</th>
-				<th id="writer">글쓴이</th>
-				<th id="hits">조회</th>
-			</tr>
-				<% if(RecruitList == null) { %>
-					
-				<% } else { %>
-					<% for(int i = 0; i < RecruitList.size(); i++) {%>
-			<tr>
-				<td><%= RecruitList.get(i).getrNo() %></td>
-				<td><%= RecruitList.get(i).getUserId() %></td>
-				<td><%= RecruitList.get(i).getbTitle() %></td>
-				<td><%= RecruitList.get(i).getbViews() %></td>
-				<td><%= RecruitList.get(i).getbDate() %></td>
-				<td><%= RecruitList.get(i).getrHead() %></td>
-			</tr>
-			<% } %>
-		<% } %>
-			<tr>
-				<td>203</td>
-				<td>NETFLIX</td>
-				<td>모집제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>4</td>
-			</tr>
-			<tr>
-				<td>203</td>
-				<td>NETFLIX</td>
-				<td>모집제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>4</td>
-			</tr>
-			<tr>
-				<td>203</td>
-				<td>NETFLIX</td>
-				<td>모집제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>4</td>
-			</tr>
-			<tr>
-				<td>203</td>
-				<td>NETFLIX</td>
-				<td>모집제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>4</td>
-			</tr>
-
+		<table id="mainWantedBody">
+				<thead>
+					<tr>
+						<th id="num">번호</th>
+						<th id="category">말머리</th>
+						<th id="title">모집 제목</th>
+						<th id="date">날짜</th>
+						<th id="writer">글쓴이</th>
+						<th id="hits">조회</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
 		</table>
 	</div>
 	<!-- footer -->
@@ -199,36 +116,81 @@ $(document).ready(function() {
 </div>
 <script>
 
-	// ajax는 데이터를 보내고 받아 올 때 사용한다 ex) 댓글 순, 중복확인, 좋아요 순 등등
-// 	$(document).ready(function(){
+// 	ajax는 데이터를 보내고 받아 올 때 사용한다 ex) 댓글 순, 중복확인, 좋아요 순 등등
+	$(document).ready(function(){
+		var fi = 'fi';
+		var se = 'se';
 		
-// 		$.ajax({
-// 			url: 'listRecruit.vo',
-// 			success:function(data){
-// 				$tableBody = $('#mainWantedBody tbody');
-// 				$tableBody.html("");
+		$.ajax({
+			url: 'listRecruit.vo',
+			data: {fi:fi},
+			success:function(data){
+				$tableBody = $('#mainReviewBody tbody');
+				$tableBody.html("");
 				
-// 				for(var i in data){
-// 					var $tr = $("<tr>");
-// 					var $numTd = $("<td>").text(data[i].rNo);
-// 					var $writerTd = $("<td>").text(data[i].userId);
-// 					var $titleTd = $("<td>").text(data[i].bTitle);
-// 					var $hitsTd = $("<td>").text(data[i].bViews);
-// 					var $dateTd = $("<td>").text(data[i].bDate);
-// 					var $categoryTd = $("<td>").text(data[i].rHead);
 				
-// 					$tr.append($numTd);				
-// 					$tr.append($writerTd);				
-// 					$tr.append($titleTd);				
-// 					$tr.append($hitsTd);
-// 					$tr.append($dateTd);				
-// 					$tr.append($categoryTd);				
-// 					$tableBody.append($tr);
-// 				}
+				
+				for(var i in data){
+					var $tr = $("<tr>");
+					var $numTd = $("<td>").text(data[i].bNo);
+					
+					switch(data[i].spo){
+					case "Y": 
+						var $spoTd = $("<td>").text("스포있음");
+						break;
+					case "N":
+						var $spoTd = $("<td>").text("스포없음");
+						break;
+					}
+					var $mTitleTd = $("<td>").text(" [ " + data[i].mTitle + " ] " + data[i].bTitle);
+					var $gradeTd = $("<td>").text(data[i].popcorn);
+					var $bDateTd = $("<td>").text(data[i].bDate);
+					var $bWriterTd = $("<td>").text(data[i].bWriter);
+					var $viewsTd = $("<td>").text(data[i].bCount);
+					
+					$tr.append($numTd);				
+					$tr.append($spoTd);		
+					$tr.append($mTitleTd);
+					$tr.append($gradeTd);
+					$tr.append($bDateTd);
+					$tr.append($bWriterTd);
+					$tr.append($viewsTd);
+					$tableBody.append($tr);
+				}
 // 				console.log(data);
-// 			}
-// 		});
-// 	});
+			}
+		});
+		
+		$.ajax({
+			url: 'listRecruit.vo',
+			data: {se:se},
+			success:function(data){
+				$tableBody = $('#mainWantedBody tbody');
+				$tableBody.html("");
+				
+				for(var i in data){
+					var $tr = $("<tr>");
+					var $numTd = $("<td>").text(data[i].rNo);
+					var $categoryTd = $("<td>").text(data[i].rHead);
+					var $titleTd = $("<td>").text(data[i].bTitle);
+					var $dateTd = $("<td>").text(data[i].bDate);
+					var $writerTd = $("<td>").text(data[i].userId);
+					var $hitsTd = $("<td>").text(data[i].bViews);
+				
+					$tr.append($numTd);				
+					$tr.append($categoryTd);				
+					$tr.append($titleTd);				
+					$tr.append($dateTd);				
+					$tr.append($writerTd);				
+					$tr.append($hitsTd);
+					$tableBody.append($tr);
+				}
+// 				console.log(data);
+			}
+		});
+		
+		
+	});
 </script>
 
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>

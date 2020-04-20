@@ -60,7 +60,16 @@ public class Recruit {
 		this.rHead = rHead;
 	}
 	
-	
+	// 정호
+	public Recruit(int rNo, String userId, String bTitle, int bViews, Date bDate, String rHead) {
+		this.rNo =  rNo;
+		this.userId = userId;
+		this.bTitle = bTitle;
+		this.bViews = bViews;
+		this.bDate = bDate;
+		this.rHead = rHead;
+	}
+
 	public int getrNo() {
 		return rNo;
 	}
