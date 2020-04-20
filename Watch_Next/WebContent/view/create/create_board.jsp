@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, create.model.vo.*"%>
     
-
+<%
+	ArrayList<Create> list = (ArrayList<Create>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +30,7 @@
 
 	
 	<div id="c_div">
-	<form id="s_form">
+<!-- 	<form id="s_form"> -->
 	<h2 id="c_title">창작 게시판</h2>
 	
 	<hr class="hline">
@@ -31,11 +40,14 @@
 	<span id="c_s_1">당신의 리뷰가 큰 도움이 됩니다!</span>
 	
 	<!-- 창작 글 선택 목록 -->
-	<select id='c'>
-  				<option value='' selected>선택</option>
-  				<option value='추천순'>추천순</option>
-  				<option value='최신순'>최신순</option>
-			</select>
+	<form action="<%=request.getContextPath() %>/list.cr" method="get">
+		<select onchange="this.form.submit()" name="sk2" id='c'>
+	  		<option ${(param.sk2=="최신순")?"selected":""} value='최신순'>최신순</option>
+	  		<option ${(param.sk2=="추천순")?"selected":""} value='추천순'>추천순</option>
+		</select>
+	</form>	
+
+
 	
 	<br>
 	
@@ -50,79 +62,87 @@
 			<th class="t" id="c_t_6">기대되요</th>
 			<th class="t" id="c_t_7">댓글수</th>	
 		</tr>
-		<tr>
-			<td rowspan="2" class="c_td1">100</td>
-			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
-			<td class="c_td3">Seven<br></td>
-			<td rowspan="2" class="c_td4">7대죄악에 대한 이야기</td>
-			<td rowspan="2" class="c_td5">2020-01-13</td>
-			<td rowspan="2" class="c_td6">6</td>
-			<td rowspan="2" class="c_td7">59</td>
-			<td rowspan="2" class="c_td8">67</td>
+		<% if(list.isEmpty()) {%>
 			<tr>
-			<td class="c_td3">데이빗핀쳐</td>
-		</tr>
+				<td colspan="7">조회된 리스트가 없습니다.</td>
+			</tr>
+		<% } else { 
+			for(Create c : list) {
+		%>
 		
 		<tr>
-			<td rowspan="2" class="c_td1">100</td>
+			<td rowspan="2" class="c_td1"><%= c.getbNO() %></td>
 			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
-			<td class="c_td3">Seven<br></td>
-			<td rowspan="2" class="c_td4">‘식탐’, ‘탐욕’… 그리고 ‘나태’, ‘분노’, ‘교만’, ‘욕정’. ‘시기’ 윌리엄 소머셋은 현장에 남은 흔적들로 기나긴 연쇄 살인이 
-			시작되었음을 직감하고 성서의 7가지 죄악을 따라 발생하는 사건들을 추적하기 시작하는데… 가장 치밀한 일곱 개의 연쇄살인이 시작된다!</td>
-			<td rowspan="2" class="c_td5">2020-01-13</td>
-			<td rowspan="2" class="c_td6">6</td>
-			<td rowspan="2" class="c_td7">59</td>
-			<td rowspan="2" class="c_td8">67</td>
+			<td class="c_td3"><%= c.getbTitle() %><br></td>
+			<td rowspan="2" class="c_td4"><%=c.getbContent() %></td>
+			<td rowspan="2" class="c_td5"><%=c.getcDate() %></td>
+			<td rowspan="2" class="c_td6"><%=c.getbCount() %></td>
+			<td rowspan="2" class="c_td7"><%=c.getcLike() %></td>
+			<td rowspan="2" class="c_td8"><%=c.getComm() %></td>
 			<tr>
-			<td class="c_td3">데이빗핀쳐</td>
+			<td class="c_td3"><%= c.getcDirector() %></td>
 		</tr>
-		<tr>
-			<td rowspan="2" class="c_td1">100</td>
-			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
-			<td class="c_td3">Seven<br></td>
-			<td rowspan="2" class="c_td4">7대죄악에 대한 이야기</td>
-			<td rowspan="2" class="c_td5">2020-01-13</td>
-			<td rowspan="2" class="c_td6">6</td>
-			<td rowspan="2" class="c_td7">59</td>
-			<td rowspan="2" class="c_td8">67</td>
-			<tr>
-			<td class="c_td3">데이빗핀쳐</td>
-		</tr>
-		<tr>
-			<td rowspan="2" class="c_td1">100</td>
-			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
-			<td class="c_td3">Seven<br></td>
-			<td rowspan="2" class="c_td4">7대죄악에 대한 이야기</td>
-			<td rowspan="2" class="c_td5">2020-01-13</td>
-			<td rowspan="2" class="c_td6">6</td>
-			<td rowspan="2" class="c_td7">59</td>
-			<td rowspan="2" class="c_td8">67</td>
-			<tr>
-			<td class="c_td3">데이빗핀쳐</td>
-		</tr>
+		
+		<% }
+			 }%>	
+		
 		</table>
-		</form>
+<!-- 		</form> -->
 	</div>
 	
 	<!-- 페이징 -->	
 	
-	<div class="list_number">
-        <div class="list_n_menu">
-        <span class="prev">이전</span>
-        <span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>
-        <a href="">다음  ></a></div>
+	<div class="pagingArea" align="center">
+	<!-- 맨 처음으로 -->
+			<button onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=1'">&lt;&lt;</button>
+			
+			<!-- 이전 페이지로 -->
+			<button onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=<%= currentPage - 1 %>'" id="beforeBtn">&lt;</button>
+			<script>
+				if(<%= currentPage %> <= 1){
+					$('#beforeBtn').attr('disabled', 'true');
+				}
+			</script>
+			
+			<!-- 10개 페이지 목록 -->
+			<% for(int p = startPage; p <= endPage; p++){ %>
+				<% if(p == currentPage){ %>
+					<button id="choosen" disabled><%= p %></button>
+				<% } else { %>
+					<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=<%= p %>'"><%= p %></button>
+				<% } %>
+			<% } %>
+			
+			<!-- 다음 페이지로 -->
+			<button id="afterBtn" onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=<%= currentPage + 1 %>'">&gt;</button>
+			<script>
+				if(<%= currentPage %> >= <%= maxPage %>){
+					$('#afterBtn').attr('disabled', 'true');
+				}
+			</script>
+			
+			<!-- 맨 끝으로 -->
+			<button onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 	</div>
-	<br><br><br>
+	
+	<!-- 글쓰기 -->
+	<% if(loginUser != null){ %>
+		<input id="write" type="button" value="글쓰기"
+			   onclick="location.href='<%= request.getContextPath() %>/view/create/createWrite.jsp'">
+	<% } %>
 	
 	<!-- 검색조건 -->
 	<div id="c_d_3">
-	<select>
-		<option value='글번호'>글번호</option>
-  		<option value='감독'>감독</option>
-  		<option value='제목'>제목</option>
-	</select>
-	
-	<input type="text">
+	<form action="<%=request.getContextPath() %>/list.cr" method="get">
+		<select id="searchType" name="sk">
+	  		<option ${(param.sk=="전체")?"selected":""} value="전체">전체</option>
+	  		<option ${(param.sk=="제목")?"selected":""} value='제목'>제목</option>
+	  		<option ${(param.sk=="감독")?"selected":""} value='감독'>감독</option>
+	  		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
+		</select>
+			
+		<input type="text" name="sv" value="${param.sv}">
+	</form>
 	
 	</div>
 

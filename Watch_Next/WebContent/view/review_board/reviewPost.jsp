@@ -139,12 +139,25 @@
 							</td>
 							<td width=5px></td>
 							<td>
-								<a href="#" target="_self">
-									<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
-										 onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
-										'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
-								</a>
+
+									<input type="text" name="rbNo" value="<%=r.getbNo() %>">
+									<button type="button" value="popup" onclick="sendPop();">
+										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
+									</button>
+
+									
+
+									<script>
+									  function sendPop(){
+											var win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+											'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
+
+											win.document.getElementById("test").value="<%=r.getbNo() %>";
+										   }
+									
+ 									</script>
 							</td>
+							
 						</tr>
 							
 						<tr>
