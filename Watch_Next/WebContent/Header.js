@@ -10,7 +10,7 @@ $(document).ready(function(){
 	  	
 		$(window).scroll(function(){
 		    var navbar = $(this).scrollTop();
-		    console.log(navbar);
+//		    console.log(navbar);
 		    var header = $('header');
 		    if(navbar > 150){
 		        header.addClass('down');
