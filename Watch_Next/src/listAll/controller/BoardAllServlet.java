@@ -44,7 +44,8 @@ public class BoardAllServlet extends HttpServlet {
 		ArrayList<Review> ReviewList = bService.selectMyReview(userId);
 		ArrayList<Recruit> RecruitList = bService.selectMyRecruit(userId);
 		ArrayList<Movie> DibList = bService.selectMyDib(userId);
-		ArrayList<Comment> CommentList = bService.selectComment(userId);
+		ArrayList<Comment> ReviewComlist = bService.selectComment(userId);
+		ArrayList<Comment> RecruitComlist = bService.selectRcComment(userId);
 //		System.out.println("ksldjf" + ReviewList);
 		
 		String page = "";
@@ -54,7 +55,8 @@ public class BoardAllServlet extends HttpServlet {
 			request.setAttribute("ReviewList", ReviewList);
 			request.setAttribute("RecruitList", RecruitList);
 			request.setAttribute("DibList", DibList);
-			request.setAttribute("CommentList", CommentList);
+			request.setAttribute("ReviewComlist", ReviewComlist);
+			request.setAttribute("RecruitComlist", RecruitComlist);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 		}
