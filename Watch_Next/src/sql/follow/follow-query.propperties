@@ -1,0 +1,1 @@
+follow=insert into tb_follow values(?, ?, seq_follow.nextval)
