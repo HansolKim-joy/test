@@ -10,6 +10,13 @@
 <head>
 <meta charset="UTF-8">
 <title>모집 글 상세보기</title>
+<style>
+#fo,#my,#nf,#le{cursor: pointer}
+#fo:hover{text-decoration: underline;}
+#my:hover{text-decoration: underline;}
+#nf:hover{text-decoration: underline;}
+#le:hover{text-decoration: underline;}
+</style>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -50,24 +57,33 @@
 				<td width="850px" style="font-size:17px;"></td>
 				<td width="90px" style="font-size:17px;">글쓴이 : </td>
 				<td width="70px" style="font-size:17px;" id="rpWriter">
-					<input type="text" readonly="<%=r.getUserId() %>" name="userId" value="<%=r.getUserId()%>" style="border: 0;">
 					<ul>
 						<li>
+							<input type="hidden"  name="rpWriter" value="<%=r.getUserId() %>"><%=r.getUserId() %>
 							<ul>
-								<li><a href='#'>쪽지보내기</a></li>
-								<li><a href='#'>팔로우하기</a></li>
+								<li>
+									<a id="le" onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
+												'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
+												쪽지보내기</a>
+								</li>
+								<li>
+								<% if(loginUser != null && !loginUser.getUserId().equals(r.getUserId())) {%>
+								<a id="fo" onclick="location.href='<%=request.getContextPath() %>/follow'">팔로우하기</a>
+								<%} else if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
+								<a id="my" onclick="location.href='<%= request.getContextPath() %>/view/myPage/myPageMain.jsp'">마이페이지</a>
+								<%} else {%>
+								<a id="nf" onclick="#">팔로우 해지</a>
+								<%} %>
+								</li>
 							</ul>
 						</li>
 					</ul>
+						
 				</td>
 				<td width="70px" style="font-size:17px;">날짜 : </td>
-		      	<td width="150px" style="font-size:17px;" >
-		      		<input type="text" readonly="<%=r.getbDate() %>" name="bDate" value="<%=r.getbDate()%>" style="border: 0;">
-		      	</td>
+		      	<td width="150px" style="font-size:17px;" ><%=r.getbDate() %> </td>
 		      	<td width="90px" style="font-size:17px;">조회수 : </td>
-		      	<td width="70px" style="font-size:17px;" >
-		      		<input type="text" readonly="<%=r.getbViews() %>" name="bViews"	value="<%= r.getbViews() %>" style="border:0;">
-		      	</td>
+		      	<td width="70px" style="font-size:17px;" ><%=r.getbViews() %></td>
 			</tr>
 		</table>
 	</div>
@@ -76,20 +92,24 @@
 
 	<div id="content">
 		<p style="font-size:15px;" >
-			<input type="text" name="bContent" class= "content" value="<%=r.getbContent() %>" style="border:0;">
+		<%=r.getbContent() %>
+		<input type="hidden" name="bContent" class= "content" value="<%=r.getbContent() %>" style="border:0;">
 			
 		</p>
 	</div>
 
 	<!-- 신고버튼 -->
 	<div id="btn">
-		
-			<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
-				onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop', 
-				'left'='+(screen.availWidth-500)/2+','top='+'(screen.availHeight-300)/2+', 'width=500px','height=300px')">
-		
+		<a href="#" target="_self"> <img
+			src="/Watch_Next/Resources/images/siren2.png" width="37px"
+			height="37px"
+			onclick="window.open('<%=request.getContextPath()%>/view/reportPop/reportPop.jsp', 'pop', 
+						'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
+		</a>
+
 	</div>
-	    <!-- 목록수정삭제 버튼 -->
+	
+	<!-- 목록수정삭제 버튼 -->
  
 		<div id=listbtn>
 			
@@ -169,7 +189,6 @@
 			}
 			
 			$(document).on('click', '.deleteC', function(){
-				console.log("눌려")
 				var rId = $(this).prev(".rId").val();
 				var rNo = $('#rNo').val();
 				$.ajax({
@@ -241,6 +260,9 @@
 					}
 				});
 			});
+				
+				
+			
 		</script>
 
 <!— footer —>
