@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*"%>
-<%
-	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
-	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
-%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -31,54 +27,11 @@
 		height: 30px;
 		width: 50px;
 	}
-	#mp_tabled{
-		font-size: 19px;
-		text-align: -webkit-center;
-	}
-	#mp_table{
-		background-color: dimgrey;
-		color: white;
-		text-align:center;
-		width: 80%;
-	}
-	.mp_first{
-		width: 230px;
-		border-bottom: 1px solid white;
-		border-right: 1px solid white;
-	}
-	.mp_last{
-		border-right: 1px solid white;
-	}
-	.mp_second{
-		text-align: center;
-		width: 400px;
-		border-bottom: 1px solid white;
-	}
-	#mp_second{
-		text-align: center;
-	}
 	#mp_info{
 		text-align: center;
 		color: white;
 		font-size: 18px;
 	}
-	#mp_update{
-		margin-top: -20px;
-		float: right;
-		height: 25px;
-		width: 80px;
-		font-size: 15px;
-		border-radius: 20px;
-	}
-	 #updatePwdBtn{
-	 	margin-top: 15px;
-	 	margin-right:-90px;
-	 	float: right;
-		height: 25px;
-		width: 100px;
-		font-size: 15px;
-		border-radius: 20px;
-	 }
 	.mp_hline{
 		border: 1px solid red;
 	}
@@ -96,28 +49,63 @@
 	.mp_h_content{
 		display: none;
 		/* height: 200px; */
-		border: 1px solid black;
+		/* border: 1px solid black; */
+		text-align: -webkit-center;
 	}
 	
 	.mp_middle{
 		height: 10px;
 	}
-	/* #updatePwdBtn{
-		width: 40px;
-		height: 30px;
-		border-radius: 50%;
-	} */
-	
-	.listTabled{
+	.hline1{
+		width: 30%;
+		border: 1px solid red;
+	}
+	#mWrite{
+		text-align: center;
+	    margin-top: 40px;
+	    color: white;
+	    font-size: 17px;
+	}
+	#mp_tabled{
+		font-size: 19px;
 		text-align: -webkit-center;
 	}
-	.listTable{
-		text-align: center;
+	#mp_table{
+		background-color: dimgrey;
+		color: white;
+		text-align:center;
 		width: 80%;
+		height: 120px;
 	}
-	#allMTable{
-		width: 100%;
-		border-spacing: 0 10px;
+	.mp_first{
+		border-bottom: 1px solid white;
+		border-right: 1px solid white;
+	}
+	.mp_third{
+		border-right: 1px solid white;
+		border-bottom : 1px solid white;
+		width: 25%;
+	}
+	.mp_second{
+		text-align: center;
+		border-bottom: 1px solid white;
+		/* border-top: 1px solid white; */
+	}
+	.mp_last{
+		border-bottom : 1px solid white;
+	}
+	#searchId{
+		height: 22px;
+		width: 150px;
+	}
+	#deleteMemberBtn{
+		background-color: red;
+		color: white;
+		width: 200px;
+		font-size: 20px;
+		height: 36px;
+		border-radius: 200px;
+		line-height: 33px;
 	}
 </style>
 </head>
@@ -131,73 +119,136 @@
 			<h2 id="mypage">마이페이지</h2>
 			<hr class="hline">
 			
-			<div id="mp_info"><%= loginUser.getUserName() %>님의 마이페이지입니다.</div>
+			<div id="mp_info">관리자 마이페이지입니다.</div>
 			<a href="javascript:void(0);" onclick="letterPopup();"><img id="send" src="/Watch_Next/Resources/images/쪽지.png"></a>
 			<script>
 			function letterPopup(){
 				window.open('<%=request.getContextPath()%>/letter.view','letter','width=700, height=700, left=100, top=50');
 			}
 			</script>
-			<br>
-			<br>
-			<form id="mp_profile" class="mp_profile" action="<%= request.getContextPath() %>/view/myPage/checkPwd.jsp">
-				<div id="mp_tabled">
-					<table id="mp_table">
-						<tr>
-							<td class="mp_first">아이디</td>
-							<td class="mp_second" height="30px"><%= loginUser.getUserId() %></td>
-						</tr>
-						<tr>
-							<td class="mp_first">이름</td>
-							<td class="mp_second" height="30px"><%= loginUser.getUserName() %></td>
-						</tr>
-						<tr>
-							<td class="mp_first">전화번호</td>
-							<td class="mp_second" height="30px"><%= loginUser.getPhone() %></td>
-						</tr>
-						<tr>
-							<td class="mp_first">이메일</td>
-							<td class="mp_second" height="30px"><%= loginUser.getEmail() %></td>
-						</tr>
-						<tr>
-							<td class="mp_last">메일링 서비스 여부</td>
-							<td id="mp_second" height="30px"><%= loginUser.getMailingYN() %></td>
-						</tr>
-					</table>
-				</div>
-				<button type="submit" id="mp_update">정보수정</button>
-			</form>
+			
+			<div id="mWrite" onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화 작성 페이지 연결</div>
+			
 			<br><br><br>
 			<hr class="mp_hline">
 			
-			<button onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_fundingWrite.jsp'">펀딩글 작성</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화글 작성</button>
+			<div id="mp_content1" class="mp_content">펀딩 요청 확인 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button1" class="mp_button">+</button>
+				<hr class="hline1">
+				<div class="mp_middle"></div>
+				<div id="mp_h_content1" class="mp_h_content">
+					내용
+				</div>
+			</div>
+			
+			
+			
+			<div id="mp_content2" class="mp_content">신고 확인 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button2" class="mp_button">+</button>
+				<hr class="hline1">
+				<div class="mp_middle"></div>
+				<div id="mp_h_content2" class="mp_h_content">
+					내용
+				</div>
+			</div>
+			
+			
+			
+			<div id="mp_content3" class="mp_content">회원 정보 조회 &nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" id="mp_button3" class="mp_button">+</button>
+				<hr class="hline1">
+				<div class="mp_middle"></div>
+				<div id="mp_h_content3" class="mp_h_content">
+					검색할 아이디 : <input type="text" id="searchId"> <button id="searchIdBtn">검색</button>
+					<br><br>
+					<div id="mp_tabled">
+						<table id="mp_table">
+							<tr>
+								<td class="mp_first" colspan="2">아이디</td>
+								<td id="sUid" class="mp_second" colspan="2"></td>
+							</tr>
+							<tr>
+								<td class="mp_first" colspan="2">이름</td>
+								<td id="sUname" class="mp_second" colspan="2"></td>
+							</tr>
+							<tr>
+							<td class="mp_third">게시글 수</td>
+								<td class="mp_third" id="sUcboard"></td>
+								<td class="mp_third">댓글 수</td>
+								<td class="mp_last" id="sUccom"></td>
+							</tr>
+						</table>
+					</div>
+					<br>
+					<div id="deleteMemberBtn">해당 회원 강제 탈퇴</div>
+				</div>
+			</div>
 			
 		</div>
 	</section>
 	<script>
-		/* $(function(){
-			$('#mp_button1').click(function(){
-				$('#mp_h_content1').slideToggle();
-			});
-			$('#mp_button2').click(function(){
-				$('#mp_h_content2').slideToggle();
-			});
-			$('#mp_button3').click(function(){
-				$('#mp_h_content3').slideToggle();
-			});
-			$('#mp_button4').click(function(){
-				$('#mp_h_content4').slideToggle();
-			});
-			$('#mp_button5').click(function(){
-				$('#mp_h_content5').slideToggle();
-			});
-		}); */
 		
-		$('#mp_button4').click(function(){
-			$('#mp_h_content4').slideToggle();
+		$('#mp_button1').click(function(){
+			$('#mp_h_content1').slideToggle();
 		});
 		
+		$('#mp_button2').click(function(){
+			$('#mp_h_content2').slideToggle();
+		});
+		
+		$('#mp_button3').click(function(){
+			$('#mp_h_content3').slideToggle();
+		});
+		
+		$('#searchIdBtn').click(function(){
+			var searchUser = $('#searchId').val();
+			/* console.log(searchUser); */
+			$.ajax({
+				url : "../../searchUser.do",
+				data : {searchUser:searchUser},
+				success: function(data){
+					console.log('성공');
+					console.log(data);
+					console.log(typeof(data));
+					if(data != null){
+						$('#sUid').text(data.userId);
+						$('#sUname').text(data.userName);
+						$('#sUcboard').text(data.countBoard);
+						$('#sUccom').text(data.countComment);
+					}else{
+						console.log('없는 회원');
+						alert('존재하지 않는 회원입니다.');
+					}
+				}
+			});
+		});
+		
+		$('#deleteMemberBtn').click(function(){
+			var searchId = $('#sUid').text();
+			console.log("아이디인데 : " + searchId);
+			if(confirm('정말 회원을 삭제하시겠습니까?') == true){
+				$.ajax({
+					url : "../../deleteUser.me",
+					data : {searchId:searchId},
+					success: function(data){
+						console.log('성공222');
+						$('#searchId').val('');
+						$('#sUid').text('');
+						$('#sUname').text('');
+						$('#sUcboard').text('');
+						$('#sUccom').text('');
+						alert('회원의 강제 탈퇴가 되었습니다.');
+					}
+				});
+			}else{
+				$('#searchId').val('');
+				$('#sUid').text('');
+				$('#sUname').text('');
+				$('#sUcboard').text('');
+				$('#sUccom').text('');
+				alert('회원 삭제를 취소하였습니다.');
+			}
+		});
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>

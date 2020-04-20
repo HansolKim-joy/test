@@ -13,6 +13,7 @@ public class Comment {
 	private String status;
 	private String bTitle;
 	private String mTitle;
+	private String bWriter;
 	
 	public String getmTitle() {
 		return mTitle;
@@ -43,10 +44,10 @@ public class Comment {
 	}
 	
 	// 한솔
-	public Comment(int refBid, String rWriter, String bTitle, String mTitle, String rContent, Date createDate) {
+	public Comment(int refBid, String bWriter, String bTitle, String mTitle, String rContent, Date createDate) {
 		super();
 		this.refBid = refBid;
-		this.rWriter = rWriter;
+		this.bWriter = bWriter;
 		this.bTitle = bTitle;
 		this.mTitle = mTitle;
 		this.rContent = rContent;
@@ -122,6 +123,14 @@ public class Comment {
 	
 	public void setbTitle(String bTitle) {
 		this.bTitle = bTitle;
+	}
+
+	public String getbWriter() {
+		return bWriter;
+	}
+
+	public void setbWriter(String bWriter) {
+		this.bWriter = bWriter;
 	}
 	
 }
