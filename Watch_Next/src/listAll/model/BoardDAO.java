@@ -48,9 +48,13 @@ public class BoardDAO {
 			rset = pstmt.executeQuery();
 //			System.out.println("DAO" + rset);
 			while(rset.next()) {
-				r = new Review(rset.getInt("board_no"), rset.getString("board_title"), 
-								rset.getInt("board_views"), rset.getDate("board_date"),
-								rset.getInt("review_grade"), rset.getString("review_movie_title"));
+				r = new Review(rset.getInt("board_no"), 
+								rset.getString("spo_chk_yn"),
+								rset.getString("board_title"), 
+								rset.getInt("board_views"), 
+								rset.getDate("board_date"),
+								rset.getInt("review_grade"), 
+								rset.getString("review_movie_title"));
 				
 				ReviewList.add(r);
 			}
@@ -127,9 +131,9 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Comment co = null;
-		ArrayList<Comment> CommentList = new ArrayList<Comment>();
+		ArrayList<Comment> ReviewComlist = new ArrayList<Comment>();
 		
-		String query = prop.getProperty("selectCom");
+		String query = prop.getProperty("selectRvCom");
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
@@ -138,14 +142,14 @@ public class BoardDAO {
 			
 			while(rset.next()) {
 				co = new Comment(rset.getInt("board_no"),
-								rset.getString("user_id"),
+								rset.getString("bwriter"),
 								rset.getString("board_title"),
 								rset.getString("review_movie_title"),
 								rset.getString("comments_cotent"),
 								rset.getDate("comments_date"));
 				
 				System.out.println("dao" + co);
-				CommentList.add(co);
+				ReviewComlist.add(co);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,7 +157,38 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return CommentList;
+		return ReviewComlist;
+	}
+	public ArrayList<Comment> selectRcComment(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Comment co = null;
+		ArrayList<Comment> RecruitComlist = new ArrayList<Comment>();
+		
+		String query = prop.getProperty("selectRcCom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				co = new Comment(rset.getInt("board_no"),
+									rset.getString("bwriter"),
+									rset.getString("board_title"),
+									rset.getString("recruit_head"), 
+									rset.getString("comments_cotent"),
+									rset.getDate("comments_date"));
+				RecruitComlist.add(co);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return RecruitComlist;
 	}
 	
 }

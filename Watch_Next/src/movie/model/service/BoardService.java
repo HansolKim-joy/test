@@ -142,8 +142,16 @@ public class BoardService {
 	public ArrayList<Comment> selectComment(String userId) {
 		Connection conn = getConnection();
 		
-		ArrayList<Comment> CommentList = new BoardDAO().selectComment(conn, userId);
+		ArrayList<Comment> ReviewComlist = new BoardDAO().selectComment(conn, userId);
 		close(conn);
-		return CommentList;
+		return ReviewComlist;
+	}
+
+	public ArrayList<Comment> selectRcComment(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Comment> RecruitComlist = new BoardDAO().selectRcComment(conn, userId);
+		close(conn);
+		return RecruitComlist;
 	}
 }

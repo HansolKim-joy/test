@@ -8,9 +8,9 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import common.Comment;
 import review.model.dao.ReviewDAO;
 import review.model.vo.Review;
-import review.model.vo.ReviewReply;
 
 public class ReviewService {
 
@@ -77,9 +77,9 @@ public class ReviewService {
 		return review;
 	}
 	
-	public ArrayList<ReviewReply> selectReplyList(int rv) {
+	public ArrayList<Comment> selectReplyList(int rv) {
 		Connection conn = getConnection();
-		ArrayList<ReviewReply> list = new ReviewDAO().selectReplyList(conn, rv);
+		ArrayList<Comment> list = new ReviewDAO().selectReplyList(conn, rv);
 		
 		close(conn);
 		
@@ -87,12 +87,12 @@ public class ReviewService {
 	}
 
 
-	public ArrayList<ReviewReply> insertReply(ReviewReply re) {
+	public ArrayList<Comment> insertReply(Comment re) {
 		Connection conn = getConnection();
 		ReviewDAO rDAO = new ReviewDAO();
 		
 		int result = rDAO.insertReply(conn, re);
-		ArrayList<ReviewReply> rList = null;
+		ArrayList<Comment> rList = null;
 		
 		if(result>0) {
 			commit(conn);

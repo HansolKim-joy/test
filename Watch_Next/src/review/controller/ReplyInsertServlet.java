@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import common.Comment;
 import review.model.service.ReviewService;
-import review.model.vo.ReviewReply;
 
 /**
  * Servlet implementation class ReplyInsertServlet
@@ -38,12 +38,12 @@ public class ReplyInsertServlet extends HttpServlet {
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		System.out.println(bid);
 		
-		ReviewReply re = new ReviewReply();
+		Comment re = new Comment ();
 		re.setrWriter(writer);
 		re.setrContent(content);
 		re.setRefBid(bid);
 		
-		ArrayList<ReviewReply> list = new ReviewService().insertReply(re);
+		ArrayList<Comment> list = new ReviewService().insertReply(re);
 		response.setContentType("applicaiton/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
 		
