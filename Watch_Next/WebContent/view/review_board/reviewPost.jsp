@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="review.model.vo.*, java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="review.model.vo.*, java.util.ArrayList, common.Comment" %>
 <%
 	Review r = (Review)request.getAttribute("review");
-	ArrayList<ReviewReply> list = (ArrayList<ReviewReply>)request.getAttribute("list");
+	ArrayList<Comment> list = (ArrayList<Comment>)request.getAttribute("list");
 	char chk = (char)request.getAttribute("chk");
 %>
 <!DOCTYPE html>

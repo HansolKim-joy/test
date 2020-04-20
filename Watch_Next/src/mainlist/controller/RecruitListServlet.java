@@ -1,4 +1,4 @@
-package review.controller;
+package mainlist.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import common.Comment;
-import review.model.service.ReviewService;
+import mainlist.model.service.mainlistService;
+import recruit.model.vo.Recruit;
 
 /**
- * Servlet implementation class ReplyInsertServlet
+ * Servlet implementation class RecruitListServlet
  */
-@WebServlet("/insertReply.rv")
-public class ReplyInsertServlet extends HttpServlet {
+@WebServlet("/listRecruit.vo")
+public class RecruitListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReplyInsertServlet() {
+    public RecruitListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +31,7 @@ public class ReplyInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String writer = request.getParameter("writer");
-		String content = request.getParameter("content");
-		int bid = Integer.parseInt(request.getParameter("bid"));
-		System.out.println(bid);
-		
-		Comment re = new Comment ();
-		re.setrWriter(writer);
-		re.setrContent(content);
-		re.setRefBid(bid);
-		
-		ArrayList<Comment> list = new ReviewService().insertReply(re);
-		response.setContentType("applicaiton/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
-		
+//	ArrayList<Recruit> list = new mainlistService().selectRelist();
 	}
 
 	/**

@@ -19,63 +19,67 @@ import member.model.vo.Member;
 @WebServlet("/update.me")
 public class memberCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public memberCheckServlet() { 
-        super();
-        // TODO Auto-generated constructor stub
-    }
- 
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public memberCheckServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String userId = request.getParameter("userId");
 		String inputPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
 		String userMailing = request.getParameter("mailing");
-		
-		System.out.println(userId + ", " + inputPwd + ", " + userName + ", " + userEmail + ","
-				+ userPhone + ", " + userMailing);
-		
+
+		System.out.println(
+				userId + ", " + inputPwd + ", " + userName + ", " + userEmail + "," + userPhone + ", " + userMailing);
+
 		HttpSession session = request.getSession();
-		Member loginUser = (Member)session.getAttribute("loginUser");
+		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userPwd = "";
-		if(inputPwd == null && inputPwd.equals(loginUser.getUserPwd())) {
+		if (inputPwd == null && inputPwd.equals(loginUser.getUserPwd())) {
 			userPwd = loginUser.getUserPwd();
-		}else {
+		} else {
 			userPwd = inputPwd;
 		}
-		
+
 		Member member = new Member(userId, userPwd, userName, userPhone, userEmail, userMailing, "N", "N");
-		
+
 		Member m = new MemberService().updateMember(member);
-		
+
 		System.out.println(m);
-		
+
 		String page = null;
-		if(m != null) {
+		if (m != null) {
 			page = "/view/myPage/myPageMain.jsp";
 			session.setAttribute("loginUser", m);
-		}else {
+		} else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
 		}
-		
+
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

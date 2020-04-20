@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList, recruit.model.vo.*" %>
+	
+<% 
+	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
-<script src="/Watch_Next/WebContent/Resources/js/Index.js"></script>
+<!-- <script src="/Watch_Next/WebContent/Resources/js/Index.js"></script> -->
 <script>
 $(document).ready(function() { 
     $(".pp_slider").lightSlider({
@@ -51,7 +55,8 @@ $(document).ready(function() {
             <ul id="pp_slider" class="pp_slider">
                 <li class="pp_item">
                 	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster1"></div>
-                	<div class="pp_item1"></div>
+               		<div class="pp_item1"></div>
+                	
                 </li>
                 <li class="pp_item">
                 	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></div>
@@ -72,7 +77,7 @@ $(document).ready(function() {
 		<h3>리뷰 게시판</h3>
 
 		<hr class="hline">
-		<table>
+		<table id="mainReviewBody">
 			<tr>
 				<th id="num">번호</th>
 				<th id="category">말머리</th>
@@ -140,14 +145,20 @@ $(document).ready(function() {
 				<th id="writer">글쓴이</th>
 				<th id="hits">조회</th>
 			</tr>
+				<% if(RecruitList == null) { %>
+					
+				<% } else { %>
+					<% for(int i = 0; i < RecruitList.size(); i++) {%>
 			<tr>
-				<td>203</td>
-				<td>NETFLIX</td>
-				<td>모집제목입니다</td>
-				<td>2020-03-20</td>
-				<td>아이디</td>
-				<td>4</td>
+				<td><%= RecruitList.get(i).getrNo() %></td>
+				<td><%= RecruitList.get(i).getUserId() %></td>
+				<td><%= RecruitList.get(i).getbTitle() %></td>
+				<td><%= RecruitList.get(i).getbViews() %></td>
+				<td><%= RecruitList.get(i).getbDate() %></td>
+				<td><%= RecruitList.get(i).getrHead() %></td>
 			</tr>
+			<% } %>
+		<% } %>
 			<tr>
 				<td>203</td>
 				<td>NETFLIX</td>
@@ -186,6 +197,39 @@ $(document).ready(function() {
 	<!-- footer -->
 	<%@ include file="/view/layout/footer.jsp" %>
 </div>
+<script>
+
+	// ajax는 데이터를 보내고 받아 올 때 사용한다 ex) 댓글 순, 중복확인, 좋아요 순 등등
+// 	$(document).ready(function(){
+		
+// 		$.ajax({
+// 			url: 'listRecruit.vo',
+// 			success:function(data){
+// 				$tableBody = $('#mainWantedBody tbody');
+// 				$tableBody.html("");
+				
+// 				for(var i in data){
+// 					var $tr = $("<tr>");
+// 					var $numTd = $("<td>").text(data[i].rNo);
+// 					var $writerTd = $("<td>").text(data[i].userId);
+// 					var $titleTd = $("<td>").text(data[i].bTitle);
+// 					var $hitsTd = $("<td>").text(data[i].bViews);
+// 					var $dateTd = $("<td>").text(data[i].bDate);
+// 					var $categoryTd = $("<td>").text(data[i].rHead);
+				
+// 					$tr.append($numTd);				
+// 					$tr.append($writerTd);				
+// 					$tr.append($titleTd);				
+// 					$tr.append($hitsTd);
+// 					$tr.append($dateTd);				
+// 					$tr.append($categoryTd);				
+// 					$tableBody.append($tr);
+// 				}
+// 				console.log(data);
+// 			}
+// 		});
+// 	});
+</script>
 
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
 </body>

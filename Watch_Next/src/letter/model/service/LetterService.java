@@ -62,7 +62,7 @@ public class LetterService {
 	public Letter getDetailLetter(int no, String chk) {
 		Connection conn = getConnection();
 		Letter l = new LetterDAO().getDetailLetter(conn, no);
-		if(chk == null) {
+		if(chk.equals("null")) {
 			int result = new LetterDAO().updateStatus(conn, no);
 			if(result > 0) {
 				commit(conn);

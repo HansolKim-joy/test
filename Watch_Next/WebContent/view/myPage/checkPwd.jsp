@@ -56,7 +56,7 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-	<form action="<%= request.getContextPath() %>/view/myPage/checkUser.jsp">
+	<form action="<%= request.getContextPath() %>/view/myPage/checkUser.jsp" method="post">
 		<div id="checkPwdMain">
 				<div id="checkPwdHead">비밀번호 확인</div>
 				<br>		

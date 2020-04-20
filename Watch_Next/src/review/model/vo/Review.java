@@ -96,13 +96,15 @@ public class Review {
 	}
 
 	// 한솔
-	public Review(int bNo, String bTitle, int bCount, Date bDate, int popcorn) {
+	public Review(int bNo, String spo, String bTitle, int bCount, Date bDate, int popcorn, String mTitle) {
 		super();
 		this.bNo = bNo;
+		this.spo = spo;
 		this.bTitle = bTitle;
 		this.bCount = bCount;
 		this.bDate = bDate;
 		this.popcorn = popcorn;
+		this.mTitle = mTitle;
 	}
 	
 	// 좋아요 용
