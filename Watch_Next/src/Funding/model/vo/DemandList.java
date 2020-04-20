@@ -4,19 +4,21 @@ package Funding.model.vo;
 public class DemandList {
 	private int dNo;
 	private int FileNo;
+	private String Title;
 	private String FileName;
-	private int minPeople;
+	private int price;
 	private int EndDay;
 
 	public DemandList() {}
 
-	public DemandList(int dNo, int fileNo, String fileName, int minPeople, int endDay) {
+	public DemandList(int dNo, int fileNo, String Title, String fileName, int price, int endDay) {
 		super();
 		this.dNo = dNo;
-		FileNo = fileNo;
-		FileName = fileName;
-		this.minPeople = minPeople;
-		EndDay = endDay;
+		this.FileNo = fileNo;
+		this.Title = Title;
+		this.FileName = fileName;
+		this.price = price;
+		this.EndDay = endDay;
 	}
 
 	public int getdNo() {
@@ -43,12 +45,12 @@ public class DemandList {
 		FileName = fileName;
 	}
 
-	public int getMinPeople() {
-		return minPeople;
+	public int getprice() {
+		return price;
 	}
 
-	public void setMinPeople(int minPeople) {
-		this.minPeople = minPeople;
+	public void setprice(int price) {
+		this.price = price;
 	}
 
 	public int getEndDay() {
@@ -58,12 +60,30 @@ public class DemandList {
 	public void setEndDay(int endDay) {
 		EndDay = endDay;
 	}
+	
+	public String getTitle() {
+		return Title;
+	}
+
+	public void setTitle(String title) {
+		Title = title;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	@Override
 	public String toString() {
-		return "DemandList [dNo=" + dNo + ", FileNo=" + FileNo + ", FileName=" + FileName + ", minPeople=" + minPeople
-				+ ", EndDay=" + EndDay + "]";
+		return "DemandList [dNo=" + dNo + ", FileNo=" + FileNo + ", Title=" + Title + ", FileName=" + FileName
+				+ ", price=" + price + ", EndDay=" + EndDay + "]";
 	}
+
+	
 	
 	
 

@@ -51,8 +51,8 @@ public class DemandListServlet extends HttpServlet {
 		}
 		 
 		maxPage = (int)((double)ListCount / boardLimit + 0.9);
-		 
-		startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1;
+		System.out.println(maxPage);
+		startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1; // 1.0/10 + 0.9
 		  
 		endPage = pageLimit + startPage - 1;
 		

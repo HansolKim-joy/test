@@ -12,16 +12,16 @@ import Funding.model.service.DemandService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class DemandWantServlet
+ * Servlet implementation class DemandNotWantServlet
  */
-@WebServlet("/demand.putWant")
-public class DemandWantServlet extends HttpServlet {
+@WebServlet("/demand.notFund")
+public class DemandNotFundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DemandWantServlet() {
+    public DemandNotFundServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +35,9 @@ public class DemandWantServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		int result = new DemandService().putWant(no, userId, dUserId);
+		int result = new DemandService().notFund(no, dUserId, userId);
 		String page = request.getContextPath() + "/demand.detail?no=" + no;
 		response.sendRedirect(page);
-		
-		
-		
-		
 	}
 
 	/**

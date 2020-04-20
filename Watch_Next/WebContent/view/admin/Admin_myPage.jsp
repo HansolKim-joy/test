@@ -126,9 +126,8 @@
 				window.open('<%=request.getContextPath()%>/letter.view','letter','width=700, height=700, left=100, top=50');
 			}
 			</script>
-			
-			<div id="mWrite" onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화 작성 페이지 연결</div>
-			
+			<button onclick="location.href='<%= request.getContextPath() %>/fundingList.adm'">펀딩글 작성</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화글 작성</button>
 			<br><br><br>
 			<hr class="mp_hline">
 			

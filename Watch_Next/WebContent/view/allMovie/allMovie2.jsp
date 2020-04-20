@@ -5,11 +5,16 @@
 	ArrayList<Movie> mlist = (ArrayList<Movie>)request.getAttribute("mlist");
 	ArrayList<String> fNameList = (ArrayList<String>)request.getAttribute("fNameList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	
+	int currentPage = 1;
+	int maxPage = 1;
+	int startPage = 1;
+	int endPage = 1;
+	if(pi != null){
+		currentPage = pi.getCurrentPage();
+		maxPage = pi.getMaxPage();
+		startPage = pi.getStartPage();
+		endPage = pi.getEndPage();
+	}
 	int moviecheck = 1;
 %>
 <!DOCTYPE html>

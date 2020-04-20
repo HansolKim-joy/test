@@ -81,10 +81,12 @@
 			margin: 0 auto;}
 	
 		/* 페이징 */
-.list_number{position:absolute; left:39%; text-align:center; display:inline-block; float:left;}
-.list_n_menu {padding:3px; MARGIN:3px; TEXT-ALIGN: center}
-.list_n_menu a {padding:5px 8px 4px 8px; MARGIN: 2px; BORDER: #ccc 1px solid; COLOR: white; TEXT-DECORATION: none}
-.list_n_menu a:hover {BORDER:red 1px solid; COLOR: red;}
-.list_n_menu a:active {BORDER:red 1px solid; COLOR: red;}
-.list_n_menu.current {BORDER: gray 1px solid; padding:5px 8px 4px 8px; FONT-WEIGHT: bold; MARGIN: 2px; COLOR: gray;}
-.list_n_menu.prev {BORDER: white 1px solid; padding:5px 8px 4px 8px; MARGIN: 2px; COLOR: white;}
+.pagingArea button{padding:5px 8px 4px 8px; color:white; font-size:12px; border:1px solid gray; background: transparent;}
+button:hover{color: red; border:red 1px solid;}
+button:focus {outline: none;}
+#numBtn{background: #transparent;}
+#choosen{background: #transparent;}	
+
+	/*글쓰기 */
+#write{position:absolute; left:1250px; background-color:red; color:white;
+		border:none; border-radius:5px; font-size:14px; height:25px;}	

@@ -69,7 +69,7 @@ public class RecruitUpdateServlet extends HttpServlet {
 			page = "/detail.recruit?rNo=" + rNo;
 		}else {
 			page = "view/errorPage/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 수정에 실패하였습니다.");
+			request.setAttribute("msg", "모집게시글 수정에 실패하였습니다.");
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);

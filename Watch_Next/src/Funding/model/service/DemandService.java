@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import Funding.model.dao.DemandDAO;
 import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
-import Funding.model.vo.DemandWant;
 
 public class DemandService {
 
@@ -23,7 +22,7 @@ public class DemandService {
 		
 		return result;
 	}
-
+	
 	public ArrayList<DemandList> selectList(int currentPage, int boardLimit) {
 		Connection conn = getConnection();
 		ArrayList<DemandList> list = new DemandDAO().selectList(conn,currentPage,boardLimit);
@@ -79,36 +78,88 @@ public class DemandService {
 		return smName;
 	}
 
-	public char getWant(String userId, int no) {
+	public char getFund(String userId, int no, String duserId) {
+        Connection conn = getConnection();
+        char chk = new DemandDAO().getFund(conn, userId, no, duserId);
+        close(conn);
+        return chk;
+    }
+
+    public int putFund(int no, String userId, String dUserId, int price) {
+        Connection conn = getConnection();
+        int result = new DemandDAO().putFund(conn, no, userId, dUserId, price);
+        if(result > 0) {
+            commit(conn);
+        }else {
+            rollback(conn);
+        }
+        close(conn);
+        return result;
+    }
+
+    public int notFund(int no, String dUserId, String userId) {
+        Connection conn = getConnection();
+        int result = new DemandDAO().notFund(conn, no, userId, dUserId);
+        if(result > 0) {
+            commit(conn);
+        }else {
+            rollback(conn);
+        }
+        close(conn);
+        return result;
+    }
+    
+	public ArrayList<DemandList> SortList(int currentPage, int boardLimit, String cinema) {
 		Connection conn = getConnection();
-		char chk = new DemandDAO().getWant(conn, userId, no);
+		ArrayList<DemandList> list = new DemandDAO().SortList(conn, currentPage, boardLimit, cinema);
 		close(conn);
-		return chk;
+		
+		return list;
 	}
 
-	public int putWant(int no, String userId, String dUserId) {
+	public ArrayList<DemandList> adminFunding(int currentPage, int boardLimit) {
 		Connection conn = getConnection();
-		int result = new DemandDAO().putWant(conn, no, userId, dUserId);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		ArrayList<DemandList> list = new DemandDAO().AdminFunding(conn, currentPage, boardLimit);
 		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<DemandList> AdminSortList(int currentPage, int boardLimit, String cinema) {
+		Connection conn = getConnection();
+		ArrayList<DemandList> list = new DemandDAO().AdminSortList(conn, currentPage, boardLimit, cinema);
+		System.out.println("service" + cinema);
+		close(conn);
+		
+		return list;
+	}
+
+	public int getSortListCount(String cinema) {
+		Connection conn = getConnection();
+		
+		int result = new DemandDAO().getSortListCount(conn, cinema);
+		System.out.println("서비스 : " + result);
+		close(conn);
+		
 		return result;
 	}
 
-	public int notWant(int no, String dUserId, String userId) {
+	public int getAdListCount() {
 		Connection conn = getConnection();
-		int result = new DemandDAO().notWant(conn, no, userId, dUserId);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		
+		int result = new DemandDAO().getAdListCount(conn);
 		close(conn);
+		
 		return result;
 	}
 	
+	public int getAdSortListCount(String cinema) {
+		Connection conn = getConnection();
+		
+		int result = new DemandDAO().getAdSortListCount(conn, cinema);
+		close(conn);
+		
+		return result;
+	}
 	
 }

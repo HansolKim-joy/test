@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="create.model.vo.*, java.sql.Date"%>
+<%
+	Create create = (Create)request.getAttribute("create");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +70,7 @@
 <%@ include file="/view/layout/Header.jsp" %>
 	<!-- 창작 게시판 작성 -->
 <br clear="all">
-<form>
+<form action="<%= request.getContextPath() %>/insert.cr">
 	<div id="creW_create">
 		<h2><strong>창작 게시판 작성</strong></h2>
 		<hr id="red_line">
