@@ -1,10 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="create.model.vo.*, java.util.ArrayList, common.Comment"      %>
+<%
+	Create c = (Create)request.getAttribute("create");
+	ArrayList<Comment> comment = (ArrayList<Comment>)request.getAttribute("comment");
+	char chk = (char)request.getAttribute("chk");
+	
+ %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>insert title</title>
+<title>창작글 상세보기</title>
+<style>
+	.like{width:35px; height:35px;}
+	.likeb{background-color:transparent; border:none;}
+	#fo,#my,#nf,#le{cursor: pointer}
+#fo:hover{text-decoration: underline;}
+#my:hover{text-decoration: underline;}
+#nf:hover{text-decoration: underline;}
+#le:hover{text-decoration: underline;}
+</style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -19,113 +34,287 @@
 <section>
 
 	<!-- 창작 게시판 상세 -->
-<div id="createp">
-	<h2 id="ch2"><strong>창작 게시판</strong></h2>
-	<hr class="hline">
-	
-	<div id="box">
-    
-<div id="cfilm">
-	<label id=cctitle>댄스영화 유월</label><label id=ccdirector>&nbsp;/&nbsp;베프</label>
-</div>
-  
-<hr>
+		<div id="createp">
+			<h2 style="color: white; font-size: 30px;">창작 게시글 상세보기</h2>
+			<hr class="hline">
+			
+			<form action="view/create/createUpdate.jsp" id="detailForm" name="detailForm">
+			<div id="box">
 
-<div id="wInfo">
-<table>
-	<tr>
-		<td width="850px" style="font-size:17px;"></td>
-		<td width="80px" style="font-size:17px;">글쓴이 : </td>
-		<td width="70px" style="font-size:17px;" id="rpWriter">
-			<ul>
-				<li>
-					kimsj
-					<ul>
-						<li><a href='#'>쪽지보내기</a></li>
-						<li><a href='#'>팔로우하기</a></li>
-					</ul>
-				</li>
-			</ul>
-		</td>
-		<td width="70px" style="font-size:17px;">날짜 : </td>
-      	<td width="150px" style="font-size:17px;">2020-03-26</td>
-      	<td width="80px" style="font-size:17px;">조회수 : </td>
-      	<td width="70px" style="font-size:17px;">3</td>
-	</tr>
-</table>
-</div>
+				<div id="cfilm">
+					<b>
+					<%-- <%= c.getbTitle() %> --%>
+					<input type="text" readonly="<%= c.getbTitle() %>" value="<%= c.getbTitle() %>" name="cTitle" style="border:0; ,font-size: 20px;">	
+					/</b>&nbsp; 
+					<input type="text" readonly="<%= c.getcDirector() %>" id="cDirector" name="cDirector" value="<%= c.getcDirector() %>" style="border: 0; font-size: 17px;">
+					
+					<input id="cNo" type="hidden" name="cNo" value="<%= c.getbNO() %>">
+				</div>
 
-<hr>
+				<hr>
 
+				<div id="wInfo">
+					<table>
+						<tr>
+							<td width="850px" style="font-size: 17px;"></td>
+							<td width="80px" style="font-size: 17px;">글쓴이 :</td>
+							<td width="70px" style="font-size: 17px;" id="rpWriter">
+								<ul>
+									<li>
+										<input type="hidden"  name="rpWriter" value="<%= c.getbWriter()%>"><%= c.getbWriter() %>
+										<ul>
+											<li>
+												<a id="le" onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
+												'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
+												쪽지보내기</a>
+											</li>
+											<li>
+												<% if(loginUser != null && !loginUser.getUserId().equals(c.getbWriter())) {%>
+												<a id="fo" onclick="follow();">팔로우하기</a>
+												<%} else if(loginUser != null && loginUser.getUserId().equals(c.getbWriter())) { %>
+												<a id="my" onclick="location.href='<%= request.getContextPath() %>/view/myPage/myPageMain.jsp'">마이페이지</a>
+												<%} else {%>
+												<a id="nf" onclick="#">팔로우 해지</a>
+												<%} %>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</td>
+							<td width="70px" style="font-size: 17px;">날짜 :</td>
+							<td width="150px" style="font-size: 17px;"><%=c.getcDate() %></td>
+							<td width="80px" style="font-size: 17px;">조회수 :</td>
+							<td width="70px" style="font-size: 17px;"><%= c.getbCount() %></td>
+						</tr>
+					</table>
+				</div>
 
-<div id="content">
-
-  <div id="film">
-  	<iframe width="560" height="315" src="https://www.youtube.com/embed/zOXFqZ9rGUo"></iframe><br>
-  </div>
-  
-  <br><br>
-  <div id="cpinfo">
-  <p>
-	
-	■ 영 화 명 : 유월<br>
-	■ 제 작 사 : 한국예술종합학교 영화과 예술사 졸업작품워크샵<br>
-	■ 감    독 : 베프<br>
-	■ 줄거리 : 한시도 몸을 가만두지 않고 춤추는 소년 유월은 어느날 사립초등학교에 발발한 집단무용증(a.k.a. 댄스바이러스)의 원흉으로 지목당하며, 질서에 목매는 담임선생 혜림과 옆반 선생들에게 추격당하기 시작하는데… 
-
-	</p>
-
-	</div>
-</div>
-
-	<!-- 기대돼요 신고버튼 -->
-<br><br>
-<div id="btn">
-	<button id="expect" onclick="alert('기대돼요를 눌렀습니다')">기대돼요</button>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#" target="_self">
-		<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px"
-			onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop', 
-								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
-	</a>
-</div>
+				<hr>
 
 
-</div>
+				<div id="content">
+
+					<div id="film">
+						<iframe width="560" height="315"
+							src="https://www.youtube.com/embed/zOXFqZ9rGUo"></iframe>
+						<br>
+					</div>
+
+					<br>
+					<br>
+					<div id="cpinfo">
+						<p style="font-size:15px;"> 
+							<%=c.getbContent() %>
+							<input type="hidden" name="bContent" class="content" value="<%= c.getbContent() %>">
+							
+						</p>
+
+					</div>
+				</div>
+
+				<!-- 기대돼요 신고버튼 -->
+				<br>
+				<br>
+				<table style="margin-left: auto; margin-right: auto; margin-bottom:10px; text-align: center; font-size:15px; color:red;">
+						<tr>
+							<td>	
+									<% if(chk == 'N' || chk==0) {%>
+							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
+									<% } else if(chk =='Y') {%>
+										<button type="button" class="likeb" onclick="onNoLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/likeee.png"></button>
+									<% } %>
+									<script>
+										function onLike(){
+											var rv = <%=c.getbNO() %>;
+ 											location.href="<%=request.getContextPath()%>/putLike.rv?rv="+rv;
+										}
+										function onNoLike(){
+											var rv = <%= c.getbNO()%>;
+											location.href="<%=request.getContextPath()%>/notLike.rv?rv="+rv;
+										}
+									</script>
+							</td>
+							<td width=5px></td>
+							<td>
+
+									<input type="text" name="rbNo" value="<%= c.getbNO()%>">
+									<button type="button" value="popup" onclick="sendPop();">
+										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
+									</button>
+
+									
+
+									<script>
+									  function sendPop(){
+											var win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+											'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
+
+											win.document.getElementById("test").value="<%= c.getbNO() %>";
+										   }
+									
+ 									</script>
+							</td>
+							
+						</tr>
+							
+						<tr>
+							<td id="likeCnt"><%= c.getcLike()%></td>
+							<td></td>
+						</tr>
+					</table>
 
 
-    
-    <!-- 목록수정삭제 버튼 -->
-<div id=listbtn>
-	<button type=button title="수정" >수정</button>
-    <button type=button title="삭제" >삭제</button>&nbsp;&nbsp;&nbsp;
-    <button onclick="location.href='reviewList.html'"
-        		type=button title="목록" >목록</button>
-</div>
-
-    	<!-- 댓글 -->
-<div id="replybox1">
-<textarea id="reply_content" name="reply_content" rows="2" cols="167" 
-		  placeholder="댓글을 입력하세요." style="resize: none; border:none;"></textarea>
-</div>
-<button id="reply_save" onclick="alert('댓글작성 완료')">댓글 작성</button>
-
-<br clear="all">
-<div id="replybox2">
-<table>
-<tr><th>한나나</th>
-	<td><button type=button id=report onclick="window.open('reportPop.html', 'pop', 
-												'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button></td></tr>
-<tr><td colspan="2" style="font-size:14px;">재밌게 보고갑니다</td></tr>
-</table>
-</div>
-	
-</div>	
-
-</div>
+			</div>
 
 
-</section>
+
+			<!-- 목록수정삭제 버튼 -->
+			<div id=listbtn>
+			<% if(loginUser != null && loginUser.getUserId().equals(c.getbWriter())) { %>
+	        <button  class="lbtn" id="bupBtn" type=submit title="수정" >수정</button>
+	        <button  class="lbtn" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
+		    <% } %>
+		        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+			</div>
+			</form>
+			
+			 
+			<!-- 댓글 -->
+			<div id="replybox1">
+				<table>
+				<tr>
+					<td>
+						<textarea id="reply_content" name="reply_content" rows="2" cols="167"  
+					  placeholder="댓글을 입력하세요." ></textarea>
+					</td>
+					<td>
+						<button id="reply_save">댓글 작성</button>
+					</td>
+				</tr>
+				</table>
+			</div>
+			
+			<div id="replybox2">
+				<table id="replySelectTable" class="Comment">
+					<% if(comment.isEmpty()) { %>
+						<tr><td colspan=3 style="font-size:14px; text-align:center">댓글이 없습니다.</td></tr>
+					<% } else { %>
+						<% for(int i = 0; i < comment.size(); i++){ %>
+						<tr class="Comment2">
+							
+							<th><%= comment.get(i).getrWriter() %></th>
+							<td>
+								<% if(loginUser != null && loginUser.getUserId().equals(comment.get(i).getrWriter())) { %>
+									<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
+									<input type="button" value="삭제" class="deleteC">
+								<% } else {%>
+								<button type=button class=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+									'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
+									<% } %>
+							</td>
+						</tr>
+						<tr>	
+							<td colspan=2 style="font-size:14px">
+								<%= comment.get(i).getrContent() %>
+							</td>
+						</tr>
+							
+						<% } %>
+					<% } %>	
+				</table>
+		</div>
+
+		</div>
+		
+		<script>
+		//게시글삭제
+		function deleterv(){
+			var bool = confirm('정말 삭제하시겠습니까?');
+			if(bool) {
+				location.href="<%= request.getContextPath()%>/delete.cr?rNo="+"<%= c.getbNO()%>";
+			}
+		}
+		
+		//댓글삭제
+		$(document).on('click', '.deleteC', function(){
+				var rId = $(this).prev(".rId").val();
+				var rNo = $('#cNo').val();
+				$.ajax({
+					url: 'delete.co',
+					data: {rId:rId, rNo:rNo},
+					success: function(data){
+						$replyTable = $('.Comment');
+// 						$replyTable.html("");
+						
+// 						//console.log(data);
+						
+// 						for(var key in data){
+// 							var $tr = $('<tr class="Comment">');
+// 							var $writerTd = $('<td>').text(data[key].rWriter).css('color','red');
+// 							var $contentTd = $('<td>').text(data[key].rContent).css('font-size','14px');
+// 							var $buttonTd = $('<td><input type="button" value="삭제" class="deleteC"></td>').css('font-size','14px');
+							
+// 							$tr.append($writerTd);
+// 							$tr.append($contentTd);
+// 							$tr.append($buttonTd);
+// 							$replyTable.append($tr);
+// 						}
+						
+// 						$('#reply_content').val("");
+						
+						$("#replySelectTable").load(window.location.href + " #replySelectTable");
+					}
+				});
+			});
+			
+				//댓글작성
+				$('#reply_save').click(function(){
+				var writer = '<%= loginUser.getUserId() %>';
+				var rNo = '<%= c.getbNO() %>';
+				var content = $('#reply_content').val();
+				var rId = $('.rId').val();
+				
+				if($('#reply_content').val().trim().length == 0){
+					alert("댓글을 작성해주세요");
+				}else{
+					//alert("댓글 작성 완료");
+				}
+				
+				$.ajax({
+					url : 'insert.co',
+					data : {writer:writer, content:content, rNo:rNo},
+					success: function(data){
+						$replyTable = $("<table class='Comment' id='replySelectTable'></table>");
+						
+						$replyTable.html("");
+						
+						console.log(data);
+						
+						for(var key in data){
+							
+							var $tr = $('<tr class="Comment2"></tr>');
+							var $writerTd = $('<td>').text(data[key].rWriter);
+							var $contentTd = $('<td class="content">').text(data[key].rContent);
+							
+							
+							$tr.append($writerTd);
+							$tr.append($contentTd);
+							$replyTable.append($tr);
+						}
+						
+						$('#reply_content').val("");
+						
+						$("#replySelectTable").load(window.location.href + " #replySelectTable");
+					}
+				});
+			});
+		
+		
+		</script>
+
+
+
+	</section>
 
 
 <!-- footer -->

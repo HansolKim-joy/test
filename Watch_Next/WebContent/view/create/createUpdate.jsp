@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="create.model.vo.*, java.sql.Date"%>
-<%
-	Create create = (Create)request.getAttribute("create");
-%>    
+  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인</title>
+<title>창작게시물 수정</title>
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -70,9 +68,9 @@
 <%@ include file="/view/layout/Header.jsp" %>
 	<!-- 창작 게시판 작성 -->
 <br clear="all">
-<form action="<%= request.getContextPath() %>/insert.cr">
+<form action="<%= request.getContextPath() %>/update.cr">
 	<div id="creW_create">
-		<h2><strong>창작 게시판 작성</strong></h2>
+		<h2><strong>창작 게시판 수정</strong></h2>
 		<hr id="red_line">
 		<br>
 		<input type="hidden" name="cNo" value="<%= request.getParameter("cNo") %>">
@@ -91,7 +89,7 @@
 	<div id = "creW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="creW_button">
+	<input type="reset" value="취소" id="creW_button" onclick="location.href='javascript:histroy.go(-1);'">
 	<input type="submit" value="완료" id="creW_button" class="creW_submit">
 	</div>
 </form>
