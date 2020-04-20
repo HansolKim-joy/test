@@ -203,7 +203,6 @@ public class recruitService {
 	
 	 public ArrayList<Comment> deleteComment(int rId, int rNo) { 
 		 Connection conn = getConnection();
-		 System.out.println("servicebid "+rId);
 		 int result = new recruitDAO().deleteComment(conn, rId);
 		 if(result > 0) {
 			 commit(conn);

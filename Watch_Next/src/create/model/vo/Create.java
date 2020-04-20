@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Create {
 	private int rnum; //ROW NUM
 	private int bNO; //게시판 번호
+	private int fNo; //파일번호
 	private String bWriter; //올린사람
 	private String bTitle; //게시판제목
 	private String cDirector; //창작영화 감독
@@ -19,20 +20,22 @@ public class Create {
 	public Create() {}
 	
 	//insert(파일 추가전버전)
-	public Create(String bWriter, String bTitle, String cDirector, String bContent) {
+	public Create(String bWriter, String bTitle, String cDirector, String bContent, int fNo) {
 		super();
 		this.bWriter = bWriter;
 		this.bTitle = bTitle;
 		this.cDirector = cDirector;
 		this.bContent = bContent;
+		this.fNo = fNo;
 	}
 	
 	//전체생성자
-	public Create(int rnum, int bNO, String bWriter, String bTitle, String cDirector, String bContent, int cLike,
-			int bCount, int comm, String dec, Date cDate, String status) {
+	public Create(int rnum, int bNO, int fNo, String bWriter, String bTitle, String cDirector, String bContent,
+			int cLike, int bCount, int comm, String dec, Date cDate, String status) {
 		super();
 		this.rnum = rnum;
 		this.bNO = bNO;
+		this.fNo = fNo;
 		this.bWriter = bWriter;
 		this.bTitle = bTitle;
 		this.cDirector = cDirector;
@@ -44,6 +47,24 @@ public class Create {
 		this.cDate = cDate;
 		this.status = status;
 	}
+	
+	//게시글 상세조회
+	public Create(int rnum,int bNO, int fNo, String bWriter, String bTitle, String cDirector, String bContent, int cLike,
+			int bCount, int comm, Date cDate) {
+		super();
+		this.rnum = rnum;
+		this.bNO = bNO;
+		this.fNo = fNo;
+		this.bWriter = bWriter;
+		this.bTitle = bTitle;
+		this.cDirector = cDirector;
+		this.bContent = bContent;
+		this.cLike = cLike;
+		this.bCount = bCount;
+		this.comm = comm;
+		this.cDate = cDate;
+	}
+	
 
 	public int getRnum() {
 		return rnum;
@@ -140,13 +161,22 @@ public class Create {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	
+	public int getfNo() {
+		return fNo;
+	}
+
+	public void setfNo(int fNo) {
+		this.fNo = fNo;
+	}
 
 	@Override
 	public String toString() {
-		return "Create [rnum=" + rnum + ", bNO=" + bNO + ", bWriter=" + bWriter + ", bTitle=" + bTitle + ", cDirector="
-				+ cDirector + ", bContent=" + bContent + ", cLike=" + cLike + ", bCount=" + bCount + ", comm=" + comm
-				+ ", dec=" + dec + ", cDate=" + cDate + ", status=" + status + "]";
+		return "Create [rnum=" + rnum + ", bNO=" + bNO + ", fNo=" + fNo + ", bWriter=" + bWriter + ", bTitle=" + bTitle
+				+ ", cDirector=" + cDirector + ", bContent=" + bContent + ", cLike=" + cLike + ", bCount=" + bCount
+				+ ", comm=" + comm + ", dec=" + dec + ", cDate=" + cDate + ", status=" + status + "]";
 	}
-	
+
 	
 }

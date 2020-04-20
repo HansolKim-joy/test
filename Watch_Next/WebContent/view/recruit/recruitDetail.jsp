@@ -32,7 +32,7 @@
 
 <!-- 모집 게시판 상세 -->
 	<div id="recruitp">
-		<h2 style="color: white; font-size: 30px;">모집 게시판글 상세보기</h2>
+		<h2 style="color: white; font-size: 30px;">모집 게시글 상세보기</h2>
 		<hr class="hline">
 		
 		<form action="view/recruit/recruitUpdate.jsp" id="detailForm" name="detailForm">
@@ -47,10 +47,10 @@
 					
 					<input id="rNo" type="hidden" name="rNo" value="<%=r.getrNo() %>">
 				
-	</div>
+				</div>
   
 <hr>
-
+	
 	<div id="wInfo">
 		<table>
 			<tr>
@@ -67,13 +67,13 @@
 												쪽지보내기</a>
 								</li>
 								<li>
-								<% if(loginUser != null && !loginUser.getUserId().equals(r.getUserId())) {%>
-								<a id="fo" onclick="location.href='<%=request.getContextPath() %>/follow'">팔로우하기</a>
-								<%} else if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
-								<a id="my" onclick="location.href='<%= request.getContextPath() %>/view/myPage/myPageMain.jsp'">마이페이지</a>
-								<%} else {%>
-								<a id="nf" onclick="#">팔로우 해지</a>
-								<%} %>
+									<% if(loginUser != null && !loginUser.getUserId().equals(r.getUserId())) {%>
+									<a id="fo" onclick="follow();">팔로우하기</a>
+									<%} else if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
+									<a id="my" onclick="location.href='<%= request.getContextPath() %>/view/myPage/myPageMain.jsp'">마이페이지</a>
+									<%} else {%>
+									<a id="nf" onclick="#">팔로우 해지</a>
+									<%} %>
 								</li>
 							</ul>
 						</li>
@@ -262,7 +262,10 @@
 			});
 				
 				
-			
+			function follow(){
+				
+				location.href='<%=request.getContextPath() %>/follow';
+			}
 		</script>
 
 <!— footer —>

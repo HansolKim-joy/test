@@ -16,7 +16,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
-<!-- <script src="/Watch_Next/WebContent/Resources/js/Index.js"></script> -->
 <script>
 $(document).ready(function() { 
     $(".pp_slider").lightSlider({
@@ -34,7 +33,75 @@ $(document).ready(function() {
 <link rel="stylesheet" href="https://han3283.cafe24.com/js/lightslider/css/lightslider.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
-
+<style>
+	.tablename{
+		font-size: 25px;
+	}
+	.index_form{
+		positon: relative;
+		min-height: 100%;
+		padding-bottom: 100px;
+	}
+	.pp_slide-wrap{
+		margin: 0 auto;
+		margin-top: 100px;
+	}
+	.pp_slider{
+	    list-style: none outside none;
+	    padding-left: 0;
+	    margin: 0;
+	}
+	.pp_slide-content{
+	    margin-bottom: 60px;
+	    /* height: 400px; */
+	}
+	.pp_slider li{
+		/* width: 20px; */
+	    text-align: center;
+	    color: #FFF;
+	    background-size:cover;
+	    background-position: center;
+	}
+	.pp_slide-content{
+	    width:100%;
+	    height:300px;
+	}
+	#pp_item_ct{
+		border: 1px solid white;
+	}
+	.pp_item table{
+		margin: 0 auto;
+	}
+	.pp_item table tb{
+		height: 200px;
+		width: 100%;
+	}
+	.pp_poster2{display: inline; vertical-align: baseline; width: 200px; height: 300px;}
+	.pp_item1{
+		width: 200px; 
+		background-color: black; 
+		height: 300px;
+		font-size: 20px;
+		text-align: center;
+	}
+	
+		/* 최신글 */
+	#review{width: 80%; margin:0 auto; margin-top: 100px; color:white;}
+	.hline{border: 2px solid red;}
+	#review>table{margin:30px auto; text-align:center;}
+	#review td{height:50px;}
+	#num{width:70px; height:60px;}
+	#category{width:150px; height:60px;}
+	#title{width:400px; height:60px;}
+	#grade{width:125px; height:60px;}
+	#date{width:200px; height:60px;}
+	#writer{width:100px; height:60px;}
+	#hits{width:150px; height:60px;}
+	
+	#wanted{width: 80%; margin:100px auto; color:white;}
+	#wanted>table{margin:30px auto; text-align:center;}
+	#wanted td{height:50px;}
+</style>
 </head>
 <body>
 <!--header -->
@@ -49,23 +116,75 @@ $(document).ready(function() {
 
 
 
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
 <div class="index_form">
 <!-- 메인 영화 정보 -->
     <div class="pp_slide-wrap">
-        <div class="pp_slide-content1">
+        <div class="pp_slide-content">
             <ul id="pp_slider" class="pp_slider">
                 <li class="pp_item">
-	           		<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></div>
-                	<div class="pp_item1"></div>
+                	<table>
+                		<tr>
+                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
+                			<td>
+                				<div class="pp_item1">
+                					여러분 모두 힘내세요<br>
+                					이제 얼마안남았어요<br>
+                					모두가 힘을 내서 하다보면 <br>
+                					우린 완성을 할 수 있어요<br>
+                					공유해조 모두모두 화이팅<br>
+                				</div>
+                			</td>
+                		</tr>
+                	</table>
                 </li>
                 <li class="pp_item">
-                	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></div>
-                	<div class="pp_item2"></div>
+                	<table>
+                		<tr>
+                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
+                			<td>
+                				<div class="pp_item1">
+                					눈물이 차올라서 <br>
+                					고갤들어 <br>
+                					흐르지 못하게 <br>
+                					살짝 웃어<br>
+                					내가 왜이러는지<br>
+                					부끄럼도 없는지<br>
+                				</div>
+                			</td>
+                		</tr>
+                	</table>
                 </li>
                 <li class="pp_item">
-                	<div><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster3"></div>
-                	<div class="pp_item3"></div>
+                	<table>
+                		<tr>
+                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
+                			<td>
+                				<div class="pp_item1">
+                					짜증날땐 짜장면<br>
+                					우울할땐 울면<br>
+                					복잡할땐 볶음밥<br>
+                					타앝앝앝ㅇ 탕수육<br>
+                				</div>
+                			</td>
+                		</tr>
+                	</table>
+                </li>
+                <li class="pp_item">
+                	<table>
+                		<tr>
+                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
+                			<td><div class="pp_item1">asdfasdfasdfa</div></td>
+                		</tr>
+                	</table>
+                </li>
+                <li class="pp_item">
+                	<table>
+                		<tr>
+                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
+                			<td><div class="pp_item1">asdfasdfasdfa</div></td>
+                		</tr>
+                	</table>
                 </li>
             </ul>
         </div>
@@ -75,7 +194,7 @@ $(document).ready(function() {
     
     <!-- 리뷰게시판 -->
 	<div id="review">
-		<h3>리뷰 게시판</h3>
+		<h3 class="tablename">리뷰 게시판</h3>
 		<hr class="hline">
 		<table id="mainReviewBody">
 			<thead>
@@ -95,7 +214,7 @@ $(document).ready(function() {
 
 	<!-- 모집게시판 -->
 	<div id="wanted">
-		<h3>모집 게시판</h3>
+		<h3 class="tablename">모집 게시판</h3>
 		<hr class="hline">
 		<table id="mainWantedBody">
 				<thead>

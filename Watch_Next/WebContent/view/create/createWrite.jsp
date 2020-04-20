@@ -75,6 +75,7 @@
 		<h2><strong>창작 게시판 작성</strong></h2>
 		<hr id="red_line">
 		<br>
+		<input type="hidden" name="cNo" value="<%= request.getParameter("cNo") %>">
 		<h4><strong>제목 : &ensp;<input type="text" id="creW_createName" name="creW_createName"></strong></h4>
 		<h4><strong>감독 : &ensp;<input type="text" id="creW_directorName" name="creW_directorName"></strong></h4>
 	</div>
