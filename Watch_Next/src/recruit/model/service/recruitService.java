@@ -142,9 +142,7 @@ public class recruitService {
 			commit(conn);
 			
 			comment = reDAO.selectComment(conn, co.getRefBid());
-			System.out.println("insertsdkjf" + comment);
 		} else {
-			System.out.println("insertno" + comment);
 			rollback(conn);
 		}
 		
@@ -170,11 +168,34 @@ public class recruitService {
 		return result;
 	}
 
-	public ArrayList<Recruit> choiceHead(String choice) {
+	public ArrayList<Recruit> choiceHead(String choice, String choice2, String choice3, int currentPage, int boardLimit) {
 		Connection conn = getConnection();
+		ArrayList<Recruit> cList = null;
 		
-		ArrayList<Recruit> cList = new recruitDAO().choiceHead(conn, choice);
+		/*
+		 * if(choice != null && choice2 == null && choice3 == null) { cList = new
+		 * recruitDAO().choiceHead1(conn, choice, currentPage, boardLimit);
+		 * 
+		 * } else if(choice == null && choice2 != null && choice3 != null) { cList = new
+		 * recruitDAO().choiceHead2(conn, choice2, choice3, currentPage, boardLimit);
+		 * 
+		 * } else if(choice != null && choice2 == null && choice3 != null) { cList = new
+		 * recruitDAO().choiceHead3(conn, choice, choice3, currentPage, boardLimit);
+		 * 
+		 * } else if(choice != null && choice2 != null && choice3 != null) { cList = new
+		 * recruitDAO().choiceHead4(conn, choice, choice2, choice3, currentPage,
+		 * boardLimit);
+		 * 
+		 * } else { cList = new recruitDAO().choiceHead5(conn); }
+		 */	
 		
+		if(choice != null && choice2 != null && choice3.equalsIgnoreCase("blank")) {
+			cList = new recruitDAO().ch1(conn, choice, choice2, currentPage, boardLimit);
+			
+		}else {
+			cList = new recruitDAO().ch2(conn, choice, choice2, choice3, currentPage, boardLimit);
+		}
+		 
 		close(conn);
 		return cList;
 	}
