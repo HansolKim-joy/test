@@ -5,7 +5,6 @@
 	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
-	System.out.println(list.isEmpty());
 	
 	double percent = 0.0;
 	int j = 4;
@@ -72,7 +71,7 @@
 					<ol>
 						<li>
 							
-							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/FunDetail.adm?no=<%=dl.getdNo()%>'">
 							
 							
 							<div class="pro">
@@ -88,7 +87,7 @@
 					
 				<%}else if(i%j==3){ %>
 						<li>
-							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/FunDetail.adm?no=<%=dl.getdNo()%>'">
 							<div class="pro">
 							<%  %>
 								<span style="width: <%= percent %>%"></span>
@@ -103,7 +102,7 @@
 						
 				<%}else{%>
 						<li>
-							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/FunDetail.adm?no=<%=dl.getdNo()%>'">
 							<div class="pro">
 								<span style="width: <%= percent %>%"></span>
 							</div>

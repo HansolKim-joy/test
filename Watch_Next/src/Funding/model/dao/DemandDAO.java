@@ -1,6 +1,7 @@
 package Funding.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,14 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Properties;
 
-import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
-
+import Funding.model.vo.AdminFunding;
 import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
-import Funding.model.vo.DemandWant;
 
 
 public class DemandDAO {
@@ -507,6 +505,43 @@ public int notFund(Connection conn, int no, String userId, String dUserId) {
 			close(rset);
 			close(pstmt);
 		}
+		return list;
+	}
+	public ArrayList<AdminFunding> FunDetail(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AdminFunding> list = new ArrayList<AdminFunding>();
+		
+		String query = prop.getProperty("FunDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				AdminFunding af = new AdminFunding(rset.getInt("DNO"),
+												   rset.getString("FNEW"),
+												   rset.getString("TITLE"),
+												   rset.getString("ACTOR"),
+												   rset.getString("DIRECTOR"),
+												   rset.getString("STORY"),
+												   rset.getString("SMNAME"),
+												   rset.getInt("MAXPEOPLE"),
+												   rset.getString("GENRE"),
+												   rset.getString("RTIME"),
+												   rset.getInt("WANT_PRICE"),
+												   rset.getInt("PRICE"));
+				list.add(af);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
 		return list;
 	}
 
