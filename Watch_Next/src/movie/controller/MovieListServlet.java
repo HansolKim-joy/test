@@ -77,15 +77,10 @@ public class MovieListServlet extends HttpServlet {
 		
 		
 		String page = null;
-		if(!mlist.isEmpty()) {
-			page = "view/allMovie/allMovie2.jsp";
-			request.setAttribute("mlist", mlist);
-			request.setAttribute("fNameList", fNameList);
-			request.setAttribute("pi", pi);
-		}else {
-			page = "view/common/errorPage.jsp";
-			request.setAttribute("msg", "영화 조회에 실패하였습니다.");
-		}
+		page = "view/allMovie/allMovie2.jsp";
+		request.setAttribute("mlist", mlist);
+		request.setAttribute("fNameList", fNameList);
+		request.setAttribute("pi", pi);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 		
