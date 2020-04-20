@@ -16,7 +16,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login.me")
+@WebServlet(urlPatterns = "/login.me", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String userPwd = request.getParameter("lg_userPwd");
 
 		System.out.println(userId + " " + userPwd);
 

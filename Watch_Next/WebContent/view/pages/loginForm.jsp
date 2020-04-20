@@ -13,9 +13,9 @@
 	<!--header -->
 	<%@ include file="/view/layout/Header.jsp"%>
 	<%
-   String msg = (String)request.getAttribute("msg"); 
-//    System.out.println("qkqh" + msg);
-%>
+		String msg = (String) request.getAttribute("msg");
+		String msg1 = (String) request.getAttribute("msg1");
+	%>
 
 	<section>
 
@@ -30,17 +30,14 @@
 							placeholder="아이디">
 					</div>
 					<div class="div">
-						<input type="password" class="lg_text1" id="userPwd"
-							name="userPwd" placeholder="비밀번호">
+						<input type="password" class="lg_text1" id="lg_userPwd"
+							name="lg_userPwd" placeholder="비밀번호">
 					</div>
 					<div>
 						<input type="submit" class="lg_button1" value="로그인">
 					</div>
-					<button type="button" class="lg_button"
-						onclick="location='/Watch_Next/view/pages/JoinForm.jsp'">회원가입</button>
-					<button type="button" class="lg_button" id="find_member"
-						onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'">아이디/비밀번호
-						찾기</button>
+					<button type="button" class="lg_button" onclick="location='/Watch_Next/view/pages/JoinForm.jsp'">회원가입</button>
+					<button type="button" class="lg_button" id="find_member" onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'">아이디/비밀번호 찾기</button>
 				</div>
 			</form>
 		</div>
@@ -56,9 +53,9 @@
          return false;
       }
       
-      if($('#userPwd').val().trim().length == 0){
+      if($('#lg_userPwd').val().trim().length == 0){
          alert('비밀번호를 입력해주세요');
-         $('#userPwd').focus();
+         $('#lg_userPwd').focus();
          
          return false;
       }
@@ -73,7 +70,12 @@
       if(msg.trim() == "없는 회원입니다 다시 확인해주세요."){
          alert(msg)
       }
-   })
+      
+      var msg1 = '<%= msg1 %>';
+      if(msg1.trim() == "회원가입에 성공하였습니다."){
+    	  alert(msg1);
+      }
+   });
    
 
 </script>

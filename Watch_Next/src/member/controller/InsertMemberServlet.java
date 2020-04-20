@@ -15,7 +15,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class InsertMemberServlet
  */
-@WebServlet("/insert.me")
+@WebServlet(urlPatterns = "/insert.me", name = "InsertMemberServlet")
 public class InsertMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,8 +31,7 @@ public class InsertMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		String userId = request.getParameter("user_ID");
@@ -58,7 +57,7 @@ public class InsertMemberServlet extends HttpServlet {
 			page = "view/pages/JoinForm.jsp";
 		}
 
-		request.setAttribute("msg", msg);
+		request.setAttribute("msg1", msg);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 
