@@ -278,39 +278,7 @@ public class recruitDAO {
 		return result;
 	}
 
-
-	public ArrayList<Recruit> choiceHead(Connection conn, String choice) {
-		//검색옵션(넷플 / 왓챠)
-		//select RECRUIT_NO, RECRUIT_HEAD, BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_VIEWS, BOARD_DATE from tb_recruit 
-		//join tb_board on (recruit_no = board_no) where recruit_head = ?
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<Recruit> cList = null;
-		String query = prop.getProperty("choiceHead");
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, choice);
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				
-				cList.add(new Recruit(
-						rset.getInt("RECRUIT_NO"), 
-						rset.getString("RECRUIT_HEAD"),
-						rset.getString("BOARD_TITLE"),
-						rset.getString("BOARD_CONTENT"), 
-						rset.getString("USER_ID"),
-						rset.getInt("BOARD_VIEWS"),
-						rset.getDate("BOARD_DATE")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return cList;
-	}
+	
 
 
 	public ArrayList<Comment> selectComment(Connection conn, int rNo) {
@@ -404,8 +372,163 @@ public class recruitDAO {
 		  
 		  return result;
 		  }
-	 
 
 
+	public ArrayList<Recruit> ch1(Connection conn, String choice, String choice2, int currentPage, int boardLimit) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Recruit> cList = new ArrayList<Recruit>();
+		int startRow = (currentPage -1) * boardLimit +1;
+		int endRow = startRow + boardLimit -1;
+		String sql = "";
+		
+				
+		try {
+			if(choice2.equals("all")) {
+				sql = "select * from reclist where rnum between ? and ? and recruit_head=? and (board_title like '%' || ? || '%'  or user_id like '%' || ? || '%' or board_content like '%' || ? || '%')";
+				pstmt = conn.prepareStatement(sql);
+				
+				//select * from reclist where rnum ? and ? and recruit_head ? and 	board_title ?  or user_id ? or board_content ?			//옵션없이 검색만
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				pstmt.setString(5, choice2);
+				pstmt.setString(6, choice2);
+				System.out.println(1);
+			}else if(choice2.equals("title")) {
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head= ? and board_title= ? ";
+				pstmt = conn.prepareStatement(sql);
+				//select * from reclist where rnum  between ? and ? and recruit_head ? and board_title ? 
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				System.out.println(2);
+			}else if(choice2.equals("userId")) {
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head =? and user_id =?";
+				pstmt = conn.prepareStatement(sql);
+				//select * from reclist where rnum  between ? and ? and and recruit_head ? and user_id ?
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				System.out.println(3);
+			}else if(choice2.equals("content")) {
+				//select * from reclist where rnum ? and ? and recruit_head ? and board_content ?
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head= ? and board_content= ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				System.out.println(4);
+			}else {
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				
+			}
+			
+			rset = pstmt.executeQuery();
+			System.out.println("rset " + rset);
+			while(rset.next()) {
+				cList.add(new Recruit(
+						rset.getInt("RECRUIT_NO"), 
+						rset.getString("RECRUIT_HEAD"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"), 
+						rset.getString("USER_ID"),
+						rset.getInt("BOARD_VIEWS"),
+						rset.getDate("BOARD_DATE")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("cList " + cList);
+		return cList;
+	}
 
-}
+
+	public ArrayList<Recruit> ch2(Connection conn, String choice, String choice2, String choice3, int currentPage, int boardLimit) {
+		// select * from reclist where rnum ? and ? recruit_head ? and board_title like '%' || ? || '%'  or user_id '%' || ? || '%' or board_content '%' || ? || '%'
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Recruit> cList = new ArrayList<Recruit>();
+		int startRow = (currentPage -1) * boardLimit +1;
+		int endRow = startRow + boardLimit -1;
+		
+		String sql = "";
+		System.out.println("ch2 " + choice2);
+		
+		try {
+			if(choice2.equals("all")) {
+				sql = "select * from reclist where rnum between ? and ? and ( board_title like '%' || ? || '%'  or user_id like '%' || ? || '%' or board_content like '%' || ? || '%')";
+				pstmt = conn.prepareStatement(sql);
+				//select * from reclist where rnum ? and ? and recruit_head ? and 	board_title ?  or user_id ? or board_content ? 
+				//and board_title like '%' || ? || '%'  or user_id '%' || ? || '%' or board_content '%' || ? || '%'
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice3);
+				pstmt.setString(4, choice3);
+				pstmt.setString(5, choice3);
+				
+			}else if(choice2.equals("title")) {
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head= ? and board_title like '%' || ? || '%'";
+				pstmt = conn.prepareStatement(sql);
+				//select * from reclist where rnum ? and ? and recruit_head ? and board_title ? and board_title like '%' || ? || '%'
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				pstmt.setString(5, choice3);
+			}else if(choice2.equals("userId")) {
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head= ? and user_id like '%' || ? || '%'";
+				pstmt = conn.prepareStatement(sql);
+				//select * from reclist where rnum ? and ? and and recruit_head ? and user_id ? and user_id '%' || ? || '%'
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				pstmt.setString(5, choice3);
+			}else if(choice2.equals("content")) {
+				sql = "select * from reclist where rnum between  ? and ? and recruit_head= ? and board_content like '%' || ? || '%'";
+				//select * from reclist where rnum ? and ? and recruit_head ? and board_content ? and board_content '%' || ? || '%'
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				pstmt.setString(4, choice2);
+				pstmt.setString(5, choice3);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				cList.add(new Recruit(
+						rset.getInt("RECRUIT_NO"), 
+						rset.getString("RECRUIT_HEAD"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"), 
+						rset.getString("USER_ID"),
+						rset.getInt("BOARD_VIEWS"),
+						rset.getDate("BOARD_DATE")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cList;
+		}
+	}
+

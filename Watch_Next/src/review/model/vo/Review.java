@@ -96,14 +96,28 @@ public class Review {
 	}
 
 	// 한솔
-	public Review(int bNo, String bTitle, int bCount, Date bDate, int popcorn, String mTitle) {
+	public Review(int bNo, String spo, String bTitle, int bCount, Date bDate, int popcorn, String mTitle) {
 		super();
 		this.bNo = bNo;
+		this.spo = spo;
 		this.bTitle = bTitle;
 		this.bCount = bCount;
 		this.bDate = bDate;
 		this.popcorn = popcorn;
 		this.mTitle = mTitle;
+	}
+	
+	// 정호
+	public Review(int bNo, String spo, String mTitle, String bTitle, int popcorn, Date bDate, String bWriter, int bCount) {
+		super();
+		this.bNo = bNo;
+		this.spo = spo;
+		this.mTitle = mTitle;
+		this.bTitle = bTitle;
+		this.popcorn = popcorn;
+		this.bDate = bDate;
+		this.bWriter = bWriter;
+		this.bCount = bCount;
 	}
 	
 	// 좋아요 용

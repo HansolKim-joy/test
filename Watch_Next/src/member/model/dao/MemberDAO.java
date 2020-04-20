@@ -1,6 +1,7 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -224,6 +225,116 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return finduser;
+	}
+
+	public int deleteMember(Connection conn, String userId) {
+		// UPDATE TB_USER SET USER_DELETE = 'Y' WHERE USER_ID=?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+//			System.out.println("dao" + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Member searchUser(Connection conn, String searchUserId) {
+		// SELECT * FROM TB_USER WHERE USER_ID=? AND USER_DELETE='N'
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member searchUser = null;
+		
+		String query = prop.getProperty("searchUser");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchUserId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				searchUser = new Member(rset.getString("user_id"),
+										rset.getString("user_pass"),
+										rset.getString("user_name"),
+										rset.getString("user_phone"),
+										rset.getString("user_email"),
+										rset.getString("mailing"),
+										rset.getString("admin_yn"),
+										rset.getString("user_delete"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return searchUser;
+	}
+
+	public int countMyBoard(Connection conn, String searchUserId) {
+		// SELECT COUNT(*) FROM TB_BOARD WHERE USER_ID=? AND BOARD_DELETE_YN='N'
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int countBoard = 0;
+		
+		String query = prop.getProperty("countMyBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchUserId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				countBoard = rset.getInt(1);
+			}
+//			System.out.println("dao" + countBoard);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return countBoard;
+	}
+
+	public int countMyComment(Connection conn, String searchUserId) {
+		// select count(*) from tb_comments where user_id=? and comments_delete_yn='N'
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int countComment = 0;
+		
+		String query = prop.getProperty("countMyComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchUserId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				countComment = rset.getInt(1);
+			}
+//			System.out.println("dao_com" + countComment);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return countComment;
 	}
 
 }

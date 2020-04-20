@@ -4,7 +4,8 @@
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
 	ArrayList<Movie> DibList = (ArrayList<Movie>)request.getAttribute("DibList");
-	ArrayList<Comment> CommentList = (ArrayList<Comment>)request.getAttribute("CommentList");
+	ArrayList<Comment> ReviewComlist = (ArrayList<Comment>)request.getAttribute("ReviewComlist");
+	ArrayList<Comment> RecruitComlist = (ArrayList<Comment>)request.getAttribute("RecruitComlist");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,9 +57,9 @@
 		width: 400px;
 		border-bottom: 1px solid white;
 	}
-	#mp_second{
+	/* #mp_second{
 		text-align: center;
-	}
+	} */
 	#mp_info{
 		text-align: center;
 		color: white;
@@ -134,11 +135,21 @@
 	}
 	#listTable{
 		border-spacing: 20px;
-		margin-top: 5px;
+		margin-top: -15px;
+		width: 60%;
+	}
+	#listTablec{
+		border-spacing: 20px;
+		margin-top: -15px;
+		width: 60%;
 	}
 	.hline1{
 		width: 30%;
 		border: 1px solid red;
+	}
+	.hline2{
+		width: 30%;
+		border: 1.7px solid red;
 	}
 	.mPhoto{
 		width: 200px;
@@ -147,7 +158,13 @@
 	#dibTable{
 		text-align: center;
 		border-spacing: 20px;
-		
+	}
+	#commentTable{
+		text-align: center;
+		width: 100%;
+	}
+	.myBtn{
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -208,16 +225,12 @@
 				<div id="mp_h_content1" class="mp_h_content"> 내용</div>
 			</div>
 			
-			
-			
 			<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button2" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content2" class="mp_h_content"> 내용</div>
 			</div>
-			
-			
 			
 			<div id="mp_content3" class="mp_content">나의 찜 영화&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button3" class="mp_button">+</button>
@@ -333,19 +346,18 @@
 							<td> <div id="myReview" class="myBtn"> 리뷰 </div> </td>
 							<td> <div id="myRecruit" class="myBtn"> 모집  </div> </td>
 							<td> <div id="myMade" class="myBtn"> 창작 </div> </td>
-							<td> <div id="myDemand" class="myBtn"> 수요조사 </div> </td>
 							<td> <div id="myFunding" class="myBtn"> 펀딩 </div> </td>
 						</tr>
 					</table>
 					<table id="myReviewTable" class="myTable">
 						<tr>
 							<td>리뷰 번호</td>
+							<td>스포 여부</td>
 							<td>리뷰 제목</td>
 							<td>리뷰 점수</td>
 							<td>작성일</td>
 							<td>조회수</td>
 						</tr>
-						
 							<% if(ReviewList.isEmpty()) {%>
 							<tr>
 								<td colspan="5"> 게시글이 존재하지 않습니다. </td>
@@ -354,8 +366,17 @@
 								<% for(int i = 0; i < ReviewList.size(); i++) {%>
 								<tr>
 									<td><%= ReviewList.get(i).getbNo() %></td>
+									<td>
+										<% String checkSpo = ""; 
+											switch(ReviewList.get(i).getSpo()){
+											case "Y" : checkSpo = "스포있음"; break;
+											case "N" : checkSpo = "스포없음"; break;
+											}
+										%>
+										<%= checkSpo %>
+									</td>
 									<td>[<%= ReviewList.get(i).getmTitle() %>]<%= ReviewList.get(i).getbTitle() %></td>
-									<td><%= ReviewList.get(i).getbLike() %></td>
+									<td><%= ReviewList.get(i).getPopcorn() %></td>
 									<td><%= ReviewList.get(i).getbDate() %></td>
 									<td><%= ReviewList.get(i).getbCount() %></td>
 								<tr>
@@ -389,13 +410,67 @@
 				</div>
 			</div>
 			
-			
-			
 			<div id="mp_content5" class="mp_content">댓글 확인 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button5" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
-				<div id="mp_h_content5" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content5" class="mp_h_content">
+					<table id="listTablec">
+						<tr>
+							<td> <div id="myReviewc" class="myBtn"> 리뷰 </div> </td>
+							<td> <div id="myRecruitc" class="myBtn"> 모집  </div> </td>
+							<td> <div id="myMadec" class="myBtn"> 창작 </div> </td>
+							<td> <div id="myFundingc" class="myBtn"> 펀딩 </div> </td>
+						</tr>
+					</table>
+					<table id="myReviewTablec" class="myTable">
+						<tr>
+							<% if(ReviewComlist.isEmpty()) { %>
+								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+							<% }else{ %>
+								<td>글 번호</td>
+								<td>리뷰 제목</td>
+								<td>리뷰 작성자</td>
+								<td>댓글내용</td>
+								<td>댓글 작성일</td>
+							</tr>
+							<% for(int i = 0; i < ReviewComlist.size(); i++) {%>
+								<tr>
+									<td><%= ReviewComlist.get(i).getRefBid() %></td>
+									<td>[<%= ReviewComlist.get(i).getmTitle() %>]<%= ReviewComlist.get(i).getbTitle() %></td>
+									<td><%= ReviewComlist.get(i).getbWriter() %></td>
+									<td><%= ReviewComlist.get(i).getrContent() %></td>
+									<td><%= ReviewComlist.get(i).getCreateDate() %></td>
+								</tr>
+							<% } %>
+						<% } %>
+					</table>
+					
+					<table id="myRecruitTablec" class="myTable">
+						<tr>
+							<% if(RecruitComlist.isEmpty()) { %>
+								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+							<% }else{ %>
+								<td>글 번호</td>
+								<td>모집 종류</td>
+								<td>모집글 제목</td>
+								<td>글 작성자</td>
+								<td>댓글내용</td>
+								<td>댓글 작성일</td>
+							</tr>
+							<% for(int i = 0; i < RecruitComlist.size(); i++) {%>
+								<tr>
+									<td><%= RecruitComlist.get(i).getRefBid() %></td>
+									<td><%= RecruitComlist.get(i).getmTitle() %></td>
+									<td><%= RecruitComlist.get(i).getbTitle() %></td>
+									<td><%= RecruitComlist.get(i).getbWriter() %></td>
+									<td><%= RecruitComlist.get(i).getrContent() %></td>
+									<td><%= RecruitComlist.get(i).getCreateDate() %></td>							
+								</tr>
+						<% } %>
+					<% } %>
+					</table>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -409,6 +484,10 @@
 			$('#mp_h_content4').slideToggle();
 		});
 		
+		$('#mp_button5').click(function(){
+			$('#mp_h_content5').slideToggle();
+		});
+		
 		$('#myReview').click(function(){
 			$('#myReviewTable').slideToggle();
 			$('#myRecruitTable').css({"display":"none"});
@@ -418,6 +497,17 @@
 			$('#myReviewTable').css({"display":"none"});
 			$('#myRecruitTable').slideToggle();
 		});
+		
+		$('#myReviewc').click(function(){
+			$('#myReviewTablec').slideToggle();
+			$('#myRecruitTablec').css({"display":"none"});
+		});
+		
+		$('#myRecruitc').click(function(){
+			$('#myReviewTablec').css({"display":"none"});
+			$('#myRecruitTablec').slideToggle();
+		});
+		
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>

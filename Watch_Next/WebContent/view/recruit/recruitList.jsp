@@ -37,7 +37,8 @@
 		<div id="recruit">
 		<h2><strong>모집 게시판</strong></h2>
 			<hr class="hline">
-			<table>
+			<table class="tablearea">
+			<thead>
 			<tr>
 				<th id="num">번호</th>
 				<th id="rccategory">말머리</th>
@@ -46,24 +47,27 @@
 				<th id="writer">글쓴이</th>
 				<th id="hits">조회</th>
 			</tr>
-			<tr>
-			<% if(list.isEmpty()) { %>
-				<td colspan="6">조회된 리스트가 없습니다.</td>
-			</tr>
-			<% } else { %>
-				<% for(Recruit r : list) { %>
-			<tr>
-				<td><%=r.getrNo() %></td>
-				<td><%=r.getrHead() %></td>
-				<td><%=r.getbTitle() %></td>
-				<td><%=r.getbDate() %></td>	
-				<td><%=r.getUserId() %></td>
-				<td><%=r.getbViews() %></td>
-				
-			</tr>
-				<% } %>
-			<% } %> 
-				</table>
+			</thead>
+				<tbody id="tbody-area">
+					<tr>
+					<% if(list.isEmpty()) { %>
+						<td colspan="6">조회된 리스트가 없습니다.</td>
+					</tr>
+					<% } else { %>
+						<% for(Recruit r : list) { %>
+					<tr>
+						<td><%=r.getrNo() %></td>
+						<td><%=r.getrHead() %></td>
+						<td><%=r.getbTitle() %></td>
+						<td><%=r.getbDate() %></td>	
+						<td><%=r.getUserId() %></td>
+						<td><%=r.getbViews() %></td>
+						
+					</tr>
+						<% } %>
+					<% } %> 
+				</tbody>
+			</table>
 		</div>
 	
 		<br><br><br><br>
@@ -131,36 +135,67 @@
 	<br clear="left">
 	
 	<div id="searchDiv">
-	<form id="searchForm" action="<%=request.getContextPath() %>/list.recruit" method="get">
+	<form id="searchForm" action="<%=request.getContextPath() %>>/list.recruit" method="get">
 		<select id="searchType" name="searchType">
 			<option value="all" selected >전체보기</option>
-			<option value="netflix" >NETFLIX</option>
-			<option value="watcha" >WATCHA</option>
+			<option value="NETFLIX" >NETFLIX</option>
+			<option value="WATCHA" >WATCHA</option>
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;
 		
 		<select id="searchType2" name="searchType2">
-			<option value="전체" selected>전체</option>
-			<option value="리뷰제목">글제목</option>
-			<option value="작성자">작성자</option>
-			<option value="내용">내용</option>
+			<option value="all" selected>전체</option>
+			<option value="title">글제목</option>
+			<option value="userId">작성자</option>
+			<option value="content">내용</option>
 		</select>
 		
 	
-		<input id="blank" type="text" size="35" id="searchText" value="">&nbsp;
+		<input id="blank" type="text" size="35" id="searchText">&nbsp;
 		<input id="botSearch" type="button" value="검색">
 	</form>
 	</div>
 	<script>
 		$('#botSearch').click(function(){
 			var choice = $('#searchType').val();
-			console.log(choice);
+			var choice2 = $('#searchType2').val();
+			var choice3 = $('#blank').val();
+			if(choice3.trim().length == 0){
+				choice3 = "blank"
+			}
+			console.log("choice " + choice);
+			console.log("choice2 " + choice2);
+			console.log("choice3 " + choice3);
 			$.ajax({
 				url: 'list.recruit',
-				data: {choice:choice},
+				data: {choice:choice, choice2:choice2, choice3:choice3},
 				success : function(data){
-					console.log("data " +data);
+					$tablearea = $('#tbody-area');
+					$tablearea.html("");
 					
-					$("#recruit").load(window.location.href + " #recruit");
+					console.log(data);
+					
+					if(data.length == 0){
+						var $trnull = $('<tr><td colspan=6>조회된 리스트가 없습니다.</td></tr>');
+						
+						$('#tbody-area').append($trnull);
+						
+					}else {
+						for(var key in data){
+							var $tr = $('<tr></tr>'); 
+							var $rNo = $('<td>').text(data[key].rNo);
+							var $rHead = $('<td>').text(data[key].rHead);
+							var $bTitle = $('<td>').text(data[key].bTitle);
+							var $bDate = $('<td>').text(data[key].bDate);
+							var $UserId = $('<td>').text(data[key].userId);
+							var $bViews = $('<td>').text(data[key].bViews);
+							
+							$tr.append($rNo, $rHead, $bTitle, $bDate, $UserId, $bViews);
+							$('#tbody-area').append($tr);
+							
+						}
+						
+						$('#tbody-area').val("");
+					}
 				}
 			});
 		});

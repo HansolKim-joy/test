@@ -72,4 +72,39 @@ public class MemberService {
 		return finduser;
 	}
 
+	public int deleteMember(String userId) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().deleteMember(conn, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public Member searchUser(String searchUserId) {
+		Connection conn = getConnection();
+		Member searchUser = new MemberDAO().searchUser(conn, searchUserId);
+		close(conn);
+		return searchUser;
+	}
+
+	public int countMyBoard(String searchUserId) {
+		Connection conn = getConnection();
+		int countBoard = new MemberDAO().countMyBoard(conn, searchUserId);
+		
+		close(conn);
+		return countBoard;
+	}
+
+	public int countMyComment(String searchUserId) {
+		Connection conn = getConnection();
+		int countComment = new MemberDAO().countMyComment(conn, searchUserId);
+		close(conn);
+		return countComment;
+	}
+
 }

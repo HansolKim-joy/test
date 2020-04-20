@@ -73,31 +73,34 @@ public class recruitListServlet extends HttpServlet {
 		 ArrayList<Recruit> list = rservice.selectList(currentPage, boardLimit);
 		 HttpSession session = request.getSession();
 		 Member loginUser = (Member)session.getAttribute("loginUser");
+		 //-------------------------검색옵션-----------------
+		 
+		 String choice = request.getParameter("choice");
+		 String choice2 = request.getParameter("choice2");
+		 String choice3 = request.getParameter("choice3");
+		 
+		String page = null;
 		
-
-		 String page = null;
-		 if(list != null) { 
+		 if(list != null && choice == null ) { 
 			 page = "view/recruit/recruitList.jsp";
 			 request.setAttribute("list", list); 
 			 request.setAttribute("pi", pi);
 			 request.setAttribute("loginUser", loginUser);
-		 
+			 RequestDispatcher view = request.getRequestDispatcher(page);
+			 view.forward(request, response);
+		 } else if(choice != null){
+			 System.out.println("여기야!" + choice);
+			 ArrayList<Recruit> cList = rservice.choiceHead(choice, choice2, choice3, currentPage, boardLimit);
+			
+			 response.setContentType("application/json; charset=UTF-8");
+			 new Gson().toJson(cList, response.getWriter());
+			 
 		 } else { 
 			 page = "view/errorPage/errorPage.jsp"; 
 		 	 request.setAttribute("msg", "게시판 조회에 실패하였습니다.");
 		 }
 		 
-		 RequestDispatcher view = request.getRequestDispatcher(page);
-				 
-		 view.forward(request, response);
 		 
-		 //-------------------------검색옵션-----------------
-			
-			String choice = request.getParameter("choice");
-			ArrayList<Recruit> cList = rservice.choiceHead(choice);
-		 
-		 response.setContentType("application/json; charset=UTF-8");
-			new Gson().toJson(cList, response.getWriter());
 	}
 
 	/**

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,13 +128,15 @@
 					</tr>
 					<tr></tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="2" style="text-align:center">
 							&emsp;&emsp;&emsp;	
 							<button id="updateMemberBtn" onclick="updateMemeber();">수정 완료</button>
 							&emsp;&emsp;&emsp;&emsp;&emsp;
 							<span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
 						</td>
-						
+					</tr>
+					<tr>
+						<td colspan="3" style="text-align:center" id="deleteBtn">회원탈퇴</td>
 					</tr>
 				</table>
 			</div>
@@ -184,6 +185,11 @@
 			}else{
 				$('#pwdMessage1').text('사용 불가능').css({"color":"red", "display":"block"});
 			}
+		});
+		
+		$('#deleteBtn').click(function(){
+			 location.href='<%= request.getContextPath() %>/deleteMember.me';
+			 alert("탈퇴가 성공적으로 완료되었습니다.");
 		});
 	</script>
 </section>

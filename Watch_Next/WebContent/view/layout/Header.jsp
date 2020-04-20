@@ -24,7 +24,7 @@
 			<ul class="subnav">
 				<li onclick="location.href='<%= request.getContextPath() %>/list.rv'">리뷰 게시판</li>
 				<li onclick="goR();">모집 게시판</li>
-				<li>창작 게시판</li>
+				<li onclick="location.href='<%= request.getContextPath() %>/list.cr'">창작 게시판</li>
 			</ul>
 		</div>
 
