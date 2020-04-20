@@ -20,22 +20,46 @@
 <br clear="all">
 
 <section>
-	<form>
-	<div id="reportfrm">
-		<div id="reason">
-				! 신고 사유를 적어주세요
-		</div>
+<%-- 	<form action="<%= request.getContextPath() %>/report.send"> --%>
+		<div id="reportfrm">
+			<div id="reason">
+					! 신고 사유를 적어주세요
+			</div>
+			
+			<br>
+
+			<div id="reportBox">
+			<!-- 상세뷰에서 게시판번호 받아오기 -->
+				<input type="text" id="test">
+				
+				<textarea id="reportContent" cols=50 rows=12 style="resize:none"></textarea>
+			</div>
+			
+			<br>
 		
-		<br>
-		<div id="reportBox">
-			<textarea cols=50 rows=12 style="resize:none"></textarea>
+			<input id="reportSubmit" type="submit" value="보 내 기"
+				   onclick="return rpt();">
 		</div>
-		
-		<br>
-	
-		<input id="reportSubmit" type="submit" value="보 내 기"
-			   onclick="alert('신고 완료')">
-	</div>
-    </form>
+   <!--  </form> -->
+   
 
 </section>
+
+<script>
+	function rpt(){
+		if($('#reportContent').val().trim().length==0) {
+			alert('내용을 입력해주세요.');
+			$('#reportContent').focus();
+			return false;
+		} else{
+			if(confirm('이 글을 신고하시겠습니까?') == false) {
+				return false;
+			} else {
+				alert('신고가 완료되었습니다.');
+			}
+		}
+	}
+</script>
+
+</body>
+</html>
