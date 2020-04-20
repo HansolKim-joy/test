@@ -14,14 +14,14 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class DemandWantServlet
  */
-@WebServlet("/demand.putWant")
-public class DemandWantServlet extends HttpServlet {
+@WebServlet("/demand.fund")
+public class DemandFundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DemandWantServlet() {
+    public DemandFundServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +32,13 @@ public class DemandWantServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.parseInt(request.getParameter("no"));
 		String dUserId = request.getParameter("userId");
+		int price = Integer.parseInt(request.getParameter("price"));
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		int result = new DemandService().putWant(no, userId, dUserId);
+		int result = new DemandService().putFund(no, userId, dUserId, price);
 		String page = request.getContextPath() + "/demand.detail?no=" + no;
 		response.sendRedirect(page);
-		
-		
-		
-		
 	}
 
 	/**

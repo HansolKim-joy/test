@@ -17,14 +17,14 @@ import common.PageInfo;
 /**
  * Servlet implementation class DemandListServlet
  */
-@WebServlet("/list.de")
-public class DemandListServlet extends HttpServlet {
+@WebServlet("/listSort.de")
+public class DemandListSortServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DemandListServlet() {
+    public DemandListSortServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,9 +34,10 @@ public class DemandListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DemandService ds = new DemandService();
+		String cinema = request.getParameter("cinema");
 		
-		int ListCount = ds.getListCount();
-		
+		int ListCount = ds.getSortListCount(cinema);
+		System.out.println("서블릿:" + ListCount);
 		int currentPage; 
 		int pageLimit = 10; 
 		int maxPage; 
@@ -49,10 +50,11 @@ public class DemandListServlet extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			 currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		 
+		
+		
 		maxPage = (int)((double)ListCount / boardLimit + 0.9);
-		System.out.println(maxPage);
-		startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1; // 1.0/10 + 0.9
+		 
+		startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1;
 		  
 		endPage = pageLimit + startPage - 1;
 		
@@ -62,7 +64,7 @@ public class DemandListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, ListCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		
-		ArrayList<DemandList> list = ds.selectList(currentPage, boardLimit);
+		ArrayList<DemandList> list = ds.SortList(currentPage, boardLimit, cinema);
 		ArrayList<Demand> want = ds.wantPeople();
 		
 		String page =null;

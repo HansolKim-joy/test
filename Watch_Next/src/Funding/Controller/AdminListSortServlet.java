@@ -17,14 +17,14 @@ import common.PageInfo;
 /**
  * Servlet implementation class DemandListServlet
  */
-@WebServlet("/list.de")
-public class DemandListServlet extends HttpServlet {
+@WebServlet("/listSort.adm")
+public class AdminListSortServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DemandListServlet() {
+    public AdminListSortServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +34,8 @@ public class DemandListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DemandService ds = new DemandService();
-		
-		int ListCount = ds.getListCount();
+		String cinema = request.getParameter("cinema");
+		int ListCount = ds.getAdSortListCount(cinema);
 		
 		int currentPage; 
 		int pageLimit = 10; 
@@ -49,10 +49,11 @@ public class DemandListServlet extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			 currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		 
+		
+		
 		maxPage = (int)((double)ListCount / boardLimit + 0.9);
-		System.out.println(maxPage);
-		startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1; // 1.0/10 + 0.9
+		 
+		startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1;
 		  
 		endPage = pageLimit + startPage - 1;
 		
@@ -62,12 +63,12 @@ public class DemandListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, ListCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		
-		ArrayList<DemandList> list = ds.selectList(currentPage, boardLimit);
+		ArrayList<DemandList> list = ds.AdminSortList(currentPage, boardLimit, cinema);
 		ArrayList<Demand> want = ds.wantPeople();
 		
 		String page =null;
 		if(list != null) {
-			page="view/demand/demandList.jsp";
+			page="view/admin/Admin_FundingList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("wlist", want);
 			request.setAttribute("pi", pi);

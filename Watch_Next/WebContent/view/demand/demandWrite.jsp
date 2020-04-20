@@ -66,6 +66,14 @@
             time.value = hours + ":" + minute;
         }
     }
+    function inputPrice(money){
+    	var m = money.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	$('#funP').text(m + "원");
+    }
+ 	function inputWantPrice(money){
+ 		var m = money.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+ 		$('#wantP').text(m + "원");
+    }
 </script>
 <link href="<%=request.getContextPath() %>/Resources/css/admin_movie_write.css" type="text/css" rel="stylesheet">
 </head>
@@ -73,11 +81,11 @@
 <%@ include file="/view/layout/Header.jsp" %>
 <form action="<%= request.getContextPath() %>/insert.demand" method="post" encType="multipart/form-data">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
-		<h2>수요조사 작성 페이지</h2>
+		<h2>펀딩 작성 페이지</h2>
 		<hr id="red_line">
 		<br>
 		<div id="admin_imageArea">
-		<img id="admin_image" width="300" height="300" >
+		<img id="admin_image" width="300" height="300">
 		<script>
 		// 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
 		function LoadImg(value,filevalue){
@@ -102,7 +110,7 @@
 		<input type="file" id="admin_imageFile" name="admin_imageFile" onchange="LoadImg(this,this.value)">
 		
 		<div class="admin_movie">
-			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name"  >
+			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name">
 			<b>장소 : </b>
 			<select id = "admin_movie_spot" name="admin_movie_spot">
 				<option value="1">압구정 CGV</option>
@@ -128,7 +136,7 @@
 			<b>감독 : </b><input type="text" id="admin_movie_director" name="admin_movie_director">
 			<b>총원 : </b><input type="text" id="admin_movie_max" name="admin_movie_max" value='150' readonly><br>
 			<b>출연 : </b><input type="text" id="admin_movie_actor" name="admin_movie_actor">
-			<b>최소 인원 : </b><input type="text" id="admin_movie_min" name="admin_movie_min"><br>
+			<b>펀딩 금액 : </b><input type="text" id="admin_movie_min" name="admin_movie_min" onKeyup="inputPrice(this);"><b id="funP"></b><br>
 			<b>장르 : </b>
 			<select id = "admin_movie_genre" name="admin_movie_genre">
 				<option value="1">액션 영화</option>
@@ -141,11 +149,12 @@
 				<option value="8">음악 영화</option>
 				<option value="9">로맨스 영화</option>
 			</select>
+			&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<b>참여 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);"><b id="wantP"></b>
 			<br>
 			<b>영화 시간 : </b>
 			<input type="text" 
 				   value="00:00" 
-				   onKeyup="inputTimeColon(this);" 
+				   onKeyup="inputTimeColon(this);"
 				   maxlength="5" 
 				   id="admin_movie_time" name="admin_movie_time"
 				   style="text-align:center;width:50px;"/>

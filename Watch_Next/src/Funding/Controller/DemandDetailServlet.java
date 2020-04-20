@@ -35,13 +35,16 @@ public class DemandDetailServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		String userId = loginUser.getUserId();
+		String userId = "비회원";
+		if(loginUser != null) {
+			userId = loginUser.getUserId();
+		}
 		DemandService service = new DemandService();
 		Demand d = service.getDemand(no);
 		String fName = service.getFile(d.getFileNo());
 		String genre = service.getGenre(d.getGerneNo());
 		String smName = service.getScreen(d.getSmNo());
-		char chk = service.getWant(userId,no);
+		char chk = service.getFund(userId,no,d.getUserId());
 		request.setAttribute("Demand", d);
 		request.setAttribute("fName", fName);
 		request.setAttribute("genre", genre);
