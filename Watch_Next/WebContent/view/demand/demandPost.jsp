@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="Funding.model.vo.Demand"%>
+	pageEncoding="UTF-8" import="Funding.model.vo.Demand, java.util.Date" %>
 <%
 	Demand d = (Demand) request.getAttribute("Demand");
 	String fName = (String) request.getAttribute("fName");
@@ -9,6 +9,7 @@
 	String wantMoney = String.format("$%,d",d.getWantMoney());
 	String money = String.format("$%,d",d.getMoney());
 	String sumMoney = String.format("$%,d",d.getSmWant());
+	Date date = new Date(System.currentTimeMillis());
 	
 %>
 <!DOCTYPE html>
@@ -16,11 +17,12 @@
 <head>
 <meta charset="UTF-8">
 <title>insert title</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<style>
+#dh2{font-size: 35px;}
+</style>
+
 <%@ include file="/view/layout/import.jsp"%>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <link type="text/css" href="/Watch_Next/Resources/css/demand_post.css"
 	rel="stylesheet">
 </head>
@@ -42,14 +44,14 @@
 					<label id=dctitle><%=d.getMovieTitle()%> 펀딩</label>
 				</div>
 
-				<hr>
+				<hr id="tbline" style="margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #000; margin: 0;">
 
 				<div id="wInfo">
 					<table>
 						<tr>
 							<td width="850px" style="font-size: 17px;"></td>
 							<td width="150px" style="font-size: 17px;">글쓴이 : <%=d.getUserId()%></td>
-							<td width="70px" style="font-size: 17px;" id="rpWriter">
+							<td width="20px" style="font-size: 17px;" id="rpWriter">
 								<ul>
 									<li>
 										<ul>
@@ -65,42 +67,44 @@
 					</table>
 				</div>
 
-				<hr>
+				<hr style="margin-top: 10px; margin-bottom: 20px; border: 0; border-top: 1px solid #000;">
 
 				<div id="content">
 
 					<div id="dposter">
-						<img id="dcposter" src="/Watch_Next/Resources/images/<%=fName%>"><br>
-					</div>
-
-					<br> <br>
-					<div id="dpinfo">
-						<p style="font-size: 15px;">
+						<img id="dcposter" src="/Watch_Next/Resources/images/<%=fName%>">
+						
+						<div id="dpinfo">
+						<p style="font-size: 23px;">
 
 							지역 -
 							<%=smName%><br> 제목 -
 							<%=d.getMovieTitle()%><br> 장르 -
 							<%=genre%><br> 감독 -
 							<%=d.getMovieDirector()%><br> 배우 -
-							<%=d.getMovieActor()%><br> <br> 줄거리 -
-							<%=d.getMovieStory()%><br> <br>
+							<%=d.getMovieActor()%><br> 줄거리 -
+							<%=d.getMovieStory()%><br><br><br><br><br>
 						</p>
 
 						<div id="minPeople">
-							<p style="font-size: 15px;">
+							<p style="font-size: 23px;">
 								필요금액 -
-								<%=money%>원
+								<%=wantMoney%>원
 							</p>
 						</div>
 
 					</div>
+						
+					</div>
+					
+					
 				</div>
 
 				<!-- 기대돼요 신고버튼 -->
 				<br> <br>
 				<div id="btn">
 					<%
-						if (loginUser != null) {
+						if (loginUser != null && d.getEndDate().compareTo(date) > 0) {
 					%>
 					<%
 						if (chk == 0) {
@@ -132,7 +136,7 @@
 						}
 					%>
 					<br>
-					<h2>금액 : <%=wantMoney%> 원  모인 금액  : <%=sumMoney%> 원</h2>
+					<h2>금액 : <%=money%> 원  / 모인 금액  : <%=sumMoney%> 원</h2>
 				</div>
 
 
@@ -142,25 +146,7 @@
 
 			<!-- 목록수정삭제 버튼 -->
 			<div id=listbtn>
-				<%
-					if (loginUser != null && d.getUserId().equals(loginUser.getUserId())) {
-				%>
-				<button type=button
-					onclick="location.href='<%=request.getContextPath()%>/updatePage.de?no=<%=d.getdNo()%>'"
-					title="수정">수정</button>
-				&nbsp;&nbsp;&nbsp;
-				<button type=button onclick="demdel();" title="삭제">삭제</button>
-				&nbsp;&nbsp;&nbsp;
-				<script>
-		function demdel(){
-			if(confirm('정말 삭제하시겠습니까?') == true){
-				location.href="<%=request.getContextPath()%>/delete.de?no=<%=d.getdNo()%>";
-			}
-		}
-	</script>
-				<%
-					}
-				%>
+				
 				<button
 					onclick="location.href='<%=request.getContextPath()%>/list.de'"
 					type=button title="목록">목록</button>

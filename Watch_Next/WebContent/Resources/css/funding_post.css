@@ -2,6 +2,7 @@
 	/* 넷플릭스,왓챠,네이버,top */
 
 
+
 	/* footer */
 #footer{
 	height: 100px;
@@ -38,6 +39,7 @@
 #listbtn button{background-color:red; color:white;
 				border-radius:5px; border:none;
 				width:50px; height:25px; font-size:14px;}
+
 
 #fundingTable{width:900px; margin:0 auto;}
 #info{width:900px; margin:30px auto;}

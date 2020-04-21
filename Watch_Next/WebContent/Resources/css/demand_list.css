@@ -6,6 +6,7 @@
 #footer{
 	height: 100px;
 	text-align: center;
+	
 }
 .f_bottom-contents{
 	color: white;
@@ -22,12 +23,15 @@
 
 	/* 선택 */
 .hline{height:4px; background-color:red; border:none;}	
-#sel{width: 500px;
+#sel{width: 515px;
     margin: 20px auto;
     margin-top: 35px;
-    margin-left: 37%;
+    margin-left: 32%;
     color: black;}
-.cinema{width: 70px; height: 70px; margin:10px;}
+.cinema{width: 80px;
+    height: 80px;
+    margin: 10px;
+    cursor: pointer;}
 #allview{margin-left:15px; font-weight:bold; font-size:18px; float:left; color:white;}
 #selSearch{width:450px; margin-left:61%; margin-bottom:10px; color:black;}
 #selSearch input{width:150px; height:25px; font-size:13px}
@@ -52,7 +56,7 @@
 #percent{text-align:right; font-size:18px}
 #dDay{width:150px; height:5px; font-size:18px; color:red; font-weight:bold}
 
-.poster{width: 250px; height: 350px;}
+.poster{width: 250px; height: 350px; margin-left: 10px;}
 
 	/* 달성률 */
 .bar{z-index:0; width:250px; height:10px; background-color:lightgray;}
@@ -117,5 +121,5 @@
 section{width: 80%;
     margin: 0 auto;
     margin-top: 100px;}
-    
+.btn{display: inline-block;}
 h2{color: white; font-size: 35px;}
