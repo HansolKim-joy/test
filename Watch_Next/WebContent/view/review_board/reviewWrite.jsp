@@ -54,9 +54,11 @@
 				alert("리뷰 내용을 입력하세요.");
 				$('div.Editor-editor').focus();
 				return false;
+			}else if($('#pop_point')[0].innerText.length==0) {
+				alert("팝콘 점수를 입력하세요.");
+				return false;
 			}else{
 				$('#editor_content').val($('div.Editor-editor')[0].innerHTML);
-				// 쪽지 window.open("writePopup.html", "a", "width=400, height=300, left=100, top=50"); 
 				alert("작성이 완료되었습니다.");
 				return true;
 			}

@@ -18,6 +18,11 @@
 <title>창작목록</title>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/창작목록.css" rel="stylesheet" />
+<style>
+	.pagingArea{margin-top:30px;}
+	#searchType{font-size:14px; height:25px;}
+	#searchInput{font-size:14px; height:20px;}
+</style>
 </head>
 <body>
 <!--header -->
@@ -74,7 +79,7 @@
 			<td rowspan="2" class="c_td1"><%= c.getbNO() %></td>
 			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
 			<td class="c_td3"><%= c.getbTitle() %><br></td>
-			<td rowspan="2" class="c_td4"><%=c.getbContent() %></td>
+			<td rowspan="2" id="conEllipsis" class="c_td4"><%=c.getbContent() %></td>
 			<td rowspan="2" class="c_td5"><%=c.getcDate() %></td>
 			<td rowspan="2" class="c_td6"><%=c.getbCount() %></td>
 			<td rowspan="2" class="c_td7"><%=c.getcLike() %></td>
@@ -90,8 +95,31 @@
 <!-- 		</form> -->
 	</div>
 	
-	<!-- 페이징 -->	
+
 	
+	<!-- 글쓰기 -->
+	<% if(loginUser != null){ %>
+		<input id="write" type="button" value="글쓰기"
+			   onclick="location.href='<%= request.getContextPath() %>/view/create/createWrite.jsp'">
+	<% } %>
+	
+	<!-- 검색조건 -->
+	<div id="c_d_3">
+	<form action="<%=request.getContextPath() %>/list.cr" method="get">
+		<select id="searchType" name="sk">
+	  		<option ${(param.sk=="전체")?"selected":""} value="전체">전체</option>
+	  		<option ${(param.sk=="제목")?"selected":""} value='제목'>제목</option>
+	  		<option ${(param.sk=="감독")?"selected":""} value='감독'>감독</option>
+	  		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
+		</select>
+			
+		<input type="text" id="searchInput" name="sv" value="${param.sv}">
+	</form>
+	
+	</div>
+	
+		<!-- 페이징 -->	
+
 	<div class="pagingArea" align="center">
 	<!-- 맨 처음으로 -->
 			<button onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=1'">&lt;&lt;</button>
@@ -124,27 +152,6 @@
 			<!-- 맨 끝으로 -->
 			<button onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 	</div>
-	
-	<!-- 글쓰기 -->
-	<% if(loginUser != null){ %>
-		<input id="write" type="button" value="글쓰기"
-			   onclick="location.href='<%= request.getContextPath() %>/view/create/createWrite.jsp'">
-	<% } %>
-	
-	<!-- 검색조건 -->
-	<div id="c_d_3">
-	<form action="<%=request.getContextPath() %>/list.cr" method="get">
-		<select id="searchType" name="sk">
-	  		<option ${(param.sk=="전체")?"selected":""} value="전체">전체</option>
-	  		<option ${(param.sk=="제목")?"selected":""} value='제목'>제목</option>
-	  		<option ${(param.sk=="감독")?"selected":""} value='감독'>감독</option>
-	  		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
-		</select>
-			
-		<input type="text" name="sv" value="${param.sv}">
-	</form>
-	
-	</div>
 
 
 
@@ -153,9 +160,9 @@
 			$('#ta1 td').mouseenter(function(){
 				$(this).parent().css('cursor', 'pointer');
 			}).click(function(){
-				var rNo = $(this).parent().children().eq(0).text();
+				var cNo = $(this).parent().children().eq(0).text();
 				 if('<%= loginUser %>' != 'null'){
-						location.href='<%= request.getContextPath() %>/detail.creat?rNo=' +rNo;
+						location.href='<%= request.getContextPath() %>/detail.creat?cNo=' +cNo;
 					}else{
 						alert('로그인 해주세요.');
 					}

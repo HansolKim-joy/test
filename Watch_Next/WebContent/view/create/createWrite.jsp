@@ -64,6 +64,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/editor.css" type="text/css" rel="stylesheet"/>
 <link rel= "stylesheet" type="text/css" href="<%=request.getContextPath() %>/Resources/css/create_write.css">
+<style>
+	.subnav li {width: 120px;}
+</style>
 </head>
 <body>
 <!--header -->

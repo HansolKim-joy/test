@@ -469,7 +469,7 @@ public class CreateDAO {
 	}
 
 	public int putLikeC(Connection conn, int rNo) {
-		// putLikeC=update tb_review set review_like = review_like + 1 where review_no = ?
+		// putLikeC=update tb_create set create_like = create_like + 1 where create_no = ?
 				PreparedStatement pstmt = null;
 				int result = 0;
 				
@@ -555,6 +555,151 @@ public class CreateDAO {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public String getWriter(Connection conn, int cNo) {
+		// getWriter = SELECT USER_ID FROM TB_BOARD WHERE BOARD_NO = ?
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Create c = null;
+		String writer = null;
+		
+		String query = prop.getProperty("getWriter");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				writer = rset.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return writer;
+	}
+
+	public char getFollow(Connection conn, String userId, String writer) {
+		// getFollow=SELECT * FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		char fchk = 0;
+		
+		Create create = null;
+		
+		String query = prop.getProperty("getFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,userId);
+			pstmt.setString(2, writer);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				fchk = rs.getString("follow_yn").charAt(0);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return fchk;
+	}
+
+	public int putFollow(Connection conn, int cNo, String writer, String userId) {
+		// putFollow = INSERT INTO TB_FOLLOW VALUES(?, ?, SEQ_FOLLOW.NEXTVAL, 'Y')
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("putFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, writer);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int notFollow(Connection conn, int cNo, String userId, String writer) {
+		// notFollow = DELETE FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("notFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  userId);
+			pstmt.setString(2, writer);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertCommentC(Comment co, Connection conn) {
+		// insertCommentC= update tb_create set create_comms = create_comms+1 where create_no=?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertCommentC");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, co.getRefBid());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int deleteCommentC(Connection conn, int rNo) {
+		// deleteCommentC= update tb_create set create_comms = create_comms-1 where create_no=? 
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteCommentC");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
 		return result;
 	}
 

@@ -29,7 +29,7 @@ public class ReportDAO {
 		}
 	}
 
-	public int insertReport(Connection conn, Report rep) {
+	public int insertReport(Connection conn, Report rep) { //게시글신고
 		// insertReport=insert into tb_dec values(SEQ_DEC.NEXTVAL, ?, ?, ?, ?)
 	
 		PreparedStatement pstmt = null;
@@ -39,10 +39,10 @@ public class ReportDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, rep.getDecContent());
-			pstmt.setInt(2, rep.getBoardNo());
-			pstmt.setNull(3, Types.INTEGER);
-			pstmt.setString(4, rep.getUserId());
+			pstmt.setString(1, rep.getDecContent());//내용
+			pstmt.setInt(2, rep.getBoardNo());//게시판번호
+			pstmt.setNull(3, Types.INTEGER);//리플번호
+			pstmt.setString(4, rep.getUserId());//유저
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -54,7 +54,7 @@ public class ReportDAO {
 		return result;
 	}
 
-	public int insertReportR(Connection conn, Report rep) {
+	public int insertReportR(Connection conn, Report rep) { //댓글신고
 		// insertReportR=insert into tb_dec values(SEQ_DEC.NEXTVAL, ?, ?, ?, ?)
 		
 		PreparedStatement pstmt = null;
@@ -64,10 +64,10 @@ public class ReportDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, rep.getDecContent());
-			pstmt.setNull(2, Types.VARCHAR);
-			pstmt.setInt(3, rep.getCommentsNo());
-			pstmt.setString(4, rep.getUserId());
+			pstmt.setString(1, rep.getDecContent());//내용
+			pstmt.setNull(2, Types.INTEGER);//게시판번호
+			pstmt.setInt(3, rep.getCommentsNo());//리플번호
+			pstmt.setString(4, rep.getUserId());//유저
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

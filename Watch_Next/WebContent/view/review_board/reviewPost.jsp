@@ -33,7 +33,7 @@
 		<!-- 리뷰 게시판 상세 -->
 	
 		<div id="review">
-			<h2 id="rh2"><strong>리뷰 게시판</strong></h2>
+			<h2 id="rh2"><strong>리뷰 게시판 상세보기</strong></h2>
 			<hr class="hline">
 			<form action="<%= request.getContextPath()%>/view/review_board/ReviewUpdateForm.jsp" id="detailForm" name="detailForm"> 
 				<div id="box">
@@ -91,14 +91,14 @@
 								<td width="70px" style="font-size:17px;" id="rpWriter">
 									<ul>
 										<li>
-											<%= r.getbWriter() %> 
+											<%= r.getbWriter() %>
+											<% if(!loginUser.getUserId().equals(r.getbWriter())) { %> 
 											<ul>
 												<li><a onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
 														'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
 													쪽지보내기</a>
 												</li>
-												
-												<% if(!loginUser.getUserId().equals(r.getbWriter())) { %>
+														
 												<li>
 													<% if(fchk == 'N' || fchk == 0) {%>
 														<a onclick="onFollow()">팔로우추가</a>
