@@ -65,17 +65,22 @@ public class MovieDAO {
 
 	public int getListCount(Connection conn) {
 		Statement stmt = null;
+		ResultSet rs = null;
 		int result = 0;
 		
 		String sql = prop.getProperty("getListCount");
 		
 		try {
 			stmt = conn.createStatement();
-			result = stmt.executeUpdate(sql);
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			close(rs);
 			close(stmt);
 		}
 		

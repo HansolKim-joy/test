@@ -2,7 +2,9 @@ package movie.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +38,10 @@ public class MovieListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService service = new BoardService();
-		
+		int choice = 0;
+		if(request.getParameter("choice") != null) {
+			choice = Integer.parseInt(request.getParameter("choice"));
+		}
 		int listCount = service.getListCount();
 		
 		int currentPage;			// 현재 페이지
@@ -51,7 +56,10 @@ public class MovieListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		maxPage = (int)(((double)listCount/boardLimit) + 0.9);
+		maxPage = (int)(((double)(listCount)/boardLimit) + 0.9);
+		if(maxPage < 1) {
+			maxPage = 1;
+		}
 		startPage = (((int)((double)currentPage/pageLimit + 0.9)) - 1) * pageLimit + 1;
 		
 		endPage = pageLimit + startPage - 1;
@@ -67,20 +75,25 @@ public class MovieListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		HashMap<String,Movie> mMap = service.MovieList(currentPage, boardLimit);
+		List<String> keySetList = new ArrayList<String>(mMap.keySet());
+		if(choice == 1) {
+			Collections.sort(keySetList,(o1, o2) -> (mMap.get(o1).getmTitle().compareTo(mMap.get(o2).getmTitle())));
+		}else if(choice == 2){
+			Collections.sort(keySetList,(o1, o2) -> (mMap.get(o2).getmTitle().compareTo(mMap.get(o1).getmTitle())));
+		}
 		ArrayList<Movie> mlist = new ArrayList<Movie>();
 		ArrayList<String> fNameList = new ArrayList<String>();
-		if(!mMap.isEmpty()) {
-			mMap.forEach((k,v) -> {mlist.add(v); 
-								  fNameList.add(k);}
-								  );
+		for(String key : keySetList) {
+			fNameList.add(key);
+			mlist.add(mMap.get(key));
 		}
-		
 		
 		String page = null;
 		page = "view/allMovie/allMovie2.jsp";
 		request.setAttribute("mlist", mlist);
 		request.setAttribute("fNameList", fNameList);
 		request.setAttribute("pi", pi);
+		request.setAttribute("choice", choice);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 		

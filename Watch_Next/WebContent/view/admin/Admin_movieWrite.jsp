@@ -74,7 +74,7 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-<form action="<%= request.getContextPath() %>/insert.movie" method="post" encType="multipart/form-data">
+<form action="<%= request.getContextPath() %>/insert.movie" name = "submitForm" method="post" encType="multipart/form-data">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
 		<h2>영화 정보 작성</h2>
 		<hr id="red_line">
@@ -165,6 +165,26 @@
 			alert('서비스 사이트를 입력해 주세요.');
 			return false;
 		}
+		var f = document.submitForm;
+ 		if(	f.admin_movie_name.value.length < 1 || 
+ 			f.admin_movie_director.value.length < 1 || 
+ 			f.admin_movie_actor.value.length < 1 || 
+ 			f.admin_movie_story.value.length < 1 ||
+ 			f.admin_movie_time.value.length < 1 ||
+ 			f.admin_movie_country.value.length < 1 ||
+ 			f.admin_movie_open.value.length < 1 ||
+ 			f.admin_imageFile.value.length < 1){
+ 			alert("비어있는 곳 없이 모두 입력해 주십시오.");
+ 			return false;
+ 		}else if(f.admin_imageFile.value == ""){
+ 			console.log("영화 포스터를 등록해주세요.");
+ 			return false;
+ 		}else if(f.admin_movie_time.value == "00:00"){
+ 			if(confirm("영화시간 없이 등록하시겠습니까?") == false){
+ 				return false;
+ 			}
+ 		}
+ 		return true;
 	}
 </script>
 <!-- footer -->
