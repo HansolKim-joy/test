@@ -1,9 +1,7 @@
 package review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,23 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import common.Comment;
 import member.model.vo.Member;
-import report.model.service.ReportService;
-import report.model.vo.Report;
 import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class ReviewDetailServlet
+ * Servlet implementation class ReviewFollowServlet
  */
-@WebServlet("/detail.rv")
-public class ReviewDetailServlet extends HttpServlet {
+@WebServlet("/putFollow.rv")
+public class ReviewFollowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDetailServlet() {
+    public ReviewFollowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,36 +31,17 @@ public class ReviewDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rv = Integer.parseInt(request.getParameter("rv"));
+		int rv= Integer.parseInt(request.getParameter("rv").trim());
+		String writer = request.getParameter("fwriter");
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		char chk = ReviewService.getLike(userId,rv);
-		request.setAttribute("chk", chk);
 		
-		String writer = new ReviewService().getWriter(rv);
-		char fchk = ReviewService.getFollow(userId, writer);
-		request.setAttribute("fchk", fchk);
-			
-				
-		review.model.vo.Review review = new ReviewService().selectReview(rv);
-		ArrayList<Comment> list = new ReviewService().selectReplyList(rv);
-		/* int[] decrpNo = new ReportService().selectReport(userId); */
+		int result = new ReviewService().putFollow(rv, writer, userId);
 		
-		String page = null;
-		if(review != null) {
-			page = "view/review_board/reviewPost.jsp";
-			request.setAttribute("review", review);
-			request.setAttribute("list", list);
-		} else {
-			page = "view/errorPage/errorPage.jsp";
-			request.setAttribute("msg", "게시물 상세조회에 실패했습니다.");
-		}
-		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
-		
+		String page = request.getContextPath()+"/detail.rv?rv=" + rv;
+		response.sendRedirect(page);
 	}
 
 	/**

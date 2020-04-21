@@ -20,7 +20,7 @@
 <br clear="all">
 
 <section>
-<%-- 	<form action="<%= request.getContextPath() %>/report.send"> --%>
+	<form action="<%= request.getContextPath() %>/report.send">
 		<div id="reportfrm">
 			<div id="reason">
 					! 신고 사유를 적어주세요
@@ -29,10 +29,11 @@
 			<br>
 
 			<div id="reportBox">
-			<!-- 상세뷰에서 게시판번호 받아오기 -->
-				<input type="text" id="test">
+			<!-- 상세뷰에서 게시판번호 or 리플번호 받아오기 -->
+				<input type="hidden" name="bno" id="bno">
+				<input type="hidden" name="rno" id="rno">
 				
-				<textarea id="reportContent" cols=50 rows=12 style="resize:none"></textarea>
+				<textarea name="reportContent" id="reportContent" cols=50 rows=12 style="resize:none"></textarea>
 			</div>
 			
 			<br>
@@ -40,7 +41,7 @@
 			<input id="reportSubmit" type="submit" value="보 내 기"
 				   onclick="return rpt();">
 		</div>
-   <!--  </form> -->
+    </form>
    
 
 </section>
@@ -56,6 +57,7 @@
 				return false;
 			} else {
 				alert('신고가 완료되었습니다.');
+				window.close();
 			}
 		}
 	}

@@ -127,6 +127,12 @@ public class Review {
 		this.bLike = bLike;
 	}
 	
+	// 팔로우용
+	public Review(String bWriter) {
+		super();
+		this.bWriter = bWriter;
+	}
+	
 	public int getRnum() {
 		return rnum;
 	}

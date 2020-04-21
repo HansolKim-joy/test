@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Properties;
 
 import report.model.vo.Report;
@@ -28,7 +30,7 @@ public class ReportDAO {
 	}
 
 	public int insertReport(Connection conn, Report rep) {
-		// insertReport=insert into tb_dec values(?, ?, ?, ?, ?)
+		// insertReport=insert into tb_dec values(SEQ_DEC.NEXTVAL, ?, ?, ?, ?)
 	
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -37,11 +39,10 @@ public class ReportDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, 1);
-			pstmt.setString(2, "임시내용");
-			pstmt.setInt(3, rep.getBoardNo());
-			pstmt.setInt(4, 1);
-			pstmt.setString(5, "user01");
+			pstmt.setString(1, rep.getDecContent());
+			pstmt.setInt(2, rep.getBoardNo());
+			pstmt.setNull(3, Types.INTEGER);
+			pstmt.setString(4, rep.getUserId());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -52,5 +53,47 @@ public class ReportDAO {
 		
 		return result;
 	}
+
+	public int insertReportR(Connection conn, Report rep) {
+		// insertReportR=insert into tb_dec values(SEQ_DEC.NEXTVAL, ?, ?, ?, ?)
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, rep.getDecContent());
+			pstmt.setNull(2, Types.VARCHAR);
+			pstmt.setInt(3, rep.getCommentsNo());
+			pstmt.setString(4, rep.getUserId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/*
+	 * public int[] selectReportR(Connection conn, String userId) { // getReportC =
+	 * select * from tb_dec where user_id=? PreparedStatement pstmt = null;
+	 * ResultSet rset = null; int[] repRp = null;
+	 * 
+	 * String query = prop.getProperty("getReportC"); try { pstmt =
+	 * conn.prepareStatement(query); pstmt.setString(1,userId);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * for(int i = 0; rset.next(); i++) { repRp[i] = rset.getInt("COMMENTS_NO"); } }
+	 * catch (SQLException e) { e.printStackTrace(); } finally { close(rset);
+	 * close(pstmt); }
+	 * 
+	 * return repRp; }
+	 */
 
 }
