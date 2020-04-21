@@ -67,6 +67,7 @@
 						<tr>
 							<td id="ppwd">현재 비밀번호 : &nbsp;</td>
 							<td><input type="password" id="inputPwd" name="inputPwd"></td>
+							<td><input type="hidden" id="hidden"></td>
 						</tr>
 						<tr height="50">
 							<td colspan="2" id="td11"><button type="submit" id="checkBtn" onclick="return checkPwd();">확인</button></td>
@@ -78,14 +79,28 @@
 		</div>
 	</form>
 	<script>
+		$('#inputPwd').change(function(){
+			var inputPwd = $('#inputPwd').val();
+			console.log("inputPwd" + inputPwd);
+			$.ajax({
+				url:'<%= request.getContextPath() %>/ckPresent.pwd',
+				data:{inputPwd:inputPwd},
+				success:function(data){
+					console.log("successData" + data.inputPwd);
+					var changeInputPwd = data.inputPwd;
+					$('#hidden').val(changeInputPwd);
+					console.log("hidden" + $('#hidden').val());
+				}
+			});
+		});
+
 		function checkPwd(){
-			var inputPwd = document.getElementById('inputPwd').value;
+			var lockInputPwd = $('#hidden').val();
 			var userPwd = '<%= loginUser.getUserPwd() %>';
-		
-			/* console.log(inputPwd);
-			console.log(userPwd); */
+			console.log("lockInputPwd" + lockInputPwd);
+			console.log("userPwd" + userPwd);
 			
-			if(inputPwd == userPwd){
+			if(inputPwd.equals(userPwd)){
 				console.log('같다!!');
 				window.close();
 			}else{

@@ -20,7 +20,7 @@ public class LockPassWord extends HttpServletRequestWrapper {
 	public String getParameter(String name) {
 		
 		String value = "";
-		if(name != null && (name.equals("user_Pass") || name.equals("lg_userPwd") || name.equals("userPwd"))) {
+		if(name != null && (name.equals("user_Pass") || name.equals("lg_userPwd") || name.equals("userPwd") || name.equals("inputPwd"))) {
 			value = getSha512(super.getParameter(name));
 		} else {
 			value = super.getParameter(name);
