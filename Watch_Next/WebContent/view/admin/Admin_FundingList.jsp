@@ -63,8 +63,6 @@
 						Demand wl = wlist.get(a);
 						if(dl.getdNo() == wl.getdNo()) {
 							percent = (int)(((double)wl.getMoney()/dl.getprice())*10000)/100.0;
-							System.out.println(dl.getprice());
-							System.out.println(wl.getMoney());
 						}
 					}
 				 if(i%j==0){ %>
