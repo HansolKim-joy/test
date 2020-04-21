@@ -200,6 +200,21 @@ public class CreateService {
 		return result1;
 	}
 
+	public int deleteCreate(int rNo) {
+		Connection conn = getConnection();
+		int result = new CreateDAO().deleteCreate(conn, rNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+			
+		return result;
+	}
+
 	
 
 	
