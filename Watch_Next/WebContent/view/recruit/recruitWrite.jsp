@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-<% System.out.println(request.getContextPath()); %>
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.sql.Date"%>
+<% Recruit recruit = (Recruit)request.getAttribute("recruit"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +8,11 @@
 <title>모집 글 작성</title>
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" >
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/Resources/js/editor.js"></script>
+<style>
+	.subnav li {width: 120px;}
+</style>
 <script>
 	$(document).ready(function() {
 		$("#txtEditor").Editor();
@@ -33,7 +33,7 @@
 		    var navbar = $(this).scrollTop();
 		    console.log(navbar);
 		    var header = $('header');
-		    if(navbar > 100){
+		    if(navbar > 30){
 		        header.addClass('down');
 		    }else{
 		        header.removeClass('down');
@@ -56,11 +56,13 @@
 				return true;
 			}
 		});
+		
 	});  
 </script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/editor.css" type="text/css" rel="stylesheet"/>
+
 <link rel= "stylesheet" type="text/css" href="<%=request.getContextPath() %>/Resources/css/recruit_write.css">
 </head>
 <body>

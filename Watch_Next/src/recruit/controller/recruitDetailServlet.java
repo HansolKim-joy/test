@@ -15,6 +15,7 @@ import common.Comment;
 import member.model.vo.Member;
 import recruit.model.service.recruitService;
 import recruit.model.vo.Recruit;
+import review.model.service.ReviewService;
 
 /**
  * Servlet implementation class recruitDetailServlet
@@ -39,7 +40,11 @@ public class recruitDetailServlet extends HttpServlet {
 		
 		 HttpSession session = request.getSession();
 		 Member loginUser = (Member)session.getAttribute("loginUser");
+		 String userId = loginUser.getUserId();
 		 
+		 String writer = new recruitService().getWriter(rNo);
+		char fchk = recruitService.getFollow(userId, writer);
+		request.setAttribute("fchk", fchk);
 		 Recruit board = new recruitService().selectBoard(rNo);
 		 ArrayList<Comment> comment = new recruitService().selectComment(rNo);
 		
@@ -47,7 +52,7 @@ public class recruitDetailServlet extends HttpServlet {
 			if(board != null) {
 				page = "view/recruit/recruitDetail.jsp";
 				request.setAttribute("board", board);
-				request.setAttribute("loginUser", loginUser);
+				request.setAttribute("loginUser", userId);
 				request.setAttribute("comment", comment);
 			} else {
 				page = "view/errorPage/errorPage.jsp";

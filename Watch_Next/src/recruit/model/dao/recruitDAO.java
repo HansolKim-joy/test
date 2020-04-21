@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import common.Comment;
 import recruit.model.vo.Recruit;
+import review.model.vo.Review;
 
 public class recruitDAO {
 	
@@ -383,7 +384,22 @@ public class recruitDAO {
 		
 				
 		try {
-			if(choice2.equals("all")) {
+			if(!choice.equals("all")) {
+				sql = "select * from reclist where rnum between ? and ? and recruit_head=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, choice);
+				
+			}else if(choice.equals("all")){
+				sql = "select * from reclist where rnum between ? and ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+			}else if(choice2.equals("all")) {
 				sql = "select * from reclist where rnum between ? and ? and recruit_head=? and (board_title like '%' || ? || '%'  or user_id like '%' || ? || '%' or board_content like '%' || ? || '%')";
 				pstmt = conn.prepareStatement(sql);
 				
@@ -395,6 +411,7 @@ public class recruitDAO {
 				pstmt.setString(5, choice2);
 				pstmt.setString(6, choice2);
 				System.out.println(1);
+				
 			}else if(choice2.equals("title")) {
 				sql = "select * from reclist where rnum between  ? and ? and recruit_head= ? and board_title= ? ";
 				pstmt = conn.prepareStatement(sql);
@@ -528,5 +545,110 @@ public class recruitDAO {
 		}
 		return cList;
 		}
+
+
+	public int follow(Connection conn, int rNo, String writer, String userId) {
+		// follw=insert into tb_follow values(?,?, seq_follow.nextval, 'Y')
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("follow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, writer);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public String getWriter(Connection conn, int rNo) {
+		// getWriter = SELECT USER_ID FROM TB_BOARD WHERE BOARD_NO = ?
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Recruit r = null;
+		String writer = null;
+		
+		String query = prop.getProperty("getWriter");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				writer = rset.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return writer;
+	}
+	
+
+	public char getFollow(Connection conn, String userId, String writer) {
+		// getFollow=SELECT * FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		char fchk=0;
+		
+		String query = prop.getProperty("getFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, writer);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				fchk = rs.getString("follow_yn").charAt(0);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return fchk;
+	}
+
+
+	public int notFollow(Connection conn, int rNo, String userId, String writer) {
+		// unfollow = DELETE FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("unfollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  userId);
+			pstmt.setString(2, writer);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+
+	
 	}
 

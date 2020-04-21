@@ -16,14 +16,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>insert title</title>
+<title>모집 게시판</title>
 
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <link type="text/css" href="/Watch_Next/Resources/css/recruit_list.css" rel="stylesheet" >
+
+
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -35,7 +36,7 @@
 	<br clear="all">
 	
 		<div id="recruit">
-		<h2><strong>모집 게시판</strong></h2>
+		<h2 style="font-size: 30px;"><strong>모집 게시판</strong></h2>
 			<hr class="hline">
 			<table class="tablearea">
 			<thead>

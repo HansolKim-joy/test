@@ -8,10 +8,10 @@
 <title>모집 글 수정</title>
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" >
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>
+	.subnav li {width: 120px;}
+</style>
 <script src="<%=request.getContextPath() %>/Resources/js/editor.js"></script>
 <script>
 	$(document).ready(function() {
@@ -58,8 +58,12 @@
 		});
 	});  
 </script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/editor.css" type="text/css" rel="stylesheet"/>
 <link rel= "stylesheet" type="text/css" href="<%=request.getContextPath() %>/Resources/css/recruit_write.css">
+<link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" >
+
 </head>
 <body>
 

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import recruit.model.dao.recruitDAO;
 import common.Comment;
 import recruit.model.vo.Recruit;
+import review.model.dao.ReviewDAO;
+import review.model.vo.Review;
 
 public class recruitService {
 
@@ -217,6 +219,57 @@ public class recruitService {
 		 return list;
 		 
 	 }
+
+	public int follow(int rNo, String writer, String userId) {
+		Connection conn = getConnection();
+		recruitDAO dao = new recruitDAO();
+		
+		int result = dao.follow(conn, rNo, writer, userId);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public String getWriter(int rNo) {
+		Connection conn = getConnection();
+		
+		String writer = new recruitDAO().getWriter(conn, rNo);
+		
+		close(conn);
+		
+		return writer;
+	}
+	
+	public static char getFollow(String userId, String writer) {
+		Connection conn = getConnection();
+		char fchk = new recruitDAO().getFollow(conn, userId, writer);
+		
+		close(conn);
+		return fchk;
+	}
+
+	public int unFollow(int rNo, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		recruitDAO dao = new recruitDAO();
+		int result = dao.notFollow(conn, rNo, userId, writer);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	
+
+	
 	 
 
 	
