@@ -40,7 +40,7 @@
 		});
 
 </script>
-<link href="<%=request.getContextPath() %>/Resources/css/Admin_fundingAllow.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/Resources/css/admin_movie_write.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>

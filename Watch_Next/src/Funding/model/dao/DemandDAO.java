@@ -221,8 +221,8 @@ public class DemandDAO {
             pstmt.setString(5, d.getMovieDirector());
             pstmt.setString(6, d.getMovieActor());
             pstmt.setString(7, d.getMovieStory());
-            pstmt.setInt(8, d.getMoney());
-            pstmt.setInt(9, d.getWantMoney());
+            pstmt.setInt(8, d.getWantMoney());
+            pstmt.setInt(9, d.getMoney());
             pstmt.setInt(10, d.getGerneNo());
             pstmt.setString(11, d.getRunningTime());
             result = pstmt.executeUpdate();
