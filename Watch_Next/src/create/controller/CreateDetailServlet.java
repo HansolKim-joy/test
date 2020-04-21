@@ -15,6 +15,7 @@ import common.Comment;
 import create.model.service.CreateService;
 import create.model.vo.Create;
 import member.model.vo.Member;
+import review.model.service.ReviewService;
 
 /**
  * Servlet implementation class CreateDetailServlet
@@ -35,17 +36,21 @@ public class CreateDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
-		System.out.println("rnoservlet " + rNo);
+		int cNo = Integer.parseInt(request.getParameter("cNo").trim());
+		System.out.println("rnoservlet " + cNo);
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		
-		char chk = new CreateService().getLike(userId, rNo);
+		char chk = new CreateService().getLike(userId, cNo);
 		request.setAttribute("chk", chk);
 		
-		Create create = new CreateService().selectCreate(rNo);
-		ArrayList<Comment> comment = new CreateService().selectComment(rNo);
+		String writer = new CreateService().getWriter(cNo);
+		char fchk = CreateService.getFollow(userId, writer);
+		request.setAttribute("fchk", fchk);
+		
+		Create create = new CreateService().selectCreate(cNo);
+		ArrayList<Comment> comment = new CreateService().selectComment(cNo);
 		
 		String page = null;
 		if(create != null) {

@@ -1,6 +1,7 @@
 package create.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +11,18 @@ import javax.servlet.http.HttpSession;
 
 import create.model.service.CreateService;
 import member.model.vo.Member;
-import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class CreateNotLikeServlet
+ * Servlet implementation class CreateFollowServlet
  */
-@WebServlet("/notlike.create")
-public class CreateNotLikeServlet extends HttpServlet {
+@WebServlet("/putFollow.cr")
+public class CreateFollowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateNotLikeServlet() {
+    public CreateFollowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +31,17 @@ public class CreateNotLikeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cNo= Integer.parseInt(request.getParameter("cNo").trim());
+		int cNo = Integer.parseInt(request.getParameter("cNo").trim());
+		String writer = request.getParameter("fwriter");
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		
-		int result = new CreateService().notLike(cNo, userId);
+		int result = new CreateService().putFollow(cNo, writer, userId);
 		
 		String page = request.getContextPath()+"/detail.creat?cNo=" + cNo;
 		response.sendRedirect(page);
-	
-	
 	}
 
 	/**

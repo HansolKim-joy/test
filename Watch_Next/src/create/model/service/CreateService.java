@@ -215,6 +215,56 @@ public class CreateService {
 		return result;
 	}
 
+	public String getWriter(int cNo) {
+		Connection conn = getConnection();
+		Create create = null;
+		
+		String writer = new CreateDAO().getWriter(conn, cNo);
+		
+		close(conn);
+		
+		return writer;
+	}
+
+	public static char getFollow(String userId, String writer) {
+		Connection conn = getConnection();
+		char fchk = new CreateDAO().getFollow(conn, userId, writer);
+		
+		close(conn);
+		return fchk;
+	}
+
+	public int putFollow(int cNo, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		CreateDAO dao = new CreateDAO();
+		
+		int result = dao.putFollow(conn, cNo, writer, userId);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int notFollow(int cNo, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		CreateDAO dao = new CreateDAO();
+		int result = dao.notFollow(conn, cNo, userId, writer);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
 	
 
 	

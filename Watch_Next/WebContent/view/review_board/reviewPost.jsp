@@ -91,14 +91,14 @@
 								<td width="70px" style="font-size:17px;" id="rpWriter">
 									<ul>
 										<li>
-											<%= r.getbWriter() %> 
+											<%= r.getbWriter() %>
+											<% if(!loginUser.getUserId().equals(r.getbWriter())) { %> 
 											<ul>
 												<li><a onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
 														'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
 													쪽지보내기</a>
 												</li>
-												
-												<% if(!loginUser.getUserId().equals(r.getbWriter())) { %>
+														
 												<li>
 													<% if(fchk == 'N' || fchk == 0) {%>
 														<a onclick="onFollow()">팔로우추가</a>

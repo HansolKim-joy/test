@@ -153,9 +153,9 @@
 			$('#ta1 td').mouseenter(function(){
 				$(this).parent().css('cursor', 'pointer');
 			}).click(function(){
-				var rNo = $(this).parent().children().eq(0).text();
+				var cNo = $(this).parent().children().eq(0).text();
 				 if('<%= loginUser %>' != 'null'){
-						location.href='<%= request.getContextPath() %>/detail.creat?rNo=' +rNo;
+						location.href='<%= request.getContextPath() %>/detail.creat?cNo=' +cNo;
 					}else{
 						alert('로그인 해주세요.');
 					}

@@ -4,6 +4,7 @@
 	Create c = (Create)request.getAttribute("create");
 	ArrayList<Comment> comment = (ArrayList<Comment>)request.getAttribute("comment");
 	char chk = (char)request.getAttribute("chk");
+	char fchk = (char)request.getAttribute("fchk");
 	
  %>    
 <!DOCTYPE html>
@@ -11,7 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <title>창작글 상세보기</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <style>
+	.subnav li {width: 120px;}
 	.like{width:35px; height:35px;}
 	.likeb{background-color:transparent; border:none;}
 	#fo,#my,#nf,#le{cursor: pointer}
@@ -19,8 +22,10 @@
 #my:hover{text-decoration: underline;}
 #nf:hover{text-decoration: underline;}
 #le:hover{text-decoration: underline;}
+#sirenb{background-color:transparent; border:none;}
+
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -62,22 +67,21 @@
 								<ul>
 									<li>
 										<input type="hidden"  name="rpWriter" value="<%= c.getbWriter()%>"><%= c.getbWriter() %>
-										<ul>
-											<li>
-												<a id="le" onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
-												'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
-												쪽지보내기</a>
-											</li>
-											<li>
-												<% if(loginUser != null && !loginUser.getUserId().equals(c.getbWriter())) {%>
-												<a id="fo" onclick="follow();">팔로우하기</a>
-												<%} else if(loginUser != null && loginUser.getUserId().equals(c.getbWriter())) { %>
-												<a id="my" onclick="location.href='<%= request.getContextPath() %>/view/myPage/myPageMain.jsp'">마이페이지</a>
-												<%} else {%>
-												<a id="nf" onclick="#">팔로우 해지</a>
-												<%} %>
-											</li>
-										</ul>
+												<% if(!loginUser.getUserId().equals(c.getbWriter())) { %>
+												<ul>
+												<li><a onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
+														'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
+													쪽지보내기</a>
+												</li>
+												<li>
+													<% if(fchk == 'N' || fchk == 0) {%>
+														<a onclick="onFollow()">팔로우추가</a>
+													<%} else if(fchk == 'Y') {%>
+														<a onclick="onNoFollow()">팔로우해제</a>
+													<%} %>
+												</li>
+												<% } %>
+												</ul>
 									</li>
 								</ul>
 							</td>
@@ -87,6 +91,36 @@
 							<td width="70px" style="font-size: 17px;"><%= c.getbCount() %></td>
 						</tr>
 					</table>
+					
+					<script>
+						function onFollow(){
+							var fwriter = "<%=c.getbWriter()%>";
+							var cNo = <%=c.getbNO() %>;
+							
+							$.ajax({
+								url: 'putFollow.cr',
+								data: {fwriter:fwriter, cNo:cNo},
+								success: function(){
+									alert('팔로우성공');
+									location.reload();
+								}
+							})
+						}
+						
+						function onNoFollow(){
+							var fwriter = "<%=c.getbWriter()%>";
+							var cNo = <%=c.getbNO() %>;
+							
+							$.ajax({
+								url: 'notFollow.cr',
+								data: {fwriter:fwriter, cNo:cNo},
+								success: function(){
+									alert('팔로우해제 성공');
+									location.reload();
+								}
+							})
+						}	
+					</script>
 				</div>
 
 				<hr>
@@ -137,19 +171,21 @@
 							<td width=5px></td>
 							<td>
 
-									<input type="text" name="rbNo" value="<%= c.getbNO()%>">
-									<button type="button" value="popup" onclick="sendPop();">
+									<input type="hidden" name="rbNo" value="<%= c.getbNO()%>">
+									<button type="button" id="sirenb" value="popup" onclick="sendPop();" >
 										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
 									</button>
 
 									
 
 									<script>
+									var win;
 									  function sendPop(){
-											var win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+											win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
 											'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
-
-											win.document.getElementById("test").value="<%= c.getbNO() %>";
+											setTimeout(function(){
+												win.document.getElementById("bno").value="<%=c.getbNO() %>";
+											},600)
 										   }
 									
  									</script>
@@ -174,7 +210,7 @@
 	        <button  class="lbtn" id="bupBtn" type=submit title="수정" >수정</button>
 	        <button  class="lbtn" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
 		    <% } %>
-		        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+		        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
 			</div>
 			</form>
 			
@@ -208,9 +244,18 @@
 									<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
 									<input type="button" value="삭제" class="deleteC">
 								<% } else {%>
-								<button type=button class=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
-									'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
+									<button type=button id=report onclick="sendPopR();">신고</button>				
 									<% } %>
+									
+									<script>
+									  function sendPopR(){
+											win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+											'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
+											setTimeout(function(){
+												win.document.getElementById("rno").value="<%=comment.get(i).getrId() %>";
+											},600)
+										}
+									</script>
 							</td>
 						</tr>
 						<tr>	
@@ -218,10 +263,11 @@
 								<%= comment.get(i).getrContent() %>
 							</td>
 						</tr>
-							
+						
 						<% } %>
 					<% } %>	
 				</table>
+				
 		</div>
 
 		</div>
