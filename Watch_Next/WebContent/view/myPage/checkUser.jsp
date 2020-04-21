@@ -7,60 +7,63 @@
 <title>정보수정 확인페이지</title>
 <%@ include file="/view/layout/import.jsp" %>
 <style>
-	#updateForm{
-		width: 80%;
-		margin: 0 auto;
-		margin-top: 100px;
-	}
-	#updateMain{
-		color: white;
-		font-size: 25px;
-	}
-	.hline{
-		border: 2px solid red;
-	}
-	#updateTabled{
-		text-align: -webkit-center;
-		font-size: 20px;
-		color: white;
-	}
-	#userId{
-		font-size: 20px;
-		text-align: center;
-		width: 250px;
-	}
-	.loginUser{
-		font-size: 20px;
-		text-align: center;
-		width: 250px;
-		color: gray;
-	}
-	#updateTable{
-		border-spacing: 30px;
-	}
-	.tdlast{
-		width: 100px;
-	}
-	#updateMemberBtn{
-		border: 0;
-		outline: 0;
-		background-color: #545257;
-		color: white;
-		font-size: 20px;
-	}
-	.checkbox{
-		width: 20px;
-		height: 20px;
-		font-size: 25px;
-	}
-	#pwdMessage{
-		text-align: center;
-		display: none;
-	}
-	#pwdMessage1{
-		text-align: center;
-		display: none;
-	}
+   #updateForm{
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 100px;
+   }
+   #updateMain{
+      color: white;
+      font-size: 25px;
+   }
+   .hline{
+      border: 2px solid red;
+   }
+   #updateTabled{
+      text-align: -webkit-center;
+      font-size: 20px;
+      color: white;
+   }
+   #userId{
+      font-size: 20px;
+      text-align: center;
+      width: 250px;
+   }
+   .loginUser{
+      font-size: 20px;
+      text-align: center;
+      width: 250px;
+      color: gray;
+   }
+   #updateTable{
+      border-spacing: 30px;
+   }
+   .tdlast{
+      width: 100px;
+   }
+   #updateMemberBtn{
+      border: 0;
+      outline: 0;
+      background-color: #545257;
+      color: white;
+      font-size: 20px;
+   }
+   .checkbox{
+      width: 20px;
+      height: 20px;
+      font-size: 25px;
+   }
+   #pwdMessage{
+      text-align: center;
+      display: none;
+   }
+   #pwdMessage1{
+      text-align: center;
+      display: none;
+   }
+   #ckck{
+   		text-align:center;
+   }
 </style>
 </head>
 <body>
@@ -69,137 +72,147 @@
 
 
 <section>
-	<div id="updateForm">
-		<h2 id="updateMain">회원 정보 수정</h2>
-		<hr class="hline">
-		<form action="<%= request.getContextPath() %>/update.me" method="post">
-			<div id="updateTabled">
-					<table id="updateTable">
-						<tr>
-							<td>아이디 : &emsp;</td>
-							<td><input type="text" id="userId" name="userId"
-								value="<%= loginUser.getUserId() %>" readonly></td>
-							<td class="tdlast"></td>
-						</tr>
-						<tr>
-							<td>변경 비밀번호 : &emsp;</td>
-							<td><input type="password" id="userPwd" name="userPwd"
-								class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
-							<td><label id="pwdMessage1"></label></td>
-						</tr>
-						<tr>
-							<td>변경 비밀번호 확인 : &emsp;</td>
-							<td><input type="password" id="userPwd2" name="userPwd2"
-								class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
-							<td><label id="pwdMessage"></label></td>
-						</tr>
-						<tr>
-							<td>이름 : &emsp;</td>
-							<td><input type="text" id="userName" name="userName"
-								class="loginUser" value="<%= loginUser.getUserName() %>"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>이메일 : &emsp;</td>
-							<td><input type="text" id="userEmail" name="userEmail"
-								class="loginUser" value="<%= loginUser.getEmail() %>"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>연락처 : &emsp;</td>
-							<td><input type="text" id="phone" name="userPhone"
-								class="loginUser" value="<%=loginUser.getPhone() %>"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>메일링 서비스 : &emsp;</td>
+   <div id="updateForm">
+      <h2 id="updateMain">회원 정보 수정</h2>
+      <hr class="hline">
+      <form action="<%= request.getContextPath() %>/update.me" method="post" onsubmit="return updateMe();">
+         <div id="updateTabled">
+               <table id="updateTable">
+                  <tr>
+                     <td>아이디 : &emsp;</td>
+                     <td><input type="text" id="userId" name="userId"
+                        value="<%= loginUser.getUserId() %>" readonly></td>
+                     <td class="tdlast"></td>
+                  </tr>
+                  <tr>
+                  	<td id="ckck" colspan="2">비밀번호를 반드시 입력해주세요.</td>
+                  </tr>
+                  <tr>
+                     <td>변경 비밀번호 : &emsp;</td>
+                     <td><input type="password" id="userPwd" name="userPwd"
+                        class="loginUser"></td>
+                     <td><label id="pwdMessage1"></label></td>
+                  </tr>
+                  <tr>
+                     <td>변경 비밀번호 확인 : &emsp;</td>
+                     <td><input type="password" id="userPwd2" name="userPwd2"
+                        class="loginUser"></td>
+                     <td><label id="pwdMessage"></label></td>
+                  </tr>
+                  <tr>
+                     <td>이름 : &emsp;</td>
+                     <td><input type="text" id="userName" name="userName"
+                        class="loginUser" value="<%= loginUser.getUserName() %>"></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>이메일 : &emsp;</td>
+                     <td><input type="text" id="userEmail" name="userEmail"
+                        class="loginUser" value="<%= loginUser.getEmail() %>"></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>연락처 : &emsp;</td>
+                     <td><input type="text" id="phone" name="userPhone"
+                        class="loginUser" value="<%=loginUser.getPhone() %>"></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>메일링 서비스 : &emsp;</td>
 
-							<% 
-							String mailing = loginUser.getMailingYN();
-							String checkedMailingY = "";
-							String checkedMailingN = "";
-							if(mailing.equals("Y")){
-								checkedMailingY = "checked"; 
-							}else{
-								checkedMailingN = "checked"; 
-							}
-						%>
-							<td>&emsp;&emsp; <input type="checkbox" id="mailingY"
-								name="mailing" onclick="doOpenCheck(this);" value="Y"
-								class="checkbox" <%= checkedMailingY %>>&emsp;Y
-								&emsp;&emsp; <input type="checkbox" id="mailingN" name="mailing"
-								onclick="doOpenCheck(this);" value="N" class="checkbox"
-								<%=checkedMailingN%>>&emsp;N
-							</td>
-							<td></td>
-						</tr>
-						<tr></tr>
-						<tr>
-							<td colspan="2" style="text-align: center">
-								&emsp;&emsp;&emsp;
-								<button id="updateMemberBtn" onclick="updateMemeber();">수정완료
-								</button> &emsp;&emsp;&emsp;&emsp;&emsp; 
-								<span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3" style="text-align: center" id="deleteBtn">회원탈퇴</td>
-						</tr>
-					</table>
-				</div>
-		</form>
+                     <% 
+                     String mailing = loginUser.getMailingYN();
+                     String checkedMailingY = "";
+                     String checkedMailingN = "";
+                     if(mailing.equals("Y")){
+                        checkedMailingY = "checked"; 
+                     }else{
+                        checkedMailingN = "checked"; 
+                     }
+                  %>
+                     <td>&emsp;&emsp; <input type="checkbox" id="mailingY"
+                        name="mailing" onclick="doOpenCheck(this);" value="Y"
+                        class="checkbox" <%= checkedMailingY %>>&emsp;Y
+                        &emsp;&emsp; <input type="checkbox" id="mailingN" name="mailing"
+                        onclick="doOpenCheck(this);" value="N" class="checkbox"
+                        <%=checkedMailingN%>>&emsp;N
+                     </td>
+                     <td></td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                     <td colspan="2" style="text-align: center">
+                        &emsp;&emsp;&emsp;
+                        <button id="updateMemberBtn">수정완료
+                        </button> &emsp;&emsp;&emsp;&emsp;&emsp; 
+                        <span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="3" style="text-align: center" id="deleteBtn">회원탈퇴</td>
+                  </tr>
+               </table>
+            </div>
+      </form>
 
-	</div>
-	
-	<script>
-		function doOpenCheck(chk){
-			var obj = document.getElementsByName("mailing");
-			for(var i = 0; i < obj.length; i++){
-				if(obj[i] != chk){
-					obj[i].checked = false;
-				}
-			}
-		}
-		
-		
-		$('#updateMemberBtn').click(function(){
-			alert('수정완료');
-			location.href="<%= request.getContextPath() %>/list.all";
-		});
-		
-		$('#userPwd2').change(function(){
-			var userPwd = $('#userPwd').val();
-			var userPwd2 = $('#userPwd2').val();
-			/* console.log(userPwd);
-			console.log(userPwd2); */
-			
-			if(userPwd == userPwd2){
-				/* console.log('같다구요!'); */
-				$('#pwdMessage').text('일치').css({"color":"green", "display":"block"});
-			}else{
-				/* console.log('다르다구요!'); */
-				$('#pwdMessage').text('불일치').css({"color":"red", "display":"block"});
-			}
-		});
-		
-		$('#userPwd').change(function(){
-			var userPwd = $('#userPwd').val();
-			var check = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-			/* console.log(userPwd); */
-			
-			if(check.test(userPwd)){
-				/* console.log('되요!'); */
-				$('#pwdMessage1').text('사용 가능').css({"color":"green", "display":"block"});
-			}else{
-				$('#pwdMessage1').text('사용 불가능').css({"color":"red", "display":"block"});
-			}
-		});
-		
-		$('#deleteBtn').click(function(){
-			 location.href='<%= request.getContextPath() %>/deleteMember.me';
-			 alert("탈퇴가 성공적으로 완료되었습니다.");
-		});
-	</script>
+   </div>
+   
+   <script>
+      function doOpenCheck(chk){
+         var obj = document.getElementsByName("mailing");
+         for(var i = 0; i < obj.length; i++){
+            if(obj[i] != chk){
+               obj[i].checked = false;
+            }
+         }
+      }
+      
+      $('#updateMemberBtn').on('click', function(){
+    	  var userPwd = $('#userPwd').val();
+    	  console.log(typeof(userPwd));
+    	  if(userPwd.trim().length==0){
+     		 alert('비밀번호를 입력해주세요.');
+     		 return false;
+     	 }else{
+     		 alert('수정완료');
+             location.href="<%= request.getContextPath() %>/list.all";
+             return true;
+     	 } 
+      })
+      
+      $('#userPwd2').change(function(){
+         var userPwd = $('#userPwd').val();
+         var userPwd2 = $('#userPwd2').val();
+         /* console.log(userPwd);
+         console.log(userPwd2); */
+         
+         if(userPwd == userPwd2){
+            /* console.log('같다구요!'); */
+            $('#pwdMessage').text('일치').css({"color":"green", "display":"block"});
+         }else{
+            /* console.log('다르다구요!'); */
+            $('#pwdMessage').text('불일치').css({"color":"red", "display":"block"});
+         }
+      });
+      
+      $('#userPwd').change(function(){
+         var userPwd = $('#userPwd').val();
+         var check = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+         /* console.log(userPwd); */
+         
+         if(check.test(userPwd)){
+            /* console.log('되요!'); */
+            $('#pwdMessage1').text('사용 가능').css({"color":"green", "display":"block"});
+         }else{
+            $('#pwdMessage1').text('사용 불가능').css({"color":"red", "display":"block"});
+         }
+      });
+      
+      $('#deleteBtn').click(function(){
+          location.href='<%= request.getContextPath() %>/deleteMember.me';
+          alert("탈퇴가 성공적으로 완료되었습니다.");
+      });
+   </script>
 </section>
 
 
