@@ -40,11 +40,12 @@
 		});
 
 </script>
-<link href="<%=request.getContextPath() %>/Resources/css/admin_movie_write.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/Resources/css/Admin_fundingAllow.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
-<form action="<%= request.getContextPath() %>/insert.demand" method="post" encType="multipart/form-data">
+
+<form action="<%= request.getContextPath() %>/updateFun.adm" method="post">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
 		<h2>펀딩 승인 페이지</h2>
 		<hr id="red_line">
@@ -55,7 +56,8 @@
 		
 		
 		<div class="admin_movie">
-			<input="hidden" >
+			<input type="hidden" name="dno" value="<%= list.get(0).getdNo()%>">
+			
 			<b>제목 : </b><input type="text" value="<%= list.get(0).getTitle()%>" readonly>
 			<b>장소 : </b><input type="text" value="<%= list.get(0).getSmName() %>" readonly>
 			<br>
@@ -78,7 +80,7 @@
 		</div>
 		<div style="width: 100%; text-align:center;">
 			<input type="submit" value="완료" id="admin_movie_btn">
-			<input type="reset" value="취소" id="admin_movie_btn">
+			<input type="button" value="취소" id="admin_movie_btn">
 		</div>
 	</div>
 </form>

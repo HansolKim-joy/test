@@ -80,7 +80,6 @@ public class DemandInsertServlet extends HttpServlet {
 			String runningTime = multiRequest.getParameter("admin_movie_time");
 			String movieStory = multiRequest.getParameter("admin_movie_story");
 			int fileNo = new BoardService().insertPoster(originFile, saveFile);
-			System.out.println(fileNo);
 			Demand d = new Demand(userId, smNo, fileNo, wantmoney, money, movieTitle, movieDirector, movieActor, movieStory, gerneNo, runningTime);
 			int result = service.insertDemand(d);
 			String page = "";

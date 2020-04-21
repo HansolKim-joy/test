@@ -12,8 +12,8 @@ public class Demand {
 	private String movieDirector; // 영화 감독
 	private String movieActor;// 영화 배우
 	private String movieStory;// 영화 스토리
-	private int money; // 펀딩 금액
-	private int wantMoney; // 참여 금액
+	private int wantMoney; // 펀딩 금액
+	private int money; // 참여 금액
 	private Date startDate;// 시작 날짜
 	private Date endDate;// 끝나는 날짜
 	private int gerneNo;// 장르 번호

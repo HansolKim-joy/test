@@ -221,8 +221,8 @@ public class DemandDAO {
             pstmt.setString(5, d.getMovieDirector());
             pstmt.setString(6, d.getMovieActor());
             pstmt.setString(7, d.getMovieStory());
-            pstmt.setInt(8, d.getWantMoney());
-            pstmt.setInt(9, d.getMoney());
+            pstmt.setInt(8, d.getMoney());
+            pstmt.setInt(9, d.getWantMoney());
             pstmt.setInt(10, d.getGerneNo());
             pstmt.setString(11, d.getRunningTime());
             result = pstmt.executeUpdate();
@@ -543,6 +543,25 @@ public int notFund(Connection conn, int no, String userId, String dUserId) {
 		}
 		
 		return list;
+	}
+	public int FundingAllow(Connection conn, int dNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("FundingAllow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, dNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

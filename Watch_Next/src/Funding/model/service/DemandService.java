@@ -129,7 +129,6 @@ public class DemandService {
 	public ArrayList<DemandList> AdminSortList(int currentPage, int boardLimit, String cinema) {
 		Connection conn = getConnection();
 		ArrayList<DemandList> list = new DemandDAO().AdminSortList(conn, currentPage, boardLimit, cinema);
-		System.out.println("service" + cinema);
 		close(conn);
 		
 		return list;
@@ -139,7 +138,6 @@ public class DemandService {
 		Connection conn = getConnection();
 		
 		int result = new DemandDAO().getSortListCount(conn, cinema);
-		System.out.println("서비스 : " + result);
 		close(conn);
 		
 		return result;
@@ -169,6 +167,20 @@ public class DemandService {
 		close(conn);
 		
 		return list;
+	}
+
+	public int FundingAllow(int dNo) {
+		Connection conn = getConnection();
+		int result = new DemandDAO().FundingAllow(conn,dNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
 	}
 	
 }
