@@ -84,6 +84,7 @@
 /*리스트  */
 .pro { 
 	height: 10px;  /* Can be anything */
+	margin-top: 10px;
 	position: relative;
 	background: black;
 	-moz-border-radius: 25px;
