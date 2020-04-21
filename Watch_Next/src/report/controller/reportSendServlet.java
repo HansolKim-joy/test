@@ -5,12 +5,13 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
+import member.model.vo.Member;
 import report.model.service.ReportService;
 import report.model.vo.Report;
 
@@ -33,36 +34,59 @@ public class reportSendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("서블릿 도달 성공");
+		int bno = 0;
+		if(request.getParameter("bno")!= "") {
+			bno = Integer.parseInt(request.getParameter("bno").trim());
+		}
 		
-		//		//ajax에서 받아온값
-//		int bid = Integer.parseInt(request.getParameter("bid").trim());//널포인트 익셉션
-//		System.out.println("서블릿bid:"+bid); //잘받아와짐
-//		
-//		//팝업jsp에서 받아온값
-//		String content = request.getParameter("repContent");
-//		System.out.println("서블릿content:"+content); //null
-//		
-//		Report rep = new Report();
-//		rep.setBoardNo(bid);
-//		
-//		
-//		
-//		if(content != null) {
-//			int result = new ReportService().sendReport(rep);
-//			String page = null;
-//			if(result>0) {
-//				page = "/detail.rv?rv="+bid;
-//			} else {
-//				page = "view/errorPage/errorPage.jsp";
-//				request.setAttribute("msg", "신고에 실패했습니다.");
-//			}
-//			RequestDispatcher view = request.getRequestDispatcher(page);
-//			view.forward(request, response);	
-//		}
-//		
-//		
+		int rno = 0;
+		if(request.getParameter("rno")!= "") {
+			rno = Integer.parseInt(request.getParameter("rno").trim());
 			
+		}
+				
+		String content = request.getParameter("reportContent");
+		
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		
+		if(rno == 0) { //게시글 신고전달
+			Report rep = new Report();
+			rep.setDecContent(content);
+			rep.setUserId(userId);
+			rep.setBoardNo(bno);
+			
+			int result = new ReportService().sendReport(rep);
+			String page = null;
+			if(result>0) {
+				page = "/detail.rv?rv="+bno;
+			} else {
+				page = "view/errorPage/errorPage.jsp";
+				request.setAttribute("msg", "신고에 실패했습니다.");
+			}
+			RequestDispatcher view = request.getRequestDispatcher(page);
+			view.forward(request, response);
+			
+		} else if(bno == 0) { //댓글 신고전달
+			Report rep = new Report();
+			rep.setDecContent(content);
+			rep.setCommentsNo(rno);
+			rep.setUserId(userId);
+			
+			int result = new ReportService().sendReportR(rep);
+			String page = null;
+			if(result>0) {
+				page = "/detail.rv?rv="+bno;
+			} else {
+				page = "view/errorPage/errorPage.jsp";
+				request.setAttribute("msg", "신고에 실패했습니다.");
+			}
+			RequestDispatcher view = request.getRequestDispatcher(page);
+			view.forward(request, response);
+		}
+		
+
 		
 	}
 

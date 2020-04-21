@@ -211,6 +211,56 @@ public class ReviewService {
 		return result1;
 	}
 
+	public int putFollow(int rv, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		ReviewDAO dao = new ReviewDAO();
+		
+		int result1 = dao.putFollow(conn, rv, writer, userId);
+	
+		
+		if(result1>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result1;
+	}
+
+	public String getWriter(int rv) {
+		Connection conn = getConnection();
+		Review review = null;
+		
+		String writer = new ReviewDAO().getWriter(conn, rv);
+		
+		close(conn);
+		
+		return writer;
+	}
+
+	public static char getFollow(String userId, String writer) {
+		Connection conn = getConnection();
+		char fchk = new ReviewDAO().getFollow(conn, userId, writer);
+		
+		close(conn);
+		return fchk;
+	}
+
+	public int notFollow(int rv, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		ReviewDAO dao = new ReviewDAO();
+		int result = dao.notFollow(conn, rv, userId, writer);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
 
 
 

@@ -8,25 +8,22 @@ public class Report {
 	private String userId;
 	
 	public Report() {}
-
 	
-	//테스트
-	public Report(int boardNo) {
+	//게시글 신고전달
+	public Report(String decContent, String userId, int boardNo) {
 		super();
+		this.decContent = decContent;
+		this.userId = userId;
 		this.boardNo = boardNo;
 	}
 	
-	
-	//신고전달
-	public Report(String decContent, int boardNo, int commentsNo, String userId) {
+	// 댓글 신고전달
+	public Report(String decContent, int commentsNo, String userId) {
 		super();
 		this.decContent = decContent;
-		this.boardNo = boardNo;
 		this.commentsNo = commentsNo;
 		this.userId = userId;
 	}
-
-	
 
 	//전체
 	public Report(int decNo, String decContent, int boardNo, int commentsNo, String userId) {

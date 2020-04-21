@@ -1,1 +1,3 @@
-follow=insert into tb_follow values(?, ?, seq_follow.nextval)
+getFollow=SELECT * FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+putFollow = INSERT INTO TB_FOLLOW VALUES(?, ?, SEQ_FOLLOW.NEXTVAL, 'Y')
+notFollow = DELETE FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
