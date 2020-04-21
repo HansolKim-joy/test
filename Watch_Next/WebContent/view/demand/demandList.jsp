@@ -5,6 +5,7 @@
 	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
+	
 	String percent1 = "";
 	double percent = 0.0;
 	int j = 4;
@@ -19,10 +20,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>펀딩 목록</title>
 <style>
-
-
+.span{display: flex;}
+.dday{
+	display: inline-block;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    }
+.pc{
+	display: inline-block;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    
+    margin-left: auto;
+    }
+.title{    
+	text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    padding-left: 9px;
+    }
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />
@@ -36,15 +58,16 @@
 	<!-- 수요조사목록 -->
 	
 	<div id="funding">
-	<h2 id="f_h2">수요조사</h2>
+	<h2 id="f_h2">펀딩 목록</h2>
 
 	<hr class="hline">
 	
 	<div id="sel">
-		<button class="btn" value="CGV"><img src="/Watch_Next/Resources/images/cgv.png" class="cinema"></button>
-		<button class="btn" value="MEGA"><img src="/Watch_Next/Resources/images/메가박스.png" class="cinema"></button>
-		<button class="btn" value="롯데"><img src="/Watch_Next/Resources/images/롯데.png" class="cinema"></button>
-		<button class="btn" value="피카"><img src="/Watch_Next/Resources/images/피카디리.png" class="cinema"></button>
+		<input type="image" value="ALL" src="/Watch_Next/Resources/images/ALL.jpg" class="cinema">
+		<input type="image" value="CGV" src="/Watch_Next/Resources/images/cgv.png" class="cinema">
+		<input type="image" value="MEGA" src="/Watch_Next/Resources/images/메가박스.png" class="cinema">
+		<input type="image" value="롯데" src="/Watch_Next/Resources/images/롯데.png" class="cinema">
+		<input type="image" value="피카" src="/Watch_Next/Resources/images/피카디리.png" class="cinema">
 	</div>
 	
 	<br>
@@ -75,10 +98,11 @@
 							<div class="pro">
 								<span style="width: <%= percent %>%"></span>
 							</div>
-							<span>
-							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
-							<div style="display: inline-block;"><%= percent %>%</div>
-							</span>
+							<div class="title"><%= dl.getTitle() %></div>
+							<div class="span" >
+								<div class="dday" >D-<%= dl.getEndDay() %></div>
+								<div class="pc" ><%= percent %>%</div>
+							</div>
 							
 						</li>
 					
@@ -89,10 +113,12 @@
 							<%  %>
 								<span style="width: <%= percent %>%"></span>
 							</div>
-							<span>
-							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
-							<div style="display: inline-block;"><%= percent %>%</div>
-							</span>
+							<div class="title"><%= dl.getTitle() %></div>
+							<div class="span" >
+								<div class="dday" >D-<%= dl.getEndDay() %></div>
+								<div class="pc" ><%= percent %>%</div>
+								
+							</div>
 						</li>
 					</ol>
 						
@@ -102,10 +128,12 @@
 							<div class="pro">
 								<span style="width: <%= percent %>%"></span>
 							</div>
-							<span>
-							<div style="display: inline-block;"><%= dl.getEndDay() %>일 남음</div>
-							<div style="display: inline-block;"><%= percent %>%</div>
-							</span>
+							<div class="title"><%= dl.getTitle() %></div>
+							<div class="span" >
+								<div class="dday" >D-<%= dl.getEndDay() %></div>
+								<div class="pc" ><%= percent %>%</div>
+								
+							</div>
 						</li>
 				<%} %>		
 			<% } %>   
@@ -126,7 +154,9 @@
 
 	<!-- 페이징 -->
 	<div class="list_number">
+		<% if(loginUser != null) { %>
 		<a type="a" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
+		<%} %>
         <div class="list_n_menu">
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
@@ -168,12 +198,17 @@
 	});
 
 
-	$('.btn').click(function(){
+	$('.cinema').click(function(){
 		var cinema = $(this).val();
-		location.href='<%= request.getContextPath() %>/listSort.de?cinema=' + cinema;
+		if(cinema == 'ALL'){
+			location.href='<%= request.getContextPath() %>/list.de';
+		}else{
+			location.href='<%= request.getContextPath() %>/listSort.de?cinema=' + cinema;
+		}
 	});
 	
 	
 </script>
+
 </body>
 </html>

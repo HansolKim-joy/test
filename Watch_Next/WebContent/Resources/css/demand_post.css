@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 	/* footer */
+@font-face { font-family: 'Godo'; font-style: normal; font-weight: 400; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); } 
+@font-face { font-family: 'Godo'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } .godo * { font-family: 'Godo', sans-serif; }
 
 #footer{
 	height: 100px;
@@ -18,25 +20,25 @@
 	color: white;
 	font-size: 10px;
 }
-
 	/* 상세뷰 */
 .hline{height:4px; background-color:red; border:none;}	
 #dh2{color:white;}
 #demandp{width: 80%; margin:100px auto;}
 #box{margin-top:30px; background-color:white; color:black; border-radius:5px;}
 
-#dcinema{padding:10px; margin: 0 auto; text-align: center;}
-#dctitle{font-size:18px;}
+#dcinema{padding:10px; margin: 0 auto; text-align: center; padding-bottom: 10px;}
+#dctitle{font-size:40px;}
 
-#wInfo{margin-left:20px;}
+#wInfo{margin-left:20%; margin-top: 10px;}
 
-#content{margin:20px;}
-#dcposter{width:250px; height:320px;}
-#btn{padding:20px; margin-left:5%; text-align:center;}
+#content{margin:20px; margin-top: 50px;}
+#dcposter{width: 280px; height: 370px; margin-left: 5%; vertical-align: top;}
+#dpinfo{font-family: 'Godo';  font-style: normal; font-weight: 700; margin-left: 5%; display: inline-block; }
+#btn{padding:23px; text-align:center;}
 #want{font-size:14px; font-weight:bold; background-color:red; color:white;
 	  border:none; border-radius:5px; width:90px; height:30px;}
 
-#listbtn{width:200px; margin-left:90%; margin-top:15px;}
+#listbtn{width:200px; margin-left: 96.5%; margin-top:15px;}
 #listbtn button{background-color:red; color:white;
 				border:none; border-radius:5px; 
 				width:50px; height:25px; font-size:14px;}
