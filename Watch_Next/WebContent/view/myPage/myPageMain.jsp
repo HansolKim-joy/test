@@ -4,6 +4,7 @@
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
 	ArrayList<Movie> DibList = (ArrayList<Movie>)request.getAttribute("DibList");
+	/* System.out.println("diblist" + DibList); */
 	ArrayList<Comment> ReviewComlist = (ArrayList<Comment>)request.getAttribute("ReviewComlist");
 	ArrayList<Comment> RecruitComlist = (ArrayList<Comment>)request.getAttribute("RecruitComlist");
 %>
@@ -237,7 +238,7 @@
 				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content3" class="mp_h_content">
-					<% if(DibList == null) {%>
+					<% if(DibList.isEmpty()) {%>
 						찜 목록이 존재하지 않습니다.
 					<% } else { %>
 						<table id="dibTable">
