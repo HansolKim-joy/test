@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList, common.Comment" %>
+    pageEncoding="UTF-8" import="recruit.model.vo.*, java.util.ArrayList, common.Comment, report.model.vo.*" %>
 <%
 	Recruit r = (Recruit)request.getAttribute("board"); 
 	ArrayList<Comment> comment = (ArrayList<Comment>)request.getAttribute("comment");
-	
+	ArrayList<Report> replist = (ArrayList<Report>)request.getAttribute("replist");
+	char fchk = (char)request.getAttribute("fchk");
 %>
 <!DOCTYPE html>
 <html>
@@ -59,22 +60,23 @@
 				<td width="70px" style="font-size:17px;" id="rpWriter">
 					<ul>
 						<li>
-							<input type="hidden"  name="rpWriter" value="<%=r.getUserId() %>"><%=r.getUserId() %>
+							<input type="hidden"  name="rpWriter" value="<%=r.getUserId() %>"> <%=r.getUserId() %>
 							<ul>
+								
+									<% if(loginUser != null && !loginUser.getUserId().equals(r.getUserId())) {%>
 								<li>
 									<a id="le" onclick="window.open('<%= request.getContextPath()%>/view/letter/letter_send.jsp', 'message',
 												'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
 												쪽지보내기</a>
 								</li>
 								<li>
-									<% if(loginUser != null && !loginUser.getUserId().equals(r.getUserId())) {%>
+									<% if(fchk == 'N' || fchk == 0) {%>
 									<a id="fo" onclick="follow();">팔로우하기</a>
-									<%} else if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
-									<a id="my" onclick="location.href='<%= request.getContextPath() %>/view/myPage/myPageMain.jsp'">마이페이지</a>
-									<%} else {%>
-									<a id="nf" onclick="#">팔로우 해지</a>
+									<%} else if(fchk == 'Y') { %>
+									<a onclick="unFollow()">팔로우해제</a>
 									<%} %>
 								</li>
+								<% } %>
 							</ul>
 						</li>
 					</ul>
@@ -86,6 +88,35 @@
 		      	<td width="70px" style="font-size:17px;" ><%=r.getbViews() %></td>
 			</tr>
 		</table>
+	<script>
+		function follow(){
+			var fwriter = "<%=r.getUserId()%>";
+			var rNo = <%=r.getrNo()%>;
+			
+			$.ajax({
+				url: 'follow.recruit',
+				data: {fwriter:fwriter, rNo:rNo},
+				success: function(){
+					alert('팔로우성공');
+					location.reload();
+				}
+			});
+		}
+		
+		function unFollow(){
+			var fwriter = "<%=r.getUserId()%>";
+			var rNo = <%=r.getrNo() %>;
+			
+			$.ajax({
+				url: 'unFollow.recruit',
+				data: {fwriter:fwriter, rNo:rNo},
+				success: function(){
+					alert('팔로우해제 성공');
+					location.reload();
+				}
+			});
+		}
+	</script>
 	</div>
 
 <hr>
@@ -159,8 +190,9 @@
 							<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
 							<input type="button" value="삭제" class="deleteC">
 						<% } else {%>
-						<button type=button class=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
-							'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
+						<button type="button" id="sirenb" value="popup" onclick="sendPop();">
+							<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
+						</button>
 							<% } %>
 					</td>
 				</tr>
@@ -180,19 +212,28 @@
 	</section>
 	
 	<script>
-			function deleteRe(){
-				var d = confirm('게시글을 삭제하시겠습니까?');
-				
-					if(d){
-						location.href="<%=request.getContextPath() %>/delete.recruit?rNo=" + <%=r.getrNo() %>;
-					}
-			}
+	  function sendPop(){
+		var win;
+			win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+			'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
+			setTimeout(function(){
+				win.document.getElementById("bno").value="<%=r.getrNo() %>";
+			},600)
+		   }
+	  
+		function deleteRe(){
+			var d = confirm('게시글을 삭제하시겠습니까?');
 			
-			$(document).on('click', '.deleteC', function(){
-				var rId = $(this).prev(".rId").val();
-				var rNo = $('#rNo').val();
-				$.ajax({
-					url: 'delete.comment',
+				if(d){
+					location.href="<%=request.getContextPath() %>/delete.recruit?rNo=" + <%=r.getrNo() %>;
+				}
+		}
+		
+		$(document).on('click', '.deleteC', function(){
+			var rId = $(this).prev(".rId").val();
+			var rNo = $('#rNo').val();
+			$.ajax({
+				url: 'delete.comment',
 					data: {rId:rId, rNo:rNo},
 					success: function(data){
 						$replyTable = $('.Comment');
@@ -262,10 +303,7 @@
 			});
 				
 				
-			function follow(){
-				
-				location.href='<%=request.getContextPath() %>/follow';
-			}
+		
 		</script>
 
 <!— footer —>
