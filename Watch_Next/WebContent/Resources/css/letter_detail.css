@@ -1,5 +1,5 @@
 @charset "UTF-8";
-body{background: #545357;}
+body{background: #545357; margin: 0px 40px;}
 #letter_detail_btn{
 	color: white; 
 	background: #ff3333; 
@@ -9,7 +9,6 @@ body{background: #545357;}
 	height: 25px;
 }
 #letter_send_btn_area{
-	width: 400px;
 	height: 100px;
 	text-align:center;
 	margin-top:50px;

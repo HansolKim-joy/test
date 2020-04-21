@@ -52,7 +52,7 @@ public class LetterSendServlet extends HttpServlet {
 			response.sendRedirect(page);
 		}else {
 			page = "view/letter/letter_send.jsp";
-			request.setAttribute("msg", "메세지 보내기에 실패했습니다.");
+			request.setAttribute("msg", "이 닉네임을 가진 유저가 없습니다.");
 			request.getRequestDispatcher(page).forward(request, response);
 		}
 		

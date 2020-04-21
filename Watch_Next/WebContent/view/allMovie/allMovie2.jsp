@@ -4,6 +4,10 @@
 	request.setCharacterEncoding("UTF-8");
 	ArrayList<Movie> mlist = (ArrayList<Movie>)request.getAttribute("mlist");
 	ArrayList<String> fNameList = (ArrayList<String>)request.getAttribute("fNameList");
+	int choice = 0;
+	if(request.getAttribute("choice") != null){
+		choice = (int)request.getAttribute("choice");
+	}
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = 1;
 	int maxPage = 1;
@@ -43,11 +47,23 @@
 	<h2 id="m_title">전체 영화</h2>
 	
 	<select id='m_choice'>
-  		<option value='' selected>-- 선택 --</option>
-  		<option value='오름차순'>오름차순</option>
-  		<option value='내림차순'>내림차순</option>
+  		<option value='0' selected>-- 선택 --</option>
+  		<option value='1'>오름차순</option>
+  		<option value='2'>내림차순</option>
 	</select>
-	
+	<script>
+		$(function(){
+			$('#m_choice').val("<%=choice%>");
+		});
+		$('#m_choice').change(function(){
+			var choice = $('#m_choice option:selected').val();
+			if(choice == 1){
+				location.href="<%=request.getContextPath()%>/movie.all?currentPage=<%=currentPage%>&choice=1";
+			}else if(choice == 2){
+				location.href="<%=request.getContextPath()%>/movie.all?currentPage=<%=currentPage%>&choice=2";
+			}
+		});
+	</script>
 	<hr class="hline">
 	</div>
 	<br><br>
@@ -72,46 +88,46 @@
 	
 	
 	<!-- 페이징 -->	
-	<!-- 
-	<div class="list_number">
+	
+	<!-- <div class="list_number">
         <div class="list_n_menu">
         <span class="prev">이전</span>
         <span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>
         <a href="">다음  ></a></div>
-	</div> -->	
+	</div> -->
 	
 	<!-- 페이징 -->
-		<div class="pagingArea" align="center">
-		<%if(!mlist.isEmpty()){ %>
-			<!-- 맨 처음으로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=1'">&lt;&lt;</button>
-			<!-- 이전 페이지로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%=currentPage - 1 %>'" id="beforeBtn">&lt;</button>
-			<script>
-				if(<%= currentPage %> <= 1){
-					$('#beforeBtn').attr("disabled", "true");
-				}
-			</script>
-			
-			<!-- 10개 페이지 목록 -->
-			<% for(int p = startPage; p<=endPage; p++){ %>
-				<%if(p == currentPage){ %>
-					<button id="choosen" disabled><%= p %></button>
-				<%} else{%>
-					<button id="numBtn" onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%= p %>'"><%= p %></button>
+			<div class="list_n_menu">
+			<%if(!mlist.isEmpty()){ %>
+				<!-- 맨 처음으로 -->
+				<a class="prev" href='<%=request.getContextPath()%>/movie.all?currentPage=1&choice=<%=choice%>'>&lt;&lt;</a>
+				<!-- 이전 페이지로 -->
+				<a id="beforeBtn" class="prev" href='<%=request.getContextPath()%>/movie.all?currentPage=<%=currentPage - 1 %>&choice=<%=choice%>'>&lt;</a>
+				<script>
+					if(<%= currentPage %> <= 1){
+						$('#beforeBtn').css({ 'pointer-events': 'none' });
+					}
+				</script>
+				
+				<!-- 10개 페이지 목록 -->
+				<% for(int p = startPage; p<=endPage; p++){ %>
+					<%if(p == currentPage){ %>
+						<span class="current" id="choosen"><%= p %></span>
+					<%} else{%>
+						<a href='<%=request.getContextPath()%>/movie.all?currentPage=<%= p %>&choice=<%=choice%>'><%= p %></a>
+					<%} %>
 				<%} %>
-			<%} %>
-			<!-- 다음 페이지로 -->
-			<button id="afterBtn" onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%=currentPage + 1 %>'">&gt;</button>
-			<script>
-				if(<%= currentPage %> >= <%=maxPage%>){
-					$('#afterBtn').attr("disabled", "true");
-				}
-			</script>
-			<!-- 맨 끝으로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/Movie.all?currentPage=<%=maxPage%>'">&gt;&gt;</button>
-		<% } %>
-		</div>
+				<!-- 다음 페이지로 -->
+				<a id = "afterBtn" href='<%=request.getContextPath()%>/movie.all?currentPage=<%=currentPage + 1 %>&choice=<%=choice%>'>&gt;</a>
+				<script>
+					if(<%= currentPage %> >= <%=maxPage%>){
+						$('#afterBtn').css({ 'pointer-events': 'none' });
+					}
+				</script>
+				<!-- 맨 끝으로 -->
+				<a href='<%=request.getContextPath()%>/movie.all?currentPage=<%=maxPage%>&choice=<%=choice%>'>&gt;&gt;</a>
+			<% } %>
+			</div>
 
 </section>	
 <br><br><br>
