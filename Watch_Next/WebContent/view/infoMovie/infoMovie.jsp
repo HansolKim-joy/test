@@ -79,7 +79,13 @@
      			<td id="m_review">
      			<%if(r != null){%>
      			<!-- 리뷰 내용 -->
-     			<%=r.getbContent() %>
+     			<div style="  overflow: hidden;
+									  text-overflow: ellipsis;
+									  white-space: nowrap;
+									  width: 100px;
+									  height: 20px;">
+									  <%=r.getbContent() %>
+						</div>
      			<%}else{ %>
      			리뷰가 없습니다.
      			<%} %>

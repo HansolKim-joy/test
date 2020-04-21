@@ -67,14 +67,50 @@
             time.value = hours + ":" + minute;
         }
     }
+    function chk(){
+		var serviceChk = document.getElementsByName('admin_movie_service');
+		var a = 0;
+		for(var i=0; i<serviceChk.length; i++){
+			if(serviceChk[i].checked){
+				a++;
+			}
+		}
+		if(a < 1){
+			alert('서비스 사이트를 입력해 주세요.');
+			return false;
+		}
+		var f = document.submitForm;
+ 		if(	f.admin_movie_name.value.length < 1 || 
+ 			f.admin_movie_director.value.length < 1 || 
+ 			f.admin_movie_actor.value.length < 1 || 
+ 			f.admin_movie_story.value.length < 1 ||
+ 			f.admin_movie_time.value.length < 1 ||
+ 			f.admin_movie_country.value.length < 1 ||
+ 			f.admin_movie_open.value.length < 1 ||
+ 			f.admin_imageFile.value.length < 1){
+ 			alert("비어있는 곳 없이 모두 입력해 주십시오.");
+ 			return false;
+ 		}else if(f.admin_imageFile.value == ""){
+ 			console.log("영화 포스터를 등록해주세요.");
+ 			return false;
+ 		}else if(f.admin_movie_time.value == "00:00"){
+ 			if(confirm("영화시간 없이 등록하시겠습니까?") == false){
+ 				return false;
+ 			}
+ 		}
+ 		var str = document.getElementById("admin_movie_story").value;
+		document.getElementById("admin_movie_story").value = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+ 		return true;
+	}
 </script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/admin_movie_write.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-<form action="<%= request.getContextPath() %>/insert.movie" name = "submitForm" method="post" encType="multipart/form-data">
+<form action="<%= request.getContextPath() %>/insert.movie" name="submitForm" method="post" encType="multipart/form-data">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
 		<h2>영화 정보 작성</h2>
 		<hr id="red_line">
@@ -152,41 +188,6 @@
 		</div>
 	</div>
 </form>
-<script>
-	function chk(){
-		var serviceChk = document.getElementsByName('admin_movie_service');
-		var a = 0;
-		for(var i=0; i<serviceChk.length; i++){
-			if(serviceChk[i].checked){
-				a++;
-			}
-		}
-		if(a < 1){
-			alert('서비스 사이트를 입력해 주세요.');
-			return false;
-		}
-		var f = document.submitForm;
- 		if(	f.admin_movie_name.value.length < 1 || 
- 			f.admin_movie_director.value.length < 1 || 
- 			f.admin_movie_actor.value.length < 1 || 
- 			f.admin_movie_story.value.length < 1 ||
- 			f.admin_movie_time.value.length < 1 ||
- 			f.admin_movie_country.value.length < 1 ||
- 			f.admin_movie_open.value.length < 1 ||
- 			f.admin_imageFile.value.length < 1){
- 			alert("비어있는 곳 없이 모두 입력해 주십시오.");
- 			return false;
- 		}else if(f.admin_imageFile.value == ""){
- 			console.log("영화 포스터를 등록해주세요.");
- 			return false;
- 		}else if(f.admin_movie_time.value == "00:00"){
- 			if(confirm("영화시간 없이 등록하시겠습니까?") == false){
- 				return false;
- 			}
- 		}
- 		return true;
-	}
-</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
