@@ -658,6 +658,51 @@ public class CreateDAO {
 		return result;
 	}
 
+	public int insertCommentC(Comment co, Connection conn) {
+		// insertCommentC= update tb_create set create_comms = create_comms+1 where create_no=?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertCommentC");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, co.getRefBid());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int deleteCommentC(Connection conn, int rNo) {
+		// deleteCommentC= update tb_create set create_comms = create_comms-1 where create_no=? 
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteCommentC");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
+	}
+
 	
 
 	

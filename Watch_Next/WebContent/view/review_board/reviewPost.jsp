@@ -33,7 +33,7 @@
 		<!-- 리뷰 게시판 상세 -->
 	
 		<div id="review">
-			<h2 id="rh2"><strong>리뷰 게시판</strong></h2>
+			<h2 id="rh2"><strong>리뷰 게시판 상세보기</strong></h2>
 			<hr class="hline">
 			<form action="<%= request.getContextPath()%>/view/review_board/ReviewUpdateForm.jsp" id="detailForm" name="detailForm"> 
 				<div id="box">

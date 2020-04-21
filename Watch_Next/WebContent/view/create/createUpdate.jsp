@@ -17,7 +17,8 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){  
-	  
+		// 수정내용 들어가게
+		$('div.Editor-editor').html("<%= request.getParameter("bContent") %>");
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  
@@ -62,6 +63,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/editor.css" type="text/css" rel="stylesheet"/>
 <link rel= "stylesheet" type="text/css" href="<%=request.getContextPath() %>/Resources/css/create_write.css">
+<style>
+	.subnav li {width: 120px;}
+</style>
 </head>
 <body>
 <!--header -->
@@ -89,7 +93,7 @@
 	<div id = "creW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="creW_button" onclick="location.href='javascript:histroy.go(-1);'">
+	<input type="reset" value="취소" id="creW_button" onclick="location.href='javascript:history.go(-1);'">
 	<input type="submit" value="완료" id="creW_button" class="creW_submit">
 	</div>
 </form>

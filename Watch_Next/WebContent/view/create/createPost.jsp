@@ -13,6 +13,11 @@
 <meta charset="UTF-8">
 <title>창작글 상세보기</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<%@ include file="/view/layout/import.jsp" %>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link type="text/css" href="/Watch_Next/Resources/css/create_post.css" rel="stylesheet" >
 <style>
 	.subnav li {width: 120px;}
 	.like{width:35px; height:35px;}
@@ -25,12 +30,6 @@
 #sirenb{background-color:transparent; border:none;}
 
 </style>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
-<%@ include file="/view/layout/import.jsp" %>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link type="text/css" href="/Watch_Next/Resources/css/create_post.css" rel="stylesheet" >
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -40,18 +39,17 @@
 
 	<!-- 창작 게시판 상세 -->
 		<div id="createp">
-			<h2 style="color: white; font-size: 30px;">창작 게시글 상세보기</h2>
+			<h2 style="color: white; font-size: 30px; font-weight:bold;">창작 게시글 상세보기</h2>
 			<hr class="hline">
 			
 			<form action="view/create/createUpdate.jsp" id="detailForm" name="detailForm">
 			<div id="box">
 
 				<div id="cfilm">
-					<b>
-					<%-- <%= c.getbTitle() %> --%>
-					<input type="text" readonly="<%= c.getbTitle() %>" value="<%= c.getbTitle() %>" name="cTitle" style="border:0; ,font-size: 20px;">	
-					/</b>&nbsp; 
-					<input type="text" readonly="<%= c.getcDirector() %>" id="cDirector" name="cDirector" value="<%= c.getcDirector() %>" style="border: 0; font-size: 17px;">
+					<label id="cfilml"><%= c.getbTitle() %>
+					<input type="hidden" readonly="<%= c.getbTitle() %>" value="<%= c.getbTitle() %>" name="cTitle" style="border:0; ,font-size: 20px;">	
+					/ <%= c.getcDirector() %></label>
+					<input type="hidden" readonly="<%= c.getcDirector() %>" id="cDirector" name="cDirector" value="<%= c.getcDirector() %>" style="border: 0; font-size: 17px;">
 					
 					<input id="cNo" type="hidden" name="cNo" value="<%= c.getbNO() %>">
 				</div>
@@ -129,9 +127,7 @@
 				<div id="content">
 
 					<div id="film">
-						<iframe width="560" height="315"
-							src="https://www.youtube.com/embed/zOXFqZ9rGUo"></iframe>
-						<br>
+						
 					</div>
 
 					<br>
@@ -209,14 +205,16 @@
 			<% if(loginUser != null && loginUser.getUserId().equals(c.getbWriter())) { %>
 	        <button  class="lbtn" id="bupBtn" type=submit title="수정" >수정</button>
 	        <button  class="lbtn" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
-		    <% } %>
+	        <button class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
+		    <% } else if(!loginUser.getUserId().equals(c.getbWriter())) { %>
 		        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
+		    <% } %>    
 			</div>
 			</form>
 			
 			 
 			<!-- 댓글 -->
-			<div id="replybox1">
+			<div id="replybox1" style="width:1095px;">
 				<table>
 				<tr>
 					<td>
@@ -224,16 +222,17 @@
 					  placeholder="댓글을 입력하세요." ></textarea>
 					</td>
 					<td>
-						<button id="reply_save">댓글 작성</button>
+						<button id="reply_save" style="margin-top:-5px; margin-left:10px;">댓글 작성</button>
 					</td>
 				</tr>
 				</table>
 			</div>
 			
+			<br><br><br><br><br><br><br>
 			<div id="replybox2">
 				<table id="replySelectTable" class="Comment">
 					<% if(comment.isEmpty()) { %>
-						<tr><td colspan=3 style="font-size:14px; text-align:center">댓글이 없습니다.</td></tr>
+						<tr><td colspan=3 style="font-size:14px; text-align:center; vertical-align:middle;">댓글이 없습니다.</td></tr>
 					<% } else { %>
 						<% for(int i = 0; i < comment.size(); i++){ %>
 						<tr class="Comment2">
@@ -242,7 +241,7 @@
 							<td>
 								<% if(loginUser != null && loginUser.getUserId().equals(comment.get(i).getrWriter())) { %>
 									<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
-									<input type="button" value="삭제" class="deleteC">
+									<input type="button" id="report" value="삭제" class="deleteC">
 								<% } else {%>
 									<button type=button id=report onclick="sendPopR();">신고</button>				
 									<% } %>
@@ -293,23 +292,23 @@
 					data: {rId:rId, rNo:rNo},
 					success: function(data){
 						$replyTable = $('.Comment');
-// 						$replyTable.html("");
+						$replyTable.html("");
 						
-// 						//console.log(data);
+						//console.log(data);
 						
-// 						for(var key in data){
-// 							var $tr = $('<tr class="Comment">');
-// 							var $writerTd = $('<td>').text(data[key].rWriter).css('color','red');
-// 							var $contentTd = $('<td>').text(data[key].rContent).css('font-size','14px');
-// 							var $buttonTd = $('<td><input type="button" value="삭제" class="deleteC"></td>').css('font-size','14px');
+						for(var key in data){
+							var $tr = $('<tr class="Comment">');
+							var $writerTd = $('<td>').text(data[key].rWriter).css('color','red');
+							var $contentTd = $('<td>').text(data[key].rContent).css('font-size','14px');
+							var $buttonTd = $('<td><input type="button" value="삭제" class="deleteC"></td>').css('font-size','14px');
 							
-// 							$tr.append($writerTd);
-// 							$tr.append($contentTd);
-// 							$tr.append($buttonTd);
-// 							$replyTable.append($tr);
-// 						}
+							$tr.append($writerTd);
+							$tr.append($contentTd);
+							$tr.append($buttonTd);
+							$replyTable.append($tr);
+						}
 						
-// 						$('#reply_content').val("");
+						$('#reply_content').val("");
 						
 						$("#replySelectTable").load(window.location.href + " #replySelectTable");
 					}
