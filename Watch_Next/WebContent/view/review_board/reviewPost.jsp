@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="review.model.vo.*, java.util.ArrayList, common.Comment" %>
+    pageEncoding="UTF-8" import="review.model.vo.*, java.util.ArrayList, common.Comment, report.model.vo.Report" %>
 <%
 	Review r = (Review)request.getAttribute("review");
 	ArrayList<Comment> list = (ArrayList<Comment>)request.getAttribute("list");
+	ArrayList<Report> replist = (ArrayList<Report>)request.getAttribute("replist");
 	char chk = (char)request.getAttribute("chk");
+	char fchk = (char)request.getAttribute("fchk");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,7 @@
 	.popimg{width:30px; height:30px;}
 	.like{width:35px; height:35px;}
 	.likeb{background-color:transparent; border:none;}
+	#sirenb{background-color:transparent; border:none;}
 </style>
 </head>
 <body>
@@ -94,7 +97,16 @@
 														'left='+(screen.availWidth-450)/2+',top='+(screen.availHeight-650)/2+', width=450px,height=650px')">
 													쪽지보내기</a>
 												</li>
-												<li><a onclick="">팔로우하기</a></li>
+												
+												<% if(!loginUser.getUserId().equals(r.getbWriter())) { %>
+												<li>
+													<% if(fchk == 'N' || fchk == 0) {%>
+														<a onclick="onFollow()">팔로우추가</a>
+													<%} else if(fchk == 'Y') {%>
+														<a onclick="onNoFollow()">팔로우해제</a>
+													<%} %>
+												</li>
+												<% } %>
 											</ul>
 										</li>
 									</ul>
@@ -104,7 +116,38 @@
 						      	<td width="80px" style="font-size:17px;">조회수 : </td>
 						      	<td width="70px" style="font-size:17px;"><%= r.getbCount() %></td>
 							</tr>
+								
 						</table>
+						
+						<script>
+							function onFollow(){
+								var fwriter = "<%=r.getbWriter()%>";
+								var rv = <%=r.getbNo() %>;
+								
+								$.ajax({
+									url: 'putFollow.rv',
+									data: {fwriter:fwriter, rv:rv},
+									success: function(){
+										alert('팔로우성공');
+										location.reload();
+									}
+								})
+							}
+							
+							function onNoFollow(){
+								var fwriter = "<%=r.getbWriter()%>";
+								var rv = <%=r.getbNo() %>;
+								
+								$.ajax({
+									url: 'notFollow.rv',
+									data: {fwriter:fwriter, rv:rv},
+									success: function(){
+										alert('팔로우해제 성공');
+										location.reload();
+									}
+								})
+							}
+						</script>
 					</div>
 		
 					<hr>
@@ -140,21 +183,24 @@
 							<td width=5px></td>
 							<td>
 
-									<input type="text" name="rbNo" value="<%=r.getbNo() %>">
-									<button type="button" value="popup" onclick="sendPop();">
+									<input type="hidden" name="rbNo" value="<%=r.getbNo() %>">
+									<button type="button" id="sirenb" value="popup" onclick="sendPop();">
 										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
 									</button>
 
 									
 
 									<script>
+									var win;
 									  function sendPop(){
-											var win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+											win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
 											'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
-
-											win.document.getElementById("test").value="<%=r.getbNo() %>";
+											setTimeout(function(){
+												win.document.getElementById("bno").value="<%=r.getbNo() %>";
+											},600)
 										   }
-									
+									  
+															  
  									</script>
 							</td>
 							
@@ -205,13 +251,28 @@
 								<form action="<%=request.getContextPath()%>/deleteReply.rv">
 									<input type="submit" id="replydelete" value="삭제" onclick="return rpdel();">
 									<input type=hidden name="replyno" value="<%=list.get(i).getrId()%>">
+
 								<input type="hidden" name="rv" value="<%=r.getbNo() %>">
 							</form>
 							<% } else { %>
-								<button type=button id=report onclick="window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
-								'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">신고</button>
+								<%-- <% for(int j=0; j<list.size(); j++) { %> --%>
+									<%-- <% if(list.get(i).getrId() == ){ %> --%>
+									<button type=button id=report onclick="sendPopR();">신고</button>
+<%-- 									<%} %> --%>
+<%-- 								<%} %> --%>
 							<% } %>	
+							
+							<script>
+							  function sendPopR(){
+									win = window.open('<%=request.getContextPath() %>/view/reportPop/reportPop.jsp', 'pop', 
+									'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px');	
+									setTimeout(function(){
+										win.document.getElementById("rno").value="<%=list.get(i).getrId() %>";
+									},600)
+								}
+							</script>
 						</td>
+						
 					</tr>
 					<tr>	
 						<td colspan=2 style="font-size:14px">
@@ -283,6 +344,7 @@
 			}
 				
 		};
+		
 		
 	</script>
 	

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import common.Comment;
+import follow.model.vo.Follow;
 import review.model.vo.Review;
 
 public class ReviewDAO {
@@ -677,7 +678,117 @@ public class ReviewDAO {
 	
 		return result;
 	}
-	
+
+
+	public int putFollow(Connection conn, int rv, String writer, String userId) {
+		// putFollow = INSERT INTO TB_FOLLOW VALUES(?, ?, SEQ_FOLLOW.NEXTVAL, 'Y')
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		
+//		Follow f = new Follow();
+//		System.out.println("유저아이디:"+f.getUserId());
+//		System.out.println("글쓴이아이디:"+f.getFollowUserId());
+
+		String query = prop.getProperty("putFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, writer);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public String getWriter(Connection conn, int rv) {
+		// getWriter = SELECT USER_ID FROM TB_BOARD WHERE BOARD_NO = ?
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Review r = null;
+		String writer = null;
+		
+		String query = prop.getProperty("getWriter");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rv);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				writer = rset.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return writer;
+	}
+
+
+	public char getFollow(Connection conn, String userId, String writer) {
+		// getFollow=SELECT * FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		char fchk=0;
+		
+		Review review = null;
+		
+		String query = prop.getProperty("getFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, writer);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				fchk = rs.getString("follow_yn").charAt(0);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return fchk;
+	}
+
+
+	public int notFollow(Connection conn, int rv, String userId, String writer) {
+		// notFollow = DELETE FROM TB_FOLLOW WHERE USER_ID = ? AND FOLLOW_USER_ID = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("notFollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  userId);
+			pstmt.setString(2, writer);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 
 

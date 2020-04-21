@@ -13,8 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import common.Comment;
 import member.model.vo.Member;
+import report.model.service.ReportService;
+import report.model.vo.Report;
 import review.model.service.ReviewService;
-import review.model.vo.Review;
 
 /**
  * Servlet implementation class ReviewDetailServlet
@@ -40,12 +41,17 @@ public class ReviewDetailServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		
 		char chk = ReviewService.getLike(userId,rv);
 		request.setAttribute("chk", chk);
 		
-		Review review = new ReviewService().selectReview(rv);
+		String writer = new ReviewService().getWriter(rv);
+		char fchk = ReviewService.getFollow(userId, writer);
+		request.setAttribute("fchk", fchk);
+			
+				
+		review.model.vo.Review review = new ReviewService().selectReview(rv);
 		ArrayList<Comment> list = new ReviewService().selectReplyList(rv);
+		/* int[] decrpNo = new ReportService().selectReport(userId); */
 		
 		String page = null;
 		if(review != null) {

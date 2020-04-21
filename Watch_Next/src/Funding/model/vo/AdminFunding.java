@@ -12,7 +12,7 @@ public class AdminFunding {
 	private String genre;// 영화 장르 이름
 	private String rTime;// 영화 시간
 	private int wantPrice;// 펀딩 총 금액
-	private int price;// 펀딩 내야하는 금액
+	private int price;// 펀딩 참여하는 금액
 	
 	public AdminFunding() {}
 

@@ -1,28 +1,28 @@
-package Funding.Controller;
+package review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import Funding.model.service.DemandService;
-import Funding.model.vo.AdminFunding;
+import member.model.vo.Member;
+import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class AdminFundingAllow
+ * Servlet implementation class ReviewFollowServlet
  */
-@WebServlet("/FunDetail.adm")
-public class AdminFundingAllow extends HttpServlet {
+@WebServlet("/putFollow.rv")
+public class ReviewFollowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminFundingAllow() {
+    public ReviewFollowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +31,17 @@ public class AdminFundingAllow extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("no"));
-		ArrayList<AdminFunding> list = new DemandService().FunDetail(no);
+		int rv= Integer.parseInt(request.getParameter("rv").trim());
+		String writer = request.getParameter("fwriter");
 		
-		String page =null;
+		HttpSession session = request.getSession();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
 		
-		if(list != null) {
-			page="view/admin/Admin_fundingAllow.jsp";
-			request.setAttribute("list", list);
-		}else {
-			page="view/errorPage/errorPage.jsp";
-			request.setAttribute("msg", "게시판 조회 실패");
-		}
+		int result = new ReviewService().putFollow(rv, writer, userId);
 		
-		request.getRequestDispatcher(page).forward(request, response);
-		
-	
-	
+		String page = request.getContextPath()+"/detail.rv?rv=" + rv;
+		response.sendRedirect(page);
 	}
 
 	/**

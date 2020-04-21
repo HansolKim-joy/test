@@ -1,8 +1,6 @@
-package follow.controller;
+package review.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
-import follow.model.vo.Follow;
-import follow.model.service.FollowService;
-
+import review.model.service.ReviewService;
 
 /**
- * Servlet implementation class FollowServlet
+ * Servlet implementation class ReviewNotFollowServlet
  */
-@WebServlet("/follow")
-public class FollowServlet extends HttpServlet {
+@WebServlet("/notFollow.rv")
+public class ReviewNotFollowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowServlet() {
+    public ReviewNotFollowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,27 +30,18 @@ public class FollowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String writer = request.getParameter("rpWriter");
-		System.out.println("writer "+writer);
+		int rv= Integer.parseInt(request.getParameter("rv").trim());
+		String writer = request.getParameter("fwriter");
+		
 		HttpSession session = request.getSession();
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		String user = loginUser.getUserId();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
 		
-		int result = new FollowService().following(writer, user);
+		int result = new ReviewService().notFollow(rv, writer, userId);
 		
-		String page = null;
-		if(result > 0) {
-			page = "/deatil.recruit";
-		}else {
-			page = "view/errorPage/errorPage.jsp";
-			request.setAttribute("msg", "팔로우에 실패하였습니다.");
-		}
-		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
-		
+		String page = request.getContextPath()+"/detail.rv?rv=" + rv;
+		response.sendRedirect(page);		
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

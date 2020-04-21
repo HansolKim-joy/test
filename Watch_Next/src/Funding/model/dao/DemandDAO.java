@@ -544,6 +544,25 @@ public int notFund(Connection conn, int no, String userId, String dUserId) {
 		
 		return list;
 	}
+	public int FundingAllow(Connection conn, int dNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("FundingAllow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, dNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }
 	

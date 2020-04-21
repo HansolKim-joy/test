@@ -154,7 +154,6 @@
 </form>
 <script>
 	function chk(){
-		var 
 		var serviceChk = document.getElementsByName('admin_movie_service');
 		var a = 0;
 		for(var i=0; i<serviceChk.length; i++){
