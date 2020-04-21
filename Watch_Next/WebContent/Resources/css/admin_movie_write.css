@@ -7,8 +7,6 @@ input[type="number"]
 	border: 1px solid red;
 }
 #admin_imageArea{
-    outline: 2px dashed #92b0b3;
-    outline-offset:-10px; 
     text-align: center;
     transition: all .15s ease-in-out;
     width: 300px;
@@ -17,8 +15,6 @@ input[type="number"]
     margin-left: 20%;
     float: left;
     background-color: gray;
-	outline-offset: -10px;
-	cursor:pointer;
 	border: 1px solid white;
 }
 
