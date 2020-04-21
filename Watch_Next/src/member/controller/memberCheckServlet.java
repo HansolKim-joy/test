@@ -16,7 +16,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class memberCheckServlet
  */
-@WebServlet("/update.me")
+@WebServlet(urlPatterns = "/update.me", name = "memberCheckServlet")
 public class memberCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -63,15 +63,15 @@ public class memberCheckServlet extends HttpServlet {
 
 		String page = null;
 		if (m != null) {
-			page = "/view/myPage/myPageMain.jsp";
+			page = "list.all";
 			session.setAttribute("loginUser", m);
+			response.sendRedirect(page);
 		} else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
+			RequestDispatcher view = request.getRequestDispatcher(page);
+			view.forward(request, response);
 		}
-
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 	}
 
 	/**

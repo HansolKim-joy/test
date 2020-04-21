@@ -237,7 +237,7 @@
 				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content3" class="mp_h_content">
-					<% if(DibList.isEmpty()) {%>
+					<% if(DibList == null) {%>
 						찜 목록이 존재하지 않습니다.
 					<% } else { %>
 						<table id="dibTable">

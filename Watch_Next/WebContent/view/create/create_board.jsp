@@ -146,6 +146,23 @@
 	
 	</div>
 
+
+
+	<script>
+		$(function(){
+			$('#ta1 td').mouseenter(function(){
+				$(this).parent().css('cursor', 'pointer');
+			}).click(function(){
+				var rNo = $(this).parent().children().eq(0).text();
+				 if('<%= loginUser %>' != 'null'){
+						location.href='<%= request.getContextPath() %>/detail.creat?rNo=' +rNo;
+					}else{
+						alert('로그인 해주세요.');
+					}
+			});
+		});
+	
+	</script>
 </section>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>

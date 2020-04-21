@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import recruit.model.service.recruitService;
 import common.Comment;
+import create.model.service.CreateService;
 
 /**
  * Servlet implementation class CommentDeleteServlet

@@ -12,6 +12,11 @@
 <body>
 	<!--header -->
 	<%@ include file="/view/layout/Header.jsp"%>
+	<%
+	 String msg = (String)request.getAttribute("msg");
+	
+	 System.out.println("나와라 참깨" + msg);
+	%>
 
 	<section>
 		<div class="jn_table">
@@ -22,7 +27,7 @@
 					<table>
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" class="jn_input" id="user_ID" name="user_ID" placeholder="아이디를 입력하시오." required></td>
+							<td><input type="text" class="jn_input" id="user_ID" name="user_ID" placeholder="아이디를 입력하시오."></td>
 							<td><label id="idResult"></label>
 						</tr>
 						<tr>
@@ -137,7 +142,6 @@
       });
       
          function jnform(){
-            
            var userId = $('#user_ID');
            var userPwd = $('#user_Pass');
            var userCh = $('#user_PassCh');
@@ -145,62 +149,50 @@
            var phone = $('#user_Phone');
            var email = $('#user_Email');
            var emailCh = $('email_Check1'); 
-           
            var bool = true;
-           
-//            console.log(userId.val()); 
-//            var userPwdch = $('#user_PassCh').val(); 이 객체는 focus를 사용할 수 없음 
-           
-        	 if(userId.val() == ''){
+
+           	 if(userId.val() == ''){
                 alert("아이디를 입력해주세요.");
                 userId.focus();
                 return false;
-                //bool = false;
              }
               
              if(userPwd.val() == ''){
                 alert("비밀번호를 입력해주세요.");
                 userPwd.focus();
                 return false;
-                //bool = false;
              }
              
              if(userCh.val() == ''){
                 alert('인증번호를 입력해주세요.');
                 userCh.focus();
                 return false;
-                //bool = false;
              }
              
              if(name.val() == ''){
                 alert('이름을 입력해주세요.');
                 name.focus();
                return false;
-               // bool = false;
              }
              
              if(phone.val() == ''){
                 alert('핸드폰 번호를 입력해주세요.');
                 phone.focus();
-            return false;
-               // bool = false;
+           		return false;
              }
             
              if(email.val() == ''){
                 alert('이메일을 입력해주세요.');
                 email.focus();
-               return false;
-               // bool = false;
+               	return false;
              }
              
              if(emailCh.val() == ''){
                 alert('인증번호를 입력해주세요.');
                 emailCh.focus();
                 return false;
-                //bool = false;
              }
              
-             //return true;
              
         	 if(bool){
            		 $('#joinForm').submit();
@@ -242,6 +234,18 @@
             alert("이메일을 입력해주세요.");
          }
       }
+      
+      $(function(){
+    	 var msg = '<%= msg %>'; 
+    	 
+    	 if(msg.trim() == '회원가입에 성공하였습니다.'){
+    		 alert(msg);
+    	 }
+    	 if(msg.trim() == '회원가입에 실패하였습니다. 다시 한번 시도하십시오.'){
+    		 alert(msg);
+    	 }
+      });
+      
       
    </script>
 	</section>

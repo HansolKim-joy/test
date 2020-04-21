@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import Funding.model.dao.DemandDAO;
+import Funding.model.vo.AdminFunding;
 import Funding.model.vo.Demand;
 import Funding.model.vo.DemandList;
 
@@ -160,6 +161,14 @@ public class DemandService {
 		close(conn);
 		
 		return result;
+	}
+
+	public ArrayList<AdminFunding> FunDetail(int no) {
+		Connection conn = getConnection();
+		ArrayList<AdminFunding> list = new DemandDAO().FunDetail(conn, no);
+		close(conn);
+		
+		return list;
 	}
 	
 }

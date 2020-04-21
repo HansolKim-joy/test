@@ -74,41 +74,47 @@
 		<hr class="hline">
 		<form action="<%= request.getContextPath() %>/update.me" method="post">
 			<div id="updateTabled">
-				<table id="updateTable">
-					<tr>
-						<td>아이디 : &emsp;</td>
-						<td><input type="text" id="userId" name="userId" value="<%= loginUser.getUserId() %>" readonly></td>
-						<td class="tdlast"></td>
-					</tr>
-					<tr>
-						<td>변경 비밀번호 : &emsp;</td>
-						<td><input type="password" id="userPwd" name="userPwd" class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
-						<td><label id="pwdMessage1"></label></td>
-					</tr>
-					<tr>
-						<td>변경 비밀번호 확인 : &emsp;</td>
-						<td><input type="password" id="userPwd2" name="userPwd2" class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
-						<td><label id="pwdMessage"></label></td>
-					</tr>
-					<tr>
-						<td>이름 : &emsp;</td>
-						<td><input type="text" id="userName" name="userName" class="loginUser" value="<%= loginUser.getUserName() %>"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>이메일 : &emsp;</td>
-						<td><input type="text" id="userEmail" name="userEmail" class="loginUser" value="<%= loginUser.getEmail() %>"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>연락처 : &emsp;</td>
-						<td><input type="text" id="phone" name="userPhone" class="loginUser" value="<%=loginUser.getPhone() %>"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>메일링 서비스 : &emsp;</td>
-						
-						<% 
+					<table id="updateTable">
+						<tr>
+							<td>아이디 : &emsp;</td>
+							<td><input type="text" id="userId" name="userId"
+								value="<%= loginUser.getUserId() %>" readonly></td>
+							<td class="tdlast"></td>
+						</tr>
+						<tr>
+							<td>변경 비밀번호 : &emsp;</td>
+							<td><input type="password" id="userPwd" name="userPwd"
+								class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
+							<td><label id="pwdMessage1"></label></td>
+						</tr>
+						<tr>
+							<td>변경 비밀번호 확인 : &emsp;</td>
+							<td><input type="password" id="userPwd2" name="userPwd2"
+								class="loginUser" value=<%= loginUser.getUserPwd() %>></td>
+							<td><label id="pwdMessage"></label></td>
+						</tr>
+						<tr>
+							<td>이름 : &emsp;</td>
+							<td><input type="text" id="userName" name="userName"
+								class="loginUser" value="<%= loginUser.getUserName() %>"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>이메일 : &emsp;</td>
+							<td><input type="text" id="userEmail" name="userEmail"
+								class="loginUser" value="<%= loginUser.getEmail() %>"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>연락처 : &emsp;</td>
+							<td><input type="text" id="phone" name="userPhone"
+								class="loginUser" value="<%=loginUser.getPhone() %>"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>메일링 서비스 : &emsp;</td>
+
+							<% 
 							String mailing = loginUser.getMailingYN();
 							String checkedMailingY = "";
 							String checkedMailingN = "";
@@ -118,29 +124,31 @@
 								checkedMailingN = "checked"; 
 							}
 						%>
-						<td>
-							&emsp;&emsp;
-							<input type="checkbox" id="mailingY" name="mailing" onclick="doOpenCheck(this);" value="Y" class="checkbox" <%= checkedMailingY %>>&emsp;Y
-							&emsp;&emsp;
-							<input type="checkbox" id="mailingN" name="mailing" onclick="doOpenCheck(this);" value="N" class="checkbox" <%= checkedMailingN %>>&emsp;N
-						</td>
-						<td></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td colspan="2" style="text-align:center">
-							&emsp;&emsp;&emsp;	
-							<button id="updateMemberBtn" onclick="updateMemeber();">수정 완료</button>
-							&emsp;&emsp;&emsp;&emsp;&emsp;
-							<span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align:center" id="deleteBtn">회원탈퇴</td>
-					</tr>
-				</table>
-			</div>
+							<td>&emsp;&emsp; <input type="checkbox" id="mailingY"
+								name="mailing" onclick="doOpenCheck(this);" value="Y"
+								class="checkbox" <%= checkedMailingY %>>&emsp;Y
+								&emsp;&emsp; <input type="checkbox" id="mailingN" name="mailing"
+								onclick="doOpenCheck(this);" value="N" class="checkbox"
+								<%=checkedMailingN%>>&emsp;N
+							</td>
+							<td></td>
+						</tr>
+						<tr></tr>
+						<tr>
+							<td colspan="2" style="text-align: center">
+								&emsp;&emsp;&emsp;
+								<button id="updateMemberBtn" onclick="updateMemeber();">수정완료
+								</button> &emsp;&emsp;&emsp;&emsp;&emsp; 
+								<span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" style="text-align: center" id="deleteBtn">회원탈퇴</td>
+						</tr>
+					</table>
+				</div>
 		</form>
+
 	</div>
 	
 	<script>
@@ -156,7 +164,7 @@
 		
 		$('#updateMemberBtn').click(function(){
 			alert('수정완료');
-			location.href="<%= request.getContextPath() %>/Resources/view/myPage/myPageMain.jsp";
+			location.href="<%= request.getContextPath() %>/list.all";
 		});
 		
 		$('#userPwd2').change(function(){
