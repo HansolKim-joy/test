@@ -537,6 +537,27 @@ public class CreateDAO {
 				return result;
 	}
 
+	public int deleteCreate(Connection conn, int rNo) {
+		// 창작글 삭제
+		//update tb_board set board_delete_yn='Y' where board_no=?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteCreate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	
 
 	

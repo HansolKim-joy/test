@@ -125,12 +125,12 @@
 									<% } %>
 									<script>
 										function onLike(){
-											var rv = <%=c.getbNO() %>;
- 											location.href="<%=request.getContextPath()%>/putLike.rv?rv="+rv;
+											var cNo = <%=c.getbNO() %>;
+ 											location.href="<%=request.getContextPath()%>/like.create?cNo="+cNo;
 										}
 										function onNoLike(){
-											var rv = <%= c.getbNO()%>;
-											location.href="<%=request.getContextPath()%>/notLike.rv?rv="+rv;
+											var cNo = <%= c.getbNO()%>;
+											location.href="<%=request.getContextPath()%>/notlike.create?cNo="+cNo;
 										}
 									</script>
 							</td>
@@ -230,8 +230,11 @@
 		//게시글삭제
 		function deleterv(){
 			var bool = confirm('정말 삭제하시겠습니까?');
+			//System.out.println("cNo " + cNo);
+			var cNo = <%=request.getParameter("cNo")%>;
 			if(bool) {
-				location.href="<%= request.getContextPath()%>/delete.cr?rNo="+"<%= c.getbNO()%>";
+				
+				location.href="<%= request.getContextPath()%>/delete.cr?cNo=" + <%=c.getbNO()%>;
 			}
 		}
 		
