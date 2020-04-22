@@ -103,7 +103,7 @@
      				if(confirm("정말 삭제하시겠습니까?") == false){
      					return false;
      				}else{
-     					location.href="<%=request.getContextPath()%>/delete.mo?no=<%=m.getmNo()%>";
+     					location.href="<%=request.getContextPath()%>/delete.mo?no=<%=m.getmNo()%>&fName=<%=fName%>";
      				}
      			}
      		</script>

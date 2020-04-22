@@ -1,5 +1,6 @@
 package movie.controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +30,15 @@ public class MovieDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.parseInt(request.getParameter("no"));
-		int result = new BoardService().DeleteMovie(no);
+		String fName = request.getParameter("fName");
+		String savePath = "";
+		if(fName != null) {
+			String root = request.getSession().getServletContext().getRealPath("/"); // 웹 서버 컨테이너 경로 추출
+			savePath = root + "Resources/images/";
+			File deleteFile = new File(savePath + fName);
+			deleteFile.delete();
+		}
+		int result = new BoardService().DeleteMovie(no,fName);
 		String page = "";
 		if(result > 0) {
 			page = request.getContextPath() + "/movie.all";

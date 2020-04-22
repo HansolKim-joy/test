@@ -173,7 +173,7 @@ public class MovieDAO {
 			pstmt.setString(1, movieTitle);
 			mMap = new HashMap<String, Movie>();
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
+			while(rset.next()) {
 				m = new Movie(
 						rset.getInt("movie_no"),
 						rset.getString("movie_title"),
@@ -366,6 +366,24 @@ public class MovieDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+	public int DeleteImage(Connection conn, String fName) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("DeleteImage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 }
