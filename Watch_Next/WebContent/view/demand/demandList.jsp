@@ -6,7 +6,6 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	
-	String percent1 = "";
 	double percent = 0.0;
 	int j = 4;
 	int currentPage = pi.getCurrentPage();
@@ -33,9 +32,8 @@
 .pc{
 	display: inline-block;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     color: white;
-    
     margin-left: auto;
     }
 .title{    
