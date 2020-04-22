@@ -51,7 +51,7 @@ public class CreateDetailServlet extends HttpServlet {
 		CreateService service = new CreateService();
 		
 		Create create = service.selectCreate(cNo);
-//		ArrayList<CFile> fileList = service.selectFile(cNo);
+		ArrayList<CFile> fileList = service.selectFile(cNo);
 		ArrayList<Comment> comment = service.selectComment(cNo);
 		
 		String page = null;
@@ -60,7 +60,7 @@ public class CreateDetailServlet extends HttpServlet {
 			request.setAttribute("create", create);
 			request.setAttribute("loginUser", loginUser);
 			request.setAttribute("comment", comment);
-//			request.setAttribute("fileList", fileList);
+			request.setAttribute("fileList", fileList);
 		} else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");

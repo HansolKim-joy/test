@@ -306,13 +306,13 @@ public class CreateService {
 		return flist;
 	}
 
-//	public ArrayList<CFile> selectFile(int cNo) {
-//		Connection conn = getConnection();
-//		ArrayList<CFile> list = new CreateDAO().selectFile(conn, cNo);
-//		
-//		close(conn);
-//		return list;
-//	}
+	public ArrayList<CFile> selectFile(int cNo) {
+		Connection conn = getConnection();
+		ArrayList<CFile> list = new CreateDAO().selectFile(conn, cNo);
+		
+		close(conn);
+		return list;
+	}
 
 	
 

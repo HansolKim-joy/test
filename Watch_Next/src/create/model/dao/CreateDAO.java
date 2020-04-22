@@ -790,40 +790,40 @@ public class CreateDAO {
 		return flist;
 	}
 
-//	public ArrayList<CFile> selectFile(Connection conn, int cNo) {
-//		// selectFile=select * from tb_cfile where board_no = ? and file_level=1 and delete_yn='N' order by file_no
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		ArrayList<CFile> list = null;
-//		
-//		String query = prop.getProperty("selectFile");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(query);
-//			pstmt.setInt(1, cNo);
-//			
-//			rset = pstmt.executeQuery();
-//			
-//			list = new ArrayList<CFile>();
-//			
-//			while(rset.next()) {
-//				CFile cf = new CFile();
-//				cf.setfNo(rset.getInt("file_no"));
-//				cf.setOriginNames(rset.getString("file_oriname"));
-//				cf.setNewNames(rset.getString("file_newname"));
-//				
-//				list.add(cf);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		
-//		return null;
-//	}
+	public ArrayList<CFile> selectFile(Connection conn, int cNo) {
+		// selectFile=select * from tb_cfile where board_no = ? and file_level=1 and delete_yn='N'
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<CFile> list = null;
+		
+		String query = prop.getProperty("selectFile");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cNo);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<CFile>();
+			
+			while(rset.next()) {
+				CFile cf = new CFile();
+				cf.setfNo(rset.getInt("file_no"));
+				cf.setOriginNames(rset.getString("file_oriname"));
+				cf.setNewNames(rset.getString("file_newname"));
+				
+				list.add(cf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
 
 
 

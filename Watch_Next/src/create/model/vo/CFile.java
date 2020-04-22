@@ -15,6 +15,15 @@ public class CFile {
 		this.bNo = bNo;
 		this.newNames = newNames;
 	}
+	
+	
+
+	public CFile(int fNo, String originNames, String newNames) {
+		super();
+		this.fNo = fNo;
+		this.originNames = originNames;
+		this.newNames = newNames;
+	}
 
 	public CFile(int fNo, int bNo, String originNames, String newNames, int fileleve, String status) {
 		super();
