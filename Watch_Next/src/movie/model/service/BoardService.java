@@ -193,8 +193,7 @@ public class BoardService {
 		close(conn);
 		return result2;
 	}
-		
-
+	
 	public ArrayList<Demand> selectOpenFunding(String userId) {
 		Connection conn = getConnection();
 		
