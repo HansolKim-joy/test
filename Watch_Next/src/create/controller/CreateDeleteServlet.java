@@ -31,7 +31,7 @@ public class CreateDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int rNo = Integer.parseInt(request.getParameter("cNo").trim());
-		System.out.println("rNo " + rNo);
+		
 		int result = new CreateService().deleteCreate(rNo);
 		
 		if(result > 0) {

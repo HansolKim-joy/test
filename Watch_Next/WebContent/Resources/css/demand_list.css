@@ -6,6 +6,7 @@
 #footer{
 	height: 100px;
 	text-align: center;
+	
 }
 .f_bottom-contents{
 	color: white;
@@ -22,26 +23,52 @@
 
 	/* 선택 */
 .hline{height:4px; background-color:red; border:none;}	
-#sel{width: 500px;
+#sel{
     margin: 20px auto;
     margin-top: 35px;
-    margin-left: 37%;
+    margin-left: 20%;
     color: black;}
-.cinema{width: 70px; height: 70px; margin:10px;}
+.cinema{width: 100px;
+    height: 100px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 50%;}
+.cinema:hover{
+	width: 102px;
+	height: 102px;
+}
 #allview{margin-left:15px; font-weight:bold; font-size:18px; float:left; color:white;}
 #selSearch{width:450px; margin-left:61%; margin-bottom:10px; color:black;}
 #selSearch input{width:150px; height:25px; font-size:13px}
 #selSearch select{height:25px;font-size:13px}
 #sbtn{margin-left: 5px; font-size:13px; width:45px; height:25px; background-color:red; color:white; border-radius:5px; border:none;}
-#btn{    margin-left: 72%;
-    font-size: 13px;
-    width: 67px;
-    height: 25px;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    padding-bottom: 2px;}
+#btn {
+	box-shadow:inset 0px 1px 0px 0px #f5978e;
+	background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+	background-color:#f24537;
+	border-radius:6px;
+	border:1px solid #db1f11;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:4px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #810e05;
+	float: right;
+    margin-right: 10%;
+}
+#btn:hover {
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+	background-color:#c62d1f;
+}
+#btn:active {
+	position:relative;
+	top:1px;
+}
+
 	/* 목록 */
 #dem{width: 80%; margin:100px auto; color:white;}
 #dem>table{margin:30px auto; text-align:center;}
@@ -80,6 +107,7 @@
 /*리스트  */
 .pro { 
 	height: 10px;  /* Can be anything */
+	margin-top: 10px;
 	position: relative;
 	background: black;
 	-moz-border-radius: 25px;
@@ -117,5 +145,5 @@
 section{width: 80%;
     margin: 0 auto;
     margin-top: 100px;}
-    
+.btn{display: inline-block;}
 h2{color: white; font-size: 35px;}

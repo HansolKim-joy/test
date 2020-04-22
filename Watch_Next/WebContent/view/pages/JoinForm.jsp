@@ -15,7 +15,7 @@
 	<%
 	 String msg = (String)request.getAttribute("msg");
 	
-	 System.out.println("나와라 참깨" + msg);
+// 	 System.out.println("나와라 참깨" + msg);
 	%>
 
 	<section>
@@ -239,9 +239,6 @@
     	 var msg = '<%= msg %>'; 
     	 
     	 if(msg.trim() == '회원가입에 성공하였습니다.'){
-    		 alert(msg);
-    	 }
-    	 if(msg.trim() == '회원가입에 실패하였습니다. 다시 한번 시도하십시오.'){
     		 alert(msg);
     	 }
       });

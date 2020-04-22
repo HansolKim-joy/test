@@ -31,15 +31,15 @@ public class CreateNotLikeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo= Integer.parseInt(request.getParameter("rNo"));
+		int cNo= Integer.parseInt(request.getParameter("cNo").trim());
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		
-		int result = new CreateService().notLike(rNo, userId);
+		int result = new CreateService().notLike(cNo, userId);
 		
-		String page = request.getContextPath()+"/detail.rNo?rNo=" + rNo;
+		String page = request.getContextPath()+"/detail.creat?cNo=" + cNo;
 		response.sendRedirect(page);
 	
 	

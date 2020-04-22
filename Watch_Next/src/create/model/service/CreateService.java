@@ -122,9 +122,10 @@ public class CreateService {
 		CreateDAO reDAO = new CreateDAO();
 		
 		int result = reDAO.insertComment(co, conn);
+		int result2 = reDAO.insertCommentC(co, conn);
 		ArrayList<Comment> comment = null;
 		
-		if(result > 0) {
+		if(result > 0 && result2>0) {
 			commit(conn);
 			
 			comment = reDAO.selectComment(conn, co.getRefBid());
@@ -139,8 +140,11 @@ public class CreateService {
 	
 	public ArrayList<Comment> deleteComment(int rId, int rNo) { 
 		 Connection conn = getConnection();
-		 int result = new CreateDAO().deleteComment(conn, rId);
-		 if(result > 0) {
+		 
+		 CreateDAO dao = new CreateDAO();
+		 int result = dao.deleteComment(conn, rId);
+		 int result2 = dao.deleteCommentC(conn, rNo);
+		 if(result > 0 && result2>0) {
 			 commit(conn);
 		 }else {
 			 rollback(conn);
@@ -212,6 +216,56 @@ public class CreateService {
 		
 		close(conn);
 			
+		return result;
+	}
+
+	public String getWriter(int cNo) {
+		Connection conn = getConnection();
+		Create create = null;
+		
+		String writer = new CreateDAO().getWriter(conn, cNo);
+		
+		close(conn);
+		
+		return writer;
+	}
+
+	public static char getFollow(String userId, String writer) {
+		Connection conn = getConnection();
+		char fchk = new CreateDAO().getFollow(conn, userId, writer);
+		
+		close(conn);
+		return fchk;
+	}
+
+	public int putFollow(int cNo, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		CreateDAO dao = new CreateDAO();
+		
+		int result = dao.putFollow(conn, cNo, writer, userId);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int notFollow(int cNo, String writer, String userId) {
+		Connection conn = getConnection();
+		
+		CreateDAO dao = new CreateDAO();
+		int result = dao.notFollow(conn, cNo, userId, writer);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		return result;
 	}
 

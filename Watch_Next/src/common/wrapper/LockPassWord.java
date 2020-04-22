@@ -18,9 +18,8 @@ public class LockPassWord extends HttpServletRequestWrapper {
 	// user_Pass, lg_userPwd, userPwd 
 	@Override
 	public String getParameter(String name) {
-		
 		String value = "";
-		if(name != null && (name.equals("user_Pass") || name.equals("lg_userPwd") || name.equals("userPwd"))) {
+		if(name != null && (name.equals("user_Pass") || name.equals("lg_userPwd") || name.equals("userPwd") || name.equals("inputPwd"))) {
 			value = getSha512(super.getParameter(name));
 		} else {
 			value = super.getParameter(name);
@@ -30,7 +29,8 @@ public class LockPassWord extends HttpServletRequestWrapper {
 	
 	}
 	
-	public static String getSha512(String lg_userPwd) {
+	
+	public static String getSha512(String userPwd) {
 		String encPwd = null;
 		
 		MessageDigest md = null;
@@ -41,10 +41,9 @@ public class LockPassWord extends HttpServletRequestWrapper {
 			e.printStackTrace();
 		}
 		
-		byte[] bytes = lg_userPwd.getBytes(Charset.forName("UTF-8"));
+		byte[] bytes = userPwd.getBytes(Charset.forName("UTF-8"));
 		md.update(bytes);
 		encPwd = Base64.getEncoder().encodeToString(md.digest());
-		
 		
 		return encPwd;
 	}

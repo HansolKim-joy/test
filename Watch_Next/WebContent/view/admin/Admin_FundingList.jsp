@@ -19,10 +19,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>펀딩 신청 목록</title>
 <style>
-
-
+.span{display: flex;}
+.dday{
+	display: inline-block;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    }
+.pc{
+	display: inline-block;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    margin-left: auto;
+    }
+.title{    
+	text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    padding-left: 9px;
+    }
+#empty{
+	text-align: center;
+    padding: 8.5%;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    }
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />
@@ -41,10 +68,11 @@
 	<hr class="hline">
 	
 	<div id="sel">
-		<button class="btn" value="CGV"><img src="/Watch_Next/Resources/images/cgv.png" class="cinema"></button>
-		<button class="btn" value="MEGA"><img src="/Watch_Next/Resources/images/메가박스.png" class="cinema"></button>
-		<button class="btn" value="롯데"><img src="/Watch_Next/Resources/images/롯데.png" class="cinema"></button>
-		<button class="btn" value="피카"><img src="/Watch_Next/Resources/images/피카디리.png" class="cinema"></button>
+		<input type="image" value="ALL" src="/Watch_Next/Resources/images/ALL.jpg" class="cinema">
+		<input type="image" value="CGV" src="/Watch_Next/Resources/images/cgv.png" class="cinema">
+		<input type="image" value="MEGA" src="/Watch_Next/Resources/images/메가박스.png" class="cinema">
+		<input type="image" value="롯데" src="/Watch_Next/Resources/images/롯데.png" class="cinema">
+		<input type="image" value="피카" src="/Watch_Next/Resources/images/피카디리.png" class="cinema">
 	</div>
 	
 	<br>
@@ -69,51 +97,53 @@
 					<ol>
 						<li>
 							
-							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/FunDetail.adm?no=<%=dl.getdNo()%>'">
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
 							
 							
 							<div class="pro">
 								<span style="width: <%= percent %>%"></span>
 							</div>
-							<span>
-							<div><%= dl.getTitle() %></div>
-							<div style="display: inline-block;">D - <%= dl.getEndDay() %></div>
-							<div style="display: inline-block;"><%= percent %>%</div>
-							</span>
+							<div class="title"><%= dl.getTitle() %></div>
+							<div class="span" >
+								<div class="dday" >D-<%= dl.getEndDay() %></div>
+								<div class="pc" ><%= percent %>%</div>
+							</div>
 							
 						</li>
 					
 				<%}else if(i%j==3){ %>
 						<li>
-							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/FunDetail.adm?no=<%=dl.getdNo()%>'">
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
 							<div class="pro">
 							<%  %>
 								<span style="width: <%= percent %>%"></span>
 							</div>
-							<span>
-							<div><%= dl.getTitle() %></div>
-							<div style="display: inline-block;">D - <%= dl.getEndDay() %></div>
-							<div style="display: inline-block;"><%= percent %>%</div>
-							</span>
+							<div class="title"><%= dl.getTitle() %></div>
+							<div class="span" >
+								<div class="dday" >D-<%= dl.getEndDay() %></div>
+								<div class="pc" ><%= percent %>%</div>
+								
+							</div>
 						</li>
 					</ol>
 						
 				<%}else{%>
 						<li>
-							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/FunDetail.adm?no=<%=dl.getdNo()%>'">
+							<img class="poster" src="<%= request.getContextPath() %>/Resources/images/<%= dl.getFileName() %>" onclick="location.href='<%=request.getContextPath()%>/demand.detail?no=<%=dl.getdNo()%>'">
 							<div class="pro">
 								<span style="width: <%= percent %>%"></span>
 							</div>
-							<span>
-							<div><%= dl.getTitle() %></div>
-							<div style="display: inline-block;">D - <%= dl.getEndDay() %></div>
-							<div style="display: inline-block;"><%= percent %>%</div>
-							</span>
+							<div class="title"><%= dl.getTitle() %></div>
+							<div class="span" >
+								<div class="dday" >D-<%= dl.getEndDay() %></div>
+								<div class="pc" ><%= percent %>%</div>
+								
+							</div>
 						</li>
 				<%} %>		
 			<% } %>   
 		<%} else{%>
-			<div>게시글이 없습니다.</div>
+			<div id="empty">신청 목록이 없습니다.</div>
 		<%} %>
 	
 	</div>
@@ -129,7 +159,7 @@
 
 	<!-- 페이징 -->
 	<div class="list_number">
-		<a type="a" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
+		<button type="button" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</button>
         <div class="list_n_menu">
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/fundingList.adm?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
@@ -170,9 +200,13 @@
 	});
 
 
-	$('.btn').click(function(){
+	$('.cinema').click(function(){
 		var cinema = $(this).val();
-		location.href='<%= request.getContextPath() %>/listSort.adm?cinema=' + cinema;
+		if(cinema == 'ALL'){
+			location.href='<%= request.getContextPath() %>/list.de';
+		}else{
+			location.href='<%= request.getContextPath() %>/listSort.de?cinema=' + cinema;
+		}
 	});
 	
 	

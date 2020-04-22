@@ -47,13 +47,17 @@
 				alert("감독을 입력하세요.");
 				$('#creW_directorName').focus();
 				return false;
-			}else if($('div.Editor-editor')[0].innerHTML.length==0){
+			}else if($('#taContent').val().length==0){
 				alert("내용을 입력하세요.");
-				$('div.Editor-editor').focus();
+				$('#taContent').focus();
+				return false;
+			} else if($('#thumb_file').val()=="") {
+				alert("썸네일을 첨부하세요.");
+				return false;
+			} else if($('#creW_file').val()=="") {
+				alert("동영상을 첨부하세요.");
 				return false;
 			}else{
-				$('#editor_content').val($('div.Editor-editor')[0].innerHTML);
-				// 쪽지 window.open("writePopup.html", "a", "width=400, height=300, left=100, top=50"); 
 				alert("작성이 완료되었습니다.");
 				return true;
 			}
@@ -64,6 +68,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/editor.css" type="text/css" rel="stylesheet"/>
 <link rel= "stylesheet" type="text/css" href="<%=request.getContextPath() %>/Resources/css/create_write.css">
+<style>
+	.subnav li {width: 120px;}
+	#taDiv{width:1000px; margin-top:30px; margin-left:10%;}
+	#filetag1{float:left; font-size:20px;}
+	#thumb_file{padding-left:20px;}
+	#filetag2{float:left; font-size:20px;}
+	#creW_file{padding-left:20px;}
+	
+</style>
 </head>
 <body>
 <!--header -->
@@ -79,19 +92,51 @@
 		<h4><strong>제목 : &ensp;<input type="text" id="creW_createName" name="creW_createName"></strong></h4>
 		<h4><strong>감독 : &ensp;<input type="text" id="creW_directorName" name="creW_directorName"></strong></h4>
 	</div>
-	<!-- 비디오 태그 -->
+	
+	<!-- 파일첨부 태그 -->
 	<div id = "creW_videos">
-	<input type="file" id="creW_file" name="creW_file">
+	<span id="filetag1">썸네일 : </span>
+		<input type="file" id="thumb_file" name="thumb_file" onchange="thumb(this, this.value)"><br>
+	<span id="filetag2">동영상 : </span>
+		<input type="file" id="creW_file" name="creW_file" onchange="cmv(this, this.value)">
 	</div>
-	<!-- 텍스트 편집기 부분 -->
-	<div class="col-lg-12 nopadding">
-		<textarea id="txtEditor"></textarea>
-		<input type="hidden" id="editor_content" name="editor_content">
+	
+	<script>
+		function thumb(value, filevalue) {
+			var reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/i;
+			if(value.files && value.files[0]) {
+				if(!filevalue.match(reg)){
+					alert("이미지 파일이 아닙니다.");
+					history.go(0);
+				}
+			}
+		}
+		
+		function cmv(value, filevalue) {
+			var reg = /(.*?)\.(avi|mp4|mpeg|flv|mkv)$/i;
+			if(value.files && value.files[0]) {
+				if(!filevalue.match(reg)){
+					alert("동영상 파일이 아닙니다.");
+					history.go(0);
+				}
+			}
+		}
+
+		
+	</script>
+	<!-- textarea부분 -->
+	<br clear="all">
+	<div id="taDiv">
+		<textarea name="taContent" id="taContent" cols=150 rows=20 style="overflow-y:scroll; resize:none;"></textarea>
 	</div>
+<!-- 	<div class="col-lg-12 nopadding"> -->
+<!-- 		<textarea id="txtEditor"></textarea> -->
+<!-- 		<input type="hidden" id="editor_content" name="editor_content"> -->
+<!-- 	</div> -->
 	<div id = "creW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="creW_button">
+	<input type="reset" value="취소" id="creW_button" onclick="location.href='javascript:history.go(-1);'">
 	<input type="submit" value="완료" id="creW_button" class="creW_submit">
 	</div>
 </form>

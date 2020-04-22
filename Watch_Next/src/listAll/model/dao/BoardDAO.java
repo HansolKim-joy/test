@@ -1,4 +1,4 @@
-package listAll.model;
+package listAll.model.dao;
 
 import static common.JDBCTemplate.close;
 
@@ -12,8 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import Funding.model.vo.Demand;
 import board.model.dao.RecBoardDAO;
 import common.Comment;
+import listAll.model.vo.MyFollow;
 import movie.model.vo.Movie;
 import recruit.model.vo.Recruit;
 import review.model.vo.Review;
@@ -189,6 +191,128 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return RecruitComlist;
+	}
+	public ArrayList<Demand> iwriteFunding(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Demand d = null;
+		ArrayList<Demand> IwriteFund = new ArrayList<Demand>();
+		
+		String query = prop.getProperty("iwriteFunding");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				d = new Demand(rset.getString("screening_movie_name"),
+								rset.getString("movie_title"),
+								rset.getInt("demand_price"),
+								rset.getDate("demand_end_date"),
+								rset.getInt("nowmoney"));
+				
+//				System.out.println("IwroteDao" + d);
+				IwriteFund.add(d);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return IwriteFund;
+	}
+	public ArrayList<MyFollow> selectFollow(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MyFollow mf = null;
+		ArrayList<MyFollow> FollowList = new ArrayList<MyFollow>();
+		
+		String query = prop.getProperty("selectfollow");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				mf = new MyFollow(rset.getString("follow_user_id"),
+								  rset.getInt("bwritecnt"), 
+								  rset.getInt("cwritecnt"));
+				FollowList.add(mf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return FollowList;
+	}
+	public ArrayList<Demand> selectOpenFunding(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Demand d = null;
+		ArrayList<Demand> OpenFunding = new ArrayList<Demand>();
+		
+		String query = prop.getProperty("openfunding");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				d = new Demand(rset.getString("requestp"),
+							   rset.getInt("demand_want_price"),
+							   rset.getString("screening_movie_name"),
+							   rset.getString("movie_title"),
+							   rset.getInt("demand_price"));
+				OpenFunding.add(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return OpenFunding;
+	}
+	
+	public ArrayList<Demand> selectClosedFunding(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Demand d = null;
+		ArrayList<Demand> CloseFunding = new ArrayList<Demand>();
+		
+		String query = prop.getProperty("closefunding");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				d = new Demand(rset.getString("requestp"),
+							   rset.getInt("demand_want_price"),
+							   rset.getString("screening_movie_name"),
+							   rset.getString("movie_title"),
+							   rset.getInt("demand_price"));
+				CloseFunding.add(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return CloseFunding;
 	}
 	
 }

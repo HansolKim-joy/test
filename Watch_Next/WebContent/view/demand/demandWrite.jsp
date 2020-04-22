@@ -74,12 +74,38 @@
  		var m = money.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
  		$('#wantP').text(m + "원");
     }
+ 	
+ 	function check(){
+ 		var f = document.submitForm;
+ 		if(	f.admin_movie_name.value.length < 1 || 
+ 			f.admin_movie_director.value.length < 1 || 
+ 			f.admin_movie_actor.value.length < 1 || 
+ 			f.admin_movie_min.value.length < 1 || 
+ 			f.movie_wantprice.value.length < 1 || 
+ 			f.admin_movie_story.value.length < 1 ||
+ 			f.admin_movie_time.value.length < 1 ||
+ 			f.admin_imageFile.value.length < 1){
+ 			alert("비어있는 곳 없이 모두 입력해 주십시오.");
+ 			return false;
+ 		}else if(parseInt(f.admin_movie_min.value) < parseInt(f.movie_wantprice.value)){
+ 			alert("목표 금액보다 참여 금액이 더 큽니다.");
+ 			return false;
+ 		}else if(f.admin_imageFile.value == ""){
+ 			console.log("영화 포스터를 등록해주세요.");
+ 			return false;
+ 		}else if(f.admin_movie_time.value == "00:00"){
+ 			if(confirm("영화시간 없이 등록하시겠습니까?") == false){
+ 				return false;
+ 			}
+ 		}
+ 		return true;
+ 	}
 </script>
 <link href="<%=request.getContextPath() %>/Resources/css/admin_movie_write.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
-<form action="<%= request.getContextPath() %>/insert.demand" method="post" encType="multipart/form-data">
+<form action="<%= request.getContextPath() %>/insert.demand" name = "submitForm" onSubmit="return check();" method="post" encType="multipart/form-data">
 	<div id="use_fix" style="width: 80%; margin:100px auto;">
 		<h2>펀딩 작성 페이지</h2>
 		<hr id="red_line">
@@ -149,7 +175,7 @@
 				<option value="8">음악 영화</option>
 				<option value="9">로맨스 영화</option>
 			</select>
-			&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<b>참여 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);"><b id="wantP"></b>
+			&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>참여 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);"><b id="wantP"></b>
 			<br>
 			<b>영화 시간 : </b>
 			<input type="text" 
@@ -159,16 +185,14 @@
 				   id="admin_movie_time" name="admin_movie_time"
 				   style="text-align:center;width:50px;"/>
 			<br>
-			<br>
-			<br>
+		
 			<b>줄거리 : </b>
-			<br><br>
-			<textarea rows="10" cols="40" style="overflow-y:scroll; resize: none;" id="admin_movie_story" name="admin_movie_story" placeholder="이미지를 넣으려면 왼쪽 영역을 클릭하세요"></textarea>
+			<textarea rows="10" cols="40" id="admin_movie_story" name="admin_movie_story" placeholder="이미지를 넣으려면 왼쪽 영역을 클릭하세요"></textarea>
 			<br>
 		</div>
-		<div style="width: 100%; text-align:center;">
+		<div id="btndiv">
 			<input type="submit" value="완료" id="admin_movie_btn">
-			<input type="button" value="취소" id="admin_movie_btn" onclick="location.href='<%= request.getContextPath()%>/list.de'">
+			<input type="button" value="취소" id="admin_movie_btn2" onclick="location.href='<%= request.getContextPath()%>/list.de'">
 		</div>
 	</div>
 </form>

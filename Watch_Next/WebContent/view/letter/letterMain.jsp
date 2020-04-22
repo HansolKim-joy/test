@@ -16,7 +16,6 @@
 			cnt++;
 		}
 	}
-		
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +25,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link type="text/css" href="<%=request.getContextPath() %>/Resources/css/letter.css" rel="stylesheet" />
 <link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
+<script>
+	$(function(){
+		self.resizeTo(800,700);
+	});
+</script>
 </head>
 <body>
 <h2 style = color:red;>쪽지함 
@@ -42,7 +46,7 @@
 	<%}%>전체 <%=allCount%>통
 	</li>
 </ul>
-<button onclick="location.href='view/letter/letter_send.jsp'" id="letter_send">보내기</button>
+<button onclick="location.href='view/letter/letter_send.jsp'" id="letter_send" class="btn">보내기</button>
 <br clear="all">
 <hr color='red' size='3'>
 <table id="letter_list">
@@ -81,13 +85,37 @@
 				</tr>
 		<%} %>
 		</table>
-		<!-- 페이징 -->
+		<br>
+		<input type="submit" value="삭제" id="letter_delete" class="btn">
+		<b id="letter_delet">선택한쪽지&emsp;</b>
+		<script type="text/javascript">
+			$('#letter_delete').click(function(){
+				if($("input:checkbox[name=letter_chk]:checked").length > 0){
+					if("<%=chk%>" == "null"){
+						if(confirm("받은 쪽지를 삭제하시겠습니까?") == false){
+							return false;
+						}
+					}else{
+						if(confirm("발송된 쪽지를 삭제하시겠습니까?") == false){
+							return false;
+						}
+					}
+				}else{
+					alert('삭제할 쪽지를 선택해주세요.');
+					return false;
+				}
+			});
+		</script>
+	</div>
+</form>
+<br clear="all">
+<!-- 페이징 -->
 		<div class="pagingArea" align="center">
 		<%if(!letterList.isEmpty()){ %>
 			<!-- 맨 처음으로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=1'">&lt;&lt;</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=1'">&lt;&lt;처음</button>
 			<!-- 이전 페이지로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage - 1 %>'" id="beforeBtn">&lt;</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage - 1 %>'" id="beforeBtn">&lt;이전</button>
 			<script>
 				if(<%= currentPage %> <= 1){
 					$('#beforeBtn').attr("disabled", "true");
@@ -103,34 +131,16 @@
 				<%} %>
 			<%} %>
 			<!-- 다음 페이지로 -->
-			<button id="afterBtn" onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage + 1 %>'">&gt;</button>
+			<button id="afterBtn" onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage + 1 %>'">다음&gt;</button>
 			<script>
 				if(<%= currentPage %> >= <%=maxPage%>){
 					$('#afterBtn').attr("disabled", "true");
 				}
 			</script>
 			<!-- 맨 끝으로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=maxPage%>'">&gt;&gt;</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=maxPage%>'">&gt;&gt;끝</button>
 		<% } %>
 		</div>
-		<br>
-		<input type="submit" value="삭제" id="letter_delete" class="letter_delete">
-		<b id="letter_delete">선택한쪽지&emsp;</b>
-		<script type="text/javascript">
-			$('.letter_delete').click(function(){
-				if($("input:checkbox[name=letter_chk]:checked").length > 0){
-					if(confirm('정말 삭제하시겠습니까?')==false){
-						return false;
-					}
-				}else{
-					alert('삭제할 쪽지를 선택해주세요.');
-					return false;
-				}
-			});
-		</script>
-	</div>
-</form>
-
 
 </body>
 </html>

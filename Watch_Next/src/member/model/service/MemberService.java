@@ -16,13 +16,13 @@ public class MemberService {
 		Connection conn = getConnection();
 		Member loginUser = new MemberDAO().loginMember(conn, m);
 		close(conn);
-		System.out.println(loginUser);
+//		System.out.println(loginUser);
 		return loginUser;
 	}
 
 	public int insertMember(Member m) {
 		Connection conn = getConnection();
-		System.out.println("service" + m.getMailingYN());
+//		System.out.println("service" + m.getMailingYN());
 		int result = new MemberDAO().insertMember(conn, m);
 		if (result > 0) {
 			commit(conn);
@@ -48,7 +48,7 @@ public class MemberService {
 
 		if (result > 0) {
 			m = mDAO.selectMember(conn, member);
-			System.out.println(m);
+//			System.out.println(m);
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -106,5 +106,20 @@ public class MemberService {
 		close(conn);
 		return countComment;
 	}
+
+	public int newPwd(String email, String uuid) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().newPwd(conn, email, uuid);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+		
 
 }

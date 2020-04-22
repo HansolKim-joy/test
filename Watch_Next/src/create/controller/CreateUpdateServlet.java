@@ -34,13 +34,13 @@ public class CreateUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("cNo"));
+		int cNo = Integer.parseInt(request.getParameter("cNo"));
 		String title = request.getParameter("creW_createName");
 		String director = request.getParameter("creW_directorName");
-		String content = request.getParameter("editor_content");
+		String content = request.getParameter("taContent");
 		
 		Create c = new Create();
-		c.setbNO(rNo);
+		c.setbNO(cNo);
 		c.setbTitle(title);
 		c.setcDirector(director);
 		c.setbContent(content);
@@ -50,7 +50,7 @@ public class CreateUpdateServlet extends HttpServlet {
 		
 		String page = null;
 		if(result>0) {
-			page="detail.creat?rNo=" + rNo;
+			page="detail.creat?cNo=" + cNo;
 			response.sendRedirect(page);
 		} else {
 			page = "view/errorPage/errorPage.jsp";

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*, movie.model.vo.*, common.Comment"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*,
+     movie.model.vo.*, common.Comment, Funding.model.vo.Demand, listAll.model.vo.*"%>
 <%
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
@@ -7,6 +8,10 @@
 	/* System.out.println("diblist" + DibList); */
 	ArrayList<Comment> ReviewComlist = (ArrayList<Comment>)request.getAttribute("ReviewComlist");
 	ArrayList<Comment> RecruitComlist = (ArrayList<Comment>)request.getAttribute("RecruitComlist");
+	ArrayList<Demand> IwriteFund = (ArrayList<Demand>)request.getAttribute("IwriteFund");
+	ArrayList<MyFollow> FollowList = (ArrayList<MyFollow>)request.getAttribute("FollowList");
+	ArrayList<Demand> OpenFunding = (ArrayList<Demand>)request.getAttribute("OpenFunding");
+	ArrayList<Demand> CloseFunding = (ArrayList<Demand>)request.getAttribute("CloseFunding"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -44,6 +49,7 @@
 		color: white;
 		text-align:center;
 		width: 80%;
+		border-radius: 20px;
 	}
 	.mp_first{
 		width: 230px;
@@ -58,9 +64,6 @@
 		width: 400px;
 		border-bottom: 1px solid white;
 	}
-	/* #mp_second{
-		text-align: center;
-	} */
 	#mp_info{
 		text-align: center;
 		color: white;
@@ -96,6 +99,7 @@
 		width: 23px;
 		height: 23px;
 		border-radius: 50%;
+		cursor: pointer;
 	}
 	.mp_h_content{
 		display: none;
@@ -128,6 +132,9 @@
 		width: 100%;
 		margin-top: 5px;
 	}
+	.myTable td{
+		width: 100px;
+	}
 	.myBtn{
 		width: 100px;
 		border: 1px solid white;
@@ -142,7 +149,6 @@
 	#listTablec{
 		border-spacing: 20px;
 		margin-top: -15px;
-		width: 60%;
 	}
 	.hline1{
 		width: 30%;
@@ -155,6 +161,7 @@
 	.mPhoto{
 		width: 200px;
 		height: 200px;
+		cursor: pointer;
 	}
 	#dibTable{
 		text-align: center;
@@ -166,6 +173,10 @@
 	}
 	.myBtn{
 		cursor: pointer;
+	}
+	#followTable{
+		text-align:center;
+		width: 80%;
 	}
 </style>
 </head>
@@ -179,7 +190,7 @@
 			<h2 id="mypage">마이페이지</h2>
 			<hr class="hline">
 			
-			<div id="mp_info"><%= loginUser.getUserName() %>님의 마이페이지입니다.</div>
+			<div id="mp_info"><%= loginUser.getUserName() %>님 마이페이지</div>
 			<a href="javascript:void(0);" onclick="letterPopup();"><img id="send" src="/Watch_Next/Resources/images/쪽지.png"></a>
 			<script>
 			function letterPopup(){
@@ -223,14 +234,86 @@
 				<button type="submit" id="mp_button1" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
-				<div id="mp_h_content1" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content1" class="mp_h_content">
+					<table id="listTablec">
+						<tr>
+							<td> <div id="fundinging" class="myBtn"> 진행 중</div> </td>
+							<td> <div id="fundingclose" class="myBtn"> 완료  </div> </td>
+						</tr>
+					</table>
+					<table id="OpenFundingTable" class="myTable">
+						<tr>
+							<% if(OpenFunding.isEmpty()) { %>
+								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+							<% }else{ %>
+								<td>펀딩 영화</td>
+								<td>펀딩 극장</td>
+								<td>펀딩 작성자</td>
+								<td>참여 금액</td>
+								<td>완료 금액</td>
+							</tr>
+							<% for(int i = 0; i < OpenFunding.size(); i++) {%>
+								<tr>
+									<td><%= OpenFunding.get(i).getMovieTitle() %></td>
+									<td><%= OpenFunding.get(i).getSmName() %></td>
+									<td><%= OpenFunding.get(i).getUserId() %></td>
+									<td><%= OpenFunding.get(i).getWantMoney() %></td>
+									<td><%= OpenFunding.get(i).getMoney() %></td>
+								</tr>
+							<% } %>
+						<% } %>
+					</table>
+					
+					<table id="CloseFundingTable" class="myTable">
+						<tr>
+							<% if(CloseFunding.isEmpty()) { %>
+								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+							<% }else{ %>
+								<td>펀딩 영화</td>
+								<td>펀딩 극장</td>
+								<td>펀딩 작성자</td>
+								<td>참여 금액</td>
+								<td>완료 금액</td>
+							</tr>
+							<% for(int i = 0; i < CloseFunding.size(); i++) {%>
+								<tr>
+									<td><%= CloseFunding.get(i).getMovieTitle() %></td>
+									<td><%= CloseFunding.get(i).getSmName() %></td>
+									<td><%= CloseFunding.get(i).getUserId() %></td>
+									<td><%= CloseFunding.get(i).getWantMoney() %></td>
+									<td><%= CloseFunding.get(i).getMoney() %></td>							
+								</tr>
+						<% } %>
+					<% } %>
+					</table>
+				</div>
 			</div>
-			
+		
 			<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button2" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
-				<div id="mp_h_content2" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content2" class="mp_h_content">
+					<table id="followTable">
+						<tr>
+						<% if(FollowList.isEmpty()) {%>
+							<td colspan="3">팔로우 한 사람이 없습니다.</td>
+						<% }else{ %>
+							<td>팔로우</td>
+							<td>게시글 수</td>
+							<td>댓글 수</td>
+						</tr>
+							<% for(int i = 0; i < FollowList.size(); i++) {%>
+								<tr>
+									<td><%= FollowList.get(i).getFollowedUser() %></td>
+									<td><%= FollowList.get(i).getbCnt() %></td>
+									<td><%= FollowList.get(i).getcCnt() %></td>
+								</tr>
+							<% } %>	
+						<% } %>
+				
+					</table>
+				</div>
 			</div>
 			
 			<div id="mp_content3" class="mp_content">나의 찜 영화&nbsp;&nbsp;&nbsp;&nbsp;
@@ -246,7 +329,7 @@
 							<% if((i+1) % 4 == 1) {%>
 								<tr>
 									<td>
-										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>">
+										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>" onclick="location.href='<%= request.getContextPath() %>/search.mo?movieTitle=<%= DibList.get(i).getmTitle() %>'">
 										<br>
 										영화 제목 : <%= DibList.get(i).getmTitle() %> 
 										<% 
@@ -270,11 +353,11 @@
 											}
 										%>
 										<br>
-										해당 사이트 : <%= where %>
+										제공 사이트 : <%= where %>
 									</td> 
 								<% }else if((i+1) % 4 == 2 || (i+1) % 4 == 3){ %>
 									<td>
-										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>">
+										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>" onclick="location.href='<%= request.getContextPath() %>/search.mo?movieTitle=<%= DibList.get(i).getmTitle() %>'">
 										<br>
 										영화 제목 : <%= DibList.get(i).getmTitle() %> 
 										<% 
@@ -298,11 +381,11 @@
 											}
 										%>
 										<br>
-										해당 사이트 : <%= where %>
+										제공 사이트 : <%= where %>
 									</td>
 							<% } else if((i+1) % 4 == 0) {%>
 								<td>
-									<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>">
+									<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>" onclick="location.href='<%= request.getContextPath() %>/search.mo?movieTitle=<%= DibList.get(i).getmTitle() %>'">
 									<br>
 									영화 제목 : <%= DibList.get(i).getmTitle() %> 
 									<% 
@@ -326,7 +409,7 @@
 										}
 									%>
 									<br>
-									해당 사이트 : <%= where %>
+									 제공 사이트 : <%= where %>
 								</td>
 							</tr>
 							<% } %>
@@ -361,7 +444,7 @@
 						</tr>
 							<% if(ReviewList.isEmpty()) {%>
 							<tr>
-								<td colspan="5"> 게시글이 존재하지 않습니다. </td>
+								<td colspan="5">작성한 리뷰 게시글이 존재하지 않습니다. </td>
 							</tr>
 							<% }else{ %>
 								<% for(int i = 0; i < ReviewList.size(); i++) {%>
@@ -394,7 +477,7 @@
 						</tr>
 						<tr>
 							<% if(RecruitList.isEmpty()){ %>
-								<td colspan="5">게시글이 존재하지 않습니다.</td>
+								<td colspan="5">작성한 모집 게시글이 존재하지 않습니다.</td>
 						</tr>
 							<% } else { %>
 								<% for(int i = 0; i < RecruitList.size(); i++) {%>
@@ -404,6 +487,30 @@
 										<td><%= RecruitList.get(i).getbTitle() %></td>
 										<td><%= RecruitList.get(i).getbDate() %></td>
 										<td><%= RecruitList.get(i).getbViews()%></td>
+									</tr>
+								<% } %>
+							<% } %>
+					</table>
+					<table id="myFundingTable" class="myTable">
+						<tr>
+							<td>펀딩 영화</td>
+							<td>상영 극장</td>
+							<td>총 금액</td>
+							<td>모인 금액</td>
+							<td>종료일</td>
+						</tr>
+						<tr>
+							<% if(IwriteFund.isEmpty()){ %>
+								<td colspan="5">작성한 펀딩 게시글이 존재하지 않습니다.</td>
+						</tr>
+							<% } else { %>
+								<% for(int i = 0; i < IwriteFund.size(); i++) {%>
+									<tr>
+										<td><%= IwriteFund.get(i).getMovieTitle() %></td>
+										<td><%= IwriteFund.get(i).getSmName() %></td>
+										<td><%= IwriteFund.get(i).getMoney() %></td>
+										<td><%= IwriteFund.get(i).getSmWant() %></td>
+										<td><%= IwriteFund.get(i).getEndDate() %></td>
 									</tr>
 								<% } %>
 							<% } %>
@@ -421,13 +528,12 @@
 							<td> <div id="myReviewc" class="myBtn"> 리뷰 </div> </td>
 							<td> <div id="myRecruitc" class="myBtn"> 모집  </div> </td>
 							<td> <div id="myMadec" class="myBtn"> 창작 </div> </td>
-							<td> <div id="myFundingc" class="myBtn"> 펀딩 </div> </td>
 						</tr>
 					</table>
 					<table id="myReviewTablec" class="myTable">
 						<tr>
 							<% if(ReviewComlist.isEmpty()) { %>
-								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+								<td colspan="5">작성한 리뷰 댓글이 없습니다.</td>
 							<% }else{ %>
 								<td>글 번호</td>
 								<td>리뷰 제목</td>
@@ -450,7 +556,7 @@
 					<table id="myRecruitTablec" class="myTable">
 						<tr>
 							<% if(RecruitComlist.isEmpty()) { %>
-								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+								<td colspan="5">작성한 모집 댓글이 없습니다.</td>
 							<% }else{ %>
 								<td>글 번호</td>
 								<td>모집 종류</td>
@@ -476,6 +582,13 @@
 		</div>
 	</section>
 	<script>
+		$('#mp_button1').click(function(){
+			$('#mp_h_content1').slideToggle();	
+		});
+		
+		$('#mp_button2').click(function(){
+			$('#mp_h_content2').slideToggle();
+		});
 		
 		$('#mp_button3').click(function(){
 			$('#mp_h_content3').slideToggle();
@@ -490,23 +603,62 @@
 		});
 		
 		$('#myReview').click(function(){
+			$('#myReview').css({"background-color":"white", "color":"black"});
+			$('#myRecruit').css({"background-color":"#545257", "color":"white"});
+			$('#myMade').css({"background-color":"#545257", "color":"white"});
+			$('#myFunding').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTable').slideToggle();
 			$('#myRecruitTable').css({"display":"none"});
+			$('#myFundingTable').css({"display":"none"});
 		});
 		
 		$('#myRecruit').click(function(){
+			$('#myRecruit').css({"background-color":"white", "color":"black"});
+			$('#myReview').css({"background-color":"#545257", "color":"white"});
+			$('#myMade').css({"background-color":"#545257", "color":"white"});
+			$('#myFunding').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTable').css({"display":"none"});
 			$('#myRecruitTable').slideToggle();
+			$('#myFundingTable').css({"display":"none"});
+		});
+		
+		$('#myFunding').click(function(){
+			$('#myFunding').css({"background-color":"white", "color":"black"});
+			$('#myRecruit').css({"background-color":"#545257", "color":"white"});
+			$('#myMade').css({"background-color":"#545257", "color":"white"});
+			$('#myReview').css({"background-color":"#545257", "color":"white"});
+			$('#myReviewTable').css({"display":"none"});
+			$('#myRecruitTable').css({"display":"none"});
+			$('#myFundingTable').slideToggle();
+			
 		});
 		
 		$('#myReviewc').click(function(){
+			$('#myReviewc').css({"background-color":"white", "color":"black"});
+			$('#myRecruitc').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTablec').slideToggle();
 			$('#myRecruitTablec').css({"display":"none"});
 		});
 		
 		$('#myRecruitc').click(function(){
+			$('#myRecruitc').css({"background-color":"white", "color":"black"});
+			$('#myReviewc').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTablec').css({"display":"none"});
 			$('#myRecruitTablec').slideToggle();
+		});
+		
+		$('#fundinging').click(function(){
+			$('#fundinging').css({"background-color":"white", "color":"black"});
+			$('#fundingclose').css({"background-color":"#545257", "color":"white"});
+			$('#OpenFundingTable').slideToggle();
+			$('#CloseFundingTable').css({"display":"none"});
+		});
+		
+		$('#fundingclose').click(function(){
+			$('#fundingclose').css({"background-color":"white", "color":"black"});
+			$('#fundinging').css({"background-color":"#545257", "color":"white"});
+			$('#OpenFundingTable').css({"display":"none"});
+			$('#CloseFundingTable').slideToggle();
 		});
 		
 	</script>

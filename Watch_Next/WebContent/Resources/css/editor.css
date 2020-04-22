@@ -269,6 +269,7 @@ pre {
   }
 .inline-form-control{
   display:inline !important;
+  width:200px;
   }
 
 .btn-group + .btn-group {

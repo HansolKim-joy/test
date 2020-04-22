@@ -90,3 +90,13 @@ button:focus {outline: none;}
 	/*글쓰기 */
 #write{position:absolute; left:1250px; background-color:red; color:white;
 		border:none; border-radius:5px; font-size:14px; height:25px;}	
+	/*검색*/
+#searchType{font-size:17px;}
+	/* 목록에 내용 잘려서나오게 */
+#conEllipsis{
+    height: 70px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}		
