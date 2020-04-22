@@ -89,7 +89,7 @@
 	<div id = "creW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="creW_button" onclick="location.href='javascript:histroy.go(-1);'">
+	<input type="reset" value="취소" id="cancel_button" onclick="location.href='javascript:history.go(-1);'">
 	<input type="submit" value="완료" id="creW_button" class="creW_submit">
 	</div>
 </form>

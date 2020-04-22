@@ -86,6 +86,16 @@
 		      	<td width="150px" style="font-size:17px;" ><%=r.getbDate() %> </td>
 		      	<td width="90px" style="font-size:17px;">조회수 : </td>
 		      	<td width="70px" style="font-size:17px;" ><%=r.getbViews() %></td>
+		      	<td>
+					<!-- 신고버튼 -->
+	      			<a href="#" target="_self" id="atag"> 
+	      				<img
+							src="/Watch_Next/Resources/images/siren.jpg" width="37px"
+							id="btn" height="37px"
+							onclick="window.open('<%=request.getContextPath()%>/view/reportPop/reportPop.jsp', 'pop', 
+					'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
+					</a>
+				</td>
 			</tr>
 		</table>
 	<script>
@@ -121,40 +131,28 @@
 
 <hr>
 
-	<div id="content">
-		<p style="font-size:15px;" >
+	<div id="content" >
 		<%=r.getbContent() %>
-		<input type="hidden" name="bContent" class= "content" value="<%=r.getbContent() %>" style="border:0;">
-			
-		</p>
+		
+		
 	</div>
 
-	<!-- 신고버튼 -->
-	<div id="btn">
-		<a href="#" target="_self"> <img
-			src="/Watch_Next/Resources/images/siren2.png" width="37px"
-			height="37px"
-			onclick="window.open('<%=request.getContextPath()%>/view/reportPop/reportPop.jsp', 'pop', 
-						'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
-		</a>
+		<input type="hidden" name="bContent" class= "content" value="<%=r.getbContent() %>">
 
 	</div>
-	
 	<!-- 목록수정삭제 버튼 -->
- 
-		<div id=listbtn>
-			
-		    <% if(loginUser != null && loginUser.getUserId().equals(r.getUserId())) { %>
-		    	<button type="submit" id="update" value="수정">수정</button>
-		    	<button type="button" id="delete" onclick="deleteRe();" value="삭제">삭제</button>
-		   <% } %>
-		    	<button onclick="location.href='<%= request.getContextPath() %>/list.recruit'" id="menu"
-		    		style="background-color:red; color:white;
-				border:none; border-radius:5px; 
-				width:50px; height:25px; font-size:14px; text-align:center;" >목록</button>
-		</div>
-
-    </div>
+	<div id=listbtn>
+		<% if (loginUser != null && loginUser.getUserId().equals(r.getUserId())) {%>
+			<button type="submit" id="update" value="수정">수정</button>
+			&nbsp;&nbsp;&nbsp;
+			<button type="button" id="delete" onclick="deleteRe();" value="삭제">삭제</button>
+		<%	} %>
+		&nbsp;&nbsp;&nbsp;
+		<button
+			onclick="location.href='<%=request.getContextPath()%>/list.recruit'"
+			id="menu"
+			style="background-color: red; color: white; border: none; border-radius: 5px; width: 50px; height: 25px; font-size: 14px; text-align: center;">목록</button>
+	</div>
     </form>
 
     
@@ -179,7 +177,7 @@
 	<div id="replybox2">
 		<table id="replySelectTable" class="Comment">
 			<% if(comment.isEmpty()) { %>
-				<tr><td colspan=3 style="font-size:14px; text-align:center">댓글이 없습니다.</td></tr>
+				<tr><td colspan=3 style="font-size:14px; text-align:center;  varlign:middle"> 댓글이 없습니다.</td></tr> 
 			<% } else { %>
 				<% for(int i = 0; i < comment.size(); i++){ %>
 				<tr class="Comment2">

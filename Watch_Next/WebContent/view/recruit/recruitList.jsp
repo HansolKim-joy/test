@@ -17,12 +17,12 @@
 <head>
 <meta charset="UTF-8">
 <title>모집 게시판</title>
+<link type="text/css" href="/Watch_Next/Resources/css/recruit_list.css" rel="stylesheet" >
 
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link type="text/css" href="/Watch_Next/Resources/css/recruit_list.css" rel="stylesheet" >
 
 
 </head>
@@ -40,9 +40,9 @@
 			<hr class="hline">
 			<table class="tablearea">
 			<thead>
-			<tr>
-				<th id="num">번호</th>
-				<th id="rccategory">말머리</th>
+			<tr id="tr">
+				<th id="num" height ="100px;">번호</th>
+				<th id="rccategory">모집사이트</th>
 				<th id="title">글 제목</th>
 				<th id="date">날짜</th>
 				<th id="writer">글쓴이</th>
@@ -63,7 +63,6 @@
 						<td><%=r.getbDate() %></td>	
 						<td><%=r.getUserId() %></td>
 						<td><%=r.getbViews() %></td>
-						
 					</tr>
 						<% } %>
 					<% } %> 
@@ -71,16 +70,22 @@
 			</table>
 		</div>
 	
-		<br><br><br><br>
+
+   		<div class="search">
+   			 <% if(loginUser != null){ %> 
+   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
+   		 <% } %>   
+   		</div>  
+		   		<br><br><br><br>
 	<!-- 페이징 -->
-		<div class="list_number" align="center">
+		<div class="list_number" >
 		<% if(!list.isEmpty()){ %>
 		
 			<!-- 맨 처음으로 -->
-			<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=1'"> &gt;</button>
+			<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=1'"> &lt;&lt;</button>
 			
 			<!-- 이전 페이지 -->
-			<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= currentPage - 1 %>'" id="before">&gt;</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= currentPage - 1 %>'" id="before">&lt;</button>
 				<script>
 					if(<%= currentPage %> <=1){
 						$('#before').attr('disable', 'true');
@@ -92,7 +97,7 @@
 					<% if(p == currentPage){ %>
 						<button id="ch" disabled><%= p %></button>
 					<%} else { %>
-						<button id="num" onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%=p %>'"><%= p %></button>
+						<button id="number" onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%=p %>'"><%= p %></button>
 					<%} %>
 				<% } %>
 				
@@ -107,13 +112,8 @@
 			<!-- 맨 끝으로 -->
 				<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 		<% } %>
-	   
-		   		<div class="search" align="right">
-		   			 <% if(loginUser != null){ %> 
-		   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
-		   		 <% } %>   
-		   		</div>  
 		</div>
+	   
 	
 	<script>
 		$(function(){
@@ -122,7 +122,7 @@
 			}).click(function(){
 				
 				var rNo = $(this).parent().children().eq(0).text();
-				 if('<%= loginUser %>' != 'null'){
+				 if('<%= loginUser %>' != 'null' && 'list != null'){
 					location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
 				}else{
 					alert('로그인 해주세요.');
@@ -144,7 +144,7 @@
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;
 		
 		<select id="searchType2" name="searchType2">
-			<option value="all" selected>전체</option>
+			<option value="all" selected>전체보기</option>
 			<option value="title">글제목</option>
 			<option value="userId">작성자</option>
 			<option value="content">내용</option>

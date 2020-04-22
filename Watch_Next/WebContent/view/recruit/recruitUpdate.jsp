@@ -77,8 +77,10 @@
 		<hr id="red_line">
 		<br>
 		<input type="hidden" name="rNo" value="<%= request.getParameter("rNo") %>">
-		<h4><strong>제목 : &ensp;<input type="text"  id="recW_recruitName" name="recW_recruitName" value="<%= request.getParameter("bTitle")%>"></strong></h4>
-		<h4><strong>종류 : &nbsp;
+		<h4><strong>제목 : &ensp;
+		<input type="text" id="recW_recruitName" name= "recW_recruitName" value="<%=request.getParameter("bTitle") %>" style="height:30px; padding-left:10px;">
+		</strong></h4>
+		<h4><strong>종류 : &ensp;
 		<select id="recW_type" name="recW_type">
 			<option value="NETFLIX">NETFLIX</option>
 			<option value="WATCHA">WATCHA</option>
@@ -95,9 +97,8 @@
 	</div>
 
 	<div id = "recW_roop">
-	&nbsp;<br>&nbsp;<br>&nbsp;<br>
-	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="recW_button" onclick="location.href='javascript:histroy.go(-1);'">
+	
+	<input type="reset" value="취소" id="cancel_button" onclick="location.href='javascript:history.go(-1);'">
 	<input type="submit" value="수정" id="recW_button" class="recW_submit" >
 	</div>
 </form>
