@@ -90,14 +90,14 @@ public class MovieInsertServlet extends HttpServlet {
 				}else {
 					File failedFile = new File(savePath + saveFile);
 					failedFile.delete();
-					page = "view/common/errorPage.jsp";
+					page = "view/errorPage/errorPage.jsp";
 					request.setAttribute("msg", "영화정보 입력에 실패했습니다.");
 					RequestDispatcher view = request.getRequestDispatcher(page);
 					view.forward(request, response);
 				}
 			} catch(Exception e) {
 				e.printStackTrace();
-				String page = "view/common/errorPage.jsp";
+				String page = "view/errorPage/errorPage.jsp";
 				request.setAttribute("msg", "영화정보 입력에 실패했습니다. 빈칸없이 입력해 주세요.");
 				RequestDispatcher view = request.getRequestDispatcher(page);
 				view.forward(request, response);

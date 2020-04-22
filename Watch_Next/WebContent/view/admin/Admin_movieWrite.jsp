@@ -183,8 +183,8 @@
 			
 		</div>
 		<div style="width: 100%; text-align:center;">
-			<input type="submit" value="완료" id="admin_movie_submit" onclick="return chk();">
-			<input type="reset" value="취소" id="admin_movie_reset">
+			<input type="submit" value="완료" id="admin_movie_submit" class="btn" onclick="return chk();">
+			<input type="button" value="취소" id="admin_movie_cancel" class="btn" onclick="location.href='<%= request.getContextPath()%>/view/admin/Admin_myPage.jsp'">
 		</div>
 	</div>
 </form>

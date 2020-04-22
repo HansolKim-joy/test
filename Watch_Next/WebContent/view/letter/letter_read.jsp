@@ -11,7 +11,7 @@
 <link type="text/css" href="<%=request.getContextPath() %>/Resources/css/letter_detail.css" rel="stylesheet" />
 <script>
 	$(function(){
-		self.resizeTo(550,600);
+		self.resizeTo(550,650);
 	});
 </script>
 </head>
