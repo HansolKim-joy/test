@@ -173,7 +173,6 @@ public class BoardService {
 		close(conn);
 		return FollowList;
 	}
-
 	public HashMap<String, Movie> DetailMovie(String movieTitle, int no) {
 		Connection conn = getConnection();
 		HashMap<String, Movie> m = new MovieDAO().DetailMovie(conn, movieTitle, no);
@@ -193,5 +192,21 @@ public class BoardService {
 		}
 		close(conn);
 		return result2;
+
+	public ArrayList<Demand> selectOpenFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> OpenFunding = new BoardDAO().selectOpenFunding(conn, userId);
+		close(conn);
+		return OpenFunding;
+	}
+
+	public ArrayList<Demand> selectClosedFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> CloseFunding = new BoardDAO().selectClosedFunding(conn, userId);
+		close(conn);
+		return CloseFunding;
+
 	}
 }

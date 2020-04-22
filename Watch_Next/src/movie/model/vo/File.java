@@ -4,14 +4,22 @@ public class File {
 	private int FileNo;
 	private String originName;
 	private String newName;
+	private String title;
 	
 	public File () {}
-
-	public File(int fileNo, String originName, String newName) {
+	
+	public File(String newName, String title) {
 		super();
-		FileNo = fileNo;
+		this.newName = newName;
+		this.title = title;
+	}
+
+	public File(int fileNo, String originName, String newName, String title) {
+		super();
+		this.FileNo = fileNo;
 		this.originName = originName;
 		this.newName = newName;
+		this.title=title;
 	}
 	
 
@@ -43,12 +51,21 @@ public class File {
 	public void setNewName(String newName) {
 		this.newName = newName;
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	@Override
 	public String toString() {
-		return "File [FileNo=" + FileNo + ", originName=" + originName + ", newName=" + newName + "]";
+		return "File [FileNo=" + FileNo + ", originName=" + originName + ", newName=" + newName + ", title=" + title
+				+ "]";
 	}
-	
+
 	
 	
 }

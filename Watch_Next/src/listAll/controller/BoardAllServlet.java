@@ -50,6 +50,8 @@ public class BoardAllServlet extends HttpServlet {
 		ArrayList<Comment> ReviewComlist = bService.selectComment(userId);
 		ArrayList<Comment> RecruitComlist = bService.selectRcComment(userId);
 		ArrayList<MyFollow> FollowList = bService.selectFollow(userId);
+		ArrayList<Demand> OpenFunding = bService.selectOpenFunding(userId);
+		ArrayList<Demand> CloseFunding = bService.selectClosedFunding(userId);
 //		System.out.println("ksldjf" + ReviewList);
 		
 		String page = "";
@@ -63,6 +65,8 @@ public class BoardAllServlet extends HttpServlet {
 			request.setAttribute("RecruitComlist", RecruitComlist);
 			request.setAttribute("IwriteFund", IwriteFund);
 			request.setAttribute("FollowList", FollowList);
+			request.setAttribute("OpenFunding", OpenFunding);
+			request.setAttribute("CloseFunding", CloseFunding);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 		}
