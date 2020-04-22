@@ -253,5 +253,66 @@ public class BoardDAO {
 		
 		return FollowList;
 	}
+	public ArrayList<Demand> selectOpenFunding(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Demand d = null;
+		ArrayList<Demand> OpenFunding = new ArrayList<Demand>();
+		
+		String query = prop.getProperty("openfunding");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				d = new Demand(rset.getString("requestp"),
+							   rset.getInt("demand_want_price"),
+							   rset.getString("screening_movie_name"),
+							   rset.getString("movie_title"),
+							   rset.getInt("demand_price"));
+				OpenFunding.add(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return OpenFunding;
+	}
+	
+	public ArrayList<Demand> selectClosedFunding(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Demand d = null;
+		ArrayList<Demand> CloseFunding = new ArrayList<Demand>();
+		
+		String query = prop.getProperty("closefunding");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				d = new Demand(rset.getString("requestp"),
+							   rset.getInt("demand_want_price"),
+							   rset.getString("screening_movie_name"),
+							   rset.getString("movie_title"),
+							   rset.getInt("demand_price"));
+				CloseFunding.add(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return CloseFunding;
+	}
 	
 }

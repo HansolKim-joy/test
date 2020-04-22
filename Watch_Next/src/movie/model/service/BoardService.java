@@ -172,4 +172,20 @@ public class BoardService {
 		close(conn);
 		return FollowList;
 	}
+
+	public ArrayList<Demand> selectOpenFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> OpenFunding = new BoardDAO().selectOpenFunding(conn, userId);
+		close(conn);
+		return OpenFunding;
+	}
+
+	public ArrayList<Demand> selectClosedFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> CloseFunding = new BoardDAO().selectClosedFunding(conn, userId);
+		close(conn);
+		return CloseFunding;
+	}
 }

@@ -102,6 +102,16 @@ public class Demand {
 		this.endDate = endDate;
 		this.smWant = smWant;
 	}
+	
+	public Demand(String userId, int wantMoney, String smName, String movieTitle, int money) {
+		super();
+		this.userId = userId;
+		this.wantMoney = wantMoney;
+		this.smName = smName;
+		this.movieTitle = movieTitle;
+		this.money = money;
+	}
+	
 	public int getdNo() {
 		return dNo;
 	}
@@ -246,5 +256,7 @@ public class Demand {
 	public void setSmName(String smName) {
 		this.smName = smName;
 	}
+
+	
 
 }
