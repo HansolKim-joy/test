@@ -46,7 +46,7 @@
 	<%}%>전체 <%=allCount%>통
 	</li>
 </ul>
-<button onclick="location.href='view/letter/letter_send.jsp'" id="letter_send">보내기</button>
+<button onclick="location.href='view/letter/letter_send.jsp'" id="letter_send" class="btn">보내기</button>
 <br clear="all">
 <hr color='red' size='3'>
 <table id="letter_list">
@@ -86,10 +86,10 @@
 		<%} %>
 		</table>
 		<br>
-		<input type="submit" value="삭제" id="letter_delete" class="letter_delete">
-		<b id="letter_delete">선택한쪽지&emsp;</b>
+		<input type="submit" value="삭제" id="letter_delete" class="btn">
+		<b id="letter_delet">선택한쪽지&emsp;</b>
 		<script type="text/javascript">
-			$('.letter_delete').click(function(){
+			$('#letter_delete').click(function(){
 				if($("input:checkbox[name=letter_chk]:checked").length > 0){
 					if("<%=chk%>" == "null"){
 						if(confirm("받은 쪽지를 삭제하시겠습니까?") == false){

@@ -172,4 +172,24 @@ public class BoardService {
 		close(conn);
 		return FollowList;
 	}
+
+	public HashMap<String, Movie> DetailMovie(String movieTitle, int no) {
+		Connection conn = getConnection();
+		HashMap<String, Movie> m = new MovieDAO().DetailMovie(conn, movieTitle, no);
+		close(conn);
+		return m;
+	}
+
+	public int DeleteMovie(int no) {
+		Connection conn = getConnection();
+		int result1 = new MovieDAO().DeleteAllDib(conn,no);
+		int result2 = new MovieDAO().DeleteMovie(conn,no);
+		if(result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result2;
+	}
 }

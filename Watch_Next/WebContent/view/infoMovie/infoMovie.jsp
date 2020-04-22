@@ -36,34 +36,10 @@
 			<tr>
 				<td rowspan="4" id="m_td"><img src="<%=request.getContextPath() %>/Resources/images/<%=fName %>" id="m_poster"></td>
 				<th id="m_Name"><%=m.getmTitle() %></th>
-				<%if(loginUser != null){ %>
-					<%if(d == null){ %>
-					<td>
-					<button id="m_want" onclick="myDib();">찜하기</button>
-	     				<script>
-	     					function myDib(){
-	     						location.href="<%=request.getContextPath()%>/movie.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
-	     					}
-	     				</script>
-	     			</td>
-	     			<%}else{ %>
-	     			<td>
-					<button id="m_want" onclick="delDib();">찜풀기</button>
-	     				<script>
-	     					function delDib(){
-	     						location.href="<%=request.getContextPath()%>/del.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
-	     					}
-	     				</script>
-	     			</td>
-	     			<%} %>
-	     		<%} %>
-     		</tr>
-     		<tr>
-     			<td id="m_info">장르 : <%=genre%><br>감독 : <%=m.getmDirector() %><br>배우 : <%=m.getmActor() %><br><br><%=m.getmStory() %></td>
-     			<td>
-     				<%for(int i=0; i<serviceSite.length; i++){
+				<td id = "btns">
+				<%for(int i=0; i<serviceSite.length; i++){
      					if(serviceSite[i].equals("3")){%>
-     				<a href="http://www.netflix.com" target="_blank"> <img src="/Watch_Next/Resources/images/넷플릭스.png" id="m_wat"> </a>
+     				<a href="http://www.netflix.com" target="_blank"> <img src="/Watch_Next/Resources/images/넷플릭스.png" id="m_wat"></a>
      					<%} 
      					if(serviceSite[i].equals("2")){%>
      				<a href="https://play.watcha.net" target="_blank"><img src="/Watch_Next/Resources/images/왓챠.png" id="m_wat"></a>
@@ -72,7 +48,33 @@
      				<a href="https://movie.naver.com" target="_blank"><img src="/Watch_Next/Resources/images/네이버 영화.png" id="m_net" class="ci"></a>
      					<%}
      				  }%>
-     			</td>
+				<%if(loginUser != null){ %>
+					<%if(d == null){ %>
+					<button id="m_want" onclick="myDib();">찜하기</button>
+	     				<script>
+	     					function myDib(){
+	     						location.href="<%=request.getContextPath()%>/movie.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
+	     					}
+	     				</script>
+	     			<%}else{ %>
+					<button id="m_want" onclick="delDib();">찜풀기</button>
+	     				<script>
+	     					function delDib(){
+	     						location.href="<%=request.getContextPath()%>/del.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
+	     					}
+	     				</script>
+	     			<%} %>
+	     		<%} %>
+	     		</td>
+     		</tr>
+     		<tr>
+     			<td id="m_info">장르 : <%=genre%>
+     			<br>감독 : <%=m.getmDirector() %>
+     			<br>배우 : <%=m.getmActor() %>
+     			<br>상영 시간 : <%=m.getmRunningTime() %>
+     			<br>국가 : <%=m.getmCountry() %>
+     			<br>장르 : <%=genre %>
+     			<br><br>줄거리 : <%=m.getmStory() %></td>
      		</tr>
      		
      		<tr>
@@ -84,15 +86,28 @@
 									  white-space: nowrap;
 									  width: 100px;
 									  height: 20px;">
-									  <%=r.getbContent() %>
-						</div>
+					<a class="a_tag" href="<%=request.getContextPath()%>/detail.rv?rv=<%=r.getbNo()%>"><%=r.getbContent()%></a>
+				</div>
      			<%}else{ %>
      			리뷰가 없습니다.
      			<%} %>
      			</td>
      		</tr>
-     		
 		</table>
+	</div>
+	<div>
+		<%if(loginUser != null && loginUser.getAdminYN().equals("Y")){ %>
+     		<button id="m_delete" type="button" onclick="m_delete();">영화 삭제</button>
+     		<script>
+     			function m_delete(){
+     				if(confirm("정말 삭제하시겠습니까?") == false){
+     					return false;
+     				}else{
+     					location.href="<%=request.getContextPath()%>/delete.mo?no=<%=m.getmNo()%>";
+     				}
+     			}
+     		</script>
+     	<%} %>
 	</div>
 </section>
 
