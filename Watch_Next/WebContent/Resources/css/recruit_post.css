@@ -34,10 +34,9 @@
 #wInfo{margin-left:20px;}
 /* #pop{width:78%;} */
 
+#atag{vertical-align: middle;}
 #content{margin:20px;}
-#btn{padding:20px; text-align:center;}
-
-#listbtn{width:200px; margin-left:85%; margin-top:15px;}
+#listbtn{width:250px; margin-left:87%; margin-top: -180px;}
 #listbtn button{background-color:red; color:white;
 				border:none; border-radius:5px; 
 				width:50px; height:25px; font-size:14px; margin-top: 180px;}
