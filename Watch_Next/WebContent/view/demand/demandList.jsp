@@ -43,6 +43,13 @@
     font-size: 23px;
     padding-left: 9px;
     }
+#empty{
+	text-align: center;
+    padding: 8.5%;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    }
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />
@@ -136,7 +143,7 @@
 				<%} %>		
 			<% } %>   
 		<%} else{%>
-			<div>게시글이 없습니다.</div>
+			<div id="empty">게시글이 없습니다.</div>
 		<%} %>
 	
 	</div>
@@ -149,12 +156,13 @@
 
 </section>
 <br clear="all">
-
+	<% if(loginUser != null) { %>
+		<a type="button" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
+<br clear="all">
 	<!-- 페이징 -->
-	<div class="list_number">
-		<% if(loginUser != null) { %>
-		<a type="a" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
-		<%} %>
+		<div class="list_number">
+		
+	<%} %>
         <div class="list_n_menu">
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
