@@ -9,8 +9,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Funding.model.vo.Demand;
 import common.Comment;
-import listAll.model.BoardDAO;
+import listAll.model.dao.BoardDAO;
+import listAll.model.vo.MyFollow;
 import movie.model.dao.MovieDAO;
 import movie.model.vo.Dib;
 import movie.model.vo.Movie;
@@ -153,5 +155,21 @@ public class BoardService {
 		ArrayList<Comment> RecruitComlist = new BoardDAO().selectRcComment(conn, userId);
 		close(conn);
 		return RecruitComlist;
+	}
+
+	public ArrayList<Demand> iwriteFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> IwriteFund = new BoardDAO().iwriteFunding(conn, userId);
+		close(conn);
+		return IwriteFund;
+	}
+
+	public ArrayList<MyFollow> selectFollow(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<MyFollow> FollowList = new BoardDAO().selectFollow(conn, userId);
+		close(conn);
+		return FollowList;
 	}
 }

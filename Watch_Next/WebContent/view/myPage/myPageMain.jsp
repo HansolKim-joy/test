@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*, movie.model.vo.*, common.Comment"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*,
+     movie.model.vo.*, common.Comment, Funding.model.vo.Demand, listAll.model.vo.*"%>
 <%
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
@@ -7,6 +8,8 @@
 	/* System.out.println("diblist" + DibList); */
 	ArrayList<Comment> ReviewComlist = (ArrayList<Comment>)request.getAttribute("ReviewComlist");
 	ArrayList<Comment> RecruitComlist = (ArrayList<Comment>)request.getAttribute("RecruitComlist");
+	ArrayList<Demand> IwriteFund = (ArrayList<Demand>)request.getAttribute("IwriteFund");
+	ArrayList<MyFollow> FollowList = (ArrayList<MyFollow>)request.getAttribute("FollowList");
 %>
 <!DOCTYPE html>
 <html>
@@ -223,14 +226,26 @@
 				<button type="submit" id="mp_button1" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
-				<div id="mp_h_content1" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content1" class="mp_h_content">
+				</div>
 			</div>
 			
 			<div id="mp_content2" class="mp_content">내 팔로우 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button2" class="mp_button">+</button>
 				<hr class="hline1">
 				<div class="mp_middle"></div>
-				<div id="mp_h_content2" class="mp_h_content"> 내용</div>
+				<div id="mp_h_content2" class="mp_h_content">
+					<% if(FollowList.isEmpty()) {%>
+						
+					<% }else{ %>
+					<% } %>
+				
+				
+				
+				
+				
+				
+				</div>
 			</div>
 			
 			<div id="mp_content3" class="mp_content">나의 찜 영화&nbsp;&nbsp;&nbsp;&nbsp;
@@ -408,6 +423,30 @@
 								<% } %>
 							<% } %>
 					</table>
+					<table id="myFundingTable" class="myTable">
+						<tr>
+							<td>펀딩 영화</td>
+							<td>상영 극장</td>
+							<td>총 금액</td>
+							<td>모인 금액</td>
+							<td>종료일</td>
+						</tr>
+						<tr>
+							<% if(IwriteFund.isEmpty()){ %>
+								<td colspan="5">게시글이 존재하지 않습니다.</td>
+						</tr>
+							<% } else { %>
+								<% for(int i = 0; i < IwriteFund.size(); i++) {%>
+									<tr>
+										<td><%= IwriteFund.get(i).getMovieTitle() %></td>
+										<td><%= IwriteFund.get(i).getSmName() %></td>
+										<td><%= IwriteFund.get(i).getMoney() %></td>
+										<td><%= IwriteFund.get(i).getSmWant() %></td>
+										<td><%= IwriteFund.get(i).getEndDate() %></td>
+									</tr>
+								<% } %>
+							<% } %>
+					</table>
 				</div>
 			</div>
 			
@@ -421,7 +460,6 @@
 							<td> <div id="myReviewc" class="myBtn"> 리뷰 </div> </td>
 							<td> <div id="myRecruitc" class="myBtn"> 모집  </div> </td>
 							<td> <div id="myMadec" class="myBtn"> 창작 </div> </td>
-							<td> <div id="myFundingc" class="myBtn"> 펀딩 </div> </td>
 						</tr>
 					</table>
 					<table id="myReviewTablec" class="myTable">
@@ -477,6 +515,10 @@
 	</section>
 	<script>
 		
+		$('#mp_button2').click(function(){
+			$('#mp_h_content2').slideToggle();
+		});
+		
 		$('#mp_button3').click(function(){
 			$('#mp_h_content3').slideToggle();
 		});
@@ -492,11 +534,20 @@
 		$('#myReview').click(function(){
 			$('#myReviewTable').slideToggle();
 			$('#myRecruitTable').css({"display":"none"});
+			$('#myFundingTable').css({"display":"none"});
 		});
 		
 		$('#myRecruit').click(function(){
 			$('#myReviewTable').css({"display":"none"});
 			$('#myRecruitTable').slideToggle();
+			$('#myFundingTable').css({"display":"none"});
+		});
+		
+		$('#myFunding').click(function(){
+			$('#myReviewTable').css({"display":"none"});
+			$('#myRecruitTable').css({"display":"none"});
+			$('#myFundingTable').slideToggle();
+			
 		});
 		
 		$('#myReviewc').click(function(){

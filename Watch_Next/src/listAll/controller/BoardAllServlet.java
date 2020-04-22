@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Funding.model.vo.Demand;
 import common.Comment;
+import listAll.model.vo.MyFollow;
 import member.model.vo.Member;
 import movie.model.service.BoardService;
 import movie.model.vo.Movie;
@@ -41,11 +43,13 @@ public class BoardAllServlet extends HttpServlet {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		BoardService bService = new BoardService();
+		ArrayList<Demand> IwriteFund = bService.iwriteFunding(userId);
 		ArrayList<Review> ReviewList = bService.selectMyReview(userId);
 		ArrayList<Recruit> RecruitList = bService.selectMyRecruit(userId);
 		ArrayList<Movie> DibList = bService.selectMyDib(userId);
 		ArrayList<Comment> ReviewComlist = bService.selectComment(userId);
 		ArrayList<Comment> RecruitComlist = bService.selectRcComment(userId);
+		ArrayList<MyFollow> FollowList = bService.selectFollow(userId);
 //		System.out.println("ksldjf" + ReviewList);
 		
 		String page = "";
@@ -57,6 +61,8 @@ public class BoardAllServlet extends HttpServlet {
 			request.setAttribute("DibList", DibList);
 			request.setAttribute("ReviewComlist", ReviewComlist);
 			request.setAttribute("RecruitComlist", RecruitComlist);
+			request.setAttribute("IwriteFund", IwriteFund);
+			request.setAttribute("FollowList", FollowList);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 		}
