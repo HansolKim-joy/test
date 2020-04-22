@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import create.model.service.CreateService;
 import create.model.vo.Create;
 import create.model.vo.PageInfo;
+import create.model.vo.CFile;
 
 /**
  * Servlet implementation class CreateListServlet
@@ -34,6 +35,10 @@ public class CreateListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CreateService service = new CreateService();
+		
+
+		//'썸네일'리스트 정보불러오기
+		ArrayList<CFile> fList = service.selectThumbList();
 		
 		// 페이징
 		int listCount = service.getListCount();
@@ -84,9 +89,10 @@ public class CreateListServlet extends HttpServlet {
 		ArrayList<Create> list = service.selectList(currentPage, boardLimit, sk, sv, sk2);
 		
 		String page = null;
-		if(list!= null) {
+		if (list != null && fList!= null) {
 			page = "view/create/create_board.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("fList", fList);
 			request.setAttribute("pi", pi);
 		} else {
 			page = "view/errorPage/errorPage.jsp";

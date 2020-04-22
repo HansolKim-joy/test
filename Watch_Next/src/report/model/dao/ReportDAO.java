@@ -10,8 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import common.Comment;
 import report.model.vo.Report;
 
 public class ReportDAO {
@@ -79,21 +81,40 @@ public class ReportDAO {
 		return result;
 	}
 
-	/*
-	 * public int[] selectReportR(Connection conn, String userId) { // getReportC =
-	 * select * from tb_dec where user_id=? PreparedStatement pstmt = null;
-	 * ResultSet rset = null; int[] repRp = null;
-	 * 
-	 * String query = prop.getProperty("getReportC"); try { pstmt =
-	 * conn.prepareStatement(query); pstmt.setString(1,userId);
-	 * 
-	 * rset = pstmt.executeQuery();
-	 * 
-	 * for(int i = 0; rset.next(); i++) { repRp[i] = rset.getInt("COMMENTS_NO"); } }
-	 * catch (SQLException e) { e.printStackTrace(); } finally { close(rset);
-	 * close(pstmt); }
-	 * 
-	 * return repRp; }
-	 */
+	
+	/*public ArrayList<Comment> getRpNo(Connection conn, String userId) { 
+		// getRpNo =select comments_no from tb_dec where user_id=? and comments_no is not null
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Comment> repRp = null;
+	
+		String query = prop.getProperty("getRpNo"); 
+		try { 
+			pstmt =conn.prepareStatement(query); 
+			pstmt.setString(1,userId);
+			rset = pstmt.executeQuery();
+			
+			repRp = new ArrayList<Comment>();
+		
+			while(rset.next()) {
+				repRp.add(new Comment )
+			}
+			
+			for(int i = 0; rset.next(); i++) { 
+				repRp[i] += rset.getInt("COMMENTS_NO"); //배열 list로 바꾸기
+				
+			} 
+		
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
+		} finally { 
+			close(rset);
+			close(pstmt); 
+		}
+		 
+		return repRp; 
+		
+	}*/
+	 
 
 }

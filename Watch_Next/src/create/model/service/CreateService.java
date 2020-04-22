@@ -1,16 +1,17 @@
 package create.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.Comment;
 import create.model.dao.CreateDAO;
+import create.model.vo.CFile;
 import create.model.vo.Create;
-import recruit.model.dao.recruitDAO;
-import review.model.dao.ReviewDAO;
-import review.model.vo.Review;
 
 public class CreateService {
 
@@ -34,15 +35,16 @@ public class CreateService {
 		return result;
 	}
 	
-	public int insertCreate(Create c) {
+	public int insertCreate(Create c, ArrayList<CFile> fileList) {
 		Connection conn = getConnection();
 		
 		CreateDAO dao = new CreateDAO();
 		
 		int result1 = dao.insertCreate1(conn,c);
 		int result2 = dao.insertCreate2(conn,c);
+		int result3 = dao.insertPoster(conn, fileList);
 		
-		if(result1>0 && result2>0) {
+		if(result1>0 && result2>0 && result3>0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -268,6 +270,49 @@ public class CreateService {
 		}
 		return result;
 	}
+
+	/*public ArrayList<Attachment> selectList(int i) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> list = null;
+		CreateDAO dao = new CreateDAO();
+		
+		if(i ==2) {
+			list = dao.selectFList(conn);
+		}
+		
+		
+		return list;
+	}*/
+
+	/*
+	 * public int insertPoster(ArrayList<CFile> fileList) { Connection conn =
+	 * getConnection();
+	 * 
+	 * int result1 = new CreateDAO().insertPoster(conn, fileList);
+	 * 
+	 * if(result1>0) { commit(conn); } else { rollback(conn); }
+	 * 
+	 * close(conn); return result1; }
+	 */
+
+	public ArrayList<CFile> selectThumbList() {
+		Connection conn = getConnection();
+		ArrayList<CFile> flist = null;
+		
+		flist = new CreateDAO().selectCFlist(conn);
+		
+		close(conn);
+		
+		return flist;
+	}
+
+//	public ArrayList<CFile> selectFile(int cNo) {
+//		Connection conn = getConnection();
+//		ArrayList<CFile> list = new CreateDAO().selectFile(conn, cNo);
+//		
+//		close(conn);
+//		return list;
+//	}
 
 	
 

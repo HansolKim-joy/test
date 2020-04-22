@@ -155,7 +155,7 @@
 					<div id="content">
 						<p style="font-size:15px;">
 							<%= r.getbContent()%>
-							<input type="hidden" name="editor_content" value="<%= r.getbContent() %>">	 
+							<input type="hidden" name="editor_content" value='<%= r.getbContent() %>'>	 
 							<br><br><br><br><br><br><br><br><br><br>
 						</p>
 					</div>

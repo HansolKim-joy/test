@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, create.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, create.model.vo.*, movie.model.vo.*"%>
     
 <%
 	ArrayList<Create> list = (ArrayList<Create>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<CFile> flist = (ArrayList<CFile>)request.getAttribute("fList");
 	
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -73,11 +74,17 @@
 			</tr>
 		<% } else { 
 			for(Create c : list) {
-		%>
+		%> 
+		
+
 		
 		<tr>
+		<% for(int j=0; j<flist.size(); j++) {
+			CFile f = flist.get(j);
+			
+			if(c.getbNO() == f.getbNo()) { %>
 			<td rowspan="2" class="c_td1"><%= c.getbNO() %></td>
-			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
+			<td rowspan="2" class="c_td2"><img src="<%=request.getContextPath()%>/Resources/crethumb_uploadFiles/<%= f.getNewNames() %>" width="200px" height="150px" class="c_poster"></td>
 			<td class="c_td3"><%= c.getbTitle() %><br></td>
 			<td rowspan="2" width=30px class="c_td4" ><div id="conEllipsis"><%=c.getbContent() %></div></td>
 			<td rowspan="2" class="c_td5"><%=c.getcDate() %></td>
@@ -88,8 +95,11 @@
 			<td class="c_td3"><%= c.getcDirector() %></td>
 		</tr>
 		
-		<% }
-			 }%>	
+			
+		<% } %>
+		<% } %>
+			<% }%>
+			 <%} %>	
 		
 		</table>
 <!-- 		</form> -->

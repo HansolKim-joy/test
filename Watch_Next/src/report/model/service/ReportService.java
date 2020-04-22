@@ -13,46 +13,45 @@ public class ReportService {
 	public int sendReport(Report rep) {
 		Connection conn = getConnection();
 		ReportDAO dao = new ReportDAO();
-		
+
 		int result = dao.insertReport(conn, rep);
-		
-		if(result>0) {
+
+		if (result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
 	public int sendReportR(Report rep) {
 		Connection conn = getConnection();
 		ReportDAO dao = new ReportDAO();
-		
+
 		int result = dao.insertReportR(conn, rep);
-		
-		if(result>0) {
+
+		if (result > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
-	/*
-	 * public int[] selectReport(String userId) { Connection conn = getConnection();
-	 * ReportDAO dao = new ReportDAO();
-	 * 
-	 * int[] replist = dao.selectReportR(conn, userId);
-	 * 
-	 * close(conn);
-	 * 
-	 * return replist; }
-	 */
+	 /*public int[] getRpNo(String userId) { Connection conn = getConnection();
+	 ReportDAO dao = new ReportDAO();
+	 
+	 int[] replist = dao.getRpNo(conn, userId);
+	 
+	 close(conn);
+	 
+	 return replist; } */
+	 
 
 }
