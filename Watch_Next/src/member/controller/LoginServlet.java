@@ -36,24 +36,32 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("lg_userPwd");
-
-		System.out.println(userId + " " + userPwd);
+//		System.out.println("정호바보" + userId + userPwd);
+//		System.out.println(userId + " " + userPwd);
 
 		Member m = new Member(userId, userPwd);
 
 		Member loginUser = new MemberService().loginMember(m);
-		if (loginUser != null) {
-			System.out.println(loginUser);
+//		System.out.println("야!" + loginUser.getDeleteYN());
+		if (loginUser != null && loginUser.getDeleteYN().equals("N")) {
+//			System.out.println(loginUser);
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			session.setMaxInactiveInterval(600);
-			System.out.println(request.getContextPath());
+//			System.out.println(request.getContextPath());
 			response.sendRedirect(request.getContextPath());
-		} else {
-			request.setAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다.");
+		} 
+		else {
+			request.setAttribute("msg", "존재하지 않습니다. 회원가입 해주세요.");
 			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
 			view.forward(request, response);
 		}
+//		else {
+//			request.setAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다.");
+//			response.sendRedirect(request.getContextPath());
+//			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
+//			view.forward(request, response);
+//		}
 	}
 
 	/**

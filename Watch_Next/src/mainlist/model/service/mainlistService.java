@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import mainlist.model.dao.mainlistDAO;
+import movie.model.vo.Movie;
 import recruit.model.vo.Recruit;
 import review.model.vo.Review;
 
@@ -26,6 +27,13 @@ public class mainlistService {
 		ArrayList<Review> Reviewlist = new mainlistDAO().selectRvlist(conn);
 		close(conn);
 		return Reviewlist;
+	}
+
+	public ArrayList<Movie> selectMovielist() {
+		Connection conn = getConnection();
+		ArrayList<Movie> Movielist = new mainlistDAO().selectMovielist(conn);
+		close(conn);
+		return Movielist;
 	}
 
 }

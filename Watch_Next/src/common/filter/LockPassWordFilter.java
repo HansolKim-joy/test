@@ -20,7 +20,8 @@ import common.wrapper.LockPassWord;
 		servletNames = { 
 				"LoginServlet", 
 				"InsertMemberServlet", 
-				"memberCheckServlet"
+				"memberCheckServlet",
+				"PresentPwdCheckServlet"
 		})
 public class LockPassWordFilter implements Filter {
 

@@ -123,7 +123,7 @@ $(document).ready(function() {
         <div class="pp_slide-content">
             <ul id="pp_slider" class="pp_slider">
                 <li class="pp_item">
-                	<table>
+                	<table id="mainMoviebody">
                 		<tr>
                 			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
                 			<td>
@@ -173,8 +173,8 @@ $(document).ready(function() {
                 <li class="pp_item">
                 	<table>
                 		<tr>
-                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
-                			<td><div class="pp_item1">asdfasdfasdfa</div></td>
+                			<td><img src="<%= request.getContextPath() %>/Resources/images/" class="pp_poster2"></td>
+                			<td><div class="pp_item1">asdfasdfasdfa</div></td>s
                 		</tr>
                 	</table>
                 </li>
@@ -247,8 +247,6 @@ $(document).ready(function() {
 				$tableBody = $('#mainReviewBody tbody');
 				$tableBody.html("");
 				
-				
-				
 				for(var i in data){
 					var $tr = $("<tr>");
 					var $numTd = $("<td>").text(data[i].bNo);
@@ -308,8 +306,31 @@ $(document).ready(function() {
 			}
 		});
 		
+		$.ajax({
+			url: 'movielist.vo',
+			success: function(data){
+				$tableBody = $('#mainMoivebody');
+				$tableBody.html("");
+				
+				for(var i in data){
+					var $tr = $("<tr>"); 
+					var $td = $("<td>"); // 영화 포스터
+					var $divTd = $("<div>").text(data[i].mTitle + "<br>" + data[i].mDirector + "<br>" + data[i].mActor + "<br>" + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
+					
+					$tr.append($divTd);
+					$tableBody.append($tr);
+				}
+// 				console.log(data);
+			}
+			
+			
+		});
+		
 		
 	});
+		
+		
+		
 </script>
 
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>

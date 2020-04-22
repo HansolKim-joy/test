@@ -85,7 +85,7 @@ public class EmailSendServlet extends HttpServlet {
 
 			// Text
 			message.setText("인증번호 : " + random, "UTF-8", "html");
-
+			System.out.println("인증번호 :"  + random);
 			// send the message
 			Transport.send(message);
 
@@ -93,10 +93,10 @@ public class EmailSendServlet extends HttpServlet {
 			out.println(random);
 			out.flush();
 			out.close();
-			System.out.println("전송 완료!!!!");
+//			System.out.println("전송 완료!!!!");
 
 		} catch (MessagingException e) {
-			System.out.println("전송 실패!! ㅠㅠ");
+//			System.out.println("전송 실패!! ㅠㅠ");
 			e.printStackTrace();
 		}
 

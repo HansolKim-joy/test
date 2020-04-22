@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import board.model.dao.RecBoardDAO;
+import movie.model.vo.Movie;
 import recruit.model.vo.Recruit;
 import review.model.vo.Review;
 
@@ -98,4 +99,39 @@ public class mainlistDAO {
 		
 		return Reviewlist;
 	}
+	/* 메인페이지 영화 리스트 */
+	public ArrayList<Movie> selectMovielist(Connection conn) {
+		// select movie_title, director, actor, story, file_newname	from tb_movie join tb_file using (file_no) order by releasedate desc;
+		Statement stmt = null;
+		ResultSet rset = null;
+		Movie mi = null;
+		ArrayList<Movie> Movielist = new ArrayList<Movie>();
+		
+		String query = prop.getProperty("selectMovielist");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				mi = new Movie(rset.getString("movie_title"),
+							   rset.getString("Director"),
+							   rset.getString("Actor"),
+							   rset.getString("Story"),
+							   rset.getString("file_newname"));
+//				System.out.println("한솔 : " + mi);
+				Movielist.add(mi);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return Movielist;
+		
+	}
+
 }

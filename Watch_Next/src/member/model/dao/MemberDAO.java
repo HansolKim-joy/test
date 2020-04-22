@@ -337,4 +337,29 @@ public class MemberDAO {
 		return countComment;
 	}
 
+	public int newPwd(Connection conn, String email, String uuid) {
+		// UPDATE TB_USER SET USER_PASS = ? WHERE USER_EMAIL = ?
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("newPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, uuid);
+			pstmt.setString(2, email);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
+
 }
