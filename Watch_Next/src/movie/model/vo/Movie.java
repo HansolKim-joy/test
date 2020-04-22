@@ -73,17 +73,32 @@ public class Movie {
 		this.Service_Site = Service_Site;
 		this.newFileName = newFileName;
 	}
-
+	
+	
 	public Movie(int mNo, String mTitle) {
 		this.mNo = mNo;
 		this.mTitle = mTitle;
 	}
-
+	
+	// 정호
+	public Movie(String mTitle, String mDirector, String mActor, String mStory, String newFileName) {
+		super();
+		this.mTitle = mTitle;
+		this.mDirector = mDirector;
+		this.mActor = mActor;
+		this.mStory = mStory;
+		this.newFileName = newFileName;
+		
+	}
+	
+	
 	
 
 	public int getmNo() {
 		return mNo;
 	}
+
+
 
 	public void setmNo(int mNo) {
 		this.mNo = mNo;

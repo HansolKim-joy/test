@@ -1,7 +1,12 @@
 package member.controller;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -42,13 +47,36 @@ public class FindUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String email = request.getParameter("find_User");
-
-		Member finduser = new MemberService().findUser(email);
-
+		String uuid = "";
+		for(int i = 0; i < 5; i++) {
+			uuid = UUID.randomUUID().toString().replaceAll("-", "");
+			uuid = uuid.substring(0, 10);
+//			System.out.println(i + ") " + uuid);
+		}
+		
+		Member finduser = new MemberService().findUser(email); // 원래 아이디/비밀번호 받아오기
+		
+		String encPwd = null;
+		
+		MessageDigest md = null;
+		
+		try {
+			md = MessageDigest.getInstance("SHA-512");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		byte[] bytes = uuid.getBytes(Charset.forName("UTF-8"));
+		md.update(bytes);
+		encPwd = Base64.getEncoder().encodeToString(md.digest());
+		
+		int result = new MemberService().newPwd(email, encPwd); // 임시 비밀번호로 업데이트
+		
+		
 		String page = "";
 		String msg = "";
 
-		if (finduser != null) {
+		if (finduser != null || result > 0) {
 
 			page = "view/pages/loginForm.jsp";
 			msg = "이메일로 회원님의 정보를 보냈습니다. 확인 후 다시 로그인 해주세요.";
@@ -95,16 +123,16 @@ public class FindUserServlet extends HttpServlet {
 				message.setSubject(" Watch_Next " + " 아이디  / 비밀번호 입니다.");
 
 				// Text
-				message.setText("아이디 : " + finduser.getUserId() + "<br> 비밀번호 : " + finduser.getUserPwd(), "UTF-8",
+				message.setText("아이디 : " + finduser.getUserId() + "<br> 임시 비밀번호 : " + uuid + "<br> 로그인 후 비밀번호를 변경바랍니다." , "UTF-8",
 						"html");
-
+				System.out.println("임시비밀번호 : " + uuid);
 				// send the message
 				Transport.send(message);
 
-				System.out.println("전송 완료!!!!");
+//				System.out.println("전송 완료!!!!");
 
 			} catch (MessagingException e) {
-				System.out.println("전송 실패!! ㅠㅠ");
+//				System.out.println("전송 실패!! ㅠㅠ");
 				e.printStackTrace();
 			}
 
@@ -120,6 +148,11 @@ public class FindUserServlet extends HttpServlet {
 
 	}
 
+	private String setSha512(String substring) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -129,5 +162,4 @@ public class FindUserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
