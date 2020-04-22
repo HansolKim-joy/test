@@ -6,6 +6,7 @@ public class Demand {
 	private int dNo;// 수요조사 번호
 	private String userId;// 회원아이디
 	private int smNo;// 상영극장번호
+	private String smName;	// 상영극장 이름 - 한솔
 	private int smWant; // 모인 금액
 	private int fileNo; // 파일번호
 	private String movieTitle; // 영화 제목
@@ -91,7 +92,16 @@ public class Demand {
 		this.runningTime = runningTime;
 		this.usedYN = usedYN;
 	}
-
+	
+	// 한솔
+	public Demand(String smName, String movieTitle, int money, Date endDate, int smWant) {
+		super();
+		this.smName = smName;
+		this.movieTitle = movieTitle;
+		this.money = money;
+		this.endDate = endDate;
+		this.smWant = smWant;
+	}
 	public int getdNo() {
 		return dNo;
 	}
@@ -227,6 +237,14 @@ public class Demand {
 				+ movieActor + ", movieStory=" + movieStory + ", money=" + money + ", wantMoney=" + wantMoney
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", gerneNo=" + gerneNo + ", runningTime="
 				+ runningTime + ", usedYN=" + usedYN + "]";
+	}
+
+	public String getSmName() {
+		return smName;
+	}
+
+	public void setSmName(String smName) {
+		this.smName = smName;
 	}
 
 }
