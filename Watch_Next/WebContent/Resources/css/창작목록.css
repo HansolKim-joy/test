@@ -92,10 +92,11 @@ button:focus {outline: none;}
 		border:none; border-radius:5px; font-size:14px; height:25px;}	
 	/*검색*/
 #searchType{font-size:17px;}
-	/* 목록에 내용 잘리게 */
 	/* 목록에 내용 잘려서나오게 */
 #conEllipsis{
-	width:70px;
-	overflow:hidden;
-	text-overflow:ellipsis;
+    height: 70px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }		

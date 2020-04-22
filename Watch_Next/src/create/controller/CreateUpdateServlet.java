@@ -37,7 +37,7 @@ public class CreateUpdateServlet extends HttpServlet {
 		int cNo = Integer.parseInt(request.getParameter("cNo"));
 		String title = request.getParameter("creW_createName");
 		String director = request.getParameter("creW_directorName");
-		String content = request.getParameter("editor_content");
+		String content = request.getParameter("taContent");
 		
 		Create c = new Create();
 		c.setbNO(cNo);

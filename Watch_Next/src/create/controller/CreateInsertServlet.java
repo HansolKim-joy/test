@@ -37,7 +37,7 @@ public class CreateInsertServlet extends HttpServlet {
 		
 		String bTitle = request.getParameter("creW_createName");
 		String cDirector = request.getParameter("creW_directorName");
-		String content = request.getParameter("editor_content");
+		String content = request.getParameter("taContent");
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser"); 

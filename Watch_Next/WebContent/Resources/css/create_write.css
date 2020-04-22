@@ -51,7 +51,6 @@ body{background: #545357;}
 
 	/* 창작글 */
 #creW_videos{margin:0px 0px 0px 10%; color: white;}
-#creW_file{font-size: 16px;}
 #creW_upload{margin:0px 0px 0px 80%; color: black; font-size: 16px;}
 #creW_create{width: 80%; margin:100px auto; color:white;}
 #creW_createName{width: 520px; height: 20px; font-size: 18px; color: black;}

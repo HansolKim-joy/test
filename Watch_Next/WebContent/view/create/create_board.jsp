@@ -79,7 +79,7 @@
 			<td rowspan="2" class="c_td1"><%= c.getbNO() %></td>
 			<td rowspan="2" class="c_td2"><img src="/Watch_Next/Resources/images/7.jpg" class="c_poster"></td>
 			<td class="c_td3"><%= c.getbTitle() %><br></td>
-			<td rowspan="2" id="conEllipsis" class="c_td4"><%=c.getbContent() %></td>
+			<td rowspan="2" width=30px class="c_td4" ><div id="conEllipsis"><%=c.getbContent() %></div></td>
 			<td rowspan="2" class="c_td5"><%=c.getcDate() %></td>
 			<td rowspan="2" class="c_td6"><%=c.getbCount() %></td>
 			<td rowspan="2" class="c_td7"><%=c.getcLike() %></td>
