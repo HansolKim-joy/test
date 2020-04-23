@@ -74,7 +74,8 @@
      			<br>상영 시간 : <%=m.getmRunningTime() %>
      			<br>국가 : <%=m.getmCountry() %>
      			<br>장르 : <%=genre %>
-     			<br><br>줄거리 : <%=m.getmStory() %></td>
+     			</td>
+     			<td><%=m.getmStory() %></td>
      		</tr>
      		
      		<tr>
