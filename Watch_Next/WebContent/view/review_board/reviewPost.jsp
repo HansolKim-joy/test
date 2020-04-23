@@ -164,6 +164,7 @@
 					<table style="margin-left: auto; margin-right: auto; margin-bottom:10px; text-align: center; font-size:15px; color:red;">
 						<tr>
 							<td>	
+							<% if(!loginUser.getUserId().equals(r.getbWriter())) { %>
 									<% if(chk == 'N' || chk==0) {%>
 							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
 									<% } else if(chk =='Y') {%>
@@ -187,7 +188,7 @@
 									<button type="button" id="sirenb" value="popup" onclick="sendPop();">
 										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
 									</button>
-
+							
 									
 
 									<script>
@@ -209,6 +210,39 @@
 						<tr>
 							<td id="likeCnt"><%= r.getbLike() %></td>
 							<td></td>
+							
+							<%} else {%>
+							<% if(chk == 'N' || chk==0) {%>
+							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
+									<% } else if(chk =='Y') {%>
+										<button type="button" class="likeb" onclick="onNoLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/likeee.png"></button>
+									<% } %>
+									<script>
+										function onLike(){
+											var rv = <%=r.getbNo() %>;
+ 											location.href="<%=request.getContextPath()%>/putLike.rv?rv="+rv;
+										}
+										function onNoLike(){
+											var rv = <%=r.getbNo() %>;
+											location.href="<%=request.getContextPath()%>/notLike.rv?rv="+rv;
+										}
+									</script>
+							</td>
+							<td width=5px></td>
+							<td>
+
+									<input type="hidden" name="rbNo" value="<%=r.getbNo() %>">
+							
+								
+							</td>
+							
+						</tr>
+							
+						<tr>
+							<td id="likeCnt"><%= r.getbLike() %></td>
+							<td></td>
+							
+							<%} %>
 						</tr>
 					</table>
 				</div>

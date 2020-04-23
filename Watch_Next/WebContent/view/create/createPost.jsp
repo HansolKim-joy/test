@@ -139,8 +139,6 @@
 					<% for(int j=0; j<flist.size(); j++) { %>
 						<p style="font-size:15px;">
 							<video controls src="<%= request.getContextPath()%>/Resources/crethumb_uploadFiles/<%= flist.get(j).getNewNames() %>"></video>
-							<input type="hidden" name="videofno" value="<%= flist.get(j).getfNo()%>">
-							<% System.out.println("뷰에서 동영상fno:"+flist.get(j).getfNo()); %>
 							<br><br>
 							<%=c.getbContent() %>
 							<input type="hidden" name="bContent" class="content" value="<%= c.getbContent() %>">
@@ -156,6 +154,7 @@
 				<table style="margin-left: auto; margin-right: auto; margin-bottom:10px; text-align: center; font-size:15px; color:red;">
 						<tr>
 							<td>	
+								<% if(!loginUser.getUserId().equals(c.getbWriter())) { %>
 									<% if(chk == 'N' || chk==0) {%>
 							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
 									<% } else if(chk =='Y') {%>
@@ -174,7 +173,7 @@
 							</td>
 							<td width=5px></td>
 							<td>
-
+								
 									<input type="hidden" name="rbNo" value="<%= c.getbNO()%>">
 									<button type="button" id="sirenb" value="popup" onclick="sendPop();" >
 										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
@@ -200,6 +199,37 @@
 						<tr>
 							<td id="likeCnt"><%= c.getcLike()%></td>
 							<td></td>
+							
+						<% } else { %>
+							<% if(chk == 'N' || chk==0) {%>
+							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
+									<% } else if(chk =='Y') {%>
+										<button type="button" class="likeb" onclick="onNoLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/likeee.png"></button>
+									<% } %>
+									<script>
+										function onLike(){
+											var cNo = <%=c.getbNO() %>;
+ 											location.href="<%=request.getContextPath()%>/like.create?cNo="+cNo;
+										}
+										function onNoLike(){
+											var cNo = <%= c.getbNO()%>;
+											location.href="<%=request.getContextPath()%>/notlike.create?cNo="+cNo;
+										}
+									</script>
+							</td>
+							<td width=5px></td>
+							<td>
+								
+									<input type="hidden" name="rbNo" value="<%= c.getbNO()%>">
+								
+							</td>
+							
+						</tr>
+							
+						<tr>
+							<td id="likeCnt"><%= c.getcLike()%></td>
+							<td></td>
+						<% } %>
 						</tr>
 					</table>
 
