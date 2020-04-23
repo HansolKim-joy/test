@@ -78,7 +78,7 @@ public class DemandInsertServlet extends HttpServlet {
 			String movieActor = multiRequest.getParameter("admin_movie_actor");
 			int gerneNo = Integer.parseInt(multiRequest.getParameter("admin_movie_genre"));
 			String runningTime = multiRequest.getParameter("admin_movie_time");
-			String movieStory = multiRequest.getParameter("admin_movie_story");
+			String movieStory = multiRequest.getParameter("admin_movie_story").replaceAll("\r\n", "<br>");
 			int fileNo = new BoardService().insertPoster(originFile, saveFile);
 			Demand d = new Demand(userId, smNo, fileNo, wantmoney, money, movieTitle, movieDirector, movieActor, movieStory, gerneNo, runningTime);
 			int result = service.insertDemand(d);

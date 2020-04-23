@@ -191,8 +191,8 @@
 			<br>
 		</div>
 		<div id="btndiv">
-			<input type="submit" value="완료" id="admin_movie_btn">
-			<input type="button" value="취소" id="admin_movie_btn2" onclick="location.href='<%= request.getContextPath()%>/list.de'">
+			<input type="submit" value="완료" class="btn red" id="admin_movie_btn">
+			<input type="button" value="취소" class="btn red" id="admin_movie_btn2" onclick="location.href='<%= request.getContextPath()%>/list.de'">
 		</div>
 	</div>
 </form>

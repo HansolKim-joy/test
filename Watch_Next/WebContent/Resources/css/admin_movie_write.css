@@ -50,6 +50,7 @@ input[type="number"]
 	padding: 6px 18px;
 	text-decoration: none;
 	text-shadow: 0px 1px 0px #810e05;
+	margin-left: -50px;
 }
 
 .btn:hover {
@@ -80,3 +81,5 @@ input[type="number"]
         width: 80%;
         color: white;
 }
+#btndiv{margin-top: 45px;}
+#admin_movie_btn2{margin-left: 10px;}

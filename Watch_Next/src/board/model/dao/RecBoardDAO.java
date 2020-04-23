@@ -37,7 +37,9 @@ public class RecBoardDAO {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
 			while(rset.next()) {
-				File f = new File(rset.getString("FILE_NEWNAME"), rset.getString("REVIEW_MOVIE_TITLE"));
+				File f = new File(rset.getString("FILE_NEWNAME"), 
+									rset.getInt("MNO"),
+									rset.getString("REVIEW_MOVIE_TITLE"));
 				list.add(f);
 			}
 		} catch (SQLException e) {
@@ -60,7 +62,9 @@ public class RecBoardDAO {
 			rset=stmt.executeQuery(query);
 			
 			while(rset.next()) {
-				File f = new File(rset.getString("FILE_NEWNAME"), rset.getString("REVIEW_MOVIE_TITLE"));
+				File f = new File(rset.getString("FILE_NEWNAME"), 
+						rset.getInt("MNO"),
+						rset.getString("REVIEW_MOVIE_TITLE"));
 				list.add(f);
 			}
 		} catch (SQLException e) {
@@ -85,7 +89,9 @@ public class RecBoardDAO {
 			rset=stmt.executeQuery(query);
 			
 			while(rset.next()) {
-				File f = new File(rset.getString("FILE_NEWNAME"), rset.getString("REVIEW_MOVIE_TITLE"));
+				File f = new File(rset.getString("FILE_NEWNAME"), 
+						rset.getInt("MNO"),
+						rset.getString("REVIEW_MOVIE_TITLE"));
 				list.add(f);
 			}
 		} catch (SQLException e) {

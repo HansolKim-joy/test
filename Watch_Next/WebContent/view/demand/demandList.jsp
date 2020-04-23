@@ -43,6 +43,13 @@
     font-size: 23px;
     padding-left: 9px;
     }
+    #empty{
+	text-align: center;
+    padding: 8.5%;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    }
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />
@@ -136,31 +143,34 @@
 				<%} %>		
 			<% } %>   
 		<%} else{%>
-			<div>게시글이 없습니다.</div>
+			<div id="empty">게시글이 없습니다.</div>
 		<%} %>
 	
 	</div>
 	<br>
 	</div>
 		
-	
-	
 	<br><br><br>
 
 </section>
 <br clear="all">
-
-	<!-- 페이징 -->
-	<div class="list_number">
-		<% if(loginUser != null) { %>
+	<% if(loginUser != null) { %>
 		<a type="a" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</a>
 		<%} %>
+<br clear="all">		
+	<!-- 페이징 -->
+	<div class="list_number">
         <div class="list_n_menu">
+        
+        	<!-- 맨 처음으로 -->
+			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=1'">&lt;&lt;</a>
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
 	        <script>
 					if(<%= currentPage %> <= 1 ){
+						$('#bebeforeBtn').hide();
 						$('#beforeBtn').hide();
+						
 					}
 			</script>
 			<!--페이지 목록  -->
@@ -173,13 +183,15 @@
 				<%} %>
 			<%} %>	
 			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
+			<!-- 맨 끝으로 -->
+			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=<%= maxPage %>'">&gt;&gt;</a>
 	        <script>
 				if(<%= currentPage %> >= <%= maxPage %>){
-					
+					$('#afafterBtn').hide();
 					$('#afterBtn').hide();
 				}
 			</script>
-        
+        	
         </div>
 	</div>
 	
