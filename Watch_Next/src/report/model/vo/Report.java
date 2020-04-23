@@ -5,6 +5,8 @@ public class Report {
 	private String decContent;
 	private int boardNo;
 	private int commentsNo;
+	private String ttorcc; //한솔
+	private String reporter; //한솔
 	private String userId;
 	
 	public Report() {}
@@ -34,7 +36,18 @@ public class Report {
 		this.commentsNo = commentsNo;
 		this.userId = userId;
 	}
-
+	
+	// 한솔
+	// 보드 신고
+	public Report(int boardNo, String decContent, String reporter, String userId, String ttorcc) {
+		super();
+		this.boardNo = boardNo;
+		this.decContent = decContent;
+		this.reporter = reporter;
+		this.userId = userId;
+		this.ttorcc = ttorcc;
+	}
+	
 	public int getDecNo() {
 		return decNo;
 	}
@@ -79,6 +92,22 @@ public class Report {
 	public String toString() {
 		return "Report [decNo=" + decNo + ", decContent=" + decContent + ", boardNo=" + boardNo + ", commentsNo="
 				+ commentsNo + ", userId=" + userId + "]";
+	}
+
+	public String getReporter() {
+		return reporter;
+	}
+
+	public void setReporter(String reporter) {
+		this.reporter = reporter;
+	}
+
+	public String getTtorcc() {
+		return ttorcc;
+	}
+
+	public void setTtorcc(String ttorcc) {
+		this.ttorcc = ttorcc;
 	}
 	
 	

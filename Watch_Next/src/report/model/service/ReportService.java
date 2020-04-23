@@ -1,6 +1,9 @@
 package report.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -42,6 +45,22 @@ public class ReportService {
 		close(conn);
 		
 		return result;
+	}
+
+	public ArrayList<Report> selectBoardtReport() {
+		Connection conn = getConnection();
+		
+		ArrayList<Report> BoardReport = new ReportDAO().selectBoardReport(conn);
+		close(conn);
+		return BoardReport;
+	}
+
+	public ArrayList<Report> selectCommReport() {
+		Connection conn = getConnection();
+		
+		ArrayList<Report> CommReport = new ReportDAO().selectCommReport(conn);
+		close(conn);
+		return CommReport;
 	}
 
 	/*
