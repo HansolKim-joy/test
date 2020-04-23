@@ -73,46 +73,43 @@
 
    		<div class="search">
    			 <% if(loginUser != null){ %> 
-   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write">작성하기</button>
+   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write" class="myButton">작성하기</button>
    		 <% } %>   
    		</div>  
 		   		<br><br><br><br>
 	<!-- 페이징 -->
-		<div class="list_number" >
-		<% if(!list.isEmpty()){ %>
-		
-			<!-- 맨 처음으로 -->
-			<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=1'"> &lt;&lt;</button>
+	<div class="pagingArea" align="center">
+	<!-- 맨 처음으로 -->
+			<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=1'">&lt;&lt;</button>
 			
-			<!-- 이전 페이지 -->
-			<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= currentPage - 1 %>'" id="before">&lt;</button>
-				<script>
-					if(<%= currentPage %> <=1){
-						$('#before').attr('disable', 'true');
-						}	
-				</script>
-		
+			<!-- 이전 페이지로 -->
+			<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= currentPage - 1 %>'" id="beforeBtn">&lt;</button>
+			<script>
+				if(<%= currentPage %> <= 1){
+					$('#beforeBtn').attr('disabled', 'true');
+				}
+			</script>
+			
 			<!-- 10개 페이지 목록 -->
-				<% for(int p = startPage; p <= endPage; p++){ %>
-					<% if(p == currentPage){ %>
-						<button id="ch" disabled><%= p %></button>
-					<%} else { %>
-						<button id="number" onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%=p %>'"><%= p %></button>
-					<%} %>
+			<% for(int p = startPage; p <= endPage; p++){ %>
+				<% if(p == currentPage){ %>
+					<button id="choosen" disabled><%= p %></button>
+				<% } else { %>
+					<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= p %>'"><%= p %></button>
 				<% } %>
-				
+			<% } %>
+			
 			<!-- 다음 페이지로 -->
-				<button id="after" onclick="location.href='<%=request.getContextPath() %>/list.recruit?currenPage=<%= currentPage + 1 %>'">&gt;</button>
-					<script>
-						if(<%= currentPage %> >= <%= maxPage %>){
-							$('#after').attr('disable', 'true');
-						}
-					</script>
+			<button id="afterBtn" onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= currentPage + 1 %>'">&gt;</button>
+			<script>
+				if(<%= currentPage %> >= <%= maxPage %>){
+					$('#afterBtn').attr('disabled', 'true');
+				}
+			</script>
 			
 			<!-- 맨 끝으로 -->
-				<button onclick="location.href='<%=request.getContextPath() %>/list.recruit?currentPage=<%= maxPage %>'">&gt;&gt;</button>
-		<% } %>
-		</div>
+			<button onclick="location.href='<%= request.getContextPath() %>/list.recruit?currentPage=<%= maxPage %>'">&gt;&gt;</button>
+	</div>
 	   
 	
 	<script>
@@ -152,7 +149,7 @@
 		
 	
 		<input id="blank" type="text" size="35" id="searchText">&nbsp;
-		<input id="botSearch" type="button" value="검색">
+		<input id="botSearch" type="button" value="검색" class="myButton">
 	</form>
 	</div>
 	<script>
