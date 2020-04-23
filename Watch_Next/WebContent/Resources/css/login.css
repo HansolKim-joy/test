@@ -1,87 +1,131 @@
 @charset "UTF-8";
 
-.lg {
-	margin: 0 auto;
-	padding: 80px;
+   .lg{
+       margin: 0 auto;
+       padding: 80px;
+       padding-left: 40px;
+    }
+       
+    h2{margin-top: 30%;}
+    
+    .lg_button{
+       width: 170px;
+       height: 30px;
+       border-radius: 7px;
+       border: 0px;
+       background-color: #4d4c50;
+       outline: 0;
+       font-size: 13px;
+    }
+    
+   .lg_form{
+       border: 1px;
+       color: white;
+       margin: 0 auto;
+       margin-top: 3%;
+       background-color: #00000014;
+       height: 350px;
+       width: 600px;
+       border-radius: 20px;
+   }
+   
+   .hline{
+       border: 0;  
+       height: 1px; 
+       background: red;
+   }
+
+   #lg_table{
+      	margin: 0 auto; 
+        margin-top: 100px;
+        font-size: 20px; 
+        font-weight: bold; 
+        width: 600px;
+        color: white;
+   }
+   
+   .lg_text{
+      background-color: white;
+       color: black;
+       height: 35px;
+       width: 266px;
+	   margin-left: 60px;
+	   margin-bottom: 5px;
+	   border-radius: 7px;
+	   padding-left: 10px;
+       border: 0px;
+       outline: 0;
+   }
+   
+   .lg_text1{
+      background-color: white;
+       color: black;
+       height: 35px;
+	   width: 266px;
+	   margin-left: 45px;
+	   border-radius: 7px;
+	   padding-left: 10px;
+       border: 0px;
+       outline: 0;
+   }
+   
+   #join_member{
+         background-color: yellow;
+   }
+
+
+#buttons {
+  text-align: center;
+}
+#buttons>input{border:none;}
+#lgbtn{display: flex;}
+#lgbtn label{font-size: 15px; vertical-align: -3px;}
+#botbtn{
+	margin-top: 74px;
+    text-align: center;
+    color: #8e8e8e;
+    border-top: 1px solid #e4e4e5;
+    margin-left: 30px;
+    padding-top: 6px;
+    }
+.btn {
+  	border-radius: 5px;
+    padding: 25px 25px;
+    font-size: 22px;
+    text-decoration: none;
+    margin-left: 10px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    vertical-align: -30px;
 }
 
-.lg_h2 {
-	text-align: center;
-	text-size: 30px;
+.btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
 }
 
-.lg_button1 {
-	margin-left: 70px;
-	width: 277px;
-	height: 30px;
-	border-radius: 7px;
-	margin-bottom: 5px;
-	margin-top: 10px;
-	border: 0px;
-	background: #B22222;
-	color: white;
-	outline: 0;
+.red {
+  background-color: #e74c3c;
+  box-shadow: 0px 5px 0px 0px #CE3323;
 }
 
-.lg_button {
-	width: 170px;
-	height: 30px;
-	border-radius: 7px;
-	margin-left: 10px;
-	border: 0px;
-	background-color: #4d4c50;
-	outline: 0;
+.red:hover {
+  background-color: #FF6656;
 }
 
-.lg_form {
-	border: 1px;
-	color: white;
-	margin: 0 auto;
-	margin-top: 3%;
-	background-color: #00000014;
-	height: 350px;
-	width: 600px;
-	border-radius: 20px;
+.div {
+    width: 400px;
 }
-
-.hline {
-	border: 0;
-	height: 1px;
-	background: red;
-}
-
-#lg_table {
-	margin: 0 auto;
-	margin-top: 100px;
-	font-size: 20px;
-	font-weight: bold;
-	width: 600px;
-	color: white;
-}
-
-.lg_text {
-	background-color: white;
-	color: black;
-	height: 30px;
-	width: 276px;
-	margin-left: 70px;
-	border-radius: 7px;
-	border: 0px;
-	outline: 0;
-}
-
-.lg_text1 {
-	background-color: white;
-	color: black;
-	height: 30px;
-	width: 276px;
-	margin-left: 70px;
-	border-radius: 7px;
-	margin-top: 10px;
-	border: 0px;
-	outline: 0;
-}
-
-#join_member {
-	background-color: yellow;
-}
+.div:nth-child(1){margin-bottom: 10px;}
+.bar{
+	display: inline-block;
+    width: 1px;
+    height: 13px;
+    text-indent: -999em;
+    background: #e4e4e5;
+    vertical-align: -10px;
+    margin: 0 4px;}
+    
+#insert{margin-left: 40px;}
