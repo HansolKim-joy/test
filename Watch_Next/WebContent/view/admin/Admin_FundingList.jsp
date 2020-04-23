@@ -150,8 +150,6 @@
 	<br>
 	</div>
 		
-	
-	
 	<br><br><br>
 
 </section>
@@ -159,31 +157,38 @@
 
 	<!-- 페이징 -->
 	<div class="list_number">
-		<button type="button" id="btn" onclick="location.href='<%= request.getContextPath() %>/view/demand/demandWrite.jsp'">작성하기</button>
         <div class="list_n_menu">
+        
+        	<!-- 맨 처음으로 -->
+			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=1'">&lt;&lt;</a>
         	<!--이전 페이지 -->
-	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/fundingList.adm?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
+	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
 	        <script>
 					if(<%= currentPage %> <= 1 ){
+						$('#bebeforeBtn').hide();
 						$('#beforeBtn').hide();
+						
 					}
 			</script>
 			<!--페이지 목록  -->
+			
 			<% for (int p=startPage; p<=endPage; p++){
 				if(p == currentPage) {%>
 					<a><%= p %></a>
 				<%} else{ %>
-					<a onclick="location.href='<%=request.getContextPath() %>/fundingList.adm?currentPage=<%= p %>'"><%= p %></a>
+					<a onclick="location.href='<%=request.getContextPath() %>/list.de?currentPage=<%= p %>'"><%= p %></a>
 				<%} %>
 			<%} %>	
-			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/fundingList.adm?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
+			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
+			<!-- 맨 끝으로 -->
+			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=<%= maxPage %>'">&gt;&gt;</a>
 	        <script>
 				if(<%= currentPage %> >= <%= maxPage %>){
-					
+					$('#afafterBtn').hide();
 					$('#afterBtn').hide();
 				}
 			</script>
-        
+        	
         </div>
 	</div>
 	
@@ -203,9 +208,9 @@
 	$('.cinema').click(function(){
 		var cinema = $(this).val();
 		if(cinema == 'ALL'){
-			location.href='<%= request.getContextPath() %>/list.de';
+			location.href='<%= request.getContextPath() %>/fundingList.adm';
 		}else{
-			location.href='<%= request.getContextPath() %>/listSort.de?cinema=' + cinema;
+			location.href='<%= request.getContextPath() %>/listSort.adm?cinema=' + cinema;
 		}
 	});
 	

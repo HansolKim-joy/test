@@ -19,7 +19,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="/Watch_Next/WebContent/Resources/js/rec_board.js"></script>
 <script>
 $(document).ready(function() {
     $(".p_slider").lightSlider({
@@ -103,7 +102,7 @@ $(document).ready(function() {
 				<ul id="p_slider1" class="p_slider">
 					<% for(int i = 0; i < rlist.size(); i++) {%>
 						<li class="p_item1">
-							<img class="listPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= rlist.get(i).getNewName() %>" onclick="location.href='<%= request.getContextPath()%>/search.mo?movieTitle=<%= rlist.get(i).getTitle()%>'">
+							<img class="listPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= rlist.get(i).getNewName() %>" onclick="location.href='<%= request.getContextPath()%>/detail.mo?movieTitle=<%= rlist.get(i).getTitle()%>&no=<%= rlist.get(i).getdNo()%>'">
 						</li>
 					<%} %>
 				</ul>
@@ -114,7 +113,7 @@ $(document).ready(function() {
 				<ul id="p_slider2" class="p_slider">
 					<% for(int i = 0; i < Slist.size(); i++) {%>
 						<li class="p_item1">
-							<img class="listPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= Slist.get(i).getNewName() %>" onclick="location.href='<%= request.getContextPath()%>/search.mo?movieTitle=<%= Slist.get(i).getTitle()%>'">
+							<img class="listPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= Slist.get(i).getNewName() %>" onclick="location.href='<%= request.getContextPath()%>/detail.mo?movieTitle=<%= Slist.get(i).getTitle()%>&no=<%= Slist.get(i).getdNo()%>'">
 						</li>
 					<% } %>
 				</ul>
@@ -125,7 +124,7 @@ $(document).ready(function() {
 				<ul id="p_slider3" class="p_slider">
 					<% for(int i = 0; i < Llist.size(); i++){ %>
 						<li class="p_item1">
-							<img class="listPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= Llist.get(i).getNewName() %>" onclick="location.href='<%=request.getContextPath()%>/search.mo?movieTitle=<%= Llist.get(i).getTitle()%>'">
+							<img class="listPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= Llist.get(i).getNewName() %>" onclick="location.href='<%=request.getContextPath()%>/detail.mo?movieTitle=<%= Llist.get(i).getTitle()%>&no=<%= Llist.get(i).getdNo()%>'">
 						</li>
 					<%} %>
 				</ul>

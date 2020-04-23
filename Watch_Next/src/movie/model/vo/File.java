@@ -4,13 +4,15 @@ public class File {
 	private int FileNo;
 	private String originName;
 	private String newName;
+	private int dNo;
 	private String title;
 	
 	public File () {}
-	
-	public File(String newName, String title) {
+
+	public File(String newName, int dNo, String title) {
 		super();
 		this.newName = newName;
+		this.dNo = dNo;
 		this.title = title;
 	}
 
@@ -22,6 +24,14 @@ public class File {
 		this.title=title;
 	}
 	
+	public File(int fileNo, String originName, String newName, int dNo, String title) {
+		super();
+		FileNo = fileNo;
+		this.originName = originName;
+		this.newName = newName;
+		this.dNo = dNo;
+		this.title = title;
+	}
 
 	public File(String newName) {
 		super();
@@ -60,11 +70,21 @@ public class File {
 		this.title = title;
 	}
 
+	public int getdNo() {
+		return dNo;
+	}
+
+	public void setdNo(int dNo) {
+		this.dNo = dNo;
+	}
+
 	@Override
 	public String toString() {
-		return "File [FileNo=" + FileNo + ", originName=" + originName + ", newName=" + newName + ", title=" + title
-				+ "]";
+		return "File [FileNo=" + FileNo + ", originName=" + originName + ", newName=" + newName + ", dNo=" + dNo
+				+ ", title=" + title + "]";
 	}
+
+	
 
 	
 	
