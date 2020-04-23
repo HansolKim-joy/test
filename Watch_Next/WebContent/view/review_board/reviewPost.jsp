@@ -152,18 +152,19 @@
 		
 					<hr>
 		
-					<div id="content">
-						<p style="font-size:15px;">
+					<div id="content" style="font-size:15px;">
+						
 							<%= r.getbContent()%>
 							<input type="hidden" name="editor_content" value='<%= r.getbContent() %>'>	 
 							<br><br><br><br><br><br><br><br><br><br>
-						</p>
+						
 					</div>
 		
 					<!-- 좋아요 및 신고버튼 -->
 					<table style="margin-left: auto; margin-right: auto; margin-bottom:10px; text-align: center; font-size:15px; color:red;">
 						<tr>
 							<td>	
+							<% if(!loginUser.getUserId().equals(r.getbWriter())) { %>
 									<% if(chk == 'N' || chk==0) {%>
 							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
 									<% } else if(chk =='Y') {%>
@@ -187,7 +188,7 @@
 									<button type="button" id="sirenb" value="popup" onclick="sendPop();">
 										<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
 									</button>
-
+							
 									
 
 									<script>
@@ -209,6 +210,39 @@
 						<tr>
 							<td id="likeCnt"><%= r.getbLike() %></td>
 							<td></td>
+							
+							<%} else {%>
+							<% if(chk == 'N' || chk==0) {%>
+							 			<button type="button" class="likeb" onclick="onLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/like.png"></button>
+									<% } else if(chk =='Y') {%>
+										<button type="button" class="likeb" onclick="onNoLike();"><img class="like" src="<%=request.getContextPath()%>/Resources/images/likeee.png"></button>
+									<% } %>
+									<script>
+										function onLike(){
+											var rv = <%=r.getbNo() %>;
+ 											location.href="<%=request.getContextPath()%>/putLike.rv?rv="+rv;
+										}
+										function onNoLike(){
+											var rv = <%=r.getbNo() %>;
+											location.href="<%=request.getContextPath()%>/notLike.rv?rv="+rv;
+										}
+									</script>
+							</td>
+							<td width=5px></td>
+							<td>
+
+									<input type="hidden" name="rbNo" value="<%=r.getbNo() %>">
+							
+								
+							</td>
+							
+						</tr>
+							
+						<tr>
+							<td id="likeCnt"><%= r.getbLike() %></td>
+							<td></td>
+							
+							<%} %>
 						</tr>
 					</table>
 				</div>
@@ -217,11 +251,11 @@
 	 
 	    <div id=listbtn>
 	    <% if(loginUser != null && loginUser.getUserId().equals(r.getbWriter())) { %>
-	        <button  class="lbtn" id="bupBtn" type=submit title="수정" >수정</button>
-	        <button  class="lbtn" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
-	   		<button class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+	        <button  class="myButton" id="bupBtn" type=submit title="수정" >수정</button>
+	        <button  class="myButton" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
+	   		<button class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
 	    <% } else if(!loginUser.getUserId().equals(r.getbWriter())) {%>    
-	        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+	        <button style="margin-left:195px" class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
 	    <% }  %>            		
 	    </div>
 	    </form>
@@ -230,9 +264,9 @@
 	    
 	   	<!-- 댓글 -->
 		<div id="replybox1">
-			<textarea id="reply_content" name="reply_content" rows="2" cols="167" placeholder="댓글을 입력하세요." style="resize: none; border:none;"></textarea>
+			<textarea id="reply_content" name="reply_content" rows="2" cols="193" placeholder="댓글을 입력하세요." style="white-space: pre-wrap; resize: none; border:none;"></textarea>
 		</div>
-		<button id="reply_save">댓글 작성</button>
+		<button class="myButton" id="reply_save">댓글 작성</button>
 	
 		<br clear="all">
 	
@@ -249,7 +283,7 @@
 						<td>
 							<% if(loginUser!=null && loginUser.getUserId().equals(list.get(i).getrWriter())) { %>
 								<form action="<%=request.getContextPath()%>/deleteReply.rv">
-									<input type="submit" id="replydelete" value="삭제" onclick="return rpdel();">
+									<input type="submit" class="myButton" id="replydelete" value="삭제" onclick="return rpdel();">
 									<input type=hidden name="replyno" value="<%=list.get(i).getrId()%>">
 
 								<input type="hidden" name="rv" value="<%=r.getbNo() %>">
@@ -257,7 +291,7 @@
 							<% } else { %>
 								<%-- <% for(int j=0; j<list.size(); j++) { %> --%>
 									<%-- <% if(list.get(i).getrId() == ){ %> --%>
-									<button type=button id=report onclick="sendPopR();">신고</button>
+									<button type=button id=report class="myButton" onclick="sendPopR();">신고</button>
 <%-- 									<%} %> --%>
 <%-- 								<%} %> --%>
 							<% } %>	

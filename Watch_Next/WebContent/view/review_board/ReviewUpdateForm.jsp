@@ -27,7 +27,7 @@
 		// 점수유지시 에러안나게!
 		$('.pop_point').val(<%=request.getParameter("popgrade") %>);
 		//
-		$('div.Editor-editor').html("<%= request.getParameter("editor_content") %>");
+		$('div.Editor-editor').html('<%= request.getParameter("editor_content") %>');
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  

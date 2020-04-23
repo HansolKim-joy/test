@@ -79,6 +79,9 @@ public class CreateInsertServlet extends HttpServlet {
 		String cDirector = multiRequest.getParameter("creW_directorName");
 		String content = multiRequest.getParameter("taContent");
 		
+		//줄바꿈
+		content = content.replace("\r\n", "<br>");
+		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser"); 
 		String writer = loginUser.getUserId(); 
