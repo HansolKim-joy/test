@@ -26,26 +26,19 @@
 			<form class="lg_form" onsubmit="return validate();"
 				action="<%= request.getContextPath() %>/login.me" method="post">
 				<div class="lg">
-					<div id="lgbtn">
+					<div class="div">
+						<input type="text" class="lg_text" id="userId" name="userId"
+							placeholder="아이디">
+					</div>
+					<div class="div">
+						<input type="password" class="lg_text1" id="lg_userPwd"
+							name="lg_userPwd" placeholder="비밀번호">
+					</div>
 					<div>
-						<div class="div">
-							<label>아이디</label>
-							<input type="text" class="lg_text" id="userId" name="userId">
-						</div>
-						<div class="div">
-							<label>비밀번호</label>
-							<input type="password" class="lg_text1" id="lg_userPwd" name="lg_userPwd" >
-						</div>
+						<input type="submit" class="lg_button1" value="로그인">
 					</div>
-					<div id="buttons">
-						<input type="submit" class="btn red" value="로그인">
-					</div>
-					</div>
-					<div id="botbtn">
-						<a class="lg_button" id="insert" onclick="location='/Watch_Next/view/pages/JoinForm.jsp'">회원가입</a>
-						<span class="bar">|</span>
-						<a class="lg_button" id="find_member" onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'">아이디/비밀번호 찾기</a>
-					</div>
+					<button type="button" class="lg_button" onclick="location='/Watch_Next/view/pages/JoinForm.jsp'">회원가입</button>
+					<button type="button" class="lg_button" id="find_member" onclick="location='/Watch_Next/view/pages/FindUserForm.jsp'">아이디/비밀번호 찾기</button>
 				</div>
 			</form>
 		</div>

@@ -7,6 +7,7 @@
 <!-- 위에 삭제 해보기 -->
 
 <link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer.css" rel="stylesheet" />
+<link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer(AFTER).css" rel="stylesheet" />
 
 <!--페이지에 적용되는 css넣기 -->
 <link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
