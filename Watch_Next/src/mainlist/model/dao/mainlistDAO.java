@@ -122,6 +122,7 @@ public class mainlistDAO {
 							   rset.getString("Actor"),
 							   rset.getString("Story"),
 							   rset.getString("file_newname"));
+				mi.setmNo(rset.getInt("movie_no"));
 //				System.out.println("한솔 : " + mi);
 				Movielist.add(mi);
 			}

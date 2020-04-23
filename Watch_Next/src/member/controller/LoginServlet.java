@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 			session.setMaxInactiveInterval(600);
 //			System.out.println(request.getContextPath());
 			response.sendRedirect(request.getContextPath());
-		} 
+		}  // eles if (파라미터로 받아온 값(id)==(loginhUser.getId) || 파라미터로 받아온 값(pwd)==(loginhUser.getPwd))
 		else {
 			request.setAttribute("msg", "존재하지 않습니다. 회원가입 해주세요.");
 			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
