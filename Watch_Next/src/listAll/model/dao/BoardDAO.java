@@ -114,7 +114,8 @@ public class BoardDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				mo = new Movie( rset.getString("movie_title"),
+				mo = new Movie( rset.getInt("movie_no"),
+								rset.getString("movie_title"),
 								rset.getString("service_site"),
 								rset.getString("file_newname"));
 				DibList.add(mo);

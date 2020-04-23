@@ -331,7 +331,7 @@
 							<% if((i+1) % 4 == 1) {%>
 								<tr>
 									<td>
-										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>" onclick="location.href='<%= request.getContextPath() %>/search.mo?movieTitle=<%= DibList.get(i).getmTitle() %>'">
+										<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/images/<%= DibList.get(i).getNewFileName() %>" onclick="location.href='<%= request.getContextPath() %>/detail.mo?movieTitle=<%= DibList.get(i).getmTitle() %>&no=<%=DibList.get(i).getmNo()%>'">
 										<br>
 										영화 제목 : <%= DibList.get(i).getmTitle() %> 
 										<% 
