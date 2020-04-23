@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import movie.model.service.BoardService;
 import movie.model.vo.Dib;
 import movie.model.vo.Movie;
@@ -41,6 +43,12 @@ public class MovieDetailServlet extends HttpServlet {
 		String movieTitle = request.getParameter("movieTitle");
 		int no = Integer.parseInt(request.getParameter("no"));
 		BoardService service = new BoardService();
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser"); 
+		String userId = "";
+		if(loginUser != null) {
+			userId = loginUser.getUserId();
+		}
 		Movie m = null;
 		String fName = "";
 		String genre = "";
@@ -52,7 +60,7 @@ public class MovieDetailServlet extends HttpServlet {
 			m = entry.getValue();
 			fName = entry.getKey().split(", ")[0];
 			genre = entry.getKey().split(", ")[1];
-			d = service.searchDib(m.getmNo());
+			d = service.searchDib(m.getmNo(),userId);
 		}
 		
 		

@@ -1,6 +1,7 @@
 package movie.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,9 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie.model.vo.Dib;
 import movie.model.vo.Movie;
-import review.model.vo.Review;
 import movie.model.service.BoardService;
 
 
@@ -41,30 +40,26 @@ public class MovieSearchServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String movieTitle = request.getParameter("movieTitle");
 		BoardService service = new BoardService();
-		Movie m = null;
-		String fName = "";
-		String genre = "";
+		ArrayList<Movie> m = new ArrayList<Movie>();
+		ArrayList<String> fName = new ArrayList<String>();
+		ArrayList<String> genre = new ArrayList<String>();
 		HashMap<String, Movie> mMap = service.searchMovie(movieTitle);
 		Iterator<Map.Entry<String,Movie>> entries = mMap.entrySet().iterator();
-		Dib d = null;
-		if(entries.hasNext()){
+		while(entries.hasNext()){
 			Entry<String,Movie> entry = (Entry<String,Movie>)entries.next();
-			m = entry.getValue();
-			fName = entry.getKey().split(", ")[0];
-			genre = entry.getKey().split(", ")[1];
-			d = service.searchDib(m.getmNo());
+			Movie mo = entry.getValue();
+			m.add(mo);
+			fName.add(entry.getKey().split(", ")[0]);
+			genre.add(entry.getKey().split(", ")[1]);
 		}
 		
-		
-		Review r = service.searchGradeReview(movieTitle);
 		String page = "";
-		if(m != null) {
-			page = "view/infoMovie/infoMovie.jsp";
-			request.setAttribute("Dib", d);
+		if(!m.isEmpty()) {
+			page = "view/infoMovie/SearchMovie.jsp";
 			request.setAttribute("Movie", m);
-			request.setAttribute("Review", r);
 			request.setAttribute("fName", fName);
 			request.setAttribute("genre", genre);
+			request.setAttribute("movieTitle", movieTitle);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "검색에 실패했습니다.");
