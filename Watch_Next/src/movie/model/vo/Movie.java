@@ -67,14 +67,17 @@ public class Movie {
 	}
 	
 	// 한솔
-	public Movie(String mTitle, String Service_Site, String newFileName) {
+	
+	public Movie(int mNo, String mTitle, String service_Site, String newFileName) {
 		super();
+		this.mNo = mNo;
 		this.mTitle = mTitle;
-		this.Service_Site = Service_Site;
+		this.Service_Site = service_Site;
 		this.newFileName = newFileName;
 	}
-	
-	
+
+
+
 	public Movie(int mNo, String mTitle) {
 		this.mNo = mNo;
 		this.mTitle = mTitle;
