@@ -37,7 +37,7 @@ public class MovieDibServlet extends HttpServlet {
 		int movie_no = Integer.parseInt(request.getParameter("no"));
 		new BoardService().insertDib(user_id, movie_no);
 		String title = request.getParameter("title");
-		response.sendRedirect(request.getContextPath() + "/search.mo?movieTitle=" + title);
+		response.sendRedirect(request.getContextPath() + "/detail.mo?movieTitle=" + title + "&no=" + movie_no);
 	}
 
 	/**

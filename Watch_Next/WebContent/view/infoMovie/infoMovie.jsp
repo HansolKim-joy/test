@@ -53,14 +53,14 @@
 					<button id="m_want" onclick="myDib();">찜하기</button>
 	     				<script>
 	     					function myDib(){
-	     						location.href="<%=request.getContextPath()%>/movie.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
+	     						location.href="<%=request.getContextPath()%>/movie.dib?no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
 	     					}
 	     				</script>
 	     			<%}else{ %>
 					<button id="m_want" onclick="delDib();">찜풀기</button>
 	     				<script>
 	     					function delDib(){
-	     						location.href="<%=request.getContextPath()%>/del.dib?id=<%=loginUser.getUserId()%>&no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
+	     						location.href="<%=request.getContextPath()%>/del.dib?no=<%=m.getmNo()%>&title=<%=m.getmTitle()%>";
 	     					}
 	     				</script>
 	     			<%} %>

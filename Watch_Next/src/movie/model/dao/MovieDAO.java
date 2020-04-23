@@ -245,7 +245,7 @@ public class MovieDAO {
 		return result;
 	}
 
-	public Dib searchDib(Connection conn, int i) {
+	public Dib searchDib(Connection conn, int i, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Dib d = null;
@@ -255,8 +255,7 @@ public class MovieDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, i);
-			pstmt.setString(2, "admin");
-			// 이거 아이디로 바꿔야댐
+			pstmt.setString(2, userId);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
