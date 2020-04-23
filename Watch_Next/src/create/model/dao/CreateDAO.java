@@ -825,6 +825,68 @@ public class CreateDAO {
 		return list;
 	}
 
+	public int updatePoster(Connection conn, ArrayList<CFile> fileList) {
+		// updatePoster=update tb_cfile set file_oriname=?, file_newname=?, file_level=? where board_no=?
+		// updatePoster=insert into tb_cfile values(? ,seq_fno.NEXTVAL, ?, ?, ?, 'N')
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updatePoster");
+		
+		
+			
+			try {
+				for(int i=0; i<fileList.size(); i++) {
+					CFile cf = fileList.get(i);
+					
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, cf.getbNo());
+				pstmt.setString(2, cf.getOriginNames());
+				pstmt.setString(3, cf.getNewNames());
+				pstmt.setInt(4, cf.getFileleve());
+				
+				
+				result += pstmt.executeUpdate();
+				} 
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			
+		
+		return result;
+			
+	}
+
+	public int deletePoster(Connection conn, ArrayList<CFile> fileList) {
+		// deletePoster = update tb_cfile set delete_yn='Y' where board_no=?
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deletePoster");
+		
+		try {
+			
+			for(int i=0; i<fileList.size(); i++) {
+				CFile cf = fileList.get(i);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cf.getbNo());
+			
+			result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 	
@@ -839,3 +901,4 @@ public class CreateDAO {
 	
 	
 }
+

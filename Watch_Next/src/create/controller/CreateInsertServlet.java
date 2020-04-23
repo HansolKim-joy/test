@@ -72,7 +72,7 @@ public class CreateInsertServlet extends HttpServlet {
 					// getOriginalFileName() : 실제 사용자가 업로드할 때의 파일 명
 				}
 			
-		}
+			}
 			
 		
 		String bTitle = multiRequest.getParameter("creW_createName");
@@ -103,16 +103,10 @@ public class CreateInsertServlet extends HttpServlet {
 			}
 			
 			fileList.add(at);
-			
-			
-			
+	
 		}
 		
-		System.out.println(fileList.get(0));
-		System.out.println(fileList.get(1));
-		
 		int result = new CreateService().insertCreate(c, fileList);
-//		int fileNo = new CreateService().insertPoster(fileList);
 		
 		if(result>0) {
 			response.sendRedirect("list.cr");

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="create.model.vo.*, java.sql.Date"%>
-  
+<%-- <%  --%>
+// 	Create c=(Create)request.getAttribute("review");
+<%-- %>   --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +82,7 @@
 <%@ include file="/view/layout/Header.jsp" %>
 	<!-- 창작 게시판 작성 -->
 <br clear="all">
-<form action="<%= request.getContextPath() %>/update.cr">
+<form action="<%= request.getContextPath() %>/update.cr" method="post" encType="multipart/form-data">
 	<div id="creW_create">
 		<h2><strong>창작 게시판 수정</strong></h2>
 		<hr id="red_line">
@@ -88,13 +90,14 @@
 		<input type="hidden" name="cNo" value="<%= request.getParameter("cNo") %>">
 		<h4><strong>제목 : &ensp;<input type="text" id="creW_createName" name="creW_createName" value="<%= request.getParameter("cTitle") %>"></strong></h4>
 		<h4><strong>감독 : &ensp;<input type="text" id="creW_directorName" name="creW_directorName" value="<%= request.getParameter("cDirector") %>"></strong></h4>
+
 	</div>
 	<!-- 파일첨부 태그 -->
 	<div id = "creW_videos">
 	<span id="filetag1">썸네일 : </span>
 		<input type="file" id="thumb_file" name="thumb_file" onchange="thumb(this, this.value)"><br>
 	<span id="filetag2">동영상 : </span>
-		<input type="file" id="creW_file" name="creW_file" onchange="cmv(this, this.value)">
+		<input type="file" id="creW_file" name="creW_file" onchange="cmv(this, this.value)" value="<%= request.getParameter("videofno")%>">
 	</div>
 	
 		<script>

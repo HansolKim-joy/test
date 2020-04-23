@@ -80,32 +80,26 @@ public class CreateService {
 		return create;
 	}
 	
-	public int updateCreate(Create c) {
+	public int updateCreate(Create c, ArrayList<CFile> fileList) {
 		Connection conn = getConnection();
 		
 		CreateDAO cd = new CreateDAO();
 		
 		int result1 = cd.updateBoard(conn, c);
-		int result2 = 0;
-		int result = 0;
+		int result2 = cd.updateCreate(conn, c);
+		int result3 = cd.deletePoster(conn, fileList);
+		int result4 = cd.updatePoster(conn, fileList);
 		
-		if(result1 > 0) {
-			result2 = cd.updateCreate(conn, c);
-			
-			if(result1 > 0 && result2 > 0) {
-				commit(conn);
-			}else {
-				rollback(conn);
-			}
+		
+		if(result1 > 0 && result2>0 && result3>0 && result4>0) {
+			commit(conn);
 		}else { 
 			rollback(conn);
 		}
 		
 		close(conn);
 		
-		result = result1 + result2;
-		
-		return result;
+		return result1;
 	}
 
 	public ArrayList<Comment> selectComment(int rNo) {
