@@ -48,10 +48,14 @@ public class ReviewDetailServlet extends HttpServlet {
 		char fchk = ReviewService.getFollow(userId, writer);
 		request.setAttribute("fchk", fchk);
 			
+//		int[] decrpNo = new ReportService().getRpNo(userId);
+//		System.out.println("서블릿 리플번호:"+decrpNo);
+		//char rdChk = ReviewService.getReportR(userId, 리플번호); //해당 유저가 해당번호의 리플을 신고했는지
+		//request.setAttribute("rdChk", rdChk);
 				
 		review.model.vo.Review review = new ReviewService().selectReview(rv);
 		ArrayList<Comment> list = new ReviewService().selectReplyList(rv);
-		/* int[] decrpNo = new ReportService().selectReport(userId); */
+		
 		
 		String page = null;
 		if(review != null) {

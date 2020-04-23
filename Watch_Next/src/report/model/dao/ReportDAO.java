@@ -14,6 +14,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import common.Comment;
 import report.model.vo.Report;
 
 public class ReportDAO {
@@ -80,7 +81,7 @@ public class ReportDAO {
 		
 		return result;
 	}
-
+  
 	public ArrayList<Report> selectBoardReport(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -140,26 +141,5 @@ public class ReportDAO {
 		}
 		
 		return CommReport;
-	}
-	
-	
-	
-	
-	/*
-	 * public int[] selectReportR(Connection conn, String userId) { // getReportC =
-	 * select * from tb_dec where user_id=? PreparedStatement pstmt = null;
-	 * ResultSet rset = null; int[] repRp = null;
-	 * 
-	 * String query = prop.getProperty("getReportC"); try { pstmt =
-	 * conn.prepareStatement(query); pstmt.setString(1,userId);
-	 * 
-	 * rset = pstmt.executeQuery();
-	 * 
-	 * for(int i = 0; rset.next(); i++) { repRp[i] = rset.getInt("COMMENTS_NO"); } }
-	 * catch (SQLException e) { e.printStackTrace(); } finally { close(rset);
-	 * close(pstmt); }
-	 * 
-	 * return repRp; }
-	 */
-
+	}	
 }

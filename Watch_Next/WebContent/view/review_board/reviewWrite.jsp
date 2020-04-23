@@ -126,7 +126,7 @@
 		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn4">
 		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn5">
 		<b id="pop_point"></b>
-		<input type="hidden" name="pop_point" class="pop_point">
+		<input type="hidden" name="pop_point" class="pop_point"repRp>
 		<input type="reset" value="취소" id="revW_button" onclick="location.href='javascript:history.go(-1);'">
 		<input type="submit" value="완료" id="revW_button" class="revW_submit">
 		

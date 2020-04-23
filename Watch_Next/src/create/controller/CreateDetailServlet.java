@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import common.Comment;
 import create.model.service.CreateService;
+import create.model.vo.CFile;
 import create.model.vo.Create;
 import member.model.vo.Member;
-import review.model.service.ReviewService;
 
 /**
  * Servlet implementation class CreateDetailServlet
@@ -48,9 +48,11 @@ public class CreateDetailServlet extends HttpServlet {
 		String writer = new CreateService().getWriter(cNo);
 		char fchk = CreateService.getFollow(userId, writer);
 		request.setAttribute("fchk", fchk);
+		CreateService service = new CreateService();
 		
-		Create create = new CreateService().selectCreate(cNo);
-		ArrayList<Comment> comment = new CreateService().selectComment(cNo);
+		Create create = service.selectCreate(cNo);
+		ArrayList<CFile> fileList = service.selectFile(cNo);
+		ArrayList<Comment> comment = service.selectComment(cNo);
 		
 		String page = null;
 		if(create != null) {
@@ -58,6 +60,7 @@ public class CreateDetailServlet extends HttpServlet {
 			request.setAttribute("create", create);
 			request.setAttribute("loginUser", loginUser);
 			request.setAttribute("comment", comment);
+			request.setAttribute("fileList", fileList);
 		} else {
 			page = "view/errorPage/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");

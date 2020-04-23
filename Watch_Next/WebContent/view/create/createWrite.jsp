@@ -83,7 +83,7 @@
 <%@ include file="/view/layout/Header.jsp" %>
 	<!-- 창작 게시판 작성 -->
 <br clear="all">
-<form action="<%= request.getContextPath() %>/insert.cr">
+<form action="<%= request.getContextPath() %>/insert.cr" method="post" encType="multipart/form-data">
 	<div id="creW_create">
 		<h2><strong>창작 게시판 작성</strong></h2>
 		<hr id="red_line">

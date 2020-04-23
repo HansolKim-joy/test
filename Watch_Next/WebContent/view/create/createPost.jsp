@@ -6,6 +6,8 @@
 	char chk = (char)request.getAttribute("chk");
 	char fchk = (char)request.getAttribute("fchk");
 	
+	ArrayList<CFile> flist = (ArrayList<CFile>)request.getAttribute("fileList");
+	
  %>    
 <!DOCTYPE html>
 <html>
@@ -133,11 +135,17 @@
 					<br>
 					<br>
 					<div id="cpinfo">
-						<p style="font-size:15px;"> 
+					<!-- 내용넣는곳 -->
+					<% for(int j=0; j<flist.size(); j++) { %>
+						<p style="font-size:15px;">
+							<video controls src="<%= request.getContextPath()%>/Resources/crethumb_uploadFiles/<%= flist.get(j).getNewNames() %>"></video>
+							<input type="hidden" name="videofno" value="<%= flist.get(j).getfNo()%>">
+							<% System.out.println("뷰에서 동영상fno:"+flist.get(j).getfNo()); %>
+							<br><br>
 							<%=c.getbContent() %>
 							<input type="hidden" name="bContent" class="content" value="<%= c.getbContent() %>">
-							
 						</p>
+					<% } %>	
 
 					</div>
 				</div>

@@ -126,7 +126,7 @@
 	<!-- 텍스트 편집기 부분 -->
 	<div class="col-lg-12 nopadding">
 		<textarea id="txtEditor"></textarea>
-		<input type="hidden" id="editor_content" name="editor_content" value="<%= request.getParameter("editor_content") %>">
+		<input type="hidden" id="editor_content" name="editor_content" value='<%= request.getParameter("editor_content") %>'>
 		
 	</div>
 	

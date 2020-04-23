@@ -54,6 +54,9 @@ public class Comment {
 		this.createDate = createDate;
 	}
 	
+	// 댓글신고중복확인
+	
+	
 	
 	public int getrId() {
 		return rId;
