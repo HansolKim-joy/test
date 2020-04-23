@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="create.model.vo.*, java.sql.Date"%>
-<%-- <%  --%>
-// 	Create c=(Create)request.getAttribute("review");
-<%-- %>   --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,7 +125,7 @@
 	<!-- textarea 부분 -->
 	<br clear="all">
 	<div id="taDiv">
-		<textarea name="taContent" id="taContent" cols=150 rows=20 style="overflow-y:scroll; resize:none;"><%= request.getParameter("bContent") %></textarea>
+		<textarea name="taContent" id="taContent" cols=150 rows=20 style="overflow-y:scroll; resize:none;"><%= request.getParameter("bContent").replaceAll("<br>","\r\n") %></textarea>
 	</div>	
 	
 	<div id = "creW_roop">

@@ -20,7 +20,7 @@
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/창작목록.css" rel="stylesheet" />
 <style>
-	.pagingArea{margin-top:30px;}
+	.pagingArea{margin-top:30px; margin-bottom:50px;}
 	#searchType{font-size:14px; height:25px;}
 	#searchInput{font-size:14px; height:20px;}
 </style>
@@ -60,7 +60,7 @@
 	<!-- 창작글 목록 -->
 	<table id="ta1">
 		<tr>
-			<td class="t" id="c_t_1">글 번호</td>
+			<th class="t" id="c_t_1" height=80px>글 번호</th>
 			<th class="t" id="c_t_2" colspan="2">영화 내용</th>
 			<th class="t" id="c_t_3">내용</th>
 			<th class="t" id="c_t_4">등록일</th>
@@ -105,29 +105,6 @@
 <!-- 		</form> -->
 	</div>
 	
-
-	
-	<!-- 글쓰기 -->
-	<% if(loginUser != null){ %>
-		<input id="write" type="button" value="글쓰기"
-			   onclick="location.href='<%= request.getContextPath() %>/view/create/createWrite.jsp'">
-	<% } %>
-	
-	<!-- 검색조건 -->
-	<div id="c_d_3">
-	<form action="<%=request.getContextPath() %>/list.cr" method="get">
-		<select id="searchType" name="sk">
-	  		<option ${(param.sk=="전체")?"selected":""} value="전체">전체</option>
-	  		<option ${(param.sk=="제목")?"selected":""} value='제목'>제목</option>
-	  		<option ${(param.sk=="감독")?"selected":""} value='감독'>감독</option>
-	  		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
-		</select>
-			
-		<input type="text" id="searchInput" name="sv" value="${param.sv}">
-	</form>
-	
-	</div>
-	
 		<!-- 페이징 -->	
 
 	<div class="pagingArea" align="center">
@@ -162,6 +139,30 @@
 			<!-- 맨 끝으로 -->
 			<button onclick="location.href='<%= request.getContextPath() %>/list.cr?currentPage=<%= maxPage %>'">&gt;&gt;</button>
 	</div>
+	
+	<!-- 글쓰기 -->
+	<% if(loginUser != null){ %>
+		<input id="write" type="button" value="글쓰기" class="myButton"
+			   onclick="location.href='<%= request.getContextPath() %>/view/create/createWrite.jsp'">
+	<% } %>
+	
+	<!-- 검색조건 -->
+	<div id="c_d_3">
+	<form action="<%=request.getContextPath() %>/list.cr" method="get">
+		<select id="searchType" name="sk">
+	  		<option ${(param.sk=="전체")?"selected":""} value="전체">전체</option>
+	  		<option ${(param.sk=="제목")?"selected":""} value='제목'>제목</option>
+	  		<option ${(param.sk=="감독")?"selected":""} value='감독'>감독</option>
+	  		<option ${(param.sk=="내용")?"selected":""} value="내용">내용</option>
+		</select>
+			
+		<input type="text" id="searchInput" name="sv" value="${param.sv}">
+		<input id="botSearch" type="submit" value="검색"/>
+	</form>
+	
+	</div>
+	
+
 
 
 

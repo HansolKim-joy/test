@@ -241,26 +241,26 @@
 			<!-- 목록수정삭제 버튼 -->
 			<div id=listbtn>
 			<% if(loginUser != null && loginUser.getUserId().equals(c.getbWriter())) { %>
-	        <button  class="lbtn" id="bupBtn" type=submit title="수정" >수정</button>
-	        <button  class="lbtn" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
-	        <button class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
+	        <button  class="myButton" id="bupBtn" type=submit title="수정" >수정</button>
+	        <button  class="myButton" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
+	        <button class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
 		    <% } else if(!loginUser.getUserId().equals(c.getbWriter())) { %>
-		        <button style="margin-left:120px" class="lbtn" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
+		        <button class="myButton" style="margin-left:195px"  id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
 		    <% } %>    
 			</div>
 			</form>
 			
 			 
 			<!-- 댓글 -->
-			<div id="replybox1" style="width:1095px;">
+			<div id="replybox1">
 				<table>
 				<tr>
 					<td>
-						<textarea id="reply_content" name="reply_content" rows="2" cols="167"  
+						<textarea id="reply_content" name="reply_content" rows="2" cols="167" style="white-space: pre-wrap"
 					  placeholder="댓글을 입력하세요." ></textarea>
 					</td>
 					<td>
-						<button id="reply_save" style="margin-top:-5px; margin-left:10px;">댓글 작성</button>
+						<button id="reply_save" class="myButton" style="margin-top:-5px;">댓글 작성</button>
 					</td>
 				</tr>
 				</table>
@@ -279,9 +279,9 @@
 							<td>
 								<% if(loginUser != null && loginUser.getUserId().equals(comment.get(i).getrWriter())) { %>
 									<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
-									<input type="button" id="report" value="삭제" class="deleteC">
+									<input type="button" class="myButton" id="report" value="삭제" class="deleteC">
 								<% } else {%>
-									<button type=button id=report onclick="sendPopR();">신고</button>				
+									<button type=button class="myButton" id=report onclick="sendPopR();">신고</button>				
 									<% } %>
 									
 									<script>
@@ -362,7 +362,7 @@
 				
 				if($('#reply_content').val().trim().length == 0){
 					alert("댓글을 작성해주세요");
-				}else{
+				}else{d
 					//alert("댓글 작성 완료");
 				}
 				

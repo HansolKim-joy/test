@@ -72,6 +72,9 @@ public class CreateUpdateServlet extends HttpServlet {
 		String director = multiRequest.getParameter("creW_directorName");
 		String content = multiRequest.getParameter("taContent");
 		
+		content = content.replace("\r\n", "<br>");
+	
+		
 		Create c = new Create();
 		c.setbNO(cNo);
 		c.setbTitle(title);
