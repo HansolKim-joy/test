@@ -6,6 +6,8 @@ public class MyFollow {
 	private int bCnt;
 	private int cCnt;
 	
+	public MyFollow(){}
+	
 	public MyFollow(String followedUser, int bCnt, int cCnt) {
 		super();
 		this.followedUser = followedUser;

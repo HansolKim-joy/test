@@ -4,6 +4,7 @@
 <% 
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("Recruitlist");
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("Reviewlist");
+// 	Recruit r = (Recruit)request.getAttribute("board");
 // 	System.out.println("index"+ RecruitList);
 %>
 <!DOCTYPE html>
@@ -14,25 +15,12 @@
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/index.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
-<script>
-$(document).ready(function() { 
-    $(".pp_slider").lightSlider({
-        mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
-        loop:true,       // 무한반복 할 것인지
-        auto:true,       // 자동 슬라이드
-        keyPress:true,   // 키보드 탐색 허용
-        pager:false,     // 페이지 표시
-        speed:1500,      // 슬라이드 되는 속도
-        pause:3000      // 이미지가 머무는 시간
-    });
-});
-</script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://han3283.cafe24.com/js/lightslider/css/lightslider.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
+<link rel="stylesheet" href="https://han3283.cafe24.com/js/lightslider/css/lightslider.css">
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!-- <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script> -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!-- <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script> -->
 <style>
 	.tablename{
 		font-size: 25px;
@@ -45,6 +33,7 @@ $(document).ready(function() {
 	.pp_slide-wrap{
 		margin: 0 auto;
 		margin-top: 100px;
+		z-index: 9999;
 	}
 	.pp_slider{
 	    list-style: none outside none;
@@ -121,76 +110,10 @@ $(document).ready(function() {
 <!-- 메인 영화 정보 -->
     <div class="pp_slide-wrap">
         <div class="pp_slide-content">
-            <ul id="pp_slider" class="pp_slider">
-                <li class="pp_item">
-                	<table id="mainMoviebody">
-                		<tr>
-                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
-                			<td>
-                				<div class="pp_item1">
-                					여러분 모두 힘내세요<br>
-                					이제 얼마안남았어요<br>
-                					모두가 힘을 내서 하다보면 <br>
-                					우린 완성을 할 수 있어요<br>
-                					공유해조 모두모두 화이팅<br>
-                				</div>
-                			</td>
-                		</tr>
-                	</table>
-                </li>
-                <li class="pp_item">
-                	<table>
-                		<tr>
-                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
-                			<td>
-                				<div class="pp_item1">
-                					눈물이 차올라서 <br>
-                					고갤들어 <br>
-                					흐르지 못하게 <br>
-                					살짝 웃어<br>
-                					내가 왜이러는지<br>
-                					부끄럼도 없는지<br>
-                				</div>
-                			</td>
-                		</tr>
-                	</table>
-                </li>
-                <li class="pp_item">
-                	<table>
-                		<tr>
-                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
-                			<td>
-                				<div class="pp_item1">
-                					짜증날땐 짜장면<br>
-                					우울할땐 울면<br>
-                					복잡할땐 볶음밥<br>
-                					타앝앝앝ㅇ 탕수육<br>
-                				</div>
-                			</td>
-                		</tr>
-                	</table>
-                </li>
-                <li class="pp_item">
-                	<table>
-                		<tr>
-                			<td><img src="<%= request.getContextPath() %>/Resources/images/" class="pp_poster2"></td>
-                			<td><div class="pp_item1">asdfasdfasdfa</div></td>s
-                		</tr>
-                	</table>
-                </li>
-                <li class="pp_item">
-                	<table>
-                		<tr>
-                			<td><img src="/Watch_Next/Resources/images/어벤져스.jpg" class="pp_poster2"></td>
-                			<td><div class="pp_item1">asdfasdfasdfa</div></td>
-                		</tr>
-                	</table>
-                </li>
+            <ul id="pp_slider1" class="pp_slider">
             </ul>
         </div>
     </div>
-    
- 
     
     <!-- 리뷰게시판 -->
 	<div id="review">
@@ -233,6 +156,67 @@ $(document).ready(function() {
 	<!-- footer -->
 	<%@ include file="/view/layout/footer.jsp" %>
 </div>
+
+<script>
+	$(document).ready(function() { 
+// 	    $(".pp_slider").lightSlider({
+// 	        mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
+// 	        loop:true,       // 무한반복 할 것인지
+// 	        auto:true,       // 자동 슬라이드
+// 	        keyPress:true,   // 키보드 탐색 허용
+// 	        pager:true,     // 페이지 표시
+// 	        speed:1500,      // 슬라이드 되는 속도
+// 	        pause:3000,      // 이미지가 머무는 시간
+// 	    });
+	    
+		$.ajax({
+			url: 'movielist.vo',
+			success: function(data){
+				$liBody = $('.pp_slider');
+			
+				for(var i in data){
+					var $li = $("<li>");
+					var $table = $("<table>");
+					var $tr = $("<tr>");
+					var $td1 = $("<td>");
+					var $td2 = $("<td>");
+						
+					var $movieTd = $("<img class='pp_poster2'>").attr("src", "/Watch_Next/Resources/images/" + data[i].newFileName);
+					var $divTd = $("<div class='pp_item1'>").html("영화 제목 : " + data[i].mTitle + "<br>" + "감독 : " + data[i].mDirector + "<br>" + "출연진 : " + data[i].mActor + "<br>" + "줄거리 : " + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
+					
+					
+					
+					$tr.click(function(){
+						console.log(data[i].mTitle);
+						location.href='<%= request.getContextPath() %>/search.mo?movieTitle=' + data[i].mTitle;
+					}).mouseenter(function(){
+						$(this).parent().css('cursor', 'pointer');
+					});
+					
+					$td1.append($movieTd);
+					$td2.append($divTd);
+					$tr.append($td1);
+					$tr.append($td2);
+					$table.append($tr);
+					$li.append($table);
+					
+					$liBody.append($li);
+				}
+				$(".pp_slider").lightSlider({
+			        mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
+			        loop:true,       // 무한반복 할 것인지
+			        auto:true,       // 자동 슬라이드
+			        keyPress:true,   // 키보드 탐색 허용
+			        pager:false,     // 페이지 표시
+			        speed:1500,      // 슬라이드 되는 속도
+			        pause:3000,      // 이미지가 머무는 시간
+			    });
+			}
+		}); 
+		
+	});
+</script>
+
 <script>
 
 // 	ajax는 데이터를 보내고 받아 올 때 사용한다 ex) 댓글 순, 중복확인, 좋아요 순 등등
@@ -245,7 +229,7 @@ $(document).ready(function() {
 			data: {fi:fi},
 			success:function(data){
 				$tableBody = $('#mainReviewBody tbody');
-				$tableBody.html("");
+// 				$tableBody.html("");
 				
 				for(var i in data){
 					var $tr = $("<tr>");
@@ -265,14 +249,25 @@ $(document).ready(function() {
 					var $bWriterTd = $("<td>").text(data[i].bWriter);
 					var $viewsTd = $("<td>").text(data[i].bCount);
 					
-					$tr.append($numTd);				
-					$tr.append($spoTd);		
-					$tr.append($mTitleTd);
-					$tr.append($gradeTd);
-					$tr.append($bDateTd);
-					$tr.append($bWriterTd);
-					$tr.append($viewsTd);
-					$tableBody.append($tr);
+					if(loginUser != null){
+						$tr.click(function(){
+							location.href='<%= request.getContextPath() %>/detail.rv?rv=' + data[i].bNo;
+						}).mouseenter(function(){
+							$(this).parent().css('cursor', 'pointer');
+						});
+					} else {
+						alert("로그인 후 이용해주세요.");
+						
+					}	
+					
+						$tr.append($numTd);				
+						$tr.append($spoTd);		
+						$tr.append($mTitleTd);
+						$tr.append($gradeTd);
+						$tr.append($bDateTd);
+						$tr.append($bWriterTd);
+						$tr.append($viewsTd);
+						$tableBody.append($tr);
 				}
 // 				console.log(data);
 			}
@@ -283,17 +278,25 @@ $(document).ready(function() {
 			data: {se:se},
 			success:function(data){
 				$tableBody = $('#mainWantedBody tbody');
-				$tableBody.html("");
+// 				$tableBody.html("");
 				
 				for(var i in data){
 					var $tr = $("<tr>");
+					var $rNo = data[i].rNo;
+// 					console.log($rNo);
 					var $numTd = $("<td>").text(data[i].rNo);
 					var $categoryTd = $("<td>").text(data[i].rHead);
 					var $titleTd = $("<td>").text(data[i].bTitle);
 					var $dateTd = $("<td>").text(data[i].bDate);
 					var $writerTd = $("<td>").text(data[i].userId);
 					var $hitsTd = $("<td>").text(data[i].bViews);
-				
+					
+					$tr.click(function(){
+						location.href="<%= request.getContextPath() %>/detail.recruit?rNo=" + data[i].rNo;
+					}).mouseenter(function(){
+						$(this).parent().css('cursor', 'pointer');
+					});
+					
 					$tr.append($numTd);				
 					$tr.append($categoryTd);				
 					$tr.append($titleTd);				
@@ -306,33 +309,10 @@ $(document).ready(function() {
 			}
 		});
 		
-		$.ajax({
-			url: 'movielist.vo',
-			success: function(data){
-				$tableBody = $('#mainMoivebody');
-				$tableBody.html("");
-				
-				for(var i in data){
-					var $tr = $("<tr>"); 
-					var $td = $("<td>"); // 영화 포스터
-					var $divTd = $("<div>").text(data[i].mTitle + "<br>" + data[i].mDirector + "<br>" + data[i].mActor + "<br>" + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
-					
-					$tr.append($divTd);
-					$tableBody.append($tr);
-				}
-// 				console.log(data);
-			}
-			
-			
-		});
-		
-		
 	});
-		
-		
-		
 </script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
 </body>
 </html>

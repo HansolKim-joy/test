@@ -75,10 +75,10 @@
 			</tr>
 		<%} else{%>
 			<% for(int i=0; i<mlist.size(); i++){%>
-				<%if(moviecheck % 6 == 0 || moviecheck == 1){%>
+				<%if(moviecheck == 6 || moviecheck == 1){%>
 					<tr>
 				<%} %>
-				<th class="m_t"><a class="a_tag" href="<%=request.getContextPath()%>/search.mo?movieTitle=<%= mlist.get(i).getmTitle()%>"><img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p"><br><%= mlist.get(i).getmTitle()%></a></th>
+						<th class="m_t"><a class="a_tag" href="<%=request.getContextPath()%>/detail.mo?movieTitle=<%= mlist.get(i).getmTitle()%>&no=<%=mlist.get(i).getmNo()%>"><img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p"><br><%= mlist.get(i).getmTitle()%></a></th>
 				<%if(moviecheck % 5 == 0){%>
 					</tr>
 				<%} %>

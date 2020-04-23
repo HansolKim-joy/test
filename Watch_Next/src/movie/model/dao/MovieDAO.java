@@ -173,7 +173,7 @@ public class MovieDAO {
 			pstmt.setString(1, movieTitle);
 			mMap = new HashMap<String, Movie>();
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
+			while(rset.next()) {
 				m = new Movie(
 						rset.getInt("movie_no"),
 						rset.getString("movie_title"),
@@ -292,6 +292,98 @@ public class MovieDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+	public HashMap<String, Movie> DetailMovie(Connection conn, String movieTitle, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Movie> mMap = null;
+		Movie m = null;
+		String sql = prop.getProperty("detailMovie");
+		// select * from MLIST where MOVIE_TITLE = ?
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, movieTitle);
+			pstmt.setInt(2, no);
+			mMap = new HashMap<String, Movie>();
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Movie(
+						rset.getInt("movie_no"),
+						rset.getString("movie_title"),
+						rset.getString("director"),
+						rset.getString("actor"),
+						rset.getString("runningtime"),
+						rset.getDate("releasedate"),
+						rset.getString("country"),
+						rset.getString("story"),
+						rset.getString("service_site")
+						);
+				mMap.put(rset.getString("file_newname") + ", " + rset.getString("genre"), m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mMap;
+	}
+
+	public int DeleteMovie(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("DeleteMovie");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int DeleteAllDib(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("DeleteAllDib");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int DeleteImage(Connection conn, String fName) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("DeleteImage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 }

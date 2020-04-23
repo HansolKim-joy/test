@@ -1,15 +1,39 @@
 @charset "UTF-8";
-body{background: #545357; margin: 0px 40px;}
-#letter_detail_btn{
-	color: white; 
-	background: #ff3333; 
-	border: 0px; 
-	border-radius: 5px;
-	width: 70px; 
-	height: 25px;
+
+body {
+	background: #545357;
+	margin: 0px 40px;
 }
-#letter_send_btn_area{
+
+#letter_send_btn_area {
 	height: 100px;
-	text-align:center;
-	margin-top:50px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+#letter_detail_btn {
+	box-shadow: inset 0px 1px 0px 0px #f5978e;
+	background: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+	background-color: #f24537;
+	border-radius: 6px;
+	border: 1px solid #db1f11;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 18px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #810e05;
+}
+
+#letter_detail_btn:hover {
+	background: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+	background-color: #c62d1f;
+}
+
+#letter_detail_btn:active {
+	position: relative;
+	top: 1px;
 }

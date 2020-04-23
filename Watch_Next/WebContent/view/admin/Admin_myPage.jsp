@@ -198,6 +198,13 @@
 		
 		$('#mp_button1').click(function(){
 			$('#mp_h_content1').slideToggle();
+			$.ajax({
+				url: "../../report.do",
+				success: function(){
+					console.log('실행된다');
+					
+				}
+			});
 		});
 		
 		$('#mp_button2').click(function(){
