@@ -51,7 +51,7 @@
 						<tr>
 							<td>이메일</td>
 							<td><input type="email" class="jn_input" id="user_Email" name="user_Email" placeholder="이메일을 입력하시오."></td>
-							<td><input type="button" onclick="email_CheckNum()" value="인증받기"></td>
+							<td><input type="button" class="myButton" onclick="email_CheckNum()" value="인증받기"></td>
 						</tr>
 						<tr>
 							<td class="em_hide" id="email_Check">이메일 확인</td>
@@ -65,9 +65,9 @@
 						</tr>
 					</table>
 					<div id="jn_btn">
-						<button type="button" id="bu_sty" onclick="jnform();">가입하기
+						<button type="button" class="myButton" id="bu_sty" onclick="jnform();">가입하기
 						</button>
-						<button type="reset" id="bu_sty">취소</button>
+						<button type="button" class="myButton" id="bu_sty" onclick="location.href='history.go(-1)'" >취소</button>
 					</div>
 				</form>
 			</div>

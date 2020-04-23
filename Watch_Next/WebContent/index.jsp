@@ -42,6 +42,7 @@
 	}
 	.pp_slide-content{
 	    margin-bottom: 60px;
+	    
 	    /* height: 400px; */
 	}
 	.pp_slider li{
@@ -54,6 +55,7 @@
 	.pp_slide-content{
 	    width:100%;
 	    height:300px;
+	    padding-left: 2%;
 	}
 	#pp_item_ct{
 		border: 1px solid white;
@@ -68,10 +70,13 @@
 	.pp_poster2{display: inline; vertical-align: baseline; width: 200px; height: 300px;}
 	.pp_item1{
 		width: 200px; 
-		background-color: black; 
+		background-color: #545357; 
 		height: 300px;
-		font-size: 20px;
-		text-align: center;
+		font-size: 18px;
+		text-align: initial;
+	    padding-left: 15px;
+/* 	    font-family: 'Nanum Myeongjo', serif; */
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
 		/* 최신글 */
@@ -159,16 +164,6 @@
 
 <script>
 	$(document).ready(function() { 
-// 	    $(".pp_slider").lightSlider({
-// 	        mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
-// 	        loop:true,       // 무한반복 할 것인지
-// 	        auto:true,       // 자동 슬라이드
-// 	        keyPress:true,   // 키보드 탐색 허용
-// 	        pager:true,     // 페이지 표시
-// 	        speed:1500,      // 슬라이드 되는 속도
-// 	        pause:3000,      // 이미지가 머무는 시간
-// 	    });
-	    
 		$.ajax({
 			url: 'movielist.vo',
 			success: function(data){
@@ -180,21 +175,31 @@
 					var $tr = $("<tr>");
 					var $td1 = $("<td>");
 					var $td2 = $("<td>");
-						
 					var $movieTd = $("<img class='pp_poster2'>").attr("src", "/Watch_Next/Resources/images/" + data[i].newFileName);
 					var $divTd = $("<div class='pp_item1'>").html("영화 제목 : " + data[i].mTitle + "<br>" + "감독 : " + data[i].mDirector + "<br>" + "출연진 : " + data[i].mActor + "<br>" + "줄거리 : " + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
+					var $mtitle = $("<input type='hidden' id='title'>").attr('value', data[i].mTitle);
+					var $mNotd =  $("<input type='hidden' id='title1'>").attr('value', data[i].mNo);
 					
+// 					console.log($mtitle);
 					
 					
 					$tr.click(function(){
-						console.log(data[i].mTitle);
-						location.href='<%= request.getContextPath() %>/search.mo?movieTitle=' + data[i].mTitle;
+						$mno = $(this).find('#title').val();
+						$mNo = $(this).find('#title1').val();
+						
+// 						console.log(mNo)
+						
+						location.href='<%= request.getContextPath() %>/detail.mo?movieTitle=' + $mno + "&no=" + $mNo;
+						
+						
 					}).mouseenter(function(){
 						$(this).parent().css('cursor', 'pointer');
 					});
 					
 					$td1.append($movieTd);
 					$td2.append($divTd);
+					$td1.append($mtitle);
+					$td1.append($mNotd);
 					$tr.append($td1);
 					$tr.append($td2);
 					$table.append($tr);
@@ -233,7 +238,7 @@
 				
 				for(var i in data){
 					var $tr = $("<tr>");
-					var $numTd = $("<td>").text(data[i].bNo);
+					var $numTd = $("<td id='dno'>").text(data[i].bNo);
 					
 					switch(data[i].spo){
 					case "Y": 
@@ -249,16 +254,14 @@
 					var $bWriterTd = $("<td>").text(data[i].bWriter);
 					var $viewsTd = $("<td>").text(data[i].bCount);
 					
-					if(loginUser != null){
+					
 						$tr.click(function(){
-							location.href='<%= request.getContextPath() %>/detail.rv?rv=' + data[i].bNo;
+							$dno = $(this).find('#dno').eq(0).text();
+							
+							location.href= "<%= request.getContextPath() %>/detail.rv?rv=" + $dno;
 						}).mouseenter(function(){
 							$(this).parent().css('cursor', 'pointer');
 						});
-					} else {
-						alert("로그인 후 이용해주세요.");
-						
-					}	
 					
 						$tr.append($numTd);				
 						$tr.append($spoTd);		
@@ -284,7 +287,7 @@
 					var $tr = $("<tr>");
 					var $rNo = data[i].rNo;
 // 					console.log($rNo);
-					var $numTd = $("<td>").text(data[i].rNo);
+					var $numTd = $("<td id='rno'>").text(data[i].rNo);
 					var $categoryTd = $("<td>").text(data[i].rHead);
 					var $titleTd = $("<td>").text(data[i].bTitle);
 					var $dateTd = $("<td>").text(data[i].bDate);
@@ -292,7 +295,8 @@
 					var $hitsTd = $("<td>").text(data[i].bViews);
 					
 					$tr.click(function(){
-						location.href="<%= request.getContextPath() %>/detail.recruit?rNo=" + data[i].rNo;
+						$rno = $(this).find('#rno').eq(0).text();
+						location.href="<%= request.getContextPath() %>/detail.recruit?rNo=" + $rno;
 					}).mouseenter(function(){
 						$(this).parent().css('cursor', 'pointer');
 					});
