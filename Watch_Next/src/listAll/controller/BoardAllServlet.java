@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import Funding.model.vo.Demand;
 import common.Comment;
+import create.model.vo.Create;
 import listAll.model.vo.MyFollow;
 import member.model.vo.Member;
 import movie.model.service.BoardService;
@@ -49,9 +50,11 @@ public class BoardAllServlet extends HttpServlet {
 		ArrayList<Movie> DibList = bService.selectMyDib(userId);
 		ArrayList<Comment> ReviewComlist = bService.selectComment(userId);
 		ArrayList<Comment> RecruitComlist = bService.selectRcComment(userId);
+		ArrayList<Comment> CreateComList = bService.selectCcomment(userId);
 		ArrayList<MyFollow> FollowList = bService.selectFollow(userId);
 		ArrayList<Demand> OpenFunding = bService.selectOpenFunding(userId);
 		ArrayList<Demand> CloseFunding = bService.selectClosedFunding(userId);
+		ArrayList<Create> CreateList = bService.selectCreate(userId);
 //		System.out.println("ksldjf" + ReviewList);
 		
 		String page = "";
@@ -67,6 +70,8 @@ public class BoardAllServlet extends HttpServlet {
 			request.setAttribute("FollowList", FollowList);
 			request.setAttribute("OpenFunding", OpenFunding);
 			request.setAttribute("CloseFunding", CloseFunding);
+			request.setAttribute("CreateList", CreateList);
+			request.setAttribute("CreateComList", CreateComList);
 		}else {
 			page = "view/errorPage/errorPage.jsp";
 		}

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, report.model.vo.*"%>
+<%
+	ArrayList<Report> BoardReport = (ArrayList<Report>)request.getAttribute("BoardReport");
+	ArrayList<Report> CommReport = (ArrayList<Report>)request.getAttribute("CommReport");
+
+%>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -120,6 +125,20 @@
 		text-align: center;
 		width: 500px;
 	}
+	.reportTable{
+		width: 100%;
+		text-align:center;
+	}
+	.reportTable td{
+		width: 20%;
+	}
+	#moveTable{
+		width: 100%;
+		text-align: center;
+	}
+	#moveTable td{
+		width: 20%;
+	}
 </style>
 </head>
 <body>
@@ -156,11 +175,66 @@
 				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content1" class="mp_h_content">
-					내용
+					게시글 신고
+					<table id="bReport" class="reportTable">
+						<tr>
+							<td> 신고 대상 번호 </td>
+							<td> 신고 대상 </td>
+							<td> 신고 이유 </td>
+							<td> 신고 대상자 </td>
+							<td> 신고 요청자 </td>
+						</tr>
+						<tr>
+						<% if(BoardReport.isEmpty()){%>
+							<td colspan="5">신고한 현황이 없습니다.</td>
+						<%}else{ %>
+							<% for(int i = 0; i < BoardReport.size(); i++) {%>
+								<td><%= BoardReport.get(i).getBoardNo() %></td>
+								<td><%= BoardReport.get(i).getTtorcc() %></td>
+								<td><%= BoardReport.get(i).getDecContent() %></td>
+								<td><%= BoardReport.get(i).getReporter() %></td>
+								<td><%= BoardReport.get(i).getUserId() %></td>
+							</tr>
+							<%} %>
+						<%} %>
+					</table> 
+					<br><br>
+					댓글 신고
+					<table id="cReport" class="reportTable">
+						<tr>
+							<td> 신고 대상 번호 </td>
+							<td> 신고 대상 </td>
+							<td> 신고 이유 </td>
+							<td> 신고 대상자 </td>
+							<td> 신고 요청자 </td>
+						</tr>
+						<tr>
+							<% if(CommReport.isEmpty()) {%>
+								<td colspan="5">신고한 현황이 없습니다.</td>
+							<%}else{ %>
+								<% for(int i = 0; i < CommReport.size(); i++){ %>
+									<td><%= CommReport.get(i).getBoardNo() %></td>
+									<td><%= CommReport.get(i).getTtorcc() %></td>
+									<td><%= CommReport.get(i).getDecContent() %></td>
+									<td><%= CommReport.get(i).getReporter() %></td>
+									<td><%= CommReport.get(i).getUserId() %></td>
+								</tr>
+								<%} %>
+							<%} %>
+					</table>
+					<br><br><br>
+					게시판 이동
+					<table id="moveTable">
+						<tr>
+							<td><div id="moveReview" class="move" onclick="location.href='/Watch_Next/list.rv'">리뷰 게시판 이동</div></td>
+							<td><div id="moveRecruit" class="move" onclick="location.href='/Watch_Next/list.recruit'">모집 게시판 이동</div></td>
+							<td><div id="moveCreate" class="move" onclick="location.href='/Watch_Next/list.cr'">창작 게시판 이동</div></td>
+							<td><div id="moveFunding" class="move" onclick="location.href='/Watch_Next/list.de'">펀딩 게시판 이동</div></td>
+						
+						</tr>
+					</table>
 				</div>
 			</div>
-			
-			
 			
 			<div id="mp_content2" class="mp_content">회원 정보 조회 &nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="submit" id="mp_button2" class="mp_button">+</button>
@@ -198,13 +272,6 @@
 		
 		$('#mp_button1').click(function(){
 			$('#mp_h_content1').slideToggle();
-			$.ajax({
-				url: "../../report.do",
-				success: function(){
-					console.log('실행된다');
-					
-				}
-			});
 		});
 		
 		$('#mp_button2').click(function(){
@@ -218,16 +285,16 @@
 				url : "../../searchUser.do",
 				data : {searchUser:searchUser},
 				success: function(data){
-					console.log('성공');
+					/* console.log('성공');
 					console.log(data);
-					console.log(typeof(data));
+					console.log(typeof(data)); */
 					if(data != null){
 						$('#sUid').text(data.userId);
 						$('#sUname').text(data.userName);
 						$('#sUcboard').text(data.countBoard);
 						$('#sUccom').text(data.countComment);
 					}else{
-						console.log('없는 회원');
+						/* console.log('없는 회원'); */
 						alert('존재하지 않는 회원입니다.');
 					}
 				}
