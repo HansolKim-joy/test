@@ -48,6 +48,10 @@ public class RecruitListServlet extends HttpServlet {
 		ArrayList<Review> Reviewlist = new mainlistService().selectRvlist();
 //		System.out.println("servlet" + list);
 		
+		
+		
+		
+		
 //		String page = "";
 		if(fi != null && se == null) {
 //			System.out.println("여기야1");
@@ -60,17 +64,8 @@ public class RecruitListServlet extends HttpServlet {
 		} else {
 			
 		}
-//			page = "index.jsp";
-//			request.setAttribute("RecruitList", list);
-			
-//		} else {
-////			page = "/views/errorPage/errorPage.jsp";
-//		}
-	
-//		RequestDispatcher view = request.getRequestDispatcher(page);
-//		view.forward(request, response);
-		
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

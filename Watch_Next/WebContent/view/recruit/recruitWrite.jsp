@@ -93,7 +93,7 @@
 	<div id = "recW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="recW_button" onclick="location.href='<%=request.getContextPath() %>/list.recruit'">
+	<input type="reset" value="취소" id="cancel_button" onclick="location.href='<%=request.getContextPath() %>/list.recruit'">
 	<input type="submit" value="완료" id="recW_button" class="recW_submit" >
 	</div>
 </form>

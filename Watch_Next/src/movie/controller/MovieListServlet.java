@@ -56,7 +56,7 @@ public class MovieListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		maxPage = (int)(((double)(listCount)/boardLimit) + 0.9);
+		maxPage = (int)(((double)(listCount)/boardLimit) + 0.99);
 		if(maxPage < 1) {
 			maxPage = 1;
 		}

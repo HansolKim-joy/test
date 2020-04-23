@@ -47,7 +47,7 @@ body{background: #545357;}
 }
 
 	/* 모집글 */
-#recW_recruit{width: 80%; margin:100px auto; color:white;}
+#recW_recruit{width: 80%; margin:0 auto; margin-bottom: 60px; color:white;}
 #recW_recruitName{width: 520px; height: 20px; font-size: 18px; color: black;}
 #recW_type{width: 150px; height: 30px; font-size: 18px; color: black;}
 #recW_spolier{font-weight: bold;}
@@ -57,7 +57,7 @@ body{background: #545357;}
 #recW_button{
 	width: 100px; 
 	float: right; 
-	margin: 30px; 
+	margin-top: 16px;
 	height: 30px; 
 	font-size: 15px; 
 	font-weight: bold;
@@ -66,6 +66,20 @@ body{background: #545357;}
 	border: 0px; 
 	border-radius: 5px; 
 }
+#cancel_button{
+	width: 100px; 
+	float: right; 
+	margin-top: 16px;
+	margin-left: 13px;
+	height: 30px; 
+	font-size: 15px; 
+	font-weight: bold;
+	color: white; 
+	background: #ff3333; 
+	border: 0px; 
+	border-radius: 5px; 
+}
+
 
 	/* footer */
 #recW_foot{text-align: center; margin-bottom: 30px; }

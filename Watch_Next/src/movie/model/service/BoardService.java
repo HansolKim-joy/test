@@ -5,6 +5,7 @@ import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -171,5 +172,42 @@ public class BoardService {
 		ArrayList<MyFollow> FollowList = new BoardDAO().selectFollow(conn, userId);
 		close(conn);
 		return FollowList;
+	}
+	public HashMap<String, Movie> DetailMovie(String movieTitle, int no) {
+		Connection conn = getConnection();
+		HashMap<String, Movie> m = new MovieDAO().DetailMovie(conn, movieTitle, no);
+		close(conn);
+		return m;
+	}
+
+	public int DeleteMovie(int no, String fName) {
+		Connection conn = getConnection();
+		int result1 = new MovieDAO().DeleteAllDib(conn,no);
+		int result2 = new MovieDAO().DeleteMovie(conn,no);
+		int result3 = new MovieDAO().DeleteImage(conn,fName);
+		if(result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result2;
+	}
+	
+	public ArrayList<Demand> selectOpenFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> OpenFunding = new BoardDAO().selectOpenFunding(conn, userId);
+		close(conn);
+		return OpenFunding;
+	}
+
+	public ArrayList<Demand> selectClosedFunding(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Demand> CloseFunding = new BoardDAO().selectClosedFunding(conn, userId);
+		close(conn);
+		return CloseFunding;
+
 	}
 }

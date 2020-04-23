@@ -110,11 +110,11 @@
 						if (chk == 0) {
 					%>
 					<!-- 보고싶어요 했는지 안했는지 검사 -->
-					<button id="want" onclick="onWant();">결제신청</button>
+					<button class="btn" id="want" onclick="onWant();">결제신청</button>
 					<%
 						} else {
 					%>
-					<button id="want" onclick="onNoWant();">결제취소</button>
+					<button class="btn" id="want" onclick="onNoWant();">결제취소</button>
 					<%
 						}
 					%>
@@ -126,7 +126,7 @@
 			location.href="<%=request.getContextPath()%>/demand.notFund?no=<%=d.getdNo()%>&userId=<%=d.getUserId()%>";
 		}
 	</script>
-					&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" target="_self"> <img
+					&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" target="_self" style="vertical-align: middle;"> <img
 						src="/Watch_Next/Resources/images/siren2.png" width="37px"
 						height="37px"
 						onclick="window.open('/Watch_Next/view/reportPop/reportPop.jsp', 'pop',
@@ -149,7 +149,7 @@
 				
 				<button
 					onclick="location.href='<%=request.getContextPath()%>/list.de'"
-					type=button title="목록">목록</button>
+					type="button" class="btn" title="목록">목록</button>
 			</div>
 
 		</div>

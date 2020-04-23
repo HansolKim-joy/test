@@ -202,9 +202,11 @@ input::-webkit-search-cancel-button{display: none;} /*검색창 x표시 삭제  
 }
 #footer{
 	position: relative;
-	width: 100%; 
-	height: 100px;
-	text-align: center;
+    width: 80%;
+    height: 100px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 9.6%;
 }
 .f_bottom-contents{
 	color: white;

@@ -1,6 +1,6 @@
 package report.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -80,41 +81,65 @@ public class ReportDAO {
 		
 		return result;
 	}
-
-	
-	/*public ArrayList<Comment> getRpNo(Connection conn, String userId) { 
-		// getRpNo =select comments_no from tb_dec where user_id=? and comments_no is not null
-		PreparedStatement pstmt = null;
+  
+	public ArrayList<Report> selectBoardReport(Connection conn) {
+		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<Comment> repRp = null;
-	
-		String query = prop.getProperty("getRpNo"); 
-		try { 
-			pstmt =conn.prepareStatement(query); 
-			pstmt.setString(1,userId);
-			rset = pstmt.executeQuery();
-			
-			repRp = new ArrayList<Comment>();
+		Report r = null;
+		ArrayList<Report> BoardReport = new ArrayList<Report>();
 		
+		String query = prop.getProperty("boardReport");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
 			while(rset.next()) {
-				repRp.add(new Comment )
+				r = new Report(rset.getInt("boardNo"),
+							   rset.getString("dec_content"),
+							   rset.getString("reporter"),
+							   rset.getString("reported"),
+							   rset.getString("board_title"));
+				BoardReport.add(r);
 			}
-			
-			for(int i = 0; rset.next(); i++) { 
-				repRp[i] += rset.getInt("COMMENTS_NO"); //배열 list로 바꾸기
-				
-			} 
-		
-		} catch (SQLException e) { 
-			e.printStackTrace(); 
-		} finally { 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(rset);
-			close(pstmt); 
+			close(stmt);
 		}
-		 
-		return repRp; 
+		return BoardReport;
+	}
+	
+	public ArrayList<Report> selectCommReport(Connection conn){
+		Statement stmt = null;
+		ResultSet rset = null;
+		Report r = null;
+		ArrayList<Report> CommReport = new ArrayList<Report>();
 		
-	}*/
-	 
-
+		String query = prop.getProperty("commReport");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				r = new Report(rset.getInt("comments_no"),
+							   rset.getString("dec_content"),
+							   rset.getString("reporter"),
+							   rset.getString("reported"),
+							   rset.getString("comments_cotent"));
+				CommReport.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return CommReport;
+	}	
 }
