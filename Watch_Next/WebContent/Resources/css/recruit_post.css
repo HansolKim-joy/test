@@ -36,15 +36,58 @@
 
 #atag{vertical-align: middle;}
 #content{margin:20px;}
-#listbtn{width:250px; margin-left:87%; margin-top: -180px;}
-#listbtn button{background-color:red; color:white;
-				border:none; border-radius:5px; 
-				width:50px; height:25px; font-size:14px; margin-top: 180px;}
-				
-#menu{background-color:red; color:white;
+
+.myButton {
+   box-shadow:inset 0px 1px 0px 0px #f5978e; 
+   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+   background-color:#f24537;
+   border-radius:6px;
+   border:1px solid #db1f11;
+   display:inline-block;
+   cursor:pointer;
+   color:#ffffff;
+   font-family:Arial;
+   font-size:15px;
+   font-weight:bold;
+   padding:6px 24px;
+   text-decoration:none;
+   text-shadow:0px 1px 0px #810e05;
+   
+}
+.myButton:hover {
+   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+   background-color:#c62d1f;
+}
+.myButton:active {
+   position:relative;
+   top:1px;
+}
+
+#deleteC{font-size: 12px;
+		font-weight: lighter;
+		padding: 4px 8px;
+		margin-left: 90%;
+		margin-top: 7px;}
+    
+#listbtn{
+  		margin-left: 1247px;
+    margin-top: 18px;
+}
+
+#sirenb{font-size: 12px;
+		font-weight: lighter;
+		padding: 4px 8px;
+		margin-left: 90%;
+		margin-top: 7px
+}
+
+#menu2{margin-left: 225px;
+    margin-top: -8px;
+    padding: 4px 8px;
+	background-color:red; color:white;
 	border:none; border-radius:5px; 
-	width:50px; height:25px; font-size:14px;}
-		
+	width:50px; height:25px; font-size:14px;} 
+	
 	/* 쪽지 및 팔로우 */
 #recruitp li ul {
 background: lightgray;
@@ -65,21 +108,30 @@ display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 	/* 댓글 */
 textarea:focus {outline: none;}
 
-#replybox1{font-size:14px; padding:5px; float:left; width:99%; height:60px; margin-top:30px; background-color:white; color:black; border-radius:5px;}
-#reply_content{resize: none; border:none;  height: 35px;}
-#reply_save{font-size:14px; margin-left:216px; width:100px; height:60px;
-			border:none; border-radius:5px;
-			background-color:red; color:white; font-weight:bold;}
+#replybox1{font-size:14px; padding:5px; float:left; width:91%; height:60px; margin-top:30px; background-color:white; color:black; border-radius:5px;}
+#reply_content{resize: none; border:none;  height: 35px; width: 1191px;}
+#reply_save{font-size: 17px;
+			margin-left: 198px;
+			width: 121px;
+			height: 71px;
+			border: none;
+			border-radius: 5px;
+			background-color: red;
+			color: white;
+			font-weight: bold;
+			margin-top: -7px;
+			}
 #report{margin-top:10px; margin-left:90%;
 		background-color:red; color:white; font-size:13px;
 		border:none; border-radius:5px;}
-#deleteComment{margin-top:10px; margin-left:90%;
-		background-color:red; color:white; font-size:13px;
-		border:none; border-radius:5px;}
+
 
 #replybox2{margin-top:30px; background-color:white; color:black; border-radius:5px;}
 #replybox2 th{padding-top:10px; padding-bottom:10px; text-align:left;font-weight:bold; font-size:17px; color:red;}
 #replybox2 td{padding-bottom:20px;}
 #replybox2 table{margin:15px; width:98%;}
+
+/* 수정 & 삭제 */
+
 
 

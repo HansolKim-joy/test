@@ -88,6 +88,7 @@
 		      	<td width="70px" style="font-size:17px;" ><%=r.getbViews() %></td>
 		      	<td>
 					<!-- 신고버튼 -->
+					<% if(loginUser != null && !loginUser.getUserId().equals(r.getUserId())) {%>
 	      			<a href="#" target="_self" id="atag"> 
 	      				<img
 							src="/Watch_Next/Resources/images/siren.jpg" width="37px"
@@ -95,6 +96,7 @@
 							onclick="window.open('<%=request.getContextPath()%>/view/reportPop/reportPop.jsp', 'pop', 
 					'left='+(screen.availWidth-500)/2+',top='+(screen.availHeight-300)/2+', width=500px,height=300px')">
 					</a>
+					<% } %>
 				</td>
 			</tr>
 		</table>
@@ -131,42 +133,40 @@
 
 <hr>
 
-	<div id="content" >
+	<div id="content" style="font-size:15px;" >
+	
 		<%=r.getbContent() %>
-		
-		
+		<input type="hidden" name="bContent" class= "content" value="<%=r.getbContent() %>">
+		<br><br><br><br><br><br><br><br><br><br>
 	</div>
 
-		<input type="hidden" name="bContent" class= "content" value="<%=r.getbContent() %>">
 
 	</div>
 	<!-- 목록수정삭제 버튼 -->
 	<div id=listbtn>
 		<% if (loginUser != null && loginUser.getUserId().equals(r.getUserId())) {%>
-			<button type="submit" id="update" value="수정">수정</button>
+			<button type="submit" id="update" class="myButton"value="수정">수정</button>
 			&nbsp;&nbsp;&nbsp;
-			<button type="button" id="delete" onclick="deleteRe();" value="삭제">삭제</button>
-		<%	} %>
-		&nbsp;&nbsp;&nbsp;
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/list.recruit'"
-			id="menu"
-			style="background-color: red; color: white; border: none; border-radius: 5px; width: 50px; height: 25px; font-size: 14px; text-align: center;">목록</button>
+			<button type="button" id="delete"  class="myButton" onclick="deleteRe();" value="삭제">삭제</button>
+			&nbsp;&nbsp;&nbsp;
+			<button type="button" id="menu"  class="myButton" onclick="location.href='<%=request.getContextPath()%>/list.recruit'">목록</button>
+	    <% } else if(!loginUser.getUserId().equals(r.getUserId())) {%>
+	    <button type="button" id="menu2"  class="myButton" onclick="location.href='<%=request.getContextPath()%>/list.recruit'">목록</button>    
+	    <% }  %>
 	</div>
     </form>
 
     
     	<!-- 댓글 -->
-	<div id="replybox1" >
+	<div id="replybox1">
 		<table>
 			<tr>
 				<td>
-					<textarea id="reply_content" name="reply_content" rows="2" cols="167"  
-				  placeholder="댓글을 입력하세요." ></textarea>
+					<textarea id="reply_content" name="reply_content"  placeholder="댓글을 입력하세요."  style="word-break: break-all;"></textarea>
 				</td>
 				<td>
 					
-					<button id="reply_save">댓글 작성</button>
+					<button id="reply_save" class="myButton">댓글 작성</button>
 				</td>
 			</tr>
 		</table>
@@ -183,19 +183,17 @@
 				<tr class="Comment2">
 					
 					<th><%= comment.get(i).getrWriter() %></th>
-					<td>
+					<td >
 						<% if(loginUser != null && loginUser.getUserId().equals(comment.get(i).getrWriter())) { %>
 							<input type="hidden" name="rId" class="rId" value="<%= comment.get(i).getrId() %>">
-							<input type="button" value="삭제" class="deleteC">
+							<input type="button" value="삭제" id="deleteC"  class="myButton" style="vertical-align:middle; ">
 						<% } else {%>
-						<button type="button" id="sirenb" value="popup" onclick="sendPop();">
-							<img src="/Watch_Next/Resources/images/siren2.png" width="37px" height="37px">
-						</button>
+						<button type="button" id="sirenb" value="신고" class="myButton" onclick="sendPop();">신고</button>
 							<% } %>
 					</td>
 				</tr>
 				<tr>	
-					<td colspan=2 style="font-size:14px">
+					<td colspan=2 style="font-size:14px"  style="word-break: break-all;">
 						<%= comment.get(i).getrContent() %>
 					</td>
 				</tr>

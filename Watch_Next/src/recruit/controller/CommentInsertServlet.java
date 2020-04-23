@@ -38,6 +38,7 @@ public class CommentInsertServlet extends HttpServlet {
 		//String writer = request.getParameter("writer");
 		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		String content = request.getParameter("content");
+		content = content.replace("\r\n", "<br>");
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser"); 

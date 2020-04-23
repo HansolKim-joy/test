@@ -11,6 +11,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <style>
 	.subnav li {width: 120px;}
+	.pagingArea button{padding:5px 8px 4px 8px; color:white; font-size:12px; border:1px solid gray; background: transparent;}
+button:hover{color: red; border:red 1px solid;}
+button:focus {outline: none;}
+#numBtn{background: #transparent;}
+#choosen{background: #transparent;}
 </style>
 <script src="<%=request.getContextPath() %>/Resources/js/editor.js"></script>
 <script>
@@ -20,7 +25,7 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){  
-		$('div.Editor-editor').html("<%= request.getParameter("bContent") %>");
+		$('div.Editor-editor').html('<%= request.getParameter("bContent") %>');
 		$(".topnav").hover(function() { //마우스를 topnav에 오버시
 			$(this).parent().find(".subnav").slideDown('normal').show(); //subnav가 내려옴.
 			$(this).parent().hover(function() {  
@@ -62,7 +67,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="<%=request.getContextPath() %>/Resources/css/editor.css" type="text/css" rel="stylesheet"/>
 <link rel= "stylesheet" type="text/css" href="<%=request.getContextPath() %>/Resources/css/recruit_write.css">
-<link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" >
 
 </head>
 <body>
@@ -98,8 +102,8 @@
 
 	<div id = "recW_roop">
 	
-	<input type="reset" value="취소" id="cancel_button" onclick="location.href='javascript:history.go(-1);'">
-	<input type="submit" value="수정" id="recW_button" class="recW_submit" >
+	<input type="reset" value="취소" id="cancel_button"  class="myButton" onclick="location.href='javascript:history.go(-1);'">
+	<input type="submit" value="수정" id="recW_button" class="recW_submit myButton" >
 	</div>
 </form>
 <!-- footer -->
