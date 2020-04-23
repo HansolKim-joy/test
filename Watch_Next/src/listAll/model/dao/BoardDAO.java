@@ -15,6 +15,7 @@ import java.util.Properties;
 import Funding.model.vo.Demand;
 import board.model.dao.RecBoardDAO;
 import common.Comment;
+import create.model.vo.Create;
 import listAll.model.vo.MyFollow;
 import movie.model.vo.Movie;
 import recruit.model.vo.Recruit;
@@ -313,6 +314,65 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return CloseFunding;
+	}
+	public ArrayList<Create> selectCreate(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Create c = null;
+		ArrayList<Create> CreateList = new ArrayList<Create>();
+		
+		String query = prop.getProperty("selectCreate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				c = new Create(rset.getInt("create_no"),
+							   rset.getString("file_newname"),
+							   rset.getString("create_director"),
+							   rset.getString("board_title"),
+							   rset.getDate("board_date"));
+				CreateList.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return CreateList;
+	}
+	public ArrayList<Comment> selectCcomment(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Comment c = null;
+		ArrayList<Comment> CreateComList = new ArrayList<Comment>();
+		
+		String query = prop.getProperty("selectCCom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				c = new Comment(rset.getInt("board_no"),
+							     rset.getString("bwriter"),
+							     rset.getString("create_director"),
+							     rset.getString("board_title"),
+							     rset.getString("comments_cotent"),
+							     rset.getDate("comments_date"));
+				CreateComList.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return CreateComList;
 	}
 	
 }

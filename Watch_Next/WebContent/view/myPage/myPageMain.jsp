@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, review.model.vo.*, recruit.model.vo.*,
-     movie.model.vo.*, common.Comment, Funding.model.vo.Demand, listAll.model.vo.*"%>
+     movie.model.vo.*, common.Comment, Funding.model.vo.Demand, listAll.model.vo.*, create.model.vo.*"%>
 <%
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("ReviewList");
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("RecruitList");
@@ -11,7 +11,9 @@
 	ArrayList<Demand> IwriteFund = (ArrayList<Demand>)request.getAttribute("IwriteFund");
 	ArrayList<MyFollow> FollowList = (ArrayList<MyFollow>)request.getAttribute("FollowList");
 	ArrayList<Demand> OpenFunding = (ArrayList<Demand>)request.getAttribute("OpenFunding");
-	ArrayList<Demand> CloseFunding = (ArrayList<Demand>)request.getAttribute("CloseFunding"); 
+	ArrayList<Demand> CloseFunding = (ArrayList<Demand>)request.getAttribute("CloseFunding");
+	ArrayList<Create> CreateList = (ArrayList<Create>)request.getAttribute("CreateList");
+	ArrayList<Comment> CreateComList = (ArrayList<Comment>)request.getAttribute("CreateComList");
 %>
 <!DOCTYPE html>
 <html>
@@ -491,6 +493,44 @@
 								<% } %>
 							<% } %>
 					</table>
+					
+					<table id="myCreateTable" class="myTable">
+						<tr>
+							<% if(CreateList.isEmpty()){ %>
+								<td colspan="4">작성한 창작 게시글이 존재하지 않습니다.</td>
+							<%}else{ %>
+								<% for(int i = 0; i < CreateList.size(); i++) {%>
+									<% if((i+1) % 4 == 1) {%>
+										<tr>
+											<td>
+												<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/crethumb_uploadFiles/<%= CreateList.get(i).getcName() %>">
+												<br>
+												영화 제목 : <%= CreateList.get(i).getbTitle() %> <br>
+												감독 : <%= CreateList.get(i).getcDirector() %><br>
+												작성일 : <%= CreateList.get(i).getcDate() %><br>
+											</td> 
+										<% }else if((i+1) % 4 == 2 || (i+1) % 4 == 3){ %>
+											<td>
+												<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/crethumb_uploadFiles/<%= CreateList.get(i).getcName() %>">
+												<br>
+												영화 제목 : <%= CreateList.get(i).getbTitle() %><br> 
+												감독 : <%= CreateList.get(i).getcDirector() %><br>
+												작성일 : <%= CreateList.get(i).getcDate() %><br>
+											</td>
+									<% } else if((i+1) % 4 == 0) {%>
+										<td>
+											<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/crethumb_uploadFiles/<%= CreateList.get(i).getcName() %>">
+											<br>
+												영화 제목 : <%= CreateList.get(i).getbTitle() %> <br>
+												감독 : <%= CreateList.get(i).getcDirector() %><br>
+												작성일 : <%= CreateList.get(i).getcDate() %><br>
+										</td>
+									</tr>
+									<% } %>
+								<% } %>
+							<%} %>
+					</table>
+					
 					<table id="myFundingTable" class="myTable">
 						<tr>
 							<td>펀딩 영화</td>
@@ -574,8 +614,33 @@
 									<td><%= RecruitComlist.get(i).getrContent() %></td>
 									<td><%= RecruitComlist.get(i).getCreateDate() %></td>							
 								</tr>
+							<% } %>
 						<% } %>
-					<% } %>
+					</table>
+					 
+					<table id="myCommentTablec" class="myTable">
+						<tr>
+							<% if(CreateComList.isEmpty()){ %>
+								<td colspan="6">작성한 창작 댓글이 없습니다.</td>
+							<%}else{%>
+								<td>글 번호</td>
+								<td>영화 제목</td>
+								<td>영화 감독</td>
+								<td>작성자</td>
+								<td>댓글작성</td>
+								<td>댓글작성일</td>
+							</tr>
+								<% for(int i = 0; i < CreateComList.size(); i++){ %>
+									<tr>
+										<td><%= CreateComList.get(i).getRefBid()%></td>
+										<td><%= CreateComList.get(i).getmTitle() %></td>
+										<td><%= CreateComList.get(i).getbTitle() %></td>
+										<td><%= CreateComList.get(i).getbWriter() %></td>
+										<td><%= CreateComList.get(i).getrContent() %></td>
+										<td><%= CreateComList.get(i).getCreateDate()%></td>
+									</tr>
+								<%} %>
+							<%} %>
 					</table>
 				</div>
 			</div>
@@ -602,6 +667,7 @@
 			$('#mp_h_content5').slideToggle();
 		});
 		
+		// 작성글 
 		$('#myReview').click(function(){
 			$('#myReview').css({"background-color":"white", "color":"black"});
 			$('#myRecruit').css({"background-color":"#545257", "color":"white"});
@@ -609,6 +675,7 @@
 			$('#myFunding').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTable').slideToggle();
 			$('#myRecruitTable').css({"display":"none"});
+			$('#myCreateTable').css({"display":"none"});
 			$('#myFundingTable').css({"display":"none"});
 		});
 		
@@ -619,7 +686,20 @@
 			$('#myFunding').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTable').css({"display":"none"});
 			$('#myRecruitTable').slideToggle();
+			$('#myCreateTable').css({"display":"none"});
 			$('#myFundingTable').css({"display":"none"});
+		});
+		
+		$('#myMade').click(function(){
+			$('#myMade').css({"background-color":"white", "color":"black"});
+			$('#myRecruit').css({"background-color":"#545257", "color":"white"});
+			$('#myFunding').css({"background-color":"#545257", "color":"white"});
+			$('#myReview').css({"background-color":"#545257", "color":"white"});
+			$('#myReviewTable').css({"display":"none"});
+			$('#myRecruitTable').css({"display":"none"});
+			$('#myCreateTable').slideToggle();
+			$('#myFundingTable').css({"display":"none"});
+			
 		});
 		
 		$('#myFunding').click(function(){
@@ -629,24 +709,40 @@
 			$('#myReview').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTable').css({"display":"none"});
 			$('#myRecruitTable').css({"display":"none"});
+			$('#myCreateTable').css({"display":"none"});
 			$('#myFundingTable').slideToggle();
 			
 		});
 		
+		// 댓글
 		$('#myReviewc').click(function(){
 			$('#myReviewc').css({"background-color":"white", "color":"black"});
 			$('#myRecruitc').css({"background-color":"#545257", "color":"white"});
+			$('#myMadec').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTablec').slideToggle();
 			$('#myRecruitTablec').css({"display":"none"});
+			$('#myCommentTablec').css({"display":"none"});
 		});
 		
 		$('#myRecruitc').click(function(){
 			$('#myRecruitc').css({"background-color":"white", "color":"black"});
 			$('#myReviewc').css({"background-color":"#545257", "color":"white"});
+			$('#myMadec').css({"background-color":"#545257", "color":"white"});
 			$('#myReviewTablec').css({"display":"none"});
 			$('#myRecruitTablec').slideToggle();
+			$('#myCommentTablec').css({"display":"none"});
 		});
 		
+		$('#myMadec').click(function(){
+			$('#myMadec').css({"background-color":"white", "color":"black"});
+			$('#myReviewc').css({"background-color":"#545257", "color":"white"});
+			$('#myRecruitc').css({"background-color":"#545257", "color":"white"});
+			$('#myReviewTablec').css({"display":"none"});
+			$('#myRecruitTablec').css({"display":"none"});
+			$('#myCommentTablec').slideToggle();
+		});
+		
+		// 펀딩
 		$('#fundinging').click(function(){
 			$('#fundinging').css({"background-color":"white", "color":"black"});
 			$('#fundingclose').css({"background-color":"#545257", "color":"white"});
@@ -660,6 +756,9 @@
 			$('#OpenFundingTable').css({"display":"none"});
 			$('#CloseFundingTable').slideToggle();
 		});
+		
+		
+		
 		
 	</script>
 <!-- footer -->

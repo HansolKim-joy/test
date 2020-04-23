@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import Funding.model.vo.Demand;
 import common.Comment;
+import create.model.vo.Create;
 import listAll.model.dao.BoardDAO;
 import listAll.model.vo.MyFollow;
 import movie.model.dao.MovieDAO;
@@ -98,11 +99,11 @@ public class BoardService {
 		return result;
 	}
 
-	public Dib searchDib(int i) {
+	public Dib searchDib(int i, String userId) {
 		Connection conn = getConnection();
-		Dib d = new MovieDAO().searchDib(conn, i);
-		close(conn);
-		return d;
+	    Dib d = new MovieDAO().searchDib(conn, i, userId);
+	    close(conn);
+	    return d;
 	}
 
 	public int DeleteDib(String user_id, int movie_no) {
@@ -209,5 +210,19 @@ public class BoardService {
 		close(conn);
 		return CloseFunding;
 
+	}
+
+	public ArrayList<Create> selectCreate(String userId) {
+		Connection conn = getConnection();
+		ArrayList<Create> CreateList = new BoardDAO().selectCreate(conn, userId);
+		close(conn);
+		return CreateList;
+	}
+
+	public ArrayList<Comment> selectCcomment(String userId) {
+		Connection conn = getConnection();
+		ArrayList<Comment> CreateComList = new BoardDAO().selectCcomment(conn, userId);
+		close(conn);
+		return CreateComList;
 	}
 }

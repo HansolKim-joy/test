@@ -96,7 +96,7 @@ public class ReportDAO {
 			rset = stmt.executeQuery(query);
 			
 			while(rset.next()) {
-				r = new Report(rset.getInt("boardNo"),
+				r = new Report(rset.getInt("board_no"),
 							   rset.getString("dec_content"),
 							   rset.getString("reporter"),
 							   rset.getString("reported"),

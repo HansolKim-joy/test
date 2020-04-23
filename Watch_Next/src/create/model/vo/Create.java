@@ -16,6 +16,7 @@ public class Create {
 	private String dec; //신고여부
 	private Date cDate; //게시글 올린날짜
 	private String status; //삭제여부(y면 삭제된게시물) 
+	private String cName; // 한솔
 	
 	public Create() {}
 	
@@ -65,6 +66,15 @@ public class Create {
 		this.cDate = cDate;
 	}
 	
+	// 한솔
+	public Create(int bNo, String cName, String cDirector, String bTitle, Date cDate) {
+		super();
+		this.bNO = bNo;
+		this.cName = cName;
+		this.cDirector = cDirector;
+		this.bTitle = bTitle;
+		this.cDate = cDate;
+	}
 
 	public int getRnum() {
 		return rnum;
@@ -176,6 +186,14 @@ public class Create {
 		return "Create [rnum=" + rnum + ", bNO=" + bNO + ", fNo=" + fNo + ", bWriter=" + bWriter + ", bTitle=" + bTitle
 				+ ", cDirector=" + cDirector + ", bContent=" + bContent + ", cLike=" + cLike + ", bCount=" + bCount
 				+ ", comm=" + comm + ", dec=" + dec + ", cDate=" + cDate + ", status=" + status + "]";
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 
 	

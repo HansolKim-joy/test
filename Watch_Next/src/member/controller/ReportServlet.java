@@ -3,6 +3,7 @@ package member.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,18 @@ public class ReportServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Report> BoardReport = new ReportService().selectBoardtReport();
 		ArrayList<Report> CommReport = new ReportService().selectCommReport();
+		
+		String page = null;
+		if(BoardReport != null && CommReport != null) {
+			page = "view/admin/Admin_myPage.jsp";
+			request.setAttribute("BoardReport", BoardReport);
+			request.setAttribute("CommReport", CommReport);
+		}else {
+			page = "view/errorPage/errorPage.jsp";
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
