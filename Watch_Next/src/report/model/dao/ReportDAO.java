@@ -1,6 +1,6 @@
 package report.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import report.model.vo.Report;
@@ -79,6 +81,70 @@ public class ReportDAO {
 		return result;
 	}
 
+	public ArrayList<Report> selectBoardReport(Connection conn) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		Report r = null;
+		ArrayList<Report> BoardReport = new ArrayList<Report>();
+		
+		String query = prop.getProperty("boardReport");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				r = new Report(rset.getInt("boardNo"),
+							   rset.getString("dec_content"),
+							   rset.getString("reporter"),
+							   rset.getString("reported"),
+							   rset.getString("board_title"));
+				BoardReport.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return BoardReport;
+	}
+	
+	public ArrayList<Report> selectCommReport(Connection conn){
+		Statement stmt = null;
+		ResultSet rset = null;
+		Report r = null;
+		ArrayList<Report> CommReport = new ArrayList<Report>();
+		
+		String query = prop.getProperty("commReport");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				r = new Report(rset.getInt("comments_no"),
+							   rset.getString("dec_content"),
+							   rset.getString("reporter"),
+							   rset.getString("reported"),
+							   rset.getString("comments_cotent"));
+				CommReport.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return CommReport;
+	}
+	
+	
+	
+	
 	/*
 	 * public int[] selectReportR(Connection conn, String userId) { // getReportC =
 	 * select * from tb_dec where user_id=? PreparedStatement pstmt = null;
