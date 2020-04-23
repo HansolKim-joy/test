@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,6 +32,7 @@ public class mainlistDAO {
 		}
 	}
 
+//	메인페이지 모집게시판
 	public ArrayList<Recruit> selectRclist(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -66,6 +68,7 @@ public class mainlistDAO {
 		return list;
 	}
 
+// 메인페이지 리뷰게시판
 	public ArrayList<Review> selectRvlist(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -133,5 +136,4 @@ public class mainlistDAO {
 		return Movielist;
 		
 	}
-
 }
