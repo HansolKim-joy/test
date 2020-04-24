@@ -266,6 +266,8 @@ public class recruitService {
 		} else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		return result;
 	}
 
