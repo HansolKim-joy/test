@@ -45,20 +45,20 @@ public class LoginServlet extends HttpServlet {
 		Member loginUser = new MemberService().loginMember(m);
 		System.out.println(loginUser);
 		
-		if(loginUser.getUserId() == userId && loginUser.getUserPwd() != userPwd) {
-			request.setAttribute("msg", "비밀번호가 틀립니다.");
-			request.getRequestDispatcher("view/pages/loginForm.jsp").forward(request, response);
-			
-		} else if(loginUser.getDeleteYN().equals("Y") || loginUser == null) {
-			request.setAttribute("msg", "회원가입을 해주세요.");
-			request.getRequestDispatcher("view/pages/loginForm.jsp").forward(request, response);	
-		} else {
+		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
 			session.setMaxInactiveInterval(600);
 			response.sendRedirect(request.getContextPath());
+//			request.getRequestDispatcher("view/pages/loginForm.jsp").forward(request, response);
+			
+//		} else if(loginUser.getDeleteYN().equals("Y") || loginUser == null) {
+//			request.setAttribute("msg", "회원가입을 해주세요.");
+//			request.getRequestDispatcher("view/pages/loginForm.jsp").forward(request, response);	
+		} else {
+			request.setAttribute("msg", "가입하지 않은 아이디거나, 또는 비밀번호가 틀립니다.");
+			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
+			view.forward(request, response);
 		}
-		
-		
 	}
 		
 		
@@ -74,8 +74,6 @@ public class LoginServlet extends HttpServlet {
 		
 //		if(loginUser.getUserId() == userId && loginUser.getUserPwd() != userPwd) {
 //			request.setAttribute("msg", "가입하지 않은 아이디거나, 비밀번호가 잘못되었습니다.");
-//			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
-//			view.forward(request, response);
 //		
 //			
 ////		} else if(loginUser == null && loginUser.getDeleteYN().equals("Y")) { // login.jsp의 input id와 pwd 값을 받아 오고 db에서 확인할때 없으면 null을 받아오기 때문에.

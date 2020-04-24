@@ -77,6 +77,11 @@
 #buttons {
   text-align: center;
 }
+
+#botbtn a:hover {
+    color: white;
+}
+
 #buttons>input{border:none;}
 #lgbtn{display: flex;}
 #lgbtn label{font-size: 15px; vertical-align: -3px;}

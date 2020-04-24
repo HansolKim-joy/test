@@ -40,7 +40,7 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getUserId());
-//			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(2, m.getUserPwd());
 
 			rset = pstmt.executeQuery();
 
