@@ -86,15 +86,25 @@
 	</div>
 	<!-- 텍스트 편집기 부분 -->
 	<div class="col-lg-12 nopadding">
-		<textarea id="txtEditor"></textarea>
-		<input type="hidden" id="editor_content" name="editor_content">
+		<textarea id="txtEditor" placeholder="
+		- 심한 욕설 또는 저속한 표현으로 이용자 다수에게 불쾌감을 주는 경우
+
+- 공포심이나 불안감, 불쾌감과 모욕감을 유발하는 내용이 포함된 게시물
+
+- 타인의 신체, 외모, 취향 등에 대해 경멸의 의미를 담다 비하하고 모욕하는 내용의 게시물
+
+- 특정 계층, 지역, 국민, 종교를 근거 없이 비하하거나 비방하는 내용의 게시물
+
+- 장애인이나 여성 등 사회적 소수자를 근거 없이 비하하거나 비방하는 내용의 게시물
+의 경우 사용자 신고  & 게시글 삭제 조치 합니다."></textarea>
+		<input type="hidden" id="editor_content" name="editor_content" >
 	</div>
 
 	<div id = "recW_roop">
 	&nbsp;<br>&nbsp;<br>&nbsp;<br>
 	<p>&nbsp;</p>
-	<input type="reset" value="취소" id="cancel_button" onclick="location.href='<%=request.getContextPath() %>/list.recruit'">
-	<input type="submit" value="완료" id="recW_button" class="recW_submit " >
+	<input type="reset" value="취소" id="cancel_button" class="myButton" onclick="location.href='<%=request.getContextPath() %>/list.recruit'">
+	<input type="submit" value="완료" id="recW_button" class="recW_submit myButton" >
 	</div>
 </form>
 <!-- footer -->
