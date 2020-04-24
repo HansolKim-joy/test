@@ -51,14 +51,27 @@
 <hr color='red' size='3'>
 <table id="letter_list">
 	<tr>
-		<td class="l_l_choise">선택</td>
+		<td class="l_l_choise"><input type="checkbox" id="all_letter_checkbox" class="letter_checkbox" onclick="allCheck();"></td>
 		<td class="l_l_nick">닉네임</td>
 		<td class="l_l_name">제목</td>
 		<td class="l_l_time">받은시간</td>
 		<td class="l_l_state">상태</td>
 	</tr>
 </table>
-<br><br>
+<script>
+	function allCheck(){
+		var all = document.getElementById("all_letter_checkbox");
+		var chk = document.getElementsByName("letter_chk");
+		for(var i = 0; i < chk.length; i++){
+			if(all.checked == true){
+				chk[i].checked = true;
+			}else{
+				chk[i].checked = false;
+			}	
+		}
+	}
+</script>
+<br>
 <!-- 쪽지 목록 DB불러오는거 이양식대로 -->
 <form action="/Watch_Next/letter.del">
 	<div id = "letter_contents">
