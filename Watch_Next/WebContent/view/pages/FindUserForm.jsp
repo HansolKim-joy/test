@@ -31,7 +31,7 @@
 				<div>
 					<input type="email" maxlength="50" class="re_input"
 						name="find_User" placeholder="이메일을 입력해주시오.">
-					<button type="submit" class="re_btn">아이디 / 비밀번호 찾기</button>
+					<button type="submit"  class="re_btn">아이디 / 비밀번호 찾기</button>
 				</div>
 			</form>
 		</div>

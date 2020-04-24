@@ -4,6 +4,7 @@
 <% 
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("Recruitlist");
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("Reviewlist");
+	Member loginUser1 = (Member)request.getAttribute("loginUser");
 // 	Recruit r = (Recruit)request.getAttribute("board");
 // 	System.out.println("index"+ RecruitList);
 %>
@@ -254,11 +255,14 @@
 					var $bWriterTd = $("<td>").text(data[i].bWriter);
 					var $viewsTd = $("<td>").text(data[i].bCount);
 					
-					
 						$tr.click(function(){
 							$dno = $(this).find('#dno').eq(0).text();
-							
+
+						if('<%= loginUser %>' != 'null'){ 
 							location.href= "<%= request.getContextPath() %>/detail.rv?rv=" + $dno;
+						} else{
+							alert("로그인 후 이용해주세요.");
+						}	
 						}).mouseenter(function(){
 							$(this).parent().css('cursor', 'pointer');
 						});
@@ -296,7 +300,11 @@
 					
 					$tr.click(function(){
 						$rno = $(this).find('#rno').eq(0).text();
+					if('<%= loginUser %>' != 'null'){	
 						location.href="<%= request.getContextPath() %>/detail.recruit?rNo=" + $rno;
+					} else {
+						alert('로그인 후 이용해주세요.');
+					}	
 					}).mouseenter(function(){
 						$(this).parent().css('cursor', 'pointer');
 					});

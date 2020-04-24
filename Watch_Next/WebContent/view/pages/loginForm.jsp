@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
+<%
+	String msg = (String)request.getAttribute("msg");
+	String msg1 = (String)request.getAttribute("msg1");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +16,8 @@
 <body>
 	<!--header -->
 	<%@ include file="/view/layout/Header.jsp"%>
-	<%
-		String msg = (String) request.getAttribute("msg");
-		String msg1 = (String) request.getAttribute("msg1");
-// 		System.out.println(msg);
-	%>
 
 	<section>
-
 		<div id="lg_table">
 			<h2>로그인</h2>
 			<hr class="hline">
@@ -71,19 +69,31 @@
       return true;
    }
    $(function(){
+	   
+	   
+	   
       var msg = '<%= msg %>';
-      if(msg.trim() == '이메일로 회원님의 정보를 보냈습니다. 확인 후 다시 로그인 해주세요.'){
-         alert(msg)
-      }
-      if(msg.trim() == "존재하지 않습니다. 회원가입 해주세요."){
-         alert(msg)
-      }
+//       	if(msg.trim() == '비밀번호가 틀립니다.'){
+      		alert(msg);
+//       	}
       
-      var msg1 = '<%= msg1 %>';
-      if(msg1.trim() == "회원가입에 성공하였습니다."){
-    	 alert(msg1);
-      }
+      if(msg.trim() == '이메일로 회원님의 정보를 보냈습니다. 확인 후 다시 로그인 해주세요.'){
+        alert(msg);
+//       }
+//       if(msg.trim() == "없는 회원입니다. 회원가입 해주세요."){
+//         alert(msg);
+//       }
+//       if(msg.trim() == "아이디 또는 비밀번호가 잘못되었습니다."){
+//    	  	alert(msg);
+//       }
+      
+<%--       var msg1 = '<%= msg1 %>'; --%>
+// //       if(msg1.trim() == "회원가입을 다시해주세요."){
+//     	 alert(msg1);
+//       }
    });
+   
+   
    
 </script>
 	<script src="/Watch_Next/Resources/js/Header.js"></script>
