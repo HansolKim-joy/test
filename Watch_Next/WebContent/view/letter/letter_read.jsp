@@ -24,7 +24,7 @@
 	<textarea cols="60" rows="15" style="overflow-y:scroll; resize: none;" readonly><%=l.getMsg_Content() %></textarea>
 	<br>
 	<div id="letter_send_btn_area">
-		<button onclick="location.href='<%=request.getContextPath()%>/letter.view'" id="letter_detail_btn">돌아가기</button>
+		<button onclick="location.href='javascript:history.back();'" id="letter_detail_btn">돌아가기</button>
 	</div>
 </body>
 </html>
