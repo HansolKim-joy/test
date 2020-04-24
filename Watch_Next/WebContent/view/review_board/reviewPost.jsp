@@ -255,7 +255,7 @@
 	        <button  class="myButton" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
 	   		<button class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
 	    <% } else if(!loginUser.getUserId().equals(r.getbWriter())) {%>    
-	        <button style="margin-left:195px" class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
+	        <button style="margin-left:175px" class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.rv'" type=button title="목록" >목록</button>
 	    <% }  %>            		
 	    </div>
 	    </form>

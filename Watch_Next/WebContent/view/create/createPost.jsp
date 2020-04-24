@@ -245,7 +245,7 @@
 	        <button  class="myButton" id="bdelBtn" type=button title="삭제" onclick="deleterv();">삭제</button>&nbsp;&nbsp;&nbsp;
 	        <button class="myButton" id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
 		    <% } else if(!loginUser.getUserId().equals(c.getbWriter())) { %>
-		        <button class="myButton" style="margin-left:195px"  id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
+		        <button class="myButton" style="margin-left:175px"  id="bliBtn" onclick="location.href='<%=request.getContextPath() %>/list.cr'" type=button title="목록" >목록</button>
 		    <% } %>    
 			</div>
 			</form>
@@ -362,7 +362,7 @@
 				
 				if($('#reply_content').val().trim().length == 0){
 					alert("댓글을 작성해주세요");
-				}else{d
+				}else{
 					//alert("댓글 작성 완료");
 				}
 				
