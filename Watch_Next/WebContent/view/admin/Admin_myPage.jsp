@@ -116,7 +116,6 @@
 		color: white;
 		font-size: 20px;
 		cursor: pointer;
-		/* border: 1px solid black; */
 	}
 	#myBtnFrom{
 		text-align: -webkit-center;
@@ -128,9 +127,14 @@
 	.reportTable{
 		width: 100%;
 		text-align:center;
+		border-spacing: 20px;
 	}
 	.reportTable td{
 		width: 20%;
+		
+	}
+	.reportTable tr.eq(0){
+		color: lightyellow;
 	}
 	#moveTable{
 		width: 100%;
@@ -138,6 +142,10 @@
 	}
 	#moveTable td{
 		width: 20%;
+	}
+	.title{
+		text-algin:center;
+		color: lightyellow;
 	}
 </style>
 </head>
@@ -175,7 +183,7 @@
 				<hr class="hline1">
 				<div class="mp_middle"></div>
 				<div id="mp_h_content1" class="mp_h_content">
-					게시글 신고
+					<div class="title">게시글 신고</div>
 					<table id="bReport" class="reportTable">
 						<tr>
 							<td> 신고 대상 번호 </td>
@@ -185,7 +193,7 @@
 							<td> 신고 요청자 </td>
 						</tr>
 						<tr>
-						<% if(BoardReport == null){%>
+						<% if(BoardReport.isEmpty()){%>
 							<td colspan="5">신고한 현황이 없습니다.</td>
 						<%}else{ %>
 							<% for(int i = 0; i < BoardReport.size(); i++) {%>
@@ -199,7 +207,7 @@
 						<%} %>
 					</table> 
 					<br><br>
-					댓글 신고
+					<div class="title">댓글 신고</div>
 					<table id="cReport" class="reportTable">
 						<tr>
 							<td> 신고 대상 번호 </td>
@@ -209,7 +217,7 @@
 							<td> 신고 요청자 </td>
 						</tr>
 						<tr>
-							<% if(CommReport == null) {%>
+							<% if(CommReport.isEmpty()) {%>
 								<td colspan="5">신고한 현황이 없습니다.</td>
 							<%}else{ %>
 								<% for(int i = 0; i < CommReport.size(); i++){ %>
