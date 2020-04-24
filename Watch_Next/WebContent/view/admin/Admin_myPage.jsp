@@ -185,7 +185,7 @@
 							<td> 신고 요청자 </td>
 						</tr>
 						<tr>
-						<% if(BoardReport.isEmpty()){%>
+						<% if(BoardReport == null){%>
 							<td colspan="5">신고한 현황이 없습니다.</td>
 						<%}else{ %>
 							<% for(int i = 0; i < BoardReport.size(); i++) {%>
@@ -209,7 +209,7 @@
 							<td> 신고 요청자 </td>
 						</tr>
 						<tr>
-							<% if(CommReport.isEmpty()) {%>
+							<% if(CommReport == null) {%>
 								<td colspan="5">신고한 현황이 없습니다.</td>
 							<%}else{ %>
 								<% for(int i = 0; i < CommReport.size(); i++){ %>
@@ -282,7 +282,7 @@
 			var searchUser = $('#searchId').val();
 			/* console.log(searchUser); */
 			$.ajax({
-				url : "../../searchUser.do",
+				url : "<%= request.getContextPath()%>/searchUser.do",
 				data : {searchUser:searchUser},
 				success: function(data){
 					/* console.log('성공');
@@ -306,7 +306,7 @@
 			console.log("아이디인데 : " + searchId);
 			if(confirm('정말 회원을 삭제하시겠습니까?') == true){
 				$.ajax({
-					url : "../../deleteUser.me",
+					url : "deleteUser.me",
 					data : {searchId:searchId},
 					success: function(data){
 						console.log('성공222');
