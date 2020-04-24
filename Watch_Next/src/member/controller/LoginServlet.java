@@ -29,40 +29,84 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
+	 * @return 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("lg_userPwd");
-//		System.out.println("정호바보" + userId + userPwd);
 //		System.out.println(userId + " " + userPwd);
 
 		Member m = new Member(userId, userPwd);
 
 		Member loginUser = new MemberService().loginMember(m);
-//		System.out.println("야!" + loginUser.getDeleteYN());
-		if (loginUser != null && loginUser.getDeleteYN().equals("N")) {
-//			System.out.println(loginUser);
-			HttpSession session = request.getSession();
+		System.out.println(loginUser);
+		
+		if(loginUser.getUserId() == userId && loginUser.getUserPwd() != userPwd) {
+			request.setAttribute("msg", "비밀번호가 틀립니다.");
+			request.getRequestDispatcher("view/pages/loginForm.jsp").forward(request, response);
+			
+		} else if(loginUser.getDeleteYN().equals("Y") || loginUser == null) {
+			request.setAttribute("msg", "회원가입을 해주세요.");
+			request.getRequestDispatcher("view/pages/loginForm.jsp").forward(request, response);	
+		} else {
 			session.setAttribute("loginUser", loginUser);
 			session.setMaxInactiveInterval(600);
-//			System.out.println(request.getContextPath());
 			response.sendRedirect(request.getContextPath());
-		}  // eles if (파라미터로 받아온 값(id)==(loginhUser.getId) || 파라미터로 받아온 값(pwd)==(loginhUser.getPwd))
-		else {
-			request.setAttribute("msg", "존재하지 않습니다. 회원가입 해주세요.");
-			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
-			view.forward(request, response);
 		}
+		
+		
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		if(loginUser.getUserId() == userId && loginUser.getUserPwd() != userPwd) {
+//			request.setAttribute("msg", "가입하지 않은 아이디거나, 비밀번호가 잘못되었습니다.");
+//			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
+//			view.forward(request, response);
+//		
+//			
+////		} else if(loginUser == null && loginUser.getDeleteYN().equals("Y")) { // login.jsp의 input id와 pwd 값을 받아 오고 db에서 확인할때 없으면 null을 받아오기 때문에.
+////			request.setAttribute("msg", "없는 회원입니다. 회원가입을 해주세요.");
+//		} else if(loginUser != null && loginUser.getDeleteYN().equals("N")){
+//			session.setAttribute("loginUser", loginUser);
+//			session.setMaxInactiveInterval(600);
+//			response.sendRedirect(request.getContextPath());
+//			
+//		}
+//	}	
+////		if(loginUser.getUserId() == userId || loginUser.getUserPwd() == userPwd) {
+////			HttpSession session = request.getSession();
+//			session.setAttribute("loginUser", loginUser);
+//			session.setMaxInactiveInterval(600);
+//			response.sendRedirect(request.getContextPath());
+//		} else {
+//			request.setAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다..");
+//			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
+//		}
+//		
+//			view.forward(request, response);
 //		else {
 //			request.setAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다.");
 //			response.sendRedirect(request.getContextPath());
 //			RequestDispatcher view = request.getRequestDispatcher("view/pages/loginForm.jsp");
 //			view.forward(request, response);
 //		}
-	}
+		
+		
+//	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

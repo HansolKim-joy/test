@@ -40,7 +40,7 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getUserId());
-			pstmt.setString(2, m.getUserPwd());
+//			pstmt.setString(2, m.getUserPwd());
 
 			rset = pstmt.executeQuery();
 
@@ -56,6 +56,8 @@ public class MemberDAO {
 				String deleteYN = rset.getString("USER_DELETE");
 
 				loginUser = new Member(userId, userPwd, userName, phone, email, mailingYN, adminYN, deleteYN);
+				
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
