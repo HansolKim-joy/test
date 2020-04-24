@@ -65,6 +65,7 @@ public class CreateUpdateServlet extends HttpServlet {
 					// getOriginalFileName() : 실제 사용자가 업로드할 때의 파일 명
 				}
 			
+				
 			}
 		
 		int cNo = Integer.parseInt(multiRequest.getParameter("cNo"));
