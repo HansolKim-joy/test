@@ -301,19 +301,14 @@
 						<% if(FollowList.isEmpty()) {%>
 							<td colspan="3">팔로우 한 사람이 없습니다.</td>
 						<% }else{ %>
-							<td>팔로우</td>
-							<td>게시글 수</td>
-							<td>댓글 수</td>
+							<td colspan="<%= FollowList.size() %>">팔로우 아이디</td>
 						</tr>
+						<tr>
 							<% for(int i = 0; i < FollowList.size(); i++) {%>
-								<tr>
-									<td><%= FollowList.get(i).getFollowedUser() %></td>
-									<td><%= FollowList.get(i).getbCnt() %></td>
-									<td><%= FollowList.get(i).getcCnt() %></td>
-								</tr>
-							<% } %>	
+								<td id="follow<%=i%>"><%= FollowList.get(i).getFollowedUser() %></td>
+							<% } %>
+						</tr>	
 						<% } %>
-				
 					</table>
 				</div>
 			</div>
@@ -756,10 +751,6 @@
 			$('#OpenFundingTable').css({"display":"none"});
 			$('#CloseFundingTable').slideToggle();
 		});
-		
-		
-		
-		
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>

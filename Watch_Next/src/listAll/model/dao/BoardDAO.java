@@ -232,7 +232,7 @@ public class BoardDAO {
 		MyFollow mf = null;
 		ArrayList<MyFollow> FollowList = new ArrayList<MyFollow>();
 		
-		String query = prop.getProperty("selectfollow");
+		String query = prop.getProperty("pickfollower");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -241,13 +241,12 @@ public class BoardDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				mf = new MyFollow(rset.getString("follow_user_id"),
-								  rset.getInt("bwritecnt"), 
-								  rset.getInt("cwritecnt"));
+				mf = new MyFollow(rset.getString("user_id"));
+				
 				FollowList.add(mf);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
