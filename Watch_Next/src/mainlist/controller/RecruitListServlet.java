@@ -1,6 +1,7 @@
 package mainlist.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,7 +49,7 @@ public class RecruitListServlet extends HttpServlet {
 		ArrayList<Review> Reviewlist = new mainlistService().selectRvlist();
 //		System.out.println("servlet" + list);
 		
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDD");
 		
 		
 		
