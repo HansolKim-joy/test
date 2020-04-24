@@ -40,6 +40,7 @@ public class CreateInsertServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,7 +48,7 @@ public class CreateInsertServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
-			int maxSize = 1024 * 1024 * 100;
+			int maxSize = 1024 * 1024 * 10000;
 			String root = request.getSession().getServletContext().getRealPath("/");
 			String savePath = root + "Resources/crethumb_uploadFiles/";
 			

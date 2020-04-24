@@ -43,7 +43,7 @@ public class CreateUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 			
 		if(ServletFileUpload.isMultipartContent(request)) {
-			int maxSize = 1024 * 1024 * 100;
+			int maxSize = 1024 * 1024 * 10000;
 			String root = request.getSession().getServletContext().getRealPath("/");
 			String savePath = root + "Resources/crethumb_uploadFiles/";
 			
@@ -65,6 +65,7 @@ public class CreateUpdateServlet extends HttpServlet {
 					// getOriginalFileName() : 실제 사용자가 업로드할 때의 파일 명
 				}
 			
+				
 			}
 		
 		int cNo = Integer.parseInt(multiRequest.getParameter("cNo"));
