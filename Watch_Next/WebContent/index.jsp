@@ -240,7 +240,13 @@
 				for(var i in data){
 					var $tr = $("<tr>");
 					var $numTd = $("<td id='dno'>").text(data[i].bNo);
-					
+					var dataArr = (data[i].bDate.split("월"));
+					var dd = (data[i].bDate).split("월");
+					dataArr[0] = dd[0];
+					var mi = dd[1].split(", ");
+					dataArr[1] = mi[0];
+					dataArr[2] = mi[1];
+					var date = dataArr[2]+"-"+dataArr[0]+"-"+dataArr[1].trim();
 					switch(data[i].spo){
 					case "Y": 
 						var $spoTd = $("<td>").text("스포있음");
@@ -251,7 +257,7 @@
 					}
 					var $mTitleTd = $("<td>").text(" [ " + data[i].mTitle + " ] " + data[i].bTitle);
 					var $gradeTd = $("<td>").text(data[i].popcorn);
-					var $bDateTd = $("<td>").text(data[i].bDate);
+					var $bDateTd = $("<td>").text(date);
 					var $bWriterTd = $("<td>").text(data[i].bWriter);
 					var $viewsTd = $("<td>").text(data[i].bCount);
 					
@@ -275,8 +281,8 @@
 						$tr.append($bWriterTd);
 						$tr.append($viewsTd);
 						$tableBody.append($tr);
+				console.log(typeof(data[i].bDate));
 				}
-// 				console.log(data);
 			}
 		});
 		
@@ -293,8 +299,16 @@
 // 					console.log($rNo);
 					var $numTd = $("<td id='rno'>").text(data[i].rNo);
 					var $categoryTd = $("<td>").text(data[i].rHead);
-					var $titleTd = $("<td>").text(data[i].bTitle);
-					var $dateTd = $("<td>").text(data[i].bDate);
+					var $titleTd = $("<td class='day'>").text(data[i].bTitle);
+					var dataArr = (data[i].bDate.split("월"));
+					var dd = (data[i].bDate).split("월");
+					dataArr[0] = dd[0];
+					var mi = dd[1].split(", ");
+					dataArr[1] = mi[0];
+					dataArr[2] = mi[1];
+					var date = dataArr[2]+"-"+dataArr[0]+"-"+dataArr[1].trim();
+// 					console.log("변한날짜 " + date);
+					var $dateTd = $("<td>").text(date);
 					var $writerTd = $("<td>").text(data[i].userId);
 					var $hitsTd = $("<td>").text(data[i].bViews);
 					
@@ -317,14 +331,16 @@
 					$tr.append($hitsTd);
 					$tableBody.append($tr);
 				}
-// 				console.log(data);
 			}
 		});
 		
+		
+		$('.day')
 	});
 </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
+
 </body>
 </html>

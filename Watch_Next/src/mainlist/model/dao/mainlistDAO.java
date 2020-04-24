@@ -53,7 +53,7 @@ public class mainlistDAO {
 								 rset.getString("user_Id"), 
 								 rset.getString("board_title"),
 								 rset.getInt("board_views"),
-								 rset.getDate("board_date"), 
+								 rset.getDate("day"), 
 								 rset.getString("recruit_head"));
 				list.add(re);
 //				System.out.println("daore"+re);
@@ -88,7 +88,7 @@ public class mainlistDAO {
 								rset.getString("review_movie_title"), 
 								rset.getString("board_title"), 
 								rset.getInt("review_grade"),
-								rset.getDate("board_date"),
+								rset.getDate("day"),
 								rset.getString("user_id"),
 								rset.getInt("board_views"));
 				Reviewlist.add(rv);
