@@ -86,9 +86,14 @@ textarea:focus {outline: none;}
     font-weight: bold;
     margin-top: 22px;}
 
-#report{margin-top:10px; margin-left:90%;
+#report{/* margin-top:10px; margin-left:90%;
 		background-color:red; color:white; font-size:13px;
-		border:none; border-radius:5px;}
+		border:none; border-radius:5px; */
+		font-size: 12px;
+      font-weight: lighter;
+      padding: 4px 8px;
+      margin-left: 90%;
+      margin-top: 7px;}
 #deleteComment{margin-top:10px; margin-left:90%;
 		background-color:red; color:white; font-size:13px;
 		border:none; border-radius:5px;}
@@ -100,6 +105,7 @@ textarea:focus {outline: none;}
 
 
 .myButton {
+	
    box-shadow:inset 0px 1px 0px 0px #f5978e;
    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
    background-color:#f24537;
