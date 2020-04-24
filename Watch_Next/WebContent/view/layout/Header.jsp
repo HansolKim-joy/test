@@ -48,14 +48,10 @@
 			</div>
 			<% if(loginUser == null) {%>
 				<div class="navi_set2">
-					<div class="topnav2">
-						<a href="/Watch_Next/view/pages/loginForm.jsp" class="a_tag">로그인</a>
-					</div>
+					<div class="topnav2" onclick="location.href='/Watch_Next/view/pages/loginForm.jsp'">로그인</div>>
 				</div>
 				<div class="navi_set2">
-					<div class="topnav2">
-						<a href="/Watch_Next/view/pages/JoinForm.jsp" class="a_tag">회원가입</a>
-					</div>
+					<div class="topnav2" onclick="location.href='/Watch_Next/view/pages/JoinForm.jsp'">회원가입</div>>
 				</div>
 			<% } else { %>
 				<% if(loginUser.getAdminYN().equals("N")){%>

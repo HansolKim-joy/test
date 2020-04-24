@@ -166,13 +166,7 @@
 			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=1'">&lt;&lt;</a>
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
-	        <script>
-					if(<%= currentPage %> <= 1 ){
-						$('#bebeforeBtn').hide();
-						$('#beforeBtn').hide();
-						
-					}
-			</script>
+	        
 			<!--페이지 목록  -->
 			
 			<% for (int p=startPage; p<=endPage; p++){
@@ -185,12 +179,7 @@
 			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
 			<!-- 맨 끝으로 -->
 			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=<%= maxPage %>'">&gt;&gt;</a>
-	        <script>
-				if(<%= currentPage %> >= <%= maxPage %>){
-					$('#afafterBtn').hide();
-					$('#afterBtn').hide();
-				}
-			</script>
+	        
         	
         </div>
 	</div>
