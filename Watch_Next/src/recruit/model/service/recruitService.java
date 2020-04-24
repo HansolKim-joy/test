@@ -121,6 +121,8 @@ public class recruitService {
 		return result;
 	}
 	
+	
+	
 	public ArrayList<Comment> selectComment(int rNo) {
 			//댓글가져옴
 		Connection conn = getConnection();
