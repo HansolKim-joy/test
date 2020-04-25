@@ -41,7 +41,6 @@ public class LetterListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		String userName = loginUser.getUserName();
 		String chk = request.getParameter("str");
 		PageInfo pi = null;
 		int allCount = service.allListCount(userId);
@@ -73,7 +72,7 @@ public class LetterListServlet extends HttpServlet {
 			request.setAttribute("count", sendlistCount);
 			request.setAttribute("chk", "str");
 		}else {
-			int listCount = service.getListCount(userName);
+			int listCount = service.getListCount(userId);
 			int currentPage;			// 현재 페이지
 			int pageLimit = 10;			// 한 페이지에 표시될 페이징 수
 			int maxPage;				// 전체 페이지중 마지막 페이지
