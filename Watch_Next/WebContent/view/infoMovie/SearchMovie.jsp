@@ -60,7 +60,9 @@
 			</table>
 	</div>
 </section>
+	<%if(m.size() > 4){ %>
 	<button id="more_btn" type="button" style="margin-left:50%;"onclick="More();">더보기</button>
+	<%} %>
 <script>
 	function More(){
 		var chk = document.getElementById("chk");
