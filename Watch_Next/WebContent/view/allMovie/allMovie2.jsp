@@ -74,17 +74,6 @@
 			</tr>
 		<%} else{%>
 			<% for(int i=0; i<mlist.size(); i++){%>
-			<%	String time = mlist.get(i).getmRunningTime();
-				if(time.charAt(0) == '0' && time.charAt(1) == '0'){
-					time = time.substring(3) + "분";
-				}else if(time.charAt(0) == '0' && time.charAt(3) == '0' && time.charAt(4) == '0'){
-					time = time.substring(1,2) + "시간";
-				}else if(time.charAt(0) == '0'){
-					time = time.substring(1,2) + "시간" + time.substring(3) + "분";
-				}else{
-					time = time.substring(0,2) + "시간" + time.substring(3) + "분";
-				}
-			%>
 				<%if(moviecheck % 5 == 1){%>
 					<tr>
 				<%} %>
@@ -92,8 +81,8 @@
 							<a class="a_tag" href="<%=request.getContextPath()%>/detail.mo?movieTitle=<%= mlist.get(i).getmTitle()%>&no=<%=mlist.get(i).getmNo()%>">
 								<img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p">
 								<br>&emsp;<b><%= mlist.get(i).getmTitle()%></b>
-								<br>&emsp;<%= time%>
-								<br>&emsp;<%= mlist.get(i).getmReleaseDate()%>
+								<br>&emsp;<%= mlist.get(i).getmDirector()%>
+								<br>&emsp;<%= mlist.get(i).getmActor()%>
 							</a>
 						</td>
 				<%if(moviecheck % 5 == 0){%>

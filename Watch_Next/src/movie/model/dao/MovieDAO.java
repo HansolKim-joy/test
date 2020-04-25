@@ -51,8 +51,8 @@ public class MovieDAO {
 				Movie m = new Movie(rset.getInt("movie_no"),
 						 rset.getString("movie_title")
 						);
-				m.setmRunningTime(rset.getString("runningtime"));
-				m.setmReleaseDate(rset.getDate("releasedate"));
+				m.setmDirector(rset.getString("director"));
+				m.setmActor(rset.getString("actor"));
 				list.put(rset.getString("file_newname"),m);
 			}
 		} catch (SQLException e) {
