@@ -35,7 +35,7 @@ public class SearchUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String searchUserId = request.getParameter("searchUser");
-		System.out.println(searchUserId);
+//		System.out.println(searchUserId);
 		MemberService ms = new MemberService();
 		Member searchUser = ms.searchUser(searchUserId);
 		int countBoard = ms.countMyBoard(searchUserId);

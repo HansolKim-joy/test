@@ -742,7 +742,6 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		char fchk=0;
 		
-		Review review = null;
 		
 		String query = prop.getProperty("getFollow");
 		
