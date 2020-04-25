@@ -65,22 +65,47 @@
 		});
 		$('.popcorn1').click(function(){
 			$('#pop_point')[0].innerText = "1 점";
+			$('.popcorn1').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn2').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
+			$('.popcorn3').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
+			$('.popcorn4').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
+			$('.popcorn5').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
 			$('.pop_point').val(1);
 		});
 		$('.popcorn2').click(function(){
 			$('#pop_point')[0].innerText = "2 점";
+			$('.popcorn1').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn2').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn3').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
+			$('.popcorn4').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
+			$('.popcorn5').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
 			$('.pop_point').val(2);
 		});
 		$('.popcorn3').click(function(){
 			$('#pop_point')[0].innerText = "3 점";
+			$('.popcorn1').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn2').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn3').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn4').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
+			$('.popcorn5').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
 			$('.pop_point').val(3);
 		});
 		$('.popcorn4').click(function(){
 			$('#pop_point')[0].innerText = "4 점";
+			$('.popcorn1').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn2').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn3').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn4').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn5').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_gray.png");
 			$('.pop_point').val(4);
 		});
 		$('.popcorn5').click(function(){
 			$('#pop_point')[0].innerText = "5 점";
+			$('.popcorn1').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn2').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn3').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn4').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
+			$('.popcorn5').attr("src","<%=request.getContextPath() %>/Resources/images/popcorn_red.png");
 			$('.pop_point').val(5);
 		});
 	});  
@@ -120,11 +145,11 @@
 		<!-- 텍스트 편집기와 팝콘 점수와의 공백 -->
 		&nbsp;<br>&nbsp;<br>&nbsp;<br>
 		<strong id="revW_popcorn">팝콘 점수 : &ensp;</strong>
-		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn1">
-		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn2">
-		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn3">
-		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn4">
-		<img src="<%=request.getContextPath() %>/Resources/images/popcorn.png" width="60px" height='60px' id="popcorn" class="popcorn5">
+		<img src="<%=request.getContextPath() %>/Resources/images/popcorn_gray.png" width="60px" height='60px' id="popcorn" class="popcorn1">
+		<img src="<%=request.getContextPath() %>/Resources/images/popcorn_gray.png" width="60px" height='60px' id="popcorn" class="popcorn2">
+		<img src="<%=request.getContextPath() %>/Resources/images/popcorn_gray.png" width="60px" height='60px' id="popcorn" class="popcorn3">
+		<img src="<%=request.getContextPath() %>/Resources/images/popcorn_gray.png" width="60px" height='60px' id="popcorn" class="popcorn4">
+		<img src="<%=request.getContextPath() %>/Resources/images/popcorn_gray.png" width="60px" height='60px' id="popcorn" class="popcorn5">
 		<b id="pop_point"></b>
 		<input type="hidden" name="pop_point" class="pop_point"repRp>
 		<input type="reset" value="취소" id="revW_button" onclick="location.href='javascript:history.go(-1);'">

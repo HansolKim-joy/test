@@ -256,7 +256,7 @@
 				<table>
 				<tr>
 					<td>
-						<textarea id="reply_content" name="reply_content" rows="2" cols="167" style="white-space: pre-wrap"
+						<textarea id="reply_content" placeholder="심한 욕설 또는 저속한 표현등과 같이 이용자 다수에게 불쾌감을 주는  댓글은 삭제&신고 될 수 있습니다." name="reply_content" rows="2" cols="167" style="white-space: pre-wrap"
 					  placeholder="댓글을 입력하세요." ></textarea>
 					</td>
 					<td>
