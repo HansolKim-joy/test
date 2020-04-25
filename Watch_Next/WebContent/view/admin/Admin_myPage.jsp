@@ -311,7 +311,7 @@
 		
 		$('#deleteMemberBtn').click(function(){
 			var searchId = $('#sUid').text();
-			console.log("아이디인데 : " + searchId);
+			/* console.log("아이디인데 : " + searchId); */
 			if(confirm('정말 회원을 삭제하시겠습니까?') == true){
 				$.ajax({
 					url : "deleteUser.me",
