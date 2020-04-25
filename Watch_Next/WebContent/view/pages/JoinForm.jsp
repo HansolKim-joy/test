@@ -79,8 +79,8 @@
          
          if(check.test(pwd1)){
 //             pwdCheck1.innerHTML = "사용 가능합니다.";
-            $('#pwdCheck1').text('사용 가능합니다.');
-            $('#pwdCheck1').css({'color' : 'white', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
+            $('#pwdCheck1').text('사용 가능');
+            $('#pwdCheck1').css({'color' : 'green', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
             return true;
          } else {
 //             pwdCheck1.innerHTML = "대문자 , 소문자 8자리 이상 입력해주세요.";            
@@ -97,13 +97,13 @@
          
          if(pwd1.value != pwd2.value){
 //             pwdCheck2.innerHTML = "비밀번호가 일치하지 않습니다."
-            $('#pwdCheck2').text('비밀번호 불일치');
+            $('#pwdCheck2').text('불일치');
             $('#pwdCheck2').css({'color' : 'red', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
             return false;
          } else {
 //             pwdCheck2.innerHTML = "비밀번호가 일치합니다."
-            $('#pwdCheck2').text('비밀번호 일치');
-            $('#pwdCheck2').css({'color' : 'white', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
+            $('#pwdCheck2').text('일치');
+            $('#pwdCheck2').css({'color' : 'green', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
             return true;   
          }
       }

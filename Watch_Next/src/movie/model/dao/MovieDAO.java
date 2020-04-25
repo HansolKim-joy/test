@@ -296,7 +296,7 @@ public class MovieDAO {
 		return result;
 	}
 
-	public HashMap<String, Movie> DetailMovie(Connection conn, String movieTitle, int no) {
+	public HashMap<String, Movie> DetailMovie(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		HashMap<String, Movie> mMap = null;
@@ -305,8 +305,7 @@ public class MovieDAO {
 		// select * from MLIST where MOVIE_TITLE = ?
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, movieTitle);
-			pstmt.setInt(2, no);
+			pstmt.setInt(1, no);
 			mMap = new HashMap<String, Movie>();
 			rset = pstmt.executeQuery();
 			if(rset.next()) {

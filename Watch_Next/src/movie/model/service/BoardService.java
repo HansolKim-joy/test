@@ -176,7 +176,7 @@ public class BoardService {
 	}
 	public HashMap<String, Movie> DetailMovie(String movieTitle, int no) {
 		Connection conn = getConnection();
-		HashMap<String, Movie> m = new MovieDAO().DetailMovie(conn, movieTitle, no);
+		HashMap<String, Movie> m = new MovieDAO().DetailMovie(conn, no);
 		close(conn);
 		return m;
 	}
