@@ -49,7 +49,6 @@ public class RecruitListServlet extends HttpServlet {
 		ArrayList<Review> Reviewlist = new mainlistService().selectRvlist();
 //		System.out.println("servlet" + list);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDD");
 		
 		
 		
