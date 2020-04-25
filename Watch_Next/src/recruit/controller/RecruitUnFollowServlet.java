@@ -31,9 +31,8 @@ public class RecruitUnFollowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
-		String writer = request.getParameter("fwirter");
-		
+		int rNo = Integer.parseInt(request.getParameter("rNo").trim());
+		String writer = request.getParameter("fwriter");
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
