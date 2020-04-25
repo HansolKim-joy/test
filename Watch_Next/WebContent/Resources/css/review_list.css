@@ -28,10 +28,10 @@
 #reviewList th{height:50px;text-align:center; font-size:20px; padding-bottom:30px;}
 #num{width:70px; height:60px;}
 #rlcategory{width:150px; height:60px;}
-#title{width:400px; height:60px;}
-#date{width:200px; height:60px;}
+#title{width:500px; height:60px;}
+#date{width:160px; height:60px;}
 #writer{width:100px; height:60px;}
-#hits{width:150px; height:60px;}
+#hits{width:100px; height:60px;}
 
 	/* 페이징 */
 .pagingArea button{padding:5px 8px 4px 8px; color:white; font-size:12px; border:1px solid gray; background: transparent;}

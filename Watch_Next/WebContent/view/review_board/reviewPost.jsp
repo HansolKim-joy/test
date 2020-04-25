@@ -19,7 +19,7 @@
 <link type="text/css" href="/Watch_Next/Resources/css/review_post.css" rel="stylesheet" >
 <style>
 	.subnav li {width: 120px;}
-	.popimg{width:30px; height:30px;}
+	.popimg{width:35px; height:35px;}
 	.like{width:35px; height:35px;}
 	.likeb{background-color:transparent; border:none;}
 	#sirenb{background-color:transparent; border:none;}
@@ -36,7 +36,7 @@
 			<h2 id="rh2"><strong>리뷰 게시판 상세보기</strong></h2>
 			<hr class="hline">
 			<form action="<%= request.getContextPath()%>/view/review_board/ReviewUpdateForm.jsp" id="detailForm" name="detailForm"> 
-				<div id="box">
+				<div style="overflow:hidden; height:auto;" id="box">
 					<div id="spo">
 						<b>
 							<%if(r.getSpo().trim().equals("Y")) { %>
@@ -61,29 +61,39 @@
 							<tr>
 								<td width="850px" style="font-size:17px;">
 									<% if(r.getPopcorn() ==1) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==2) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==3) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==4) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==5) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
 										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} %>
 								</td>
@@ -264,7 +274,7 @@
 	    
 	   	<!-- 댓글 -->
 		<div id="replybox1">
-			<textarea id="reply_content" name="reply_content" rows="2" cols="193" placeholder="댓글을 입력하세요." style="white-space: pre-wrap; resize: none; border:none;"></textarea>
+			<textarea id="reply_content" placeholder="심한 욕설 또는 저속한 표현등과 같이 이용자 다수에게 불쾌감을 주는  댓글은 삭제&신고 될 수 있습니다." name="reply_content" rows="2" cols="193" placeholder="댓글을 입력하세요." style="white-space: pre-wrap; resize: none; border:none;"></textarea>
 		</div>
 		<button class="myButton" id="reply_save">댓글 작성</button>
 	

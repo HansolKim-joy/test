@@ -127,7 +127,7 @@
 	<!-- textarea부분 -->
 	<br clear="all">
 	<div id="taDiv">
-		<textarea name="taContent" id="taContent" cols=150 rows=20 style="overflow-y:scroll; resize:none;"></textarea>
+		<textarea name="taContent" id="taContent" cols=202 rows=20 style="overflow-y:scroll; resize:none;"></textarea>
 	</div>
 <!-- 	<div class="col-lg-12 nopadding"> -->
 <!-- 		<textarea id="txtEditor"></textarea> -->
