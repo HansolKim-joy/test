@@ -17,13 +17,154 @@
 #my:hover{text-decoration: underline;}
 #nf:hover{text-decoration: underline;}
 #le:hover{text-decoration: underline;}
+
+	/* footer */
+
+#footer{
+	height: 100px;
+	text-align: center;
+}
+.f_bottom-contents{
+	color: white;
+}
+#f_logo{
+	width: 150px;
+	height: 40px;
+}
+#copyright{
+	text-align: center;
+	color: white;
+	font-size: 10px;
+}
+
+	/* 상세뷰 */
+.hline{height:4px; background-color:red; border:none;}	
+#recruitp{width: 80%; margin:100px auto;}
+#box{margin-top:30px; background-color:white; color:black; 
+	 border-radius:5px; 
+	 
+    }
+
+#now{padding:10px; margin: 0 auto; text-align: center;}
+#now b{font-weight:bold; font-size:20px; color:red;}
+#fo {cursor:pointer;}
+#fo:hover{text-decoration: underline;}
+
+#rctitle{font-size:18px;}
+
+#wInfo{margin-left:20px;}
+/* #pop{width:78%;} */
+
+#atag{vertical-align: middle;}
+#content{margin:20px;}
+
+.myButton {
+   box-shadow:inset 0px 1px 0px 0px #f5978e; 
+   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+   background-color:#f24537;
+   border-radius:6px;
+   border:1px solid #db1f11;
+   display:inline-block;
+   cursor:pointer;
+   color:#ffffff;
+   font-family:Arial;
+   font-size:15px;
+   font-weight:bold;
+   padding:6px 24px;
+   text-decoration:none;
+   text-shadow:0px 1px 0px #810e05;
+   
+}
+.myButton:hover {
+   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+   background-color:#c62d1f;
+}
+.myButton:active {
+   position:relative;
+   top:1px;
+}
+
+#update{ margin-left : 37%;}
+
+#deleteC{font-size: 12px;
+		font-weight: lighter;
+		padding: 4px 8px;
+		margin-left: 90%;
+		margin-top: 7px;}
+    
+#listbtn{
+  		margin-left: 1247px;
+    margin-top: 18px;
+}
+
+#sirenb{font-size: 12px;
+		font-weight: lighter;
+		padding: 4px 8px;
+		margin-left: 90%;
+		margin-top: 7px;
+}
+
+#menu2{
+	margin-left: 225px;
+    margin-top: -8px;
+    padding: 4px 8px;
+    background-color: red;
+   	width:50px; height:25px; font-size:14px;
+   	} 
+	
+#recruitp li ul {
+background: lightgray;
+display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+height:auto;
+padding:5px;
+margin:0px;
+border:0px;
+position:absolute;
+width:100px;
+z-index:200;
+}
+
+#recruitp li:hover ul {
+display:block;   /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+}
+
+	/* 댓글 */
+textarea:focus {outline: none;}
+
+#replybox1{font-size:14px; padding:5px; float:left; width:91%; height:60px; margin-top:30px; background-color:white; color:black; border-radius:5px;}
+#reply_content{resize: none; border:none;  height: 35px; width: 1191px;}
+#reply_save{font-size: 17px;
+			margin-left: 304%;
+			width: 121px;
+			height: 71px;
+			border: none;
+			border-radius: 5px;
+			background-color: red;
+			color: white;
+			font-weight: bold;
+			margin-top: -7px;
+			}
+#report{margin-top:10px; margin-left:90%;
+		background-color:red; color:white; font-size:13px;
+		border:none; border-radius:5px;}
+
+
+#replybox2{margin-top:30px; background-color:white; color:black; border-radius:5px;}
+#replybox2 th{padding-top:10px; padding-bottom:10px; text-align:left;font-weight:bold; font-size:17px; color:red;}
+#replybox2 td{padding-bottom:20px;}
+#replybox2 table{margin:15px; width:98%;}
+
+
+
+
+
 </style>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <%@ include file="/view/layout/import.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" >
+<!-- <link type="text/css" href="/Watch_Next/Resources/css/recruit_post.css" rel="stylesheet" > -->
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -112,7 +253,7 @@
 					alert('팔로우성공');
 					location.reload();
 				}
-			});
+			})
 		}
 		
 		function unFollow(){
@@ -126,7 +267,7 @@
 					alert('팔로우해제 성공');
 					location.reload();
 				}
-			});
+			})
 		}
 	</script>
 	</div>
@@ -137,7 +278,9 @@
 	
 		<%=r.getbContent() %>
 		<input type="hidden" name="bContent" class= "content" value="<%=r.getbContent() %>">
+		
 		<br><br><br><br><br><br><br><br><br><br>
+		<span></span>
 	</div>
 
 
@@ -225,7 +368,7 @@
 				}
 		}
 		
-		$(document).on('click', '.deleteC', function(){
+		$(document).on('click', '#deleteC', function(){
 			var rId = $(this).prev(".rId").val();
 			var rNo = $('#rNo').val();
 			$.ajax({
