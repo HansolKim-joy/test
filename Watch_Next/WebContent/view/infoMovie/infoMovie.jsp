@@ -75,7 +75,7 @@
      			<br>국가 : <%=m.getmCountry() %>
      			<br>장르 : <%=genre %>
      			</td>
-     			<td><%=m.getmStory() %></td>
+     			<td id="story"><%=m.getmStory() %></td>
      		</tr>
      		
      		<tr>

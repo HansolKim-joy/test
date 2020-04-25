@@ -73,16 +73,28 @@
 				<th colspan="5" class="m_t">조회된 리스트가 없습니다.</th>
 			</tr>
 		<%} else{%>
-			<% for(int i=0; i<mlist.size(); i++){%>
+			<% for(int i=0; i<mlist.size(); i++){
+				String title = mlist.get(i).getmTitle();
+				if(title.length() > 12){
+					title = title.substring(0,11) + "...";
+				}
+				String director = mlist.get(i).getmDirector();
+				if(director.length() > 12){
+					director = director.substring(0,11) + "...";
+				}
+				String actor = mlist.get(i).getmActor();
+				if(actor.length() > 12){
+					actor = actor.substring(0,11) + "...";
+				}%>
 				<%if(moviecheck % 5 == 1){%>
 					<tr>
 				<%} %>
 						<td class="m_t">
 							<a class="a_tag" href="<%=request.getContextPath()%>/detail.mo?movieTitle=<%= mlist.get(i).getmTitle()%>&no=<%=mlist.get(i).getmNo()%>">
 								<img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p">
-								<br>&emsp;<b><%= mlist.get(i).getmTitle()%></b>
-								<br>&emsp;<%= mlist.get(i).getmDirector()%>
-								<br>&emsp;<%= mlist.get(i).getmActor()%>
+								<br>&emsp;<b><%= title%></b>
+								<br>&emsp;<%= director%>
+								<br>&emsp;<%= actor%>
 							</a>
 						</td>
 				<%if(moviecheck % 5 == 0){%>
