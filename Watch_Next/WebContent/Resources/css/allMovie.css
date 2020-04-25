@@ -27,18 +27,30 @@
 	.hline{ border: 0;  height: 1px;  background: red;}	
 	
 	#m_poster{margin: 0 auto; 
-			font-size: 20px; 
-			font-weight: bold; 
-			width: 80%;
+			font-size: 20px;
  			border-collapse: separate;
-			border-spacing: 0 40px; 
-			color: white;}
+			border-spacing: 18px 40px;
+	}
+	#m_poster td{
+	box-shadow:0.5px 0.1px 4px 0.5px black;
+	border-radius: 15px;}
+	#m_poster td:hover{
+		box-shadow:0.5px 0.1px 4px 0.5px red;
+		transition: box-shadow 0.5s;
+	}
+	#m_poster img{
+	border-radius: 15px 15px 0px 0px;
+	border-bottom: 1px solid white;
+	}
+	#m_poster b{
+		color:white;
+	}
 	
 	/* .m_t{
 	width: 900px;} */
 		
-	.m_p{ margin-top: 10%; 
-		width: 180px; height: 250px; padding:5px;
+	.m_p{
+		width: 180px; height: 250px;
 	}
 
 .list_n_menu {padding:3px; MARGIN:3px; TEXT-ALIGN: center}
