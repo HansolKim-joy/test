@@ -27,7 +27,6 @@
 <meta charset="UTF-8">
 <title>insert title</title>
 <link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer.css" rel="stylesheet" />
-<link type="text/css" href="/Watch_Next/Resources/css/hedaer_footer(AFTER).css" rel="stylesheet" />
 <link type="text/css" href="/Watch_Next/Resources/css/login.css" rel="stylesheet" />
 <!--페이지에 적용되는 css넣기 -->
 <link rel= "stylesheet" type="text/css" href="/Watch_Next/Resources/css/a_tag.css">
@@ -75,10 +74,28 @@
 			</tr>
 		<%} else{%>
 			<% for(int i=0; i<mlist.size(); i++){%>
-				<%if(moviecheck == 6 || moviecheck == 1){%>
+			<%	String time = mlist.get(i).getmRunningTime();
+				if(time.charAt(0) == '0' && time.charAt(1) == '0'){
+					time = time.substring(3) + "분";
+				}else if(time.charAt(0) == '0' && time.charAt(3) == '0' && time.charAt(4) == '0'){
+					time = time.substring(1,2) + "시간";
+				}else if(time.charAt(0) == '0'){
+					time = time.substring(1,2) + "시간" + time.substring(3) + "분";
+				}else{
+					time = time.substring(0,2) + "시간" + time.substring(3) + "분";
+				}
+			%>
+				<%if(moviecheck % 5 == 1){%>
 					<tr>
 				<%} %>
-						<th class="m_t"><a class="a_tag" href="<%=request.getContextPath()%>/detail.mo?movieTitle=<%= mlist.get(i).getmTitle()%>&no=<%=mlist.get(i).getmNo()%>"><img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p"><br><%= mlist.get(i).getmTitle()%></a></th>
+						<td class="m_t">
+							<a class="a_tag" href="<%=request.getContextPath()%>/detail.mo?movieTitle=<%= mlist.get(i).getmTitle()%>&no=<%=mlist.get(i).getmNo()%>">
+								<img src="<%=request.getContextPath() %>/Resources/images/<%=fNameList.get(i)%>" class="m_p">
+								<br>&emsp;<b><%= mlist.get(i).getmTitle()%></b>
+								<br>&emsp;<%= time%>
+								<br>&emsp;<%= mlist.get(i).getmReleaseDate()%>
+							</a>
+						</td>
 				<%if(moviecheck % 5 == 0){%>
 					</tr>
 				<%} %>
