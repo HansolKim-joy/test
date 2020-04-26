@@ -7,7 +7,7 @@
 	height: 100px;
 	text-align: center;
     margin-top: 3%;
-}
+    
 }
 .f_bottom-contents{
 	color: white;
@@ -84,7 +84,7 @@
 #percent{text-align:right; font-size:18px}
 #dDay{width:150px; height:5px; font-size:18px; color:red; font-weight:bold}
 
-.poster{width: 250px; height: 350px;}
+.poster{width: 250px; height: 350px; cursor: pointer;}
 
 	/* 달성률 */
 .bar{z-index:0; width:250px; height:10px; background-color:lightgray;}
