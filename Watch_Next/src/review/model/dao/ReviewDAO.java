@@ -47,7 +47,8 @@ public class ReviewDAO {
 				try {
 				if(sk2.equals("스포선택")) {
 					if(sk.equals("전체")) {
-						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?";
+						System.out.println("dao페이징:"+startRow+"/" + endRow);
+						SQL = "SELECT * FROM RVLIST WHERE RNUM BETWEEN ? AND ? AND (REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?)";
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setInt(1, startRow);
 						pstmt.setInt(2, endRow);
@@ -86,7 +87,7 @@ public class ReviewDAO {
 					
 				} else {
 					if(sk.equals("전체")) {
-						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?";
+						SQL = "SELECT * FROM RVLIST WHERE SPO_CHK_YN=? AND RNUM BETWEEN ? AND ? AND (REVIEW_MOVIE_TITLE LIKE ? OR BOARD_TITLE LIKE ? OR USER_ID LIKE ? OR BOARD_CONTENT LIKE ?)";
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1, sk2);
 						pstmt.setInt(2, startRow);
