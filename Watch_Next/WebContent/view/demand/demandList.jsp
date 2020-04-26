@@ -4,7 +4,7 @@
 	ArrayList<DemandList> list = (ArrayList<DemandList>)request.getAttribute("list");
 	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
+	System.out.println(list);
 	
 	double percent = 0.0;
 	int j = 4;
@@ -50,7 +50,7 @@
     color: white;
     font-weight: bold;
     }
- 
+ input:focus {outline:none;}
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />

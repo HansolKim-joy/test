@@ -28,7 +28,6 @@ public class DemandService {
 		Connection conn = getConnection();
 		ArrayList<DemandList> list = new DemandDAO().selectList(conn,currentPage,boardLimit);
 		close(conn);
-		
 		return list;
 	}
 	
