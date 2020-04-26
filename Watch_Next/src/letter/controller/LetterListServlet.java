@@ -44,7 +44,7 @@ public class LetterListServlet extends HttpServlet {
 		String chk = request.getParameter("str");
 		PageInfo pi = null;
 		int allCount = service.allListCount(userId);
-		if(chk != null) {
+		if(chk != null && !chk.equals("null")) {
 			int sendlistCount = service.getsendListCount(userId);
 			int currentPage;			// 현재 페이지
 			int pageLimit = 10;			// 한 페이지에 표시될 페이징 수

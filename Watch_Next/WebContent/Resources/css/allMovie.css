@@ -33,19 +33,21 @@
 	}
 	#m_poster td{
 	box-shadow:0.5px 0.1px 4px 0.5px black;
-	border-radius: 15px;}
+	}
 	#m_poster td:hover{
 		box-shadow:0.5px 0.1px 4px 0.5px red;
 		transition: box-shadow 0.5s;
 	}
 	#m_poster img{
-	border-radius: 15px 15px 0px 0px;
 	border-bottom: 1px solid white;
 	}
 	#m_poster b{
 		color:white;
+		font-size: 17px;
 	}
-	
+	.a_tag{
+		font-size: 12px;
+	}
 	/* .m_t{
 	width: 900px;} */
 		
