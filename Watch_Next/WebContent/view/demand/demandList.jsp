@@ -42,6 +42,10 @@
     font-weight: bold;
     font-size: 23px;
     padding-left: 9px;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     }
     #empty{
 	text-align: center;
