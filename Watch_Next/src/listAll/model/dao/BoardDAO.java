@@ -209,7 +209,8 @@ public class BoardDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				d = new Demand(rset.getString("screening_movie_name"),
+				d = new Demand(rset.getInt("demand_survey_no"),
+								rset.getString("screening_movie_name"),
 								rset.getString("movie_title"),
 								rset.getInt("demand_price"),
 								rset.getDate("demand_end_date"),
@@ -269,7 +270,8 @@ public class BoardDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				d = new Demand(rset.getString("requestp"),
+				d = new Demand(rset.getInt("demand_survey_no"),
+							   rset.getString("requestp"),
 							   rset.getInt("demand_want_price"),
 							   rset.getString("screening_movie_name"),
 							   rset.getString("movie_title"),
@@ -300,7 +302,8 @@ public class BoardDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				d = new Demand(rset.getString("requestp"),
+				d = new Demand(rset.getInt("demand_survey_no"),
+							   rset.getString("requestp"),
 							   rset.getInt("demand_want_price"),
 							   rset.getString("screening_movie_name"),
 							   rset.getString("movie_title"),
