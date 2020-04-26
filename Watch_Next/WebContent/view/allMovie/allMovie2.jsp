@@ -75,16 +75,16 @@
 		<%} else{%>
 			<% for(int i=0; i<mlist.size(); i++){
 				String title = mlist.get(i).getmTitle();
-				if(title.length() > 12){
-					title = title.substring(0,11) + "...";
+				if(title.length() > 8){
+					title = title.substring(0,7) + "...";
 				}
 				String director = mlist.get(i).getmDirector();
-				if(director.length() > 12){
-					director = director.substring(0,11) + "...";
+				if(director.length() > 8){
+					director = director.substring(0,7) + "...";
 				}
 				String actor = mlist.get(i).getmActor();
-				if(actor.length() > 12){
-					actor = actor.substring(0,11) + "...";
+				if(actor.length() > 8){
+					actor = actor.substring(0,7) + "...";
 				}%>
 				<%if(moviecheck % 5 == 1){%>
 					<tr>
