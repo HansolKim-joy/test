@@ -114,7 +114,6 @@ public class CreateDAO {
 			}
 			
 			
-			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Create>();
 			
