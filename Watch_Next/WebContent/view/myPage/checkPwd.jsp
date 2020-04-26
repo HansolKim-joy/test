@@ -101,7 +101,7 @@
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
-	<form action="<%= request.getContextPath() %>/view/myPage/checkUser.jsp" method="post">
+	<form action="<%= request.getContextPath() %>/view/myPage/checkUser.jsp" method="post" onsubmit="return checkPwd();">
 		<div id="checkPwdMain">
 				<div id="checkPwdHead">비밀번호 확인</div>
 				<br>		
@@ -113,7 +113,7 @@
 								<input type="password" id="inputPwd" name="inputPwd">
 								<input type="hidden" id="hidden">
 							<div>
-								<button type="submit" id="checkBtn" class="mybtn" onclick="return checkPwd();">확인</button>
+								<button type="submit" id="checkBtn" class="mybtn">확인</button>
 							</div>
 					</div>
 				</div>
@@ -141,15 +141,18 @@
 			console.log("lockInputPwd" + lockInputPwd);
 			console.log("userPwd" + userPwd);
 			
-			if(inputPwd.equals(userPwd)){
+			if(lockInputPwd == userPwd){
 				console.log('같다!!');
 				window.close();
+				return true;
 			}else{
 				console.log('다르다!!');
 				alert('비밀번호가 일치하지 않습니다!');
+				$('#inputPwd').val('');
+				$('#inputPwd').focus();
 				return false;
 			}
-		};
+		}
 	</script>
 <!-- footer -->
 <%@ include file="/view/layout/footer.jsp" %>
