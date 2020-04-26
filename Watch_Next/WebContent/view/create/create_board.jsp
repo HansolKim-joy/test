@@ -174,16 +174,18 @@
 					$(this).parent().css('cursor', 'pointer');
 				}).click(function(){
 					var cNo = $(this).parent().children().eq(0).text();
-					 if('<%= loginUser %>' != 'null'){
-							location.href='<%= request.getContextPath() %>/detail.creat?cNo=' +cNo;
-						}else{
-							alert('로그인 해주세요.');
-						}
+					
+				    if('<%= loginUser %>' != 'null' && cNo != '조회된 리스트가 없습니다.'){
+			            location.href="<%= request.getContextPath() %>/detail.creat?cNo="+cNo;
+			         } else if('<%= loginUser %>' != 'null' && cNo == '조회된 리스트가 없습니다.'){
+			            alert('리스트가 없습니다!');
+			         } else{
+			            alert('로그인 해주세요^^');
+			         }
+			         
+
 				});
-				
-			
-			
-		});
+			});
 	
 	</script>
 </section>
