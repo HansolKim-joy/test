@@ -40,7 +40,8 @@ $(document).ready(function() {
 
 <style>
 	#rec_title{
-		font-size: 25px;
+		font-size: 30px;
+		margin-top: 10%;
 	}
 	.p_slide-wrap{
 		width: 80%;
@@ -85,12 +86,53 @@ $(document).ready(function() {
 		width: 200px;
 		height: 300px;
 	}
+	
+		/*사이드바 */
+#sidebar{
+	position: fixed;
+	width: 100px;
+	height: 700px;
+	left: 94%;
+	top: 15%;
+}
+#sidebar a{
+	color: #545357;
+}
+#mlink{
+	border: 1px solid;
+ 	width: 80px; 
+	height: 80px;
+}
+#topbtn{
+	text-align: center;
+	font-weight: bold;
+	background-color: yellow;
+}
+	
 </style>
 
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
+
+<div id="sidebar">
+	<table>
+		<tr>
+			<td><a href="https://play.watcha.net/" target="_blank"><img src="Resources/images/왓챠.png" id="mlink" class="mwha"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://www.netflix.com/kr/" target="_blank"><img src="Resources/images/넷플릭스.png" id="mlink" class="mnet"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://movie.naver.com/" target="_blank"><img src="Resources/images/네이버 영화.png" id="mlink" class="mnav"></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" target="_self"><img src="Resources/images/top.png" id="mlink" ></a></td>
+		</tr>
+	
+	</table>
+</div>
 
 	<section>
 		<!-- 추천게시판 -->

@@ -33,10 +33,53 @@
 <link type="text/css" href="<%=request.getContextPath()%>/Resources/css/allMovie.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style>
+	/*사이드바 */
+#sidebar{
+	position: fixed;
+	width: 100px;
+	height: 700px;
+	left: 94%;
+	top: 15%;
+}
+#sidebar a{
+	color: #545357;
+}
+#mlink{
+	border: 1px solid;
+	width: 80px;
+	height: 80px;
+}
+#topbtn{
+	text-align: center;
+	font-weight: bold;
+	background-color: yellow;
+}
+
+#footer{margin-top: 23.2%;}
+</style>
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
+
+<div id="sidebar">
+	<table>
+		<tr>
+			<td><a href="https://play.watcha.net/" target="_blank"><img src="Resources/images/왓챠.png" id="mlink" class="mwha"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://www.netflix.com/kr/" target="_blank"><img src="Resources/images/넷플릭스.png" id="mlink" class="mnet"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://movie.naver.com/" target="_blank"><img src="Resources/images/네이버 영화.png" id="mlink" class="mnav"></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" target="_self"><img src="Resources/images/top.png" id="mlink" ></a></td>
+		</tr>
+	
+	</table>
+</div>
 
 <section>
 

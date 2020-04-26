@@ -6,7 +6,8 @@
 #footer{
 	height: 100px;
 	text-align: center;
-	
+    margin-top: 3%;
+}
 }
 .f_bottom-contents{
 	color: white;

@@ -50,6 +50,7 @@
     color: white;
     font-weight: bold;
     }
+ 
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />

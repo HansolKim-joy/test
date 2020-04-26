@@ -20,13 +20,13 @@
     
    .lg_form{
        border: 1px;
-       color: white;
-       margin: 0 auto;
-       margin-top: 3%;
-       background-color: #00000014;
-       height: 350px;
-       width: 600px;
-       border-radius: 20px;
+	   color: white;
+	   margin: 0 auto;
+	   margin-top: 7%;
+	   background-color: #00000014;
+	   height: 315px;
+	   width: 600px;
+	   border-radius: 20px;
    }
    
    .hline{
@@ -86,7 +86,7 @@
 #lgbtn{display: flex;}
 #lgbtn label{font-size: 15px; vertical-align: -3px;}
 #botbtn{
-	margin-top: 74px;
+	margin-top: 15%;
     text-align: center;
     color: #8e8e8e;
     border-top: 1px solid #e4e4e5;
