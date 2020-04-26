@@ -246,7 +246,7 @@
 					<table id="OpenFundingTable" class="myTable">
 						<tr>
 							<% if(OpenFunding.isEmpty()) { %>
-								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+								<td colspan="5">진행 중인 펀딩 중 참여한 펀딩이 없습니다.</td>
 							<% }else{ %>
 								<td>펀딩 영화</td>
 								<td>펀딩 극장</td>
@@ -255,7 +255,7 @@
 								<td>완료 금액</td>
 							</tr>
 							<% for(int i = 0; i < OpenFunding.size(); i++) {%>
-								<tr>
+								<tr onclick="location.href='<%= request.getContextPath() %>/demand.detail?no=<%= OpenFunding.get(i).getdNo() %>'">
 									<td><%= OpenFunding.get(i).getMovieTitle() %></td>
 									<td><%= OpenFunding.get(i).getSmName() %></td>
 									<td><%= OpenFunding.get(i).getUserId() %></td>
@@ -269,7 +269,7 @@
 					<table id="CloseFundingTable" class="myTable">
 						<tr>
 							<% if(CloseFunding.isEmpty()) { %>
-								<td colspan="5">작성한 댓글이 존재하지 않습니다.</td>
+								<td colspan="5">완료된 펀딩 중 참여한 펀딩이 없습니다.</td>
 							<% }else{ %>
 								<td>펀딩 영화</td>
 								<td>펀딩 극장</td>
@@ -278,7 +278,7 @@
 								<td>완료 금액</td>
 							</tr>
 							<% for(int i = 0; i < CloseFunding.size(); i++) {%>
-								<tr>
+								<tr onclick="location.href='<%= request.getContextPath() %>/demand.detail?no=<%= CloseFunding.get(i).getdNo() %>'">
 									<td><%= CloseFunding.get(i).getMovieTitle() %></td>
 									<td><%= CloseFunding.get(i).getSmName() %></td>
 									<td><%= CloseFunding.get(i).getUserId() %></td>
@@ -445,7 +445,7 @@
 							</tr>
 							<% }else{ %>
 								<% for(int i = 0; i < ReviewList.size(); i++) {%>
-								<tr>
+								<tr onclick="location.href='<%= request.getContextPath() %>/detail.rv?rv=<%= ReviewList.get(i).getbNo() %>'">
 									<td><%= ReviewList.get(i).getbNo() %></td>
 									<td>
 										<% String checkSpo = ""; 
@@ -478,7 +478,7 @@
 						</tr>
 							<% } else { %>
 								<% for(int i = 0; i < RecruitList.size(); i++) {%>
-									<tr>
+									<tr onclick="location.href='<%= request.getContextPath() %>/detail.recruit?rNo=<%= RecruitList.get(i).getrNo() %>'">
 										<td><%= RecruitList.get(i).getrNo() %></td>
 										<td><%= RecruitList.get(i).getrHead() %></td>
 										<td><%= RecruitList.get(i).getbTitle() %></td>
@@ -497,7 +497,7 @@
 								<% for(int i = 0; i < CreateList.size(); i++) {%>
 									<% if((i+1) % 4 == 1) {%>
 										<tr>
-											<td>
+											<td onclick="location.href='<%= request.getContextPath() %>/detail.creat?cNo=<%= CreateList.get(i).getbNO() %>'">
 												<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/crethumb_uploadFiles/<%= CreateList.get(i).getcName() %>">
 												<br>
 												영화 제목 : <%= CreateList.get(i).getbTitle() %> <br>
@@ -505,7 +505,7 @@
 												작성일 : <%= CreateList.get(i).getcDate() %><br>
 											</td> 
 										<% }else if((i+1) % 4 == 2 || (i+1) % 4 == 3){ %>
-											<td>
+											<td onclick="location.href='<%= request.getContextPath() %>/detail.creat?cNo=<%= CreateList.get(i).getbNO() %>'">
 												<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/crethumb_uploadFiles/<%= CreateList.get(i).getcName() %>">
 												<br>
 												영화 제목 : <%= CreateList.get(i).getbTitle() %><br> 
@@ -513,7 +513,7 @@
 												작성일 : <%= CreateList.get(i).getcDate() %><br>
 											</td>
 									<% } else if((i+1) % 4 == 0) {%>
-										<td>
+										<td onclick="location.href='<%= request.getContextPath() %>/detail.creat?cNo=<%= CreateList.get(i).getbNO() %>'">
 											<img class="mPhoto" src="<%= request.getContextPath() %>/Resources/crethumb_uploadFiles/<%= CreateList.get(i).getcName() %>">
 											<br>
 												영화 제목 : <%= CreateList.get(i).getbTitle() %> <br>
@@ -540,7 +540,7 @@
 						</tr>
 							<% } else { %>
 								<% for(int i = 0; i < IwriteFund.size(); i++) {%>
-									<tr>
+									<tr onclick="location.href='<%= request.getContextPath() %>/demand.detail?no=<%= IwriteFund.get(i).getdNo() %>'">
 										<td><%= IwriteFund.get(i).getMovieTitle() %></td>
 										<td><%= IwriteFund.get(i).getSmName() %></td>
 										<td><%= IwriteFund.get(i).getMoney() %></td>
@@ -577,7 +577,7 @@
 								<td>댓글 작성일</td>
 							</tr>
 							<% for(int i = 0; i < ReviewComlist.size(); i++) {%>
-								<tr>
+								<tr onclick="location.href='<%= request.getContextPath() %>/detail.rv?rv=<%= ReviewComlist.get(i).getRefBid() %>'">
 									<td><%= ReviewComlist.get(i).getRefBid() %></td>
 									<td>[<%= ReviewComlist.get(i).getmTitle() %>]<%= ReviewComlist.get(i).getbTitle() %></td>
 									<td><%= ReviewComlist.get(i).getbWriter() %></td>
@@ -601,7 +601,7 @@
 								<td>댓글 작성일</td>
 							</tr>
 							<% for(int i = 0; i < RecruitComlist.size(); i++) {%>
-								<tr>
+								<tr onclick="location.href='<%= request.getContextPath() %>/detail.recruit?rNo=<%= RecruitComlist.get(i).getRefBid() %>'">
 									<td><%= RecruitComlist.get(i).getRefBid() %></td>
 									<td><%= RecruitComlist.get(i).getmTitle() %></td>
 									<td><%= RecruitComlist.get(i).getbTitle() %></td>
@@ -626,7 +626,7 @@
 								<td>댓글작성일</td>
 							</tr>
 								<% for(int i = 0; i < CreateComList.size(); i++){ %>
-									<tr>
+									<tr onclick="location.href='<%= request.getContextPath() %>/detail.creat?cNo=<%= CreateComList.get(i).getRefBid() %>'">
 										<td><%= CreateComList.get(i).getRefBid()%></td>
 										<td><%= CreateComList.get(i).getmTitle() %></td>
 										<td><%= CreateComList.get(i).getbTitle() %></td>

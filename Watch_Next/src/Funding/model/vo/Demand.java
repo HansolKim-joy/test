@@ -94,8 +94,9 @@ public class Demand {
 	}
 	
 	// 한솔
-	public Demand(String smName, String movieTitle, int money, Date endDate, int smWant) {
+	public Demand(int dNo, String smName, String movieTitle, int money, Date endDate, int smWant) {
 		super();
+		this.dNo = dNo;
 		this.smName = smName;
 		this.movieTitle = movieTitle;
 		this.money = money;
@@ -103,8 +104,9 @@ public class Demand {
 		this.smWant = smWant;
 	}
 	
-	public Demand(String userId, int wantMoney, String smName, String movieTitle, int money) {
+	public Demand(int dNo, String userId, int wantMoney, String smName, String movieTitle, int money) {
 		super();
+		this.dNo = dNo;
 		this.userId = userId;
 		this.wantMoney = wantMoney;
 		this.smName = smName;
