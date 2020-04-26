@@ -180,12 +180,14 @@ textarea:focus {outline: none;}
 		<form action="view/recruit/recruitUpdate.jsp" id="detailForm" name="detailForm">
 			<div id="box">
 		    
-				<div id="now">
-					<b>
+				<div id="now" style = "display: block; margin: 4px 79px 0 10px;">
+
+					<b style="margin-left: 479px;">
 					<%= r.getrHead() %>
 					<input type="hidden" value="<%= r.getrHead() %>" name="rHead">	
 					</b>&nbsp;&nbsp;&nbsp; 
-					<input type="text" readonly="<%= r.getbTitle() %>" id=rctitle name="bTitle" value="<%= r.getbTitle() %>" style="border: 0;">
+					
+					<input type="text" readonly id=rctitle name="bTitle" value="<%= r.getbTitle() %>" style="border: 0; width:50%;">
 					
 					<input id="rNo" type="hidden" name="rNo" value="<%=r.getrNo() %>">
 				
@@ -197,7 +199,7 @@ textarea:focus {outline: none;}
 		<table>
 			<tr>
 				<td width="850px" style="font-size:17px;"></td>
-				<td width="90px" style="font-size:17px;">글쓴이 : </td>
+				<td width="90px" style="font-size:17px; padding-left: 264px;">글쓴이 : </td>
 				<td width="70px" style="font-size:17px;" id="rpWriter">
 					<ul>
 						<li>
@@ -292,6 +294,8 @@ textarea:focus {outline: none;}
 			&nbsp;&nbsp;&nbsp;
 			<button type="button" id="delete"  class="myButton" onclick="deleteRe();" value="삭제">삭제</button>
 			&nbsp;&nbsp;&nbsp;
+			<!-- <button type="button" id="end"  class="myButton" onclick="end();" value="마감">마감</button>
+			&nbsp;&nbsp;&nbsp; -->
 			<button type="button" id="menu"  class="myButton" onclick="location.href='<%=request.getContextPath()%>/list.recruit'">목록</button>
 	    <% } else if(!loginUser.getUserId().equals(r.getUserId())) {%>
 	    <button type="button" id="menu2"  class="myButton" onclick="location.href='<%=request.getContextPath()%>/list.recruit'">목록</button>    
@@ -367,6 +371,12 @@ textarea:focus {outline: none;}
 					location.href="<%=request.getContextPath() %>/delete.recruit?rNo=" + <%=r.getrNo() %>;
 				}
 		}
+		
+		<%-- function end(){
+			var end;
+			end = location.href('<%=request.getContextPath() %>/view/recruit/recruitList.jsp', 'text-decoration', 'line-through');
+		} --%>
+		
 		
 		$(document).on('click', '#deleteC', function(){
 			var rId = $(this).prev(".rId").val();
