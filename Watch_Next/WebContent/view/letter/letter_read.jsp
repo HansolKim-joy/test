@@ -18,8 +18,8 @@
 <body>
 	<h2 style = color:red;>쪽지함</h2>
 	<hr color='red'>
-	<h4 style = color:white;>보낸 이 : <%=l.getUserName() %></h4>
-	<h4 style = color:white;>받는 이 : <%=l.getUserId() %></h4>
+	<h4 style = color:white;>보낸 이 : <%=l.getUserId() %></h4>
+	<h4 style = color:white;>받는 이 : <%=l.getUserName() %></h4>
 	<h4 style = color:white;>제목 : <%=l.getMsg_Title() %></h4>
 	<textarea cols="60" rows="15" style="overflow-y:scroll; resize: none;" readonly><%=l.getMsg_Content() %></textarea>
 	<br>
