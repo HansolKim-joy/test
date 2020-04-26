@@ -88,7 +88,7 @@ div[contenteditable=true] {
 		<h2><strong>모집 게시판 작성</strong></h2>
 		<hr id="red_line">
 		<br>
-		<h4><strong>제목 : &ensp;<input type="text" id="recW_recruitName" name="recW_recruitName"></strong></h4>
+		<h4><strong>제목 : &ensp;<input type="text" id="recW_recruitName" name="recW_recruitName" maxlength="30"></strong></h4>
 		<h4><strong>종류 : &nbsp;
 		<select id="recW_type" name="recW_type">
 			<option value="NETFLIX">NETFLIX</option>
