@@ -12,12 +12,12 @@
 	
 	#m_choice{
 	width: 120px;
-	margin-left: 80%;
-	padding: .7em .4em; /* 여백으로 높이 설정 */
+	margin-left: 83%;
+	height: 30px;
     font-family: inherit;  /* 폰트 상속 */
     background: url('') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
     border: 1px solid #999;
-    border-radius: 0px; /* iOS 둥근모서리 제거 */
+    border-radius: 8px; /* iOS 둥근모서리 제거 */
     color: white;}
     #m_choice option{
     	background: #545357;
