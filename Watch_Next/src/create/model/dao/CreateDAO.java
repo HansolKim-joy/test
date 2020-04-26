@@ -112,8 +112,7 @@ public class CreateDAO {
 					pstmt.setInt(2, endRow);
 				}
 			}
-			
-			
+						
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Create>();
 			
