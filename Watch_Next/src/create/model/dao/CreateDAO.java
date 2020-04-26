@@ -49,7 +49,7 @@ public class CreateDAO {
 		try {
 			if(sk2.equals("최신순")) {
 				if(sk.equals("전체")) {
-					SQL = "SELECT * FROM CRLIST WHERE RNUM BETWEEN ? AND ? AND BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ? OR CREATE_DIRECTOR LIKE ? ORDER BY BOARD_DATE DESC";
+					SQL = "SELECT * FROM CRLIST WHERE RNUM BETWEEN ? AND ? AND (BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ? OR CREATE_DIRECTOR LIKE ?) ORDER BY BOARD_DATE DESC";
 					pstmt = conn.prepareStatement(SQL);
 					pstmt.setInt(1, startRow);
 					pstmt.setInt(2, endRow);
@@ -81,7 +81,7 @@ public class CreateDAO {
 				}
 			} else { //추천순
 				if(sk.equals("전체")) {
-					SQL = "SELECT * FROM CRLIST WHERE RNUM BETWEEN ? AND ? AND BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ? OR CREATE_DIRECTOR LIKE ? ORDER BY CREATE_LIKE DESC";
+					SQL = "SELECT * FROM CRLIST WHERE RNUM BETWEEN ? AND ? AND (BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ? OR CREATE_DIRECTOR LIKE ?) ORDER BY CREATE_LIKE DESC";
 					pstmt = conn.prepareStatement(SQL);
 					pstmt.setInt(1, startRow);
 					pstmt.setInt(2, endRow);
