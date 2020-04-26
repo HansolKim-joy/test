@@ -26,11 +26,11 @@ public class BoardService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public HashMap<String, Movie> MovieList(int currentPage, int boardLimit) {
+	public HashMap<String, Movie> MovieList(int currentPage, int boardLimit, int choice) {
 		HashMap<String, Movie> list = null;
 		Connection conn = getConnection();
 		
-		list = new MovieDAO().MovieList(conn, currentPage, boardLimit);
+		list = new MovieDAO().MovieList(conn, currentPage, boardLimit, choice);
 		
 		close(conn);
 		return list;
@@ -181,18 +181,16 @@ public class BoardService {
 		return m;
 	}
 
-	public int DeleteMovie(int no, String fName) {
+	public int DeleteMovie(int no) {
 		Connection conn = getConnection();
-		int result1 = new MovieDAO().DeleteAllDib(conn,no);
-		int result2 = new MovieDAO().DeleteMovie(conn,no);
-		int result3 = new MovieDAO().DeleteImage(conn,fName);
-		if(result2 > 0) {
+		int result = new MovieDAO().DeleteMovie(conn,no);
+		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
-		return result2;
+		return result;
 	}
 	
 	public ArrayList<Demand> selectOpenFunding(String userId) {
@@ -224,5 +222,29 @@ public class BoardService {
 		ArrayList<Comment> CreateComList = new BoardDAO().selectCcomment(conn, userId);
 		close(conn);
 		return CreateComList;
+	}
+
+	public int DeleteAllDib(int no) {
+		Connection conn = getConnection();
+		int result1 = new MovieDAO().DeleteAllDib(conn,no);
+		if(result1 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result1;
+	}
+
+	public int DeleteFile(String fName) {
+		Connection conn = getConnection();
+		int result3 = new MovieDAO().DeleteImage(conn,fName);
+		if(result3 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result3;
 	}
 }

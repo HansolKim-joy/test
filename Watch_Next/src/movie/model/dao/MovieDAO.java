@@ -31,11 +31,16 @@ public class MovieDAO {
 	
 	}
 
-	public HashMap<String, Movie> MovieList(Connection conn, int currentPage, int boardLimit) {
+	public HashMap<String, Movie> MovieList(Connection conn, int currentPage, int boardLimit, int choice) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		HashMap<String, Movie> list = null;
 		String sql = prop.getProperty("MovieList");
+		if(choice == 1) {
+			sql = prop.getProperty("MovieListASC");
+		}else if(choice == 2) {
+			sql = prop.getProperty("MovieListDESC");
+		}
 		int startRow = (currentPage - 1) * boardLimit + 1;
 		int endRow = startRow + boardLimit - 1;
 		
