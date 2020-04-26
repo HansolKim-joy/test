@@ -28,7 +28,7 @@
 				action="<%= request.getContextPath() %>/login.me" method="post">
 				<div class="lg">
 					<div id="lgbtn">
-					<div>
+					<div class="in">
 						<div class="div">
 							<label>아이디</label>
 							<input type="text" class="lg_text" id="userId" name="userId">

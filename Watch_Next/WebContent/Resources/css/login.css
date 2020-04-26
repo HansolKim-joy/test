@@ -17,6 +17,8 @@
        outline: 0;
        font-size: 13px;
     }
+    .in input{vertical-align: 2px; color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+	.in input:focus{background-color: #e74c3c; color: white;}
     
    .lg_form{
        border: 1px;

@@ -58,7 +58,7 @@
 						<div id="s6" class="span">
 							<label class="star">*</label>
 							<label class="title">이메일</label>
-							<input type="email" class="jn_input" id="user_Email" name="user_Email" placeholder="이메일을 입력하시오.">
+							<input type="email" class="jn_input" id="user_Email" name="user_Email">
 							<input type="button" id="chkbtn" onclick="email_CheckNum()" value="인증받기">
 						</div>
 						<div id="s7" class="span">
