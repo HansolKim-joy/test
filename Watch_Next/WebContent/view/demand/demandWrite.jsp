@@ -164,7 +164,7 @@
 			<b>감독 : </b><input type="text" id="admin_movie_director" name="admin_movie_director">
 			<b style="margin-left: 8%;">총원 : </b><input type="text" id="admin_movie_max" name="admin_movie_max" value='150' readonly><br>
 			<b>출연 : </b><input type="text" id="admin_movie_actor" name="admin_movie_actor">
-			<b style="margin-left: 8%;">펀딩 금액 : </b><input type="text" id="admin_movie_min" name="admin_movie_min" onKeyup="inputPrice(this);">&nbsp;&nbsp;<b id="funP"></b><br>
+			<b style="margin-left: 8%;">펀딩 총 금액 : </b><input type="text" id="admin_movie_min" name="admin_movie_min" onKeyup="inputPrice(this);">&nbsp;&nbsp;<b id="funP"></b><br>
 			<b>장르 : </b>
 			<select id = "admin_movie_genre" name="admin_movie_genre">
 				<option value="1">액션 영화</option>
@@ -177,7 +177,7 @@
 				<option value="8">음악 영화</option>
 				<option value="9">로맨스 영화</option>
 			</select>
-			<b style="margin-left: 13.5%;">참여 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);">&nbsp;&nbsp;<b id="wantP"></b>
+			<b style="margin-left: 13.5%;">결제 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);">&nbsp;&nbsp;<b id="wantP"></b>
 			<br>
 			<b>영화 시간 : </b>
 			<input type="text" 
