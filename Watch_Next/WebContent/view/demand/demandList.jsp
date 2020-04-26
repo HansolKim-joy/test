@@ -164,7 +164,7 @@
         <div class="list_n_menu">
         
         	<!-- 맨 처음으로 -->
-			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=1'">&lt;&lt;</a>
+			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.de?currentPage=1'">&lt;&lt;</a>
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
 	        
@@ -179,7 +179,7 @@
 			<%} %>	
 			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
 			<!-- 맨 끝으로 -->
-			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=<%= maxPage %>'">&gt;&gt;</a>
+			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.de?currentPage=<%= maxPage %>'">&gt;&gt;</a>
 	        
         	
         </div>
