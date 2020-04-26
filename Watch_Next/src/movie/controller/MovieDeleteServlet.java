@@ -38,9 +38,11 @@ public class MovieDeleteServlet extends HttpServlet {
 			File deleteFile = new File(savePath + fName);
 			deleteFile.delete();
 		}
-		int result = new BoardService().DeleteMovie(no,fName);
+		int result1 = new BoardService().DeleteAllDib(no);
+		int result2 = new BoardService().DeleteMovie(no);
+		int result3 = new BoardService().DeleteFile(fName);
 		String page = "";
-		if(result > 0) {
+		if(result2 > 0 && result3 > 0) {
 			page = request.getContextPath() + "/movie.all";
 			response.sendRedirect(page);
 		}else {

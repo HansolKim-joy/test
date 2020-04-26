@@ -74,7 +74,7 @@ public class MovieListServlet extends HttpServlet {
 		 */
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
-		HashMap<String,Movie> mMap = service.MovieList(currentPage, boardLimit);
+		HashMap<String,Movie> mMap = service.MovieList(currentPage, boardLimit, choice);
 		List<String> keySetList = new ArrayList<String>(mMap.keySet());
 		if(choice == 1) {
 			Collections.sort(keySetList,(o1, o2) -> (mMap.get(o1).getmTitle().compareTo(mMap.get(o2).getmTitle())));
