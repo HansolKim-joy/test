@@ -72,7 +72,7 @@
 	#td11{
 		text-align: center;
 	}
-	.mybtn {
+.mybtn {
    box-shadow:inset 0px 1px 0px 0px #f5978e;
    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
    background-color:#f24537;

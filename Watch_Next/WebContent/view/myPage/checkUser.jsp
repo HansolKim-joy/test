@@ -7,6 +7,9 @@
 <title>정보수정 확인페이지</title>
 <%@ include file="/view/layout/import.jsp" %>
 <style>
+	#footer{margin-top: 5%;}
+	#s2 label, #s3{font-size: 15px;}
+
    #updateForm{
       width: 80%;
       margin: 0 auto;
@@ -23,20 +26,29 @@
       text-align: -webkit-center;
       font-size: 20px;
       color: white;
+      margin-top: 5%;
    }
    #userId{
       font-size: 20px;
       text-align: center;
-      width: 250px;
+      width: 260px;
    }
    .loginUser{
-      font-size: 20px;
-      text-align: center;
-      width: 250px;
-      color: gray;
+      border-radius: 10px;
+    border: none;
+    font-size: 15px;
+    height: 30px;
+    width: 260px;
+    outline: 0;
+    padding-left: 10px;
    }
    #updateTable{
-      border-spacing: 30px;
+      color: white;
+	    margin: 0 auto;
+	    background-color: #00000014;
+	    height: 80%;
+	    width: 50%;
+	    border-radius: 20px;
    }
    .tdlast{
       width: 100px;
@@ -46,7 +58,7 @@
       outline: 0;
       background-color: #545257;
       color: white;
-      font-size: 20px;
+      font-size: 16px;
    }
    .checkbox{
       width: 20px;
@@ -64,6 +76,109 @@
    #ckck{
    		text-align:center;
    }
+   /*폼 css*/
+   .span input[type=text],input[type=password]{color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+   .span input[type=text]:focus,input[type=password]:focus{background-color: #e74c3c; color: white;}
+    
+   label.star{color:red;}
+   .span{
+       margin-left: 7%;
+    display: inline-block;
+    margin-top: 4%;}
+    .title{font-size: 15px; font-weight: bold;}
+   #j1{font-size: 15px;
+    float: right;
+    margin-right: 15px;
+    padding-top: 10px;}
+    
+    #s1{margin-left: 3%;}
+    #s1 input{margin-left: 113px;}
+    
+    #s2 {margin-left: 0%;}
+    #s2 input{margin-left: 68px;}
+    
+    #s3 {margin-left: 0.5%;}
+    #s3 input{margin-left: 35px;}
+    
+    #s4{margin-left: 3%;}
+    #s4 input{margin-left: 135px;}
+    
+    
+    #s5{margin-left: 3%;}
+    #s5 input{margin-left: 118px;}
+    
+    #s6{margin-left: 3%;}
+    #s6 input{margin-left: 118px;}
+    
+    #s7{margin-left: 3%;}
+    
+    
+    
+    /* checkbox css */
+#s7 input[type=checkbox]{display:none;}
+#s7 label.chkred { 
+  display: inline-block;
+  font-size: 13px;
+  cursor: pointer;
+  }
+#s7 label.chkred::before {
+  display: inline-block;
+  margin:0 20px;
+  font-family: FontAwesome;
+  font-size: 20px;
+  color: #ff5843;
+  transition: transform 0.2s ease-out, color 0.2s ease;
+  transform: scale3d(0.8,0.8,1);
+}
+#s7 label.chkred.chkbox::before {
+  content: "\f0c8";
+}
+#s7 input.userChk + label.chkred:hover::before {
+  transform: scale3d(1,1,1);
+}
+
+#s7 input.userChk + label.chkred:active::before {
+  transform: scale3d(1.5,1.5,1);
+}
+
+#s7 input.userChk:checked + label.chkred::before {
+  display: inline-block; 
+  font-family: FontAwesome; 
+  color:#ff5843;
+  transform: scale3d(1,1,1);
+}
+
+#s7 input.userChk:checked + label.chkred::before {
+    content:"\f14a";
+}
+.chkdiv{margin-top: -5px;
+    margin-left: 25px;}
+/* 내꺼 끝 */
+/*버튼 */
+.mybtn {
+   box-shadow:inset 0px 1px 0px 0px #f5978e;
+   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+   background-color:#f24537;
+   border-radius:6px;
+   border:1px solid #db1f11;
+   display:inline-block;
+   cursor:pointer;
+   color:#ffffff;
+   font-family:Arial;
+   font-size:15px;
+   font-weight:bold;
+   padding:6px 24px;
+   text-decoration:none;
+   text-shadow:0px 1px 0px #810e05;
+}
+.mybtn:hover {
+   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+   background-color:#c62d1f;
+}
+.mybtn:active {
+   position:relative;
+   top:1px;
+}
 </style>
 </head>
 <body>
@@ -77,48 +192,52 @@
       <hr class="hline">
       <form action="<%= request.getContextPath() %>/update.me" method="post" onsubmit="return updateMe();">
          <div id="updateTabled">
-               <table id="updateTable">
-                  <tr>
-                     <td>아이디 : &emsp;</td>
-                     <td><input type="text" id="userId" name="userId"
-                        value="<%= loginUser.getUserId() %>" readonly></td>
-                     <td class="tdlast"></td>
-                  </tr>
-                  <tr>
-                  	<td id="ckck" colspan="2">비밀번호를 반드시 입력해주세요.</td>
-                  </tr>
-                  <tr>
-                     <td>변경 비밀번호 : &emsp;</td>
-                     <td><input type="password" id="userPwd" name="userPwd"
-                        class="loginUser"></td>
-                     <td><label id="pwdMessage1"></label></td>
-                  </tr>
-                  <tr>
-                     <td>변경 비밀번호 확인 : &emsp;</td>
-                     <td><input type="password" id="userPwd2" name="userPwd2"
-                        class="loginUser"></td>
-                     <td><label id="pwdMessage"></label></td>
-                  </tr>
-                  <tr>
-                     <td>이름 : &emsp;</td>
-                     <td><input type="text" id="userName" name="userName"
-                        class="loginUser" value="<%= loginUser.getUserName() %>"></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>이메일 : &emsp;</td>
-                     <td><input type="text" id="userEmail" name="userEmail"
-                        class="loginUser" value="<%= loginUser.getEmail() %>"></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>연락처 : &emsp;</td>
-                     <td><input type="text" id="phone" name="userPhone"
-                        class="loginUser" value="<%=loginUser.getPhone() %>"></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>메일링 서비스 : &emsp;</td>
+               <div id="updateTable">
+                  
+                  <div id="j1"><label class="star">*</label> 필수항목</div>
+                  <br clear="all">
+                  <div id="s1" class="span">
+                     <label class="title">아이디</label>
+                     <input type="text" id="userId" name="userId" class="loginUser"
+                        value="<%= loginUser.getUserId() %>" readonly>
+                  </div>
+                  <br>
+                  <div id="s2" class="span">
+                  	 <label class="star">*</label>
+                     <label class="title">변경 비밀번호 :</label>
+                     <input type="password" id="userPwd" name="userPwd"
+                        class="loginUser">
+                     <label id="pwdMessage1"></label>
+                  </div>
+                  <br>
+                  <div id="s3" class="span">
+                  	 <label class="star">*</label>
+                     <label class="title">변경 비밀번호 확인 :</label>
+                     <input type="password" id="userPwd2" name="userPwd2"
+                        class="loginUser">
+                     <label id="pwdMessage"></label>
+                  </div>
+                  <br>
+                  <div id="s4" class="span">
+                     <label class="title">이름 :</label>
+                     <input type="text" id="userName" name="userName"
+                        class="loginUser" value="<%= loginUser.getUserName() %>">
+                  </div>
+                  <br>
+                  <div id="s5" class="span">
+                     <label class="title">이메일 :</label>
+                     <input type="text" id="userEmail" name="userEmail"
+                        class="loginUser" value="<%= loginUser.getEmail() %>">
+                  </div>
+                  <br>
+                  <div id="s6" class="span">
+                     <label class="title">연락처 :</label>
+                     <input type="text" id="phone" name="userPhone"
+                        class="loginUser" value="<%=loginUser.getPhone() %>">
+                  </div>
+                  <br>
+                  <div id="s7" class="span">
+                     <label class="title">메일링 서비스 :</label>
 
                      <% 
                      String mailing = loginUser.getMailingYN();
@@ -130,28 +249,25 @@
                         checkedMailingN = "checked"; 
                      }
                   %>
-                     <td>&emsp;&emsp; <input type="checkbox" id="mailingY"
+                     <input type="checkbox" id="mailingY"
                         name="mailing" onclick="doOpenCheck(this);" value="Y"
-                        class="checkbox" <%= checkedMailingY %>>&emsp;Y
-                        &emsp;&emsp; <input type="checkbox" id="mailingN" name="mailing"
-                        onclick="doOpenCheck(this);" value="N" class="checkbox"
-                        <%=checkedMailingN%>>&emsp;N
-                     </td>
-                     <td></td>
-                  </tr>
-                  <tr></tr>
-                  <tr>
-                     <td colspan="2" style="text-align: center">
-                        &emsp;&emsp;&emsp;
-                        <button id="updateMemberBtn">수정완료
-                        </button> &emsp;&emsp;&emsp;&emsp;&emsp; 
-                        <span id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</span>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td colspan="3" style="text-align: center" id="deleteBtn">회원탈퇴</td>
-                  </tr>
-               </table>
+                        class="userChk" <%= checkedMailingY %>>
+                     <label for="mailingY" class="chkred chkbox">수신</label>
+                        
+                     <input type="checkbox" id="mailingN" name="mailing"
+                        onclick="doOpenCheck(this);" value="N" class="userChk"
+                        <%=checkedMailingN%>>
+                     <label for="mailingN" class="chkred chkbox">비수신</label>
+                  </div>
+                  <br>
+                  <div style="margin-top: 5%;">
+                        <button class="mybtn" id="updateMemberBtn">수정완료 </button> 
+                        <button class="mybtn" id="cancelBtn" onclick="location.href='javascript:history.go(-2)'">취소하기</button>
+                  </div>
+                  <div style="margin-top: 2%;">
+                     <button class="mybtn" id="deleteBtn">회원탈퇴</button>
+                  </div>
+               </div>
             </div>
       </form>
 
