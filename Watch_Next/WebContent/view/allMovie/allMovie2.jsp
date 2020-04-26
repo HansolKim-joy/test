@@ -56,7 +56,6 @@
 	background-color: yellow;
 }
 
-#footer{margin-top: 23.2%;}
 </style>
 </head>
 <body>
