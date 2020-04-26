@@ -172,7 +172,7 @@
 				<!-- 10개 페이지 목록 -->
 				<% for(int p = startPage; p<=endPage; p++){ %>
 					<%if(p == currentPage){ %>
-						<span class="current" id="choosen"><%= p %></span>
+						<a class="current" id="choosen"><%= p %></a>
 					<%} else{%>
 						<a href='<%=request.getContextPath()%>/movie.all?currentPage=<%= p %>&choice=<%=choice%>'><%= p %></a>
 					<%} %>
