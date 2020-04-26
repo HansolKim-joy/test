@@ -89,6 +89,7 @@ public class DemandDAO {
 		int result = 0;
 		
 		String query = prop.getProperty("AdminListCount");
+		// SELECT COUNT(*) FROM ADFLIST
 		
 		try {
 			stmt = conn.createStatement();
@@ -209,9 +210,11 @@ public class DemandDAO {
 
 	
 	public int insertDemand(Connection conn, Demand d) {
+		
         PreparedStatement pstmt = null;
         int result = 0;
         String sql = prop.getProperty("insertDemand");
+//INSERT INTO TB_DEMAND VALUES(SEQ_DEMANDNO.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE+30, ?, ?, DEFAULT)
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, d.getUserId());

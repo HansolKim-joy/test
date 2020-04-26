@@ -110,7 +110,9 @@
 		<h2>펀딩 작성 페이지</h2>
 		<hr id="red_line">
 		<br>
-		<div id="admin_imageArea">
+		
+		<div class="admin_movie">
+			<div id="admin_imageArea">
 		<img id="admin_image" width="300" height="300">
 		<script>
 		// 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
@@ -135,9 +137,9 @@
 		</div>
 		<input type="file" id="admin_imageFile" name="admin_imageFile" onchange="LoadImg(this,this.value)">
 		
-		<div class="admin_movie">
+		<div class="joinm" style="padding-top: 40px;">
 			<b>제목 : </b><input type="text" id="admin_movie_name" name="admin_movie_name">
-			<b>장소 : </b>
+			<b style="margin-left: 8%;">장소 : </b>
 			<select id = "admin_movie_spot" name="admin_movie_spot">
 				<option value="1">압구정 CGV</option>
 				<option value="2">COXE MEGABOX</option>
@@ -160,9 +162,9 @@
 			</script>
 			<br>
 			<b>감독 : </b><input type="text" id="admin_movie_director" name="admin_movie_director">
-			<b>총원 : </b><input type="text" id="admin_movie_max" name="admin_movie_max" value='150' readonly><br>
+			<b style="margin-left: 8%;">총원 : </b><input type="text" id="admin_movie_max" name="admin_movie_max" value='150' readonly><br>
 			<b>출연 : </b><input type="text" id="admin_movie_actor" name="admin_movie_actor">
-			<b>펀딩 금액 : </b><input type="text" id="admin_movie_min" name="admin_movie_min" onKeyup="inputPrice(this);"><b id="funP"></b><br>
+			<b style="margin-left: 8%;">펀딩 금액 : </b><input type="text" id="admin_movie_min" name="admin_movie_min" onKeyup="inputPrice(this);">&nbsp;&nbsp;<b id="funP"></b><br>
 			<b>장르 : </b>
 			<select id = "admin_movie_genre" name="admin_movie_genre">
 				<option value="1">액션 영화</option>
@@ -175,7 +177,7 @@
 				<option value="8">음악 영화</option>
 				<option value="9">로맨스 영화</option>
 			</select>
-			&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>참여 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);"><b id="wantP"></b>
+			<b style="margin-left: 13.5%;">참여 금액 : </b><input type="text" id="movie_wantprice" name="movie_wantprice" onKeyup="inputWantPrice(this);">&nbsp;&nbsp;<b id="wantP"></b>
 			<br>
 			<b>영화 시간 : </b>
 			<input type="text" 
@@ -189,6 +191,7 @@
 			<b>줄거리 : </b>
 			<textarea rows="10" cols="40" id="admin_movie_story" name="admin_movie_story" placeholder="이미지를 넣으려면 왼쪽 영역을 클릭하세요"></textarea>
 			<br>
+			</div>
 		</div>
 		<div id="btndiv">
 			<input type="submit" value="완료" class="btn red" id="admin_movie_btn">

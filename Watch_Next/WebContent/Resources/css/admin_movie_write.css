@@ -1,8 +1,20 @@
 @charset "UTF-8";
-select,
-input[type="text"], 
-input[type="number"]
-{height:auto; margin-bottom:10px; text-size: 14px;}
+
+#footer{margin-top: -1%;}
+	.joinm input{
+       background-color: white;
+       color: black;
+       height: 30px;
+       width: 150px;
+	   margin-bottom: 5px;
+	   border-radius: 7px;
+	   padding-left: 10px;
+       border: 0px;
+       outline: 0;
+    }
+	.joinm input{color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+	.joinm input:focus{background-color: #e74c3c; color: white;}
+	
 #red_line{
 	border: 1px solid red;
 }
@@ -12,7 +24,6 @@ input[type="number"]
     width: 300px;
     height: 300px;
     margin: 50px;
-    margin-left: 20%;
     float: left;
     background-color: gray;
 	border: 1px solid white;
@@ -21,20 +32,33 @@ input[type="number"]
 	overflow-y: scroll;
     resize: none;
     vertical-align: top;
-    width: 24%;
-    height: 135px;
+    width: 40%;
+    height: 115px;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;
 }
+#admin_movie_story:focus{background-color: #e74c3c; color: white;}
+
+#admin_movie_spot{height: 20px; border-radius: 5px;transition:width 1s, height 1s, background-color 1s, transform 1s;}
+#admin_movie_spot:focus{background-color: #e74c3c;}
+#admin_movie_genre{height: 20px; border-radius: 5px; color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+#admin_movie_genre:focus{background-color: #e74c3c;}
 
 .admin_movie{
-	margin: 0 auto; 
-    margin-top: 50px;
-    font-size: 15px; 
-    font-weight: bold; 
-	
+	border: 1px;
+    color: white;
+    margin: 0 auto;
+    margin-top: 7%;
+    background-color: #00000014;
+    height: 420px;
+    width: 70%;
+    border-radius: 20px;
 }
 .admin_movie_text{
 	color:black;
 }
+
 .btn {
 	box-shadow: inset 0px 1px 0px 0px #f5978e;
 	background: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
@@ -67,12 +91,12 @@ input[type="number"]
 	background: red;
 	border: none;
 }
-
-#admin_movie_min{width: 7%;}
-#movie_wantprice{width: 7%;}
+#admin_movie_time{padding-left: 0px;}
+#admin_movie_min{width: 10%;}
+#movie_wantprice{width: 10%;}
 #admin_movie_max{width: 3%;}
 
-#adm_foot{text-align: center; margin-bottom: 30px; }
+#adm_foot{text-align: center; margin-bottom: 30px;}
 #use_fix{
 		margin: 0 auto; 
         margin-top: 100px;
@@ -81,5 +105,5 @@ input[type="number"]
         width: 80%;
         color: white;
 }
-#btndiv{margin-top: 45px;}
+#btndiv{margin-top: 45px; text-align: center;}
 #admin_movie_btn2{margin-left: 10px;}
