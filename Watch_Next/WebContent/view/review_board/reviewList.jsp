@@ -26,11 +26,55 @@
 <style>
 	.subnav li {width: 120px;}
 	.popimg{width:30px; height:30px;}
+	
+	/*사이드바 */
+#sidebar{
+	position: fixed;
+	width: 100px;
+	height: 700px;
+	left: 94%;
+	top: 15%;
+}
+#sidebar a{
+	color: #545357;
+}
+#mlink{
+	border: 1px solid;
+ 	width: 80px; 
+	height: 80px;
+	margin-bottom: 4px;
+}
+#topbtn{
+	text-align: center;
+	font-weight: bold;
+	background-color: yellow;
+}
+
+#footer{margin-top: -1.4%;}
 </style>
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 <br clear="all">
+
+<div id="sidebar">
+	<table>
+		<tr>
+			<td><a href="https://play.watcha.net/" target="_blank"><img src="Resources/images/왓챠.png" id="mlink" class="mwha"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://www.netflix.com/kr/" target="_blank"><img src="Resources/images/넷플릭스.png" id="mlink" class="mnet"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://movie.naver.com/" target="_blank"><img src="Resources/images/네이버 영화.png" id="mlink" class="mnav"></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" target="_self"><img src="Resources/images/top.png" id="mlink" ></a></td>
+		</tr>
+	
+	</table>
+</div>
+
 
 <section>
 
@@ -38,7 +82,7 @@
 <br clear="all">
 
 <div id="reviewList">
-	<h2><strong>리뷰 게시판</strong></h2>
+	<h2 style="margin-top: 10%; margin-bottom: 2%;"><strong>리뷰 게시판</strong></h2>
 	<hr class="hline">
 	
 	
@@ -54,7 +98,7 @@
 	</tr>
 	<% if(list.isEmpty()){ %>
 	<tr>
-		<td colspan="7">조회된 리스트가 없습니다.</td>
+		<td colspan="7" style="height: 330px; font-size: 30px" >조회된 리스트가 없습니다.</td>
 	</tr>
 	<% } else{ 
 		for(Review r : list){ 
@@ -72,35 +116,35 @@
 		<td align="left">[ <%= r.getmTitle() %> ] <%= r.getbTitle() %></td>
 		<td align="middle">
 			<% if(r.getPopcorn() ==1) { %>
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 			<%} else if(r.getPopcorn() ==2) { %>
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 			<%} else if(r.getPopcorn() ==3) { %>
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 			<%} else if(r.getPopcorn() ==4) { %>
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 			<%} else if(r.getPopcorn() ==5) { %>
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+				<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 			<%} %>
 			
 		
@@ -174,7 +218,7 @@
 		<option ${(param.sk2=="스포선택")?"selected":""} value="스포선택">스포선택</option>
 		<option ${(param.sk2=="Y")?"selected":""} value="Y">스포있음</option>
 		<option ${(param.sk2=="N")?"selected":""} value="N">스포없음</option>	
-	</select>&nbsp;&nbsp;&nbsp;&nbsp;
+	</select>&nbsp;&nbsp;
 
 	<input id="blank" name="sv" type="text" size="35" id="searchText" value="${param.sv}">&nbsp;
 	<input id="botSearch" type="submit" value="검색"/>
@@ -191,13 +235,15 @@
 		}).click(function(){
 			var rv = $(this).parent().children().eq(0).text();
 			
-			if('<%= loginUser %>' != 'null'){
+			if('<%= loginUser %>' != 'null' && rv != '조회된 리스트가 없습니다.'){
 				location.href="<%= request.getContextPath() %>/detail.rv?rv="+rv;
+			} else if('<%= loginUser %>' != 'null' && rv == '조회된 리스트가 없습니다.'){
+				alert('리스트가 없습니다!');
 			} else{
-				alert('로그인 해주세요.');
+				alert('로그인 해주세요^^');
 			}
 			
-		})
+		});
 	});
 	
 	
@@ -205,7 +251,7 @@
 </script>
 
 
-<!— footer —>
+
 <%@ include file="/view/layout/footer.jsp" %>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
 </body>

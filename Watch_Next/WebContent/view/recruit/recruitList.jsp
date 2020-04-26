@@ -23,12 +23,55 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style>
+	/*사이드바 */
+#sidebar{
+	position: fixed;
+	width: 100px;
+	height: 700px;
+	left: 94%;
+	top: 15%;
+}
+#sidebar a{
+	color: #545357;
+}
+#mlink{
+	border: 1px solid;
+ 	width: 80px; 
+	height: 80px;
+	margin-bottom: 4px;
+}
+#topbtn{
+	text-align: center;
+	font-weight: bold;
+	background-color: yellow;
+}
 
+#footer{margin-top: 5.6%;}
+</style>
 
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
 	<br clear="all">
+	
+<div id="sidebar">
+	<table>
+		<tr>
+			<td><a href="https://play.watcha.net/" target="_blank"><img src="Resources/images/왓챠.png" id="mlink" class="mwha"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://www.netflix.com/kr/" target="_blank"><img src="Resources/images/넷플릭스.png" id="mlink" class="mnet"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://movie.naver.com/" target="_blank"><img src="Resources/images/네이버 영화.png" id="mlink" class="mnav"></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" target="_self"><img src="Resources/images/top.png" id="mlink" ></a></td>
+		</tr>
+	
+	</table>
+</div>	
 	
 	<section>
 	
@@ -36,7 +79,7 @@
 	<br clear="all">
 	
 		<div id="recruit">
-		<h2 style="font-size: 30px;"><strong>모집 게시판</strong></h2>
+		<h2 style="font-size: 30px; margin-top: 10%; margin-bottom: 2%;"><strong>모집 게시판</strong></h2>
 			<hr class="hline">
 			<table class="tablearea">
 			<thead>
@@ -52,7 +95,7 @@
 				<tbody id="tbody-area">
 					<tr>
 					<% if(list.isEmpty()) { %>
-						<td colspan="6">조회된 리스트가 없습니다.</td>
+						<td colspan="6" style="height: 330px; font-size: 30px">조회된 리스트가 없습니다.</td>
 					</tr>
 					<% } else { %>
 						<% for(Recruit r : list) { %>
@@ -71,12 +114,7 @@
 		</div>
 	
 
-   		<div class="search">
-   			 <% if(loginUser != null){ %> 
-   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write" class="myButton">작성하기</button>
-   		 <% } %>   
-   		</div>  
-		   		<br><br><br><br>
+   		
 	<!-- 페이징 -->
 	<div class="pagingArea" align="center">
 	<!-- 맨 처음으로 -->
@@ -113,22 +151,31 @@
 	   
 	
 	<script>
-		$(function(){
-			$('#recruit td').mouseenter(function(){
-				$(this).parent().css('cursor', 'pointer');
-			}).click(function(){
-				
-				var rNo = $(this).parent().children().eq(0).text();
-				 if('<%= loginUser %>' != 'null' && 'list != null'){
-					location.href='<%= request.getContextPath() %>/detail.recruit?rNo=' +rNo;
-				}else{
-					alert('로그인 해주세요.');
-				}
-			})
+	$(function(){
+		$('#reviewList td').mouseenter(function(){
+			$(this).parent().css('cursor', 'pointer');
+		}).click(function(){
+			var rv = $(this).parent().children().eq(0).text();
+			
+			if('<%= loginUser %>' != 'null' && rv != '조회된 리스트가 없습니다.'){
+				location.href="<%= request.getContextPath() %>/detail.rv?rv="+rv;
+			} else if('<%= loginUser %>' != 'null' && rv == '조회된 리스트가 없습니다.'){
+				alert('리스트가 없습니다!');
+			} else{
+				alert('로그인 해주세요^^');
+			}
+			
 		});
+	});
 		
 	</script> 
-	 
+	
+	 	<div class="search">
+   			 <% if(loginUser != null){ %> 
+   				 <button onclick="location.href='view/recruit/recruitWrite.jsp'" id="write" class="myButton">작성하기</button>
+   		 <% } %>   
+   		</div>  
+   		
 	<!-- 검색 -->
 	<br clear="left">
 	
@@ -138,7 +185,7 @@
 			<option value="all" selected >전체보기</option>
 			<option value="NETFLIX" >NETFLIX</option>
 			<option value="WATCHA" >WATCHA</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;
+		</select>&nbsp;&nbsp;&nbsp;
 		
 		<select id="searchType2" name="searchType2">
 			<option value="all" selected>전체보기</option>

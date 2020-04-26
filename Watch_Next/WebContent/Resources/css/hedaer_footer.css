@@ -13,10 +13,11 @@ body {
 }
 #myPage{
     text-align: center;
-    width: 85px;
+    width: 93px;
     height: 15px;
     cursor: pointer;
     font-weight: bold;
+    margin-left: 10px;
 }
 #logo{
 	width: 150px;
@@ -119,7 +120,8 @@ header{
 
 
 .subnav li:hover{
-	background:#555;
+	background:black;
+	color: red;
 }
 /*스크롤바 내리는 효과  */
 .down {
@@ -212,7 +214,6 @@ input::-webkit-search-cancel-button{display: none;} /*검색창 x표시 삭제  
     height: 100px;
     margin: 0 auto;
     text-align: center;
-    margin-top: 9.6%;
 }
 .f_bottom-contents{
 	color: white;

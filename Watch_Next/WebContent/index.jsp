@@ -24,12 +24,12 @@
 <!-- <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script> -->
 <style>
 	.tablename{
-		font-size: 25px;
+		font-size: 30px;
+		margin-top: 10%;
 	}
 	.index_form{
 		positon: relative;
 		min-height: 100%;
-		padding-bottom: 100px;
 	}
 	.pp_slide-wrap{
 		margin: 0 auto;
@@ -96,6 +96,33 @@
 	#wanted{width: 80%; margin:100px auto; color:white;}
 	#wanted>table{margin:30px auto; text-align:center;}
 	#wanted td{height:50px;}
+	
+	/*사이드바 */
+#sidebar{
+	position: fixed;
+	width: 100px;
+	height: 700px;
+	left: 94%;
+	top: 55%;
+}
+#sidebar a{
+	color: #545357;
+}
+#mlink{
+	border: 1px solid;
+	width: 80px;
+	height: 80px;
+}
+#topbtn{
+	text-align: center;
+	font-weight: bold;
+	background-color: yellow;
+}
+/*footer*/
+#footer {
+    
+    margin-top: 9.6%;
+}
 </style>
 </head>
 <body>
@@ -108,6 +135,24 @@
 		}
 	</script>
 <br clear="all">
+
+<div id="sidebar">
+	<table>
+		<tr>
+			<td><a href="https://play.watcha.net/" target="_blank"><img src="Resources/images/왓챠.png" id="mlink" class="mwha"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://www.netflix.com/kr/" target="_blank"><img src="Resources/images/넷플릭스.png" id="mlink" class="mnet"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://movie.naver.com/" target="_blank"><img src="Resources/images/네이버 영화.png" id="mlink" class="mnav"></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" target="_self"><img src="Resources/images/top.png" id="mlink" ></a></td>
+		</tr>
+	
+	</table>
+</div>
 
 
 

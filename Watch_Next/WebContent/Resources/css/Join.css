@@ -5,9 +5,21 @@
 	margin-top: 100px;
 	font-size: 20px;
 	font-weight: bold;
-	width: 600px;
+	width: 45%;
 	color: white;
 }
+#joinForm {
+    color: white;
+    margin: 0 auto;
+    background-color: #00000014;
+    height: 80%;
+    width: 77%;
+    border-radius: 20px;
+}
+#j1{font-size: 15px;
+    float: right;
+    margin-right: 15px;
+    padding-top: 10px;}
 
 .hline {
 	border: 0;
@@ -18,7 +30,7 @@
 #div_form {
 	background-color: #545357;
 	height: 795px;
-	padding-top: 45px;
+	padding-top: 55px;
 	border-radius: 35px;
 }
 
@@ -27,6 +39,73 @@ div#div_form>form>table>tbody>tr>td {
 	width: 290px;
 	text-align: center;
 }
+.star{font-size: 12px;
+	  color: #e62713;}
+.title{font-size: 15px;}	
+.span{margin-left: 7%; display: inline-block; margin-top: 4%;}
+.span input{margin-left: 30px; vertical-align: 2px; color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+.span input:focus{background-color: #e74c3c; color: white;}
+
+#s1{margin-top: 5%;}
+#s1 input{margin-left: 77px;}
+#idResult{vertical-align: 2px; padding-left: 15px;}
+
+
+#s2 input{margin-left: 62px;}
+#pwdCheck1{margin-top: 10px;
+    	   margin-left: 128px;}    
+#s3{margin-top: 2%;}
+#s3 input{margin-left: 29px;}
+#pwdCheck1{vertical-align: 2px; padding-left: 15px;}    
+#s4{}
+#s4 input{margin-left: 94px;}
+#s5 input{margin-left: 64px;}
+#s6 #user_Email{margin-left: 79px;}
+#s7{display: block;}
+#s7 input{margin-left: 44px;}
+#s7 #email_id{margin-left: 144px;}
+#s8{margin-left: 9%; margin-top: 0px; display: flex;}
+
+/* 내꺼 */
+.chkdiv input[type=checkbox]{display:none;}
+.chkdiv label.chkred { 
+  display: inline-block;
+  font-size: 13px;
+  cursor: pointer;
+  }
+.chkdiv label.chkred::before {
+  display: inline-block;
+  margin:0 20px;
+  font-family: FontAwesome;
+  font-size: 20px;
+  color: #ff5843;
+  transition: transform 0.2s ease-out, color 0.2s ease;
+  transform: scale3d(0.8,0.8,1);
+}
+label.chkred.chkbox::before {
+  content: "\f0c8";
+}
+input.userChk + label.chkred:hover::before {
+  transform: scale3d(1,1,1);
+}
+
+input.userChk + label.chkred:active::before {
+  transform: scale3d(1.5,1.5,1);
+}
+
+input.userChk:checked + label.chkred::before {
+  display: inline-block; 
+  font-family: FontAwesome; 
+  color:#ff5843;
+  transform: scale3d(1,1,1);
+}
+
+input.userChk:checked + label.chkred::before {
+    content:"\f14a";
+}
+.chkdiv{margin-top: -5px;
+    margin-left: 25px;}
+/* 내꺼 끝 */
 
 .jn_input {
 	border-radius: 10px;
@@ -38,10 +117,12 @@ div#div_form>form>table>tbody>tr>td {
 	padding-left: 10px;
 }
 
+
+
+
 #jn_btn {
-	text-align: right;
-	margin-right: 42px;
-	margin-top: 42px;
+	text-align: center;
+    margin-top: 42px;
 }
 
 #bu_sty {
@@ -63,6 +144,34 @@ div#div_form>form>table>tbody>tr>td {
 	outline: 0;
 	padding-left: 10px;
 }
+
+#chkbtn {
+   box-shadow:inset 0px 1px 0px 0px #f5978e;
+   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+   background-color:#f24537;
+   border-radius:6px;
+   border:1px solid #db1f11;
+   display:inline-block;
+   cursor:pointer;
+   color:#ffffff;
+   font-family:Arial;
+   font-size: 10px;
+   font-weight: lighter;
+   padding: 4px 10px;
+   text-decoration:none;
+   text-shadow:0px 1px 0px #810e05;
+}
+#chkbtn:hover {
+   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+   background-color:#c62d1f;
+}
+#chkbtn:active {
+   position:relative;
+   top:1px;
+}
+
+
+
 
 .myButton {
    box-shadow:inset 0px 1px 0px 0px #f5978e;

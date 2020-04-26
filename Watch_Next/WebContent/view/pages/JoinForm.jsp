@@ -20,50 +20,62 @@
 
 	<section>
 		<div class="jn_table">
-			<h2>회원가입</h2>
+			<h2 style="margin-top: 20%">회원가입</h2>
 			<hr class="hline">
 			<div id="div_form">
 				<form action="<%= request.getContextPath() %>/insert.me" method="post" id="joinForm" name="joinForm">
-					<table>
-						<tr>
-							<td>아이디</td>
-							<td><input type="text" class="jn_input" id="user_ID" name="user_ID" placeholder="아이디를 입력하시오."></td>
-							<td><label id="idResult"></label>
-						</tr>
-						<tr>
-							<td>비밀번호</td>
-							<td><input type="password" class="jn_input" id="user_Pass" onkeyup="check_pwd();" name="user_Pass" placeholder="비밀번호를 입력하시오."></td>
-							<td><label id="pwdCheck1"></label></td>
-						</tr>
-						<tr>
-							<td>비밀번호 확인</td>
-							<td><input type="password" class="jn_input" id="user_PassCh" onkeyup="check_pwd1();" name="user_Pass1" placeholder="비밀번호를 입력하시오."></td>
-							<td><label id="pwdCheck2"></label></td>
-						</tr>
-						<tr>
-							<td>이름</td>
-							<td><input type="text" class="jn_input" id="user_Name" name="user_Name" placeholder="이름을 입력하시오."></td>
-						</tr>
-						<tr>
-							<td>전화번호</td>
-							<td><input type="tel" class="jn_input" id="user_Phone" name="user_Phone" placeholder="전화번호를 입력하시오."></td>
-						</tr>
-						<tr>
-							<td>이메일</td>
-							<td><input type="email" class="jn_input" id="user_Email" name="user_Email" placeholder="이메일을 입력하시오."></td>
-							<td><input type="button" class="myButton" onclick="email_CheckNum()" value="인증받기"></td>
-						</tr>
-						<tr>
-							<td class="em_hide" id="email_Check">이메일 확인</td>
-							<td><input type="text" class="em_hide" id="email_Check1"></td>
-							<td><label id="email_id"></label>
-						</tr>
-						<tr>
-							<td>메일링 서비스</td>
-							<td><input type="checkbox" id="user_Check" name="user_Check" value="Y">수신 
-								<input type="checkbox" id="user_Check"name="user_Check" value="N">비수신</td>
-						</tr>
-					</table>
+					<div id="j1"><label class="star">*</label> 필수항목</div>
+					<br clear="all">
+					<!-- <table> -->
+						<div id="s1" class="span">
+							<label class="star">*</label>
+							<label class="title">아이디</label>
+							<input type="text" class="jn_input" id="user_ID" name="user_ID" >
+							<label id="idResult"></label>
+						</div>
+						<div id="s2" class="span">
+							<label class="star">*</label>
+							<label class="title">비밀번호</label>
+							<input type="password" class="jn_input" id="user_Pass" onkeyup="check_pwd();" name="user_Pass" > <label id="pwdchk"></label><br>
+							<label id="pwdCheck1"></label>
+						</div>
+						<div id="s3" class="span">
+							<label class="star">*</label>
+							<label class="title">비밀번호 확인</label>
+							<input type="password" class="jn_input" id="user_PassCh" onkeyup="check_pwd1();" name="user_Pass1" >
+							<label id="pwdCheck2"></label>
+						</div>
+						<div id="s4" class="span">
+							<label class="star">*</label>
+							<label class="title">이름</label>
+							<input type="text" class="jn_input" id="user_Name" name="user_Name">
+						</div>
+						<div id="s5" class="span">
+							<label class="star">*</label>
+							<label class="title">전화번호</label>
+							<input type="tel" class="jn_input" id="user_Phone" name="user_Phone">
+						</div>
+						<div id="s6" class="span">
+							<label class="star">*</label>
+							<label class="title">이메일</label>
+							<input type="email" class="jn_input" id="user_Email" name="user_Email" placeholder="이메일을 입력하시오.">
+							<input type="button" id="chkbtn" onclick="email_CheckNum()" value="인증받기">
+						</div>
+						<div id="s7" class="span">
+							<label class="star em_hide" id="emaiChk">*</label>
+							<label class="title em_hide" id="email_Check">이메일 확인</label>
+							<input type="text" class="em_hide" id="email_Check1"><br>
+							<label id="email_id"></label>
+						</div>
+						<div id="s8" class="span">
+							<label class="title">메일링 서비스</label>
+							<div class="chkdiv">
+								<input type="checkbox" id="user_Check" class="userChk" name="user_Check" value="Y">
+								<label for="user_Check" class="chkred chkbox">수신</label>
+								<input type="checkbox" id="user_Check2" class="userChk" name="user_Check" value="N">
+								<label for="user_Check2" class="chkred chkbox">비수신</label>
+							</div>
+						</div>
 					<div id="jn_btn">
 						<button type="button" class="myButton" id="bu_sty" onclick="jnform();">가입하기
 						</button>
@@ -79,13 +91,15 @@
          
          if(check.test(pwd1)){
 //             pwdCheck1.innerHTML = "사용 가능합니다.";
-            $('#pwdCheck1').text('사용 가능');
-            $('#pwdCheck1').css({'color' : 'green', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
+            $('#pwdchk').text('사용 가능');
+            $('#pwdchk').css({'color' : 'green', 'font-size' : 'medium'});
+            $('#pwdCheck1').text('');
             return true;
          } else {
 //             pwdCheck1.innerHTML = "대문자 , 소문자 8자리 이상 입력해주세요.";            
             $('#pwdCheck1').text('대/소문자, 특수문자, 숫자 포함하여 8자리 이상 입력해주세요.');
-            $('#pwdCheck1').css({'color' : 'red', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
+            $('#pwdCheck1').css({'color' : 'red', 'font-size' : 'x-small'});
+            $('#pwdchk').text('');
             return false;
          }
       }
@@ -98,12 +112,12 @@
          if(pwd1.value != pwd2.value){
 //             pwdCheck2.innerHTML = "비밀번호가 일치하지 않습니다."
             $('#pwdCheck2').text('불일치');
-            $('#pwdCheck2').css({'color' : 'red', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
+            $('#pwdCheck2').css({'color' : 'red', 'font-size' : 'medium'});
             return false;
          } else {
 //             pwdCheck2.innerHTML = "비밀번호가 일치합니다."
             $('#pwdCheck2').text('일치');
-            $('#pwdCheck2').css({'color' : 'green', 'float':'left', 'display':'inline-block', 'font-size' : 'x-small'});
+            $('#pwdCheck2').css({'color' : 'green', 'font-size' : 'medium'});
             return true;   
          }
       }
@@ -126,12 +140,12 @@
                success: function(data){
                   if(data == "success"){
                      $('#idResult').text('사용 가능');
-                     $('#idResult').css({'color' : 'green', 'float':'left', 'display':'inline-block', 'font-size' : 'medium'});
+                     $('#idResult').css({'color' : 'green', 'font-size' : 'medium'});
                      isUsable = true;
                      isIdChecked = true;
                   } else {
                      $('#idResult').text('사용 불가능');
-                     $('#idResult').css({'color' : 'red', 'float':'left', 'display':'inline-block', 'font-size' : 'medium'});
+                     $('#idResult').css({'color' : 'red', 'font-size' : 'medium'});
                      userId.focus();                     
                      isUsable = false;
                      isIdChecked = false;
@@ -205,6 +219,7 @@
          var em_ch = Number(em_check);
          var isEmpty = false;
          
+         $('#emaiChk').show();
          $('#email_Check').show();
          $('#email_Check1').show();
          
@@ -214,17 +229,17 @@
                url: '<%= request.getContextPath() %>/send.to',
                data: {user_em:user_em},
                success: function(data){
-                  $('#email_id').text('인증번호를 입력하시오');
-                  $('#email_id').css({'color' : 'red', 'float':'left', 'display':'inline-block', 'font-size' : 'medium'});
+                  $('#email_id').text('인증번호를 입력하세요');
+                  $('#email_id').css({'color' : 'red', 'font-size' : 'medium'});
    
                   $('#email_Check1').keyup(function(){
                      if(em_ch.value != data.value){
                         $('#email_id').text('불일치');
-                        $('#email_id').css({'color' : 'red', 'float':'left', 'display':'inline-block', 'font-size' : 'medium'});
+                        $('#email_id').css({'color' : 'red', 'font-size' : 'medium'});
                         isEmpty = false;
                      } else {
                         $('#email_id').text('인증완료');
-                        $('#email_id').css({'color' : 'green', 'float':'left', 'display':'inline-block', 'font-size' : 'medium'});
+                        $('#email_id').css({'color' : 'green', 'font-size' : 'medium'});
                         return true;
                      }
                   });

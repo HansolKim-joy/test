@@ -12,6 +12,9 @@
 <%@ include file="/view/layout/import.jsp"%>
 <link type="text/css" href="/Watch_Next/Resources/css/login.css"
 	rel="stylesheet" />
+<style>
+#footer{margin-top: 10.5%;}
+</style>
 </head>
 <body>
 	<!--header -->

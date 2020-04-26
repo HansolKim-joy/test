@@ -32,7 +32,7 @@
 
 	/* 목록 */
 #recruit{width: 80%; margin:100px auto; color:white;}
-#recruit>table{margin:30px auto; text-align:center;}
+#recruit>table{margin:30px auto; text-align:center; margin-top: 1%;}
 #recruit td{height:60px; font-size:17px;}
 #recruit th{height:50px;text-align:center; font-size:20px; padding-bottom:30px;}
 
@@ -105,15 +105,17 @@ button:focus {outline: none;}
 #choosen{background: #transparent;}
 
 	/* 글쓰기 */
-#write{margin-left: 71%;
+#write{margin-left: 83%;
 		font-weight: lighter;}
 #write:hover{color: white;}
 
 	/* 검색 */
 #searchDiv{width: 100%; margin:0 auto; margin-left: 36%;}
-#searchType{font-size:14px; width:90px; height:30px;}
-#searchType2{font-size:14px; width:90px; height:30px; margin-right: 12px;}
-#blank{height:25px; font-size:14px;}
+#searchType{font-size:14px; width:90px; height:25px;}
+#searchType2{font-size:14px; width:90px; height:25px; margin-right: 12px;}
+#blank{height: 20px; font-size: 14px; vertical-align: 2px;}
 #botSearch{padding: 6px 14px;
-			margin-top: 26px;}
-
+			margin-top: 26px; margin-left: 8px;}
+form#searchForm {
+    margin-left: -20px;
+}
