@@ -44,12 +44,12 @@ public class LetterDAO {
 			while(rs.next()) {
 				l = new Letter(
 						rs.getInt("message_no"),
-						rs.getString("user_id"),
+						rs.getString("user_id2"),
 						rs.getString("message_title"),
 						rs.getString("message_content"),
 						rs.getDate("message_date"),
 						rs.getString("state").charAt(0),
-						rs.getString("user_id2")
+						rs.getString("user_id")
 						);
 				letterList.add(l);
 			}
