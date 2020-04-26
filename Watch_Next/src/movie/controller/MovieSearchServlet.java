@@ -53,16 +53,14 @@ public class MovieSearchServlet extends HttpServlet {
 			genre.add(entry.getKey().split(", ")[1]);
 		}
 		
-		String page = "";
+		String page = "view/infoMovie/SearchMovie.jsp";
 		if(!m.isEmpty()) {
-			page = "view/infoMovie/SearchMovie.jsp";
 			request.setAttribute("Movie", m);
 			request.setAttribute("fName", fName);
 			request.setAttribute("genre", genre);
 			request.setAttribute("movieTitle", movieTitle);
 		}else {
-			page = "view/errorPage/errorPage.jsp";
-			request.setAttribute("msg", "검색에 실패했습니다.");
+			request.setAttribute("msg", "'" + movieTitle + "' 에 대한 검색 결과가 없습니다.");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
