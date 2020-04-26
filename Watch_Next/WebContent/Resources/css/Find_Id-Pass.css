@@ -5,7 +5,7 @@
 	margin-top: 100px;
 	font-size: 20px;
 	font-weight: bold;
-	width: 600px;
+	width: 800px;
 	color: white;
 }
 
@@ -14,26 +14,31 @@
 	height: 1px;
 	background: red;
 }
-
+	.re_input{vertical-align: 2px; color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+	.re_input:focus{background-color: #e74c3c; color: white;}
+	
 #re_form {
 	background-color: #00000014;
 	border-radius: 20px;
 	text-align: center;
-	width: 465px;
-	height: 350px;
-	margin: 70px;
+	width: 594px;
+    height: 350px;
+    margin: 70px;
+    margin-left: 120px;
+    margin-top: 20%;
 }
 
 .re_input {
 	border-radius: 10px;
 	border: none;
 	height: 30px;
-	width: 300px;
-	margin-top: 10px;
+	width: 285px;
+    margin-top: 10px;
+    padding-left: 10px;
 }
 
 .re_btn {
-	width: 220px;
+	width: 156px;
 	border: none;
 	height: 30px;
 	margin-top: 10px;

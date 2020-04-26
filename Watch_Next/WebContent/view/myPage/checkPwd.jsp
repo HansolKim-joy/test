@@ -13,8 +13,22 @@
 	#checkPwdMain{
 		width: 80%;
 		margin: 0 auto;
-		margin-top: 100px;
+		margin-top: 10%;
 	}
+	input{ color: black; transition:width 1s, height 1s, background-color 1s, transform 1s;}
+	input:focus{background-color: #e74c3c; color: white;}
+	input{
+		background-color: white;
+	    color: black;
+	    height: 35px;
+	    width: 266px;
+	    border-radius: 7px;
+	    padding-left: 10px;
+	    border: 0px;
+	    outline: 0;
+	    border: none;
+    }
+    #footer{margin-top: 11%;}
 	#checkPwdHead{
 		text-align: center;
 		color: white;
@@ -28,7 +42,15 @@
 	
 	}
 	#checkPwdTable{
-		border-spacing: 30px;
+		border: 1px;
+	    color: white;
+	    margin: 0 auto;
+	    margin-top: 7%;
+	    background-color: #00000014;
+	    height: 150px;
+	    width: 600px;
+	    border-radius: 20px;
+	    padding-top: 100px;
 	}
 	#ppwd{
 		text-align: center;
@@ -39,18 +61,41 @@
 	
 	#checkBtn{
 		text-align: center;
-		font-size: 20px;
+		font-size: 15px;
 		color: white;
 		border: none;
-		width: 150px;
-		height: 30px;
 		background-color: #ca0d0d;
 		border-radius: 50px;
 		margin: 0 auto;
+		margin-top: 7%;
 	}
 	#td11{
 		text-align: center;
 	}
+	.mybtn {
+   box-shadow:inset 0px 1px 0px 0px #f5978e;
+   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+   background-color:#f24537;
+   border-radius:6px;
+   border:1px solid #db1f11;
+   display:inline-block;
+   cursor:pointer;
+   color:#ffffff;
+   font-family:Arial;
+   font-size:15px;
+   font-weight:bold;
+   padding:6px 24px;
+   text-decoration:none;
+   text-shadow:0px 1px 0px #810e05;
+}
+.mybtn:hover {
+   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+   background-color:#c62d1f;
+}
+.mybtn:active {
+   position:relative;
+   top:1px;
+}
 </style>
 </head>
 <body>
@@ -63,19 +108,15 @@
 				<hr class="hline">
 				<br>
 				<div id="checkPwdTabled">
-					<table id="checkPwdTable">
-						<tr>
-							<td id="ppwd">현재 비밀번호 : &nbsp;</td>
-							<td><input type="password" id="inputPwd" name="inputPwd"></td>
-							<td><input type="hidden" id="hidden"></td>
-						</tr>
-						<tr height="50">
-							<td colspan="2" id="td11"><button type="submit" id="checkBtn" onclick="return checkPwd();">확인</button></td>
-						</tr>
-					</table>
+					<div id="checkPwdTable">
+							<div style="display: inline-block; font-size: 15px;">현재 비밀번호 : &nbsp;</div>
+								<input type="password" id="inputPwd" name="inputPwd">
+								<input type="hidden" id="hidden">
+							<div>
+								<button type="submit" id="checkBtn" class="mybtn" onclick="return checkPwd();">확인</button>
+							</div>
+					</div>
 				</div>
-				<br><br><br><br>
-				
 		</div>
 	</form>
 	<script>
