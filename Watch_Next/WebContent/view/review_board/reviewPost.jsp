@@ -61,40 +61,35 @@
 							<tr>
 								<td width="850px" style="font-size:17px;">
 									<% if(r.getPopcorn() ==1) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
-										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==2) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
-										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==3) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
-										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==4) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_gray.png">
-										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
 									<%} else if(r.getPopcorn() ==5) { %>
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_red.png">
-										<input type="hidden" name="popgrade" value="<%= r.getPopcorn() %>">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
+										<img class="popimg" src="<%=request.getContextPath()%>/Resources/images/popcorn_after.png">
 									<%} %>
 								</td>
 								<td width="80px" style="font-size:17px;">글쓴이 : </td>
