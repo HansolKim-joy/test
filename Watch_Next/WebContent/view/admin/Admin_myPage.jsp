@@ -143,10 +143,39 @@
 	#moveTable td{
 		width: 20%;
 	}
+	.move{cursor: pointer;}
+	
 	.title{
 		text-algin:center;
 		color: lightyellow;
 	}
+	#footer{margin-top: 20%;}
+	
+.pageBtn {
+	box-shadow:inset 0px 1px 0px 0px #f5978e;
+	background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+	background-color:#f24537;
+	border-radius:6px;
+	border:1px solid #db1f11;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:4px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #810e05;
+    margin-left: 2%;
+}
+.pageBtn:hover {
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+	background-color:#c62d1f;
+}
+.pageBtn:active {
+	position:relative;
+	top:1px;
+}
 </style>
 </head>
 <body>
@@ -168,12 +197,8 @@
 			</script>
 			<br><br><br>
 			<div id="myBtnFrom">
-				<table id="myBtnTable">
-					<tr>
-						<td><div class="pageBtn" onclick="location.href='<%= request.getContextPath() %>/fundingList.adm'">펀딩 작성 이동</div></td>
-						<td><div class="pageBtn" onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화 작성 이동</div></td>
-					</tr>
-				</table>
+						<button class="pageBtn" onclick="location.href='<%= request.getContextPath() %>/fundingList.adm'">펀딩 작성 이동</button>
+						<button class="pageBtn" onclick="location.href='<%= request.getContextPath() %>/view/admin/Admin_movieWrite.jsp'">영화 작성 이동</button>
 			</div>
 			<br><br><br>
 			<hr class="mp_hline">

@@ -56,7 +56,6 @@
 	background-color: yellow;
 }
 
-#footer{margin-top: 23.2%;}
 </style>
 </head>
 <body>
@@ -118,16 +117,16 @@
 		<%} else{%>
 			<% for(int i=0; i<mlist.size(); i++){
 				String title = mlist.get(i).getmTitle();
-				if(title.length() > 8){
-					title = title.substring(0,7) + "...";
+				if(title.length() > 11){
+					title = title.substring(0,10) + "...";
 				}
 				String director = mlist.get(i).getmDirector();
-				if(director.length() > 8){
-					director = director.substring(0,7) + "...";
+				if(director.length() > 15){
+					director = director.substring(0,14) + "...";
 				}
 				String actor = mlist.get(i).getmActor();
-				if(actor.length() > 8){
-					actor = actor.substring(0,7) + "...";
+				if(actor.length() > 15){
+					actor = actor.substring(0,14) + "...";
 				}%>
 				<%if(moviecheck % 5 == 1){%>
 					<tr>
@@ -173,7 +172,7 @@
 				<!-- 10개 페이지 목록 -->
 				<% for(int p = startPage; p<=endPage; p++){ %>
 					<%if(p == currentPage){ %>
-						<span class="current" id="choosen"><%= p %></span>
+						<a class="current" id="choosen"><%= p %></a>
 					<%} else{%>
 						<a href='<%=request.getContextPath()%>/movie.all?currentPage=<%= p %>&choice=<%=choice%>'><%= p %></a>
 					<%} %>

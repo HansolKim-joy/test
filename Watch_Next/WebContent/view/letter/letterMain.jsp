@@ -126,9 +126,9 @@
 		<div class="pagingArea" align="center">
 		<%if(!letterList.isEmpty()){ %>
 			<!-- 맨 처음으로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=1'">&lt;&lt;처음</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=1&str=<%=chk%>'">&lt;&lt;처음</button>
 			<!-- 이전 페이지로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage - 1 %>'" id="beforeBtn">&lt;이전</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage - 1 %>&str=<%=chk%>'" id="beforeBtn">&lt;이전</button>
 			<script>
 				if(<%= currentPage %> <= 1){
 					$('#beforeBtn').attr("disabled", "true");
@@ -140,18 +140,18 @@
 				<%if(p == currentPage){ %>
 					<button id="choosen" disabled><%= p %></button>
 				<%} else{%>
-					<button id="numBtn" onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%= p %>'"><%= p %></button>
+					<button id="numBtn" onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%= p %>&str=<%=chk%>'"><%= p %></button>
 				<%} %>
 			<%} %>
 			<!-- 다음 페이지로 -->
-			<button id="afterBtn" onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage + 1 %>'">다음&gt;</button>
+			<button id="afterBtn" onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=currentPage + 1 %>&str=<%=chk%>'">다음&gt;</button>
 			<script>
 				if(<%= currentPage %> >= <%=maxPage%>){
 					$('#afterBtn').attr("disabled", "true");
 				}
 			</script>
 			<!-- 맨 끝으로 -->
-			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=maxPage%>'">&gt;&gt;끝</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/letter.view?currentPage=<%=maxPage%>'&str=<%=chk%>">&gt;&gt;끝</button>
 		<% } %>
 		</div>
 

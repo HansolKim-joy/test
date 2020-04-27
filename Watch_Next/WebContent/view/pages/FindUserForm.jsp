@@ -8,6 +8,10 @@
 <%@ include file="/view/layout/import.jsp"%>
 <link type="text/css" href="/Watch_Next/Resources/css/Find_Id-Pass.css"
 	rel="stylesheet" />
+<style>
+#footer{margin-top: 7%}
+
+</style>
 </head>
 <body>
 	<!--header -->
@@ -25,13 +29,13 @@
 			<form action="<%= request.getContextPath() %>/finduser.to"
 				id="re_form">
 				<div id="re_div">
-					아이디 / 비밀번호 기억나지 않으세요? <br> "아이디 / 비밀번호는 회원가입 시, 입력하신 이메일로 확인
-					가능하십니다."
+					아이디 / 비밀번호 기억나지 않으세요? <br> <label>회원가입 시, 입력하신 이메일로 확인
+					가능하십니다.</label>
 				</div>
-				<div>
+				<div id="in" style="margin-top: 30px;">
 					<input type="email" maxlength="50" class="re_input"
-						name="find_User" placeholder="이메일을 입력해주시오.">
-					<button type="submit"  class="re_btn">아이디 / 비밀번호 찾기</button>
+						name="find_User" placeholder="이메일을 입력해주세요.">
+					<button type="submit"  class="re_btn">또 잊어버렸어?</button>
 				</div>
 			</form>
 		</div>

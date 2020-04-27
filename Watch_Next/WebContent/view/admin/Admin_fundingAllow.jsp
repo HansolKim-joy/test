@@ -41,6 +41,10 @@
 
 </script>
 <link href="<%=request.getContextPath() %>/Resources/css/admin_movie_write.css" type="text/css" rel="stylesheet">
+<style>
+.btn{margin-top: 2%; margin-left: 30px;}
+</style>
+
 </head>
 <body>
 <%@ include file="/view/layout/Header.jsp" %>
@@ -50,37 +54,39 @@
 		<h2>펀딩 승인 페이지</h2>
 		<hr id="red_line">
 		<br>
-		<div id="admin_imageArea">
-		<img id="admin_image" width="300" height="300" src="<%= request.getContextPath() %>/Resources/images/<%= list.get(0).getfNewName() %>">
-		</div>
+		
 		
 		
 		<div class="admin_movie">
 			<input type="hidden" name="dno" value="<%= list.get(0).getdNo()%>">
-			
-			<b>제목 : </b><input type="text" value="<%= list.get(0).getTitle()%>" readonly>
-			<b>장소 : </b><input type="text" value="<%= list.get(0).getSmName() %>" readonly>
-			<br>
-			<b>감독 : </b><input type="text" value="<%= list.get(0).getDirector()%>" readonly>
-			<b>총원 : </b><input type="text" value="<%= list.get(0).getMaxPeople()%>" readonly>
-			<br>
-			<b>출연 : </b><input type="text" value="<%= list.get(0).getActor()%>" readonly>
-			<b>펀딩 총 금액 : </b><input type="text" id="allp" value="<%= list.get(0).getWantPrice()%>" readonly><b id="funP"></b>
-			<br>
-			<b>장르 : </b><input type="text" value="<%= list.get(0).getGenre() %>" readonly>
-			<b>결제 금액 : </b><input type="text" id="pay" value="<%= list.get(0).getPrice() %>" readonly><b id="wantP"></b>
-			<br>
-			<b>영화 시간 : </b>
-			<input type="text" 
+			<div id="admin_imageArea">
+				<img id="admin_image" width="300" height="300" src="<%= request.getContextPath() %>/Resources/images/<%= list.get(0).getfNewName() %>">
+			</div>
+			<div class="joinm" style="padding-top: 40px;">
+				<b>제목 : </b><input type="text" value="<%= list.get(0).getTitle()%>" readonly>
+				<b style="margin-left: 6%;">장소 : </b><input type="text" value="<%= list.get(0).getSmName() %>" readonly>
+				<br>
+				<b>감독 : </b><input type="text" value="<%= list.get(0).getDirector()%>" readonly>
+				<b style="margin-left: 6%;">총원 : </b><input type="text" value="<%= list.get(0).getMaxPeople()%>" style="width: 3%;"readonly>
+				<br>
+				<b>출연 : </b><input type="text" value="<%= list.get(0).getActor()%>" readonly>
+				<b style="margin-left: 6%;">펀딩 총 금액 : </b><input type="text" id="allp" value="<%= list.get(0).getPrice()%>" readonly>&nbsp;&nbsp;<b id="funP"></b>
+				<br>
+				<b>장르 : </b><input type="text" value="<%= list.get(0).getGenre() %>" readonly>
+				<b style="margin-left: 6%; ">결제 금액 : </b><input type="text" id="pay" value="<%= list.get(0).getWantPrice() %>" style="margin-left: 27px;"readonly>&nbsp;&nbsp;<b id="wantP"></b>
+				<br>
+				<b>영화 시간 : </b>
+				<input type="text" 
 				   value="<%= list.get(0).getrTime() %>" 
-				   style="text-align:center;width:50px;" readonly>
-			<br>
-			<b>줄거리 : </b><textarea rows="10" cols="40" style="overflow-y:scroll; resize: none; vertical-align: top;" readonly><%= list.get(0).getStory() %></textarea>
-			<br>
+				   style="text-align:center;width:50px; padding-left: 0px;" readonly>
+				<br>
+				<b>줄거리 : </b><textarea id="admin_movie_story" rows="10" cols="40" style="overflow-y:scroll; resize: none; vertical-align: top;" readonly><%= list.get(0).getStory() %></textarea>
+				<br>
+			</div>
 		</div>
 		<div style="width: 100%; text-align:center;">
-			<input type="submit" value="완료" id="admin_movie_btn">
-			<input type="button" value="취소" id="admin_movie_btn">
+			<input type="submit" value="완료" class="btn" id="admin_movie_btn">
+			<input type="button" value="취소" class="btn" id="admin_movie_btn">
 		</div>
 	</div>
 </form>

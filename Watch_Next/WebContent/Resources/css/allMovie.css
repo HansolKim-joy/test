@@ -2,7 +2,7 @@
 
 
 	#m_a{margin: 0 auto; 
-			margin-top: 100px;  
+			margin-top: 10%;  
 			font-size: 20px; 
 			font-weight: bold; 
 			width: 80%;
@@ -12,12 +12,12 @@
 	
 	#m_choice{
 	width: 120px;
-	margin-left: 80%;
-	padding: .7em .4em; /* 여백으로 높이 설정 */
+	margin-left: 83%;
+	height: 30px;
     font-family: inherit;  /* 폰트 상속 */
     background: url('') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
     border: 1px solid #999;
-    border-radius: 0px; /* iOS 둥근모서리 제거 */
+    border-radius: 8px; /* iOS 둥근모서리 제거 */
     color: white;}
     #m_choice option{
     	background: #545357;
@@ -29,23 +29,25 @@
 	#m_poster{margin: 0 auto; 
 			font-size: 20px;
  			border-collapse: separate;
-			border-spacing: 18px 40px;
+			border-spacing: 80px 100px;
 	}
 	#m_poster td{
 	box-shadow:0.5px 0.1px 4px 0.5px black;
-	border-radius: 15px;}
+	}
 	#m_poster td:hover{
 		box-shadow:0.5px 0.1px 4px 0.5px red;
 		transition: box-shadow 0.5s;
 	}
 	#m_poster img{
-	border-radius: 15px 15px 0px 0px;
 	border-bottom: 1px solid white;
 	}
 	#m_poster b{
 		color:white;
+		font-size: 17px;
 	}
-	
+	.a_tag{
+		font-size: 12px;
+	}
 	/* .m_t{
 	width: 900px;} */
 		

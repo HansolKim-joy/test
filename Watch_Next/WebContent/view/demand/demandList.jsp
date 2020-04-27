@@ -4,7 +4,7 @@
 	ArrayList<DemandList> list = (ArrayList<DemandList>)request.getAttribute("list");
 	ArrayList<Demand> wlist = (ArrayList<Demand>)request.getAttribute("wlist");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
+	System.out.println(list);
 	
 	double percent = 0.0;
 	int j = 4;
@@ -42,6 +42,10 @@
     font-weight: bold;
     font-size: 23px;
     padding-left: 9px;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     }
     #empty{
 	text-align: center;
@@ -50,7 +54,7 @@
     color: white;
     font-weight: bold;
     }
- 
+ input:focus {outline:none;}
 </style>
 <%@ include file="/view/layout/import.jsp" %>
 <link type="text/css" href="/Watch_Next/Resources/css/demand_list.css" rel="stylesheet" />
@@ -164,7 +168,7 @@
         <div class="list_n_menu">
         
         	<!-- 맨 처음으로 -->
-			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=1'">&lt;&lt;</a>
+			<a id="bebeforeBtn" onclick="location.href='<%= request.getContextPath() %>/list.de?currentPage=1'">&lt;&lt;</a>
         	<!--이전 페이지 -->
 	        <a id="beforeBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage -1  %>'">&lt; 이전</a>
 	        
@@ -179,7 +183,7 @@
 			<%} %>	
 			<a id="afterBtn" onclick="location.href='<%= request.getContextPath()%>/list.de?currentPage=<%= currentPage + 1 %>'">다음  &gt;</a>
 			<!-- 맨 끝으로 -->
-			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.rv?currentPage=<%= maxPage %>'">&gt;&gt;</a>
+			<a id="afafterBtn" onclick="location.href='<%= request.getContextPath() %>/list.de?currentPage=<%= maxPage %>'">&gt;&gt;</a>
 	        
         	
         </div>

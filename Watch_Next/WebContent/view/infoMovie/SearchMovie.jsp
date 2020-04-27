@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="movie.model.vo.*, review.model.vo.Review, java.util.ArrayList"%>
-<% ArrayList<Movie> m = (ArrayList<Movie>)request.getAttribute("Movie");
-   ArrayList<String> fName = (ArrayList<String>)request.getAttribute("fName");
-   ArrayList<String> genre = (ArrayList<String>)request.getAttribute("genre");
+<% 
+	ArrayList<Movie> m = new ArrayList<Movie>();
+	ArrayList<String> fName = new ArrayList<String>();
+	ArrayList<String> genre = new ArrayList<String>();
+	String msg = "";
+	if(request.getAttribute("Movie") != null){
+	   m = (ArrayList<Movie>)request.getAttribute("Movie");
+	   fName = (ArrayList<String>)request.getAttribute("fName");
+	   genre = (ArrayList<String>)request.getAttribute("genre");
+	}else{
+		msg = (String)request.getAttribute("msg");
+	}
    %>
 <!DOCTYPE html>
 <html>
@@ -29,6 +38,9 @@
 	<h1 id="m_title">영화검색 결과 <%=m.size()%> 개</h1>
 	<hr class="hline">
 			<table id="m_movie">
+			<%if(m.size() == 0) {%>
+				<tr><th><%=msg %><th></tr>
+			<%} else{%>
 			<%for(int i=0; i<m.size(); i++){ %>
 				<%if(i > 3){ %>
 				<tr class="<%=i%>" style="display:none;">
@@ -56,7 +68,7 @@
 				<%}else{%>
 				<tr>
 				<%} %><td><br></td></tr>
-	     	<%} %>
+	     	<%} }%>
 			</table>
 	</div>
 </section>
