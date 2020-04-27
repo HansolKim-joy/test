@@ -185,8 +185,8 @@ textarea:focus {outline: none;}
 					<%= r.getrHead() %>
 					<input type="hidden" value="<%= r.getrHead() %>" name="rHead">	
 					</b>&nbsp;&nbsp;&nbsp; 
-					<input type="text" readonly="<%= r.getbTitle() %>" id=rctitle name="bTitle" value="<%= r.getbTitle() %>" style="border: 0;">
-					
+					<input type="text" readonly id=rctitle name="bTitle" value="<%= r.getbTitle() %>" style="border: 0;">
+			
 					<input id="rNo" type="hidden" name="rNo" value="<%=r.getrNo() %>">
 				
 				</div>
@@ -444,6 +444,16 @@ textarea:focus {outline: none;}
 				
 		
 		</script>
+				<script>
+						$(function(){
+							var title = document.getElementById('rctitle');
+							var size = title.value.length;
+						
+							console.log(size);
+							console.log(title);
+							
+						});
+					</script>
 
 <!— footer —>
 <%@ include file="/view/layout/footer.jsp" %>

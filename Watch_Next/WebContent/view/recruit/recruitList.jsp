@@ -152,13 +152,13 @@
 	
 	<script>
 	$(function(){
-		$('#reviewList td').mouseenter(function(){
+		$('#recruit td').mouseenter(function(){
 			$(this).parent().css('cursor', 'pointer');
 		}).click(function(){
 			var rv = $(this).parent().children().eq(0).text();
 			
 			if('<%= loginUser %>' != 'null' && rv != '조회된 리스트가 없습니다.'){
-				location.href="<%= request.getContextPath() %>/detail.rv?rv="+rv;
+				location.href="<%= request.getContextPath() %>/detail.recruit?rNo="+rv;
 			} else if('<%= loginUser %>' != 'null' && rv == '조회된 리스트가 없습니다.'){
 				alert('리스트가 없습니다!');
 			} else{

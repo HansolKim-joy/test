@@ -222,7 +222,7 @@
 					var $td1 = $("<td>");
 					var $td2 = $("<td>");
 					var $movieTd = $("<img class='pp_poster2'>").attr("src", "/Watch_Next/Resources/images/" + data[i].newFileName);
-					var $divTd = $("<div class='pp_item1'>").html("영화 제목 : " + data[i].mTitle + "<br>" + "감독 : " + data[i].mDirector + "<br>" + "출연진 : " + data[i].mActor + "<br>" + "줄거리 : " + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
+					var $divTd = $("<div class='pp_item1'>").html(data[i].mTitle + "<br>" + "감독 : " + data[i].mDirector + "<br>" + "출연진 : " + data[i].mActor + "<br>" + "줄거리 : " + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
 					var $mtitle = $("<input type='hidden' id='title'>").attr('value', data[i].mTitle);
 					var $mNotd =  $("<input type='hidden' id='title1'>").attr('value', data[i].mNo);
 					
