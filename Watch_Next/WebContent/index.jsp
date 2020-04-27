@@ -4,6 +4,7 @@
 <% 
 	ArrayList<Recruit> RecruitList = (ArrayList<Recruit>)request.getAttribute("Recruitlist");
 	ArrayList<Review> ReviewList = (ArrayList<Review>)request.getAttribute("Reviewlist");
+	Member loginUser1 = (Member)request.getAttribute("loginUser");
 // 	Recruit r = (Recruit)request.getAttribute("board");
 // 	System.out.println("index"+ RecruitList);
 %>
@@ -23,12 +24,12 @@
 <!-- <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script> -->
 <style>
 	.tablename{
-		font-size: 25px;
+		font-size: 30px;
+		margin-top: 10%;
 	}
 	.index_form{
 		positon: relative;
 		min-height: 100%;
-		padding-bottom: 100px;
 	}
 	.pp_slide-wrap{
 		margin: 0 auto;
@@ -68,16 +69,7 @@
 		width: 100%;
 	}
 	.pp_poster2{display: inline; vertical-align: baseline; width: 200px; height: 300px;}
-	.pp_item1{
-		width: 200px; 
-		background-color: #545357; 
-		height: 300px;
-		font-size: 18px;
-		text-align: initial;
-	    padding-left: 15px;
-/* 	    font-family: 'Nanum Myeongjo', serif; */
-		font-family: 'Noto Sans KR', sans-serif;
-	}
+
 	
 		/* 최신글 */
 	#review{width: 80%; margin:0 auto; margin-top: 100px; color:white;}
@@ -95,6 +87,72 @@
 	#wanted{width: 80%; margin:100px auto; color:white;}
 	#wanted>table{margin:30px auto; text-align:center;}
 	#wanted td{height:50px;}
+	
+	/*사이드바 */
+#sidebar{
+	position: fixed;
+	width: 100px;
+	height: 700px;
+	left: 94%;
+	top: 55%;
+}
+#sidebar a{
+	color: #545357;
+}
+#mlink{
+	border: 1px solid;
+	width: 80px;
+	height: 80px;
+}
+#topbtn{
+	text-align: center;
+	font-weight: bold;
+	background-color: yellow;
+}
+/*footer*/
+#footer {
+    
+    margin-top: 9.6%;
+}
+
+/* 메인슬라이드 */
+.trtr{
+	position: relative;
+	
+	
+}
+
+.p_slide-content .lSSlideOuter .lSPager.lSpg > li:hover a, .lSSlideOuter .lSPager.lSpg > li.active a {
+    background-color: #f44336 !important;
+}
+
+.p_slide-content li:hover a, li:active a{
+	background-color: #f44336 !important; 
+}
+
+
+.pp_item1{
+	position: absolute;
+	top: 0;
+	width: 202px; 
+	height: 302px;
+	font-size: 18px;
+	text-align: initial;
+	background: rgb(255,255,255,0);
+   	color: rgb(255,255,255,0);
+	font-family: 'Noto Sans KR', sans-serif;
+	transition:width 1s, height 1s, background-color 1s, transform 1s;
+}
+
+.pp_item1:hover{
+	color: white;
+    background: rgba(0, 0, 0, 0.8);
+		
+}
+
+
+
+
 </style>
 </head>
 <body>
@@ -107,6 +165,24 @@
 		}
 	</script>
 <br clear="all">
+
+<div id="sidebar">
+	<table>
+		<tr>
+			<td><a href="https://play.watcha.net/" target="_blank"><img src="Resources/images/왓챠.png" id="mlink" class="mwha"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://www.netflix.com/kr/" target="_blank"><img src="Resources/images/넷플릭스.png" id="mlink" class="mnet"></a></td>
+		</tr>
+		<tr>
+			<td><a href="https://movie.naver.com/" target="_blank"><img src="Resources/images/네이버 영화.png" id="mlink" class="mnav"></a></td>
+		</tr>
+		<tr>
+			<td><a href="#" target="_self"><img src="Resources/images/top.png" id="mlink" ></a></td>
+		</tr>
+	
+	</table>
+</div>
 
 
 
@@ -172,11 +248,11 @@
 				for(var i in data){
 					var $li = $("<li>");
 					var $table = $("<table>");
-					var $tr = $("<tr>");
+					var $tr = $("<tr class='trtr'>");
 					var $td1 = $("<td>");
 					var $td2 = $("<td>");
 					var $movieTd = $("<img class='pp_poster2'>").attr("src", "/Watch_Next/Resources/images/" + data[i].newFileName);
-					var $divTd = $("<div class='pp_item1'>").html("영화 제목 : " + data[i].mTitle + "<br>" + "감독 : " + data[i].mDirector + "<br>" + "출연진 : " + data[i].mActor + "<br>" + "줄거리 : " + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
+					var $divTd = $("<div class='pp_item1'>").html(data[i].mTitle + "<br>" + "감독 : " + data[i].mDirector + "<br>" + "출연진 : " + data[i].mActor + "<br>" + "줄거리 : " + data[i].mStory); // 타이틀, 감독, 출연, 줄거리
 					var $mtitle = $("<input type='hidden' id='title'>").attr('value', data[i].mTitle);
 					var $mNotd =  $("<input type='hidden' id='title1'>").attr('value', data[i].mNo);
 					
@@ -196,25 +272,27 @@
 						$(this).parent().css('cursor', 'pointer');
 					});
 					
-					$td1.append($movieTd);
 					$td2.append($divTd);
+					$td1.append($movieTd);
 					$td1.append($mtitle);
 					$td1.append($mNotd);
-					$tr.append($td1);
 					$tr.append($td2);
+					$tr.append($td1);
 					$table.append($tr);
 					$li.append($table);
 					
 					$liBody.append($li);
 				}
 				$(".pp_slider").lightSlider({
-			        mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
+			        item: 5,		 // 갯수
+					mode:'slide',    // 이미지가 표시되는 형식 (fade / slide)
 			        loop:true,       // 무한반복 할 것인지
 			        auto:true,       // 자동 슬라이드
 			        keyPress:true,   // 키보드 탐색 허용
 			        pager:false,     // 페이지 표시
 			        speed:1500,      // 슬라이드 되는 속도
 			        pause:3000,      // 이미지가 머무는 시간
+			        
 			    });
 			}
 		}); 
@@ -239,7 +317,13 @@
 				for(var i in data){
 					var $tr = $("<tr>");
 					var $numTd = $("<td id='dno'>").text(data[i].bNo);
-					
+					var dataArr = (data[i].bDate.split("월"));
+					var dd = (data[i].bDate).split("월");
+					dataArr[0] = dd[0];
+					var mi = dd[1].split(", ");
+					dataArr[1] = mi[0];
+					dataArr[2] = mi[1];
+					var date = dataArr[2]+"-"+dataArr[0]+"-"+dataArr[1].trim();
 					switch(data[i].spo){
 					case "Y": 
 						var $spoTd = $("<td>").text("스포있음");
@@ -250,15 +334,18 @@
 					}
 					var $mTitleTd = $("<td>").text(" [ " + data[i].mTitle + " ] " + data[i].bTitle);
 					var $gradeTd = $("<td>").text(data[i].popcorn);
-					var $bDateTd = $("<td>").text(data[i].bDate);
+					var $bDateTd = $("<td>").text(date);
 					var $bWriterTd = $("<td>").text(data[i].bWriter);
 					var $viewsTd = $("<td>").text(data[i].bCount);
 					
-					
 						$tr.click(function(){
 							$dno = $(this).find('#dno').eq(0).text();
-							
+
+						if('<%= loginUser %>' != 'null'){ 
 							location.href= "<%= request.getContextPath() %>/detail.rv?rv=" + $dno;
+						} else{
+							alert("로그인 후 이용해주세요.");
+						}	
 						}).mouseenter(function(){
 							$(this).parent().css('cursor', 'pointer');
 						});
@@ -271,8 +358,8 @@
 						$tr.append($bWriterTd);
 						$tr.append($viewsTd);
 						$tableBody.append($tr);
+				console.log(typeof(data[i].bDate));
 				}
-// 				console.log(data);
 			}
 		});
 		
@@ -289,14 +376,26 @@
 // 					console.log($rNo);
 					var $numTd = $("<td id='rno'>").text(data[i].rNo);
 					var $categoryTd = $("<td>").text(data[i].rHead);
-					var $titleTd = $("<td>").text(data[i].bTitle);
-					var $dateTd = $("<td>").text(data[i].bDate);
+					var $titleTd = $("<td class='day'>").text(data[i].bTitle);
+					var dataArr = (data[i].bDate.split("월"));
+					var dd = (data[i].bDate).split("월");
+					dataArr[0] = dd[0];
+					var mi = dd[1].split(", ");
+					dataArr[1] = mi[0];
+					dataArr[2] = mi[1];
+					var date = dataArr[2]+"-"+dataArr[0]+"-"+dataArr[1].trim();
+// 					console.log("변한날짜 " + date);
+					var $dateTd = $("<td>").text(date);
 					var $writerTd = $("<td>").text(data[i].userId);
 					var $hitsTd = $("<td>").text(data[i].bViews);
 					
 					$tr.click(function(){
 						$rno = $(this).find('#rno').eq(0).text();
+					if('<%= loginUser %>' != 'null'){	
 						location.href="<%= request.getContextPath() %>/detail.recruit?rNo=" + $rno;
+					} else {
+						alert('로그인 후 이용해주세요.');
+					}	
 					}).mouseenter(function(){
 						$(this).parent().css('cursor', 'pointer');
 					});
@@ -309,14 +408,16 @@
 					$tr.append($hitsTd);
 					$tableBody.append($tr);
 				}
-// 				console.log(data);
 			}
 		});
 		
+		
+		$('.day')
 	});
 </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
 <script src="<%=request.getContextPath() %>/Resources/js/Header.js"></script>
+
 </body>
 </html>
